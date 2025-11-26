@@ -31,22 +31,25 @@ return [
 	'skankydev'  => [
 		'version'=>'Alpha.0.0.1'
 	],
-	'debug' => false,
+	'debug' => true,
 	'class' => [
-		'helper' => [
-			'Flash' => 'SkankyDev\View\Helper\FlashMessagesHelper',
-			'Form'  => 'SkankyDev\View\Helper\FormHelper',
-			'Auth'  => 'SkankyDev\View\Helper\AuthHelper',
-			'Time'  => 'SkankyDev\View\Helper\TimeHelper',
-		],
 		'behavior' => [
 			'Timed' => 'SkankyDev\Model\Behavior\TimedBehavior',
 		],
-		'tools' => [
-			'Flash' => 'SkankyDev\Controller\Tools\FlashMessagesTool',
-		],
-		'listener' => [ 
-			'Debug' => 'SkankyDev\Listener\DebugListener',
+		'middleware' => [],
+		'fields' => [
+			'text'     => \SkankyDev\Form\Fields\TextField::class,
+			'textarea' => \SkankyDev\Form\Fields\TextareaField::class,
+			'color'    => \SkankyDev\Form\Fields\ColorField::class,
+			'number'   => \SkankyDev\Form\Fields\NumberField::class,
+			'select'   => \SkankyDev\Form\Fields\SelectField::class,
+			'checkbox' => \SkankyDev\Form\Fields\CheckboxField::class,
+			'email'    => \SkankyDev\Form\Fields\EmailField::class,
+			'radio'    => \SkankyDev\Form\Fields\RadioField::class,
+			'date'     => \SkankyDev\Form\Fields\DateField::class,
+			'datetime' => \SkankyDev\Form\Fields\DateTimeField::class,
+			'password' => \SkankyDev\Form\Fields\PasswordField::class,
+			'default'  => \SkankyDev\Form\Fields\TextField::class,
 		]
 	],
 	'timehelper'=> [

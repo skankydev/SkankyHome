@@ -34,6 +34,10 @@ class Token{
 		return ($this->value === $value);
 	}
 
+	public function getToken(){
+		return $this->value;
+	}
+
 
 }
 

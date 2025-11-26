@@ -19,6 +19,9 @@ $conf =  [
 			'langue' =>'fr_FR'
 		]
 	],
+	'Module'=>[
+		'App'
+	],
 	'smtp' => $smtp,
 	'debug' => 2,
 	'adminMail' => 'skankydev@gmail.com',

@@ -14,22 +14,34 @@
 
 namespace App\Controller;
 
+use App\Form\TestForm;
 use SkankyDev\Controller\MasterController;
 use SkankyDev\Http\Request;
+use SkankyDev\Http\Routing\Router;
 
 class HomeController extends MasterController {
 
-	public function __construct(protected  Request $request){
+	public function __construct(protected Request $request){
 
 	}
 
 	public function index(){
-		debug($this->request);
-		debug($this->request->input());
-		dd('Coucou');
+		/*debug($this->request->input());*/
+		/*debug(Router::_getCurrentRoute());
+		debug(Router::_getRoutesCollection());*/
+
+		return view('home.index');
 	}
 
 	public function show(string $slug){
 		debug('coucou : '.$slug);
+	}
+
+	public function form(TestForm $form){
+		return view('home.form',['form'=>$form]);
+	}
+
+	public function pasla(){
+		return redirect(['action'=>'index','get'=>['is_redirect'=>'oui']]);
 	}
 }

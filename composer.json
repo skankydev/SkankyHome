@@ -9,7 +9,8 @@
         },
         "files": [
             "src/SkankyDev/constant.php",
-            "src/SkankyDev/Debug.php"
+            "src/SkankyDev/Debug.php",
+            "src/SkankyDev/function.php"
         ]
     },
     "autoload-dev": {

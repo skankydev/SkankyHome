@@ -1,6 +1,6 @@
 <?php 
 $this->setTitle(' - framework');
-$this->layout = 'test';
+$this->setLayout('layout.default');
 ?>
 
 <header class="home-cover">
@@ -26,5 +26,6 @@ $this->layout = 'test';
 			<?= _('Expedita hic quas vel vero culpa molestias itaque, quidem saepe. ');?>
 		</div>
 	</div>
+	<?php debug($this) ?>
 </section>
 

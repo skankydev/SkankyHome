@@ -33,6 +33,18 @@ class Request {
 		return strtoupper($this->server['REQUEST_METHOD'] ?? 'GET');
 	}
 
+	// Http ou Https
+	public function sheme(): string {
+		return $this->server['REQUEST_SCHEME'] ?? 'http';
+	}
+
+	// Host name
+	public function host(): string {
+		return $this->server['HTTP_HOST'] ?? '';
+	}
+
+	
+
 	// URI demandée
 	public function uri(): string {
 		return strtok($this->server['REQUEST_URI'] ?? '/', '?');

@@ -30,6 +30,7 @@ class Route
 	private $link;
 	private $rules;
 	private $regex = false;
+	private $middlewares = [];
 
 
 	/**
@@ -115,5 +116,13 @@ class Route
 			$this->makeRegex();
 		}
 		return $this->regex;
+	}
+
+	public function setMiddlewares(array $middlewares){
+		$this->middlewares = $middlewares;
+	}
+
+	public function getMiddlewares(){
+		return $this->middlewares;
 	}
 }

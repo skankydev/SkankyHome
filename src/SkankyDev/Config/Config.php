@@ -90,6 +90,10 @@ class Config {
 		return self::arrayGet('debug',self::$conf);
 	}
 
+	static function print(){
+		debug(self::$conf);
+	}
+
 	static function initConf($basePath = ''){
 
 		if(empty(self::$conf)){
@@ -98,6 +102,13 @@ class Config {
 			}
 			$mConf = require $basePath.DS.'config'.DS.'master.config.php';
 			$tmpConf = [];
+			foreach ($mConf['Module'] as $key) {
+				if(!file_exists($basePath.DS.'src'.DS.$key.DS.'Config'.DS.'config.php') ){
+					continue;
+				}
+				$tmpConf = require $basePath.DS.'src'.DS.$key.DS.'Config'.DS.'config.php';
+				$conf = array_replace_recursive($conf,$tmpConf);
+			}
 			$conf = array_replace_recursive($tmpConf,$mConf);
 			$dConf = require $basePath.DS.'src'.DS.'SkankyDev'.DS.'Config'.DS.'default.config.php';
 			self::$conf = array_replace_recursive($dConf,$conf);

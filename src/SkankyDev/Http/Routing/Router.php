@@ -41,7 +41,9 @@ class Router
 	 * @param array  $rules  the rules for match with uri ex ['slug'=>'[a-zA-Z0-9-]*']
 	 */
 	public function add(string $schema,array $link,$rules = []){
-		$this->routesCollection[] =  new Route($schema,$link,$rules);
+		$route = new Route($schema,$link,$rules);
+		$this->routesCollection[] = $route;
+		return $route;
 	}
 
 	/**

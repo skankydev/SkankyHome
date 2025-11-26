@@ -10,24 +10,15 @@
  * @copyright     Copyright (c) SCHENCK Simon
  *
  */
+
 namespace SkankyDev\Core;
 
 use Exception;
+use SkankyDev\Config\Config;
+use SkankyDev\Http\Middleware\MiddlewareManager;
 use SkankyDev\Http\Request;
 use SkankyDev\Http\Routing\Router;
 
-
-if ( !defined('DS') ){
-	define('DS', DIRECTORY_SEPARATOR);
-}
-
-if ( !defined('APP_FOLDER') ){
-	define('APP_FOLDER', dirname(dirname(__DIR__)));
-}
-
-if ( !defined('PUBLIC_FOLDER') ){
-	define('PUBLIC_FOLDER',APP_FOLDER.DS.'public');
-}
 
 class Application {
 	
@@ -38,13 +29,20 @@ class Application {
 
 	public function run(){
 		try {
+			Config::initConf();
 			include_once APP_FOLDER.DS.'config'.DS.'routes.php';
 			$request = Request::getInstance();
 			$current = Router::_findCurrentRoute($request->uri());
-			
-			$controller = MasterFactory::_make($current->getController());
-			$result = MasterFactory::_call($controller,$current->getAction(),$current->getParams());
 
+			$manager = new MiddlewareManager();
+        
+			$response = $manager->run($request, $current, function($request) use ($current) {
+				$controller = MasterFactory::_make($current->getController());
+				return MasterFactory::_call($controller, $current->getAction(), $current->getParams());
+			});
+			if($response){
+				$response->send();
+			}
 			/*$view = Dispatcher::_execute($current);
 			$view->render();*/
 		} catch (Exception $e) {

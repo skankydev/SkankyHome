@@ -66,4 +66,15 @@ trait StringFacility {
 	    
 	    return $string;
 	}
+
+	/**
+	 * convert info-action-name to infoActionName
+	 * @param  string $string the string need to be convert
+	 * @return string         the result
+	 */
+	public function dotToFolder($string, $charset='utf-8'){
+		$list = explode('.', $string);
+		$string = implode(DS,$list);
+		return $string;
+	}
 }

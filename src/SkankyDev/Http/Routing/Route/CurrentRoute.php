@@ -27,6 +27,7 @@ class CurrentRoute
 	private $action;
 	private $link;
 	private $uri;
+	private $middlewares = [];
 	
 	/**
 	 * get the route matche with uri and parse the params
@@ -70,7 +71,7 @@ class CurrentRoute
 			}
 			$this->link['params'] = $params;
 		}
-		$this->controller = $this->link['controller'];
+		$this->middlewares = $route->getMiddlewares();
 		$this->setControllerAction();
 	}
 
@@ -99,7 +100,6 @@ class CurrentRoute
 			$this->link['params'] = array_slice($tmp,2);
 		}
 
-		$this->controller = $this->link['namespace'].'\\Controller\\'.$this->link['controller'].'Controller';
 		$this->setControllerAction();
 
 	}
@@ -108,6 +108,7 @@ class CurrentRoute
 	 * define the controller name and the action for the dispatcher
 	 */
 	private function setControllerAction(){
+		$this->controller = $this->link['namespace'].'\\Controller\\'.$this->link['controller'].'Controller';
 		$this->action = $this->link['action'];
 	}
 
@@ -148,5 +149,13 @@ class CurrentRoute
 	 */
 	public function getNamespace(){
 		return $this->link['namespace'];
+	}
+
+	public function setMiddlewares(array $middlewares){
+		$this->middlewares = $middlewares;
+	}
+
+	public function getMiddlewares(){
+		return $this->middlewares;
 	}
 }

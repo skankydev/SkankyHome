@@ -11,14 +11,18 @@
  *
  */
 
-const TIME_SECOND     =  1;
-const TIME_MINUTE     =  60;
-const TIME_HOUR       =  3600;
-const TIME_DAY        =  86400;
-const TIME_WEEK       =  604800;
-const TIME_MONTH      =  2592000;
-const TIME_YEAR       =  31536000;
+define('APP_FOLDER', dirname(dirname(__DIR__)));
 
-if ( !defined('DS') ){
-	define('DS', DIRECTORY_SEPARATOR);
-}
+const TIME_SECOND = 1;
+const TIME_MINUTE = 60;
+const TIME_HOUR   = 3600;
+const TIME_DAY    = 86400;
+const TIME_WEEK   = 604800;
+const TIME_MONTH  = 2592000;
+const TIME_YEAR   = 31536000;
+
+const DS = DIRECTORY_SEPARATOR;
+const PUBLIC_FOLDER = APP_FOLDER.DS.'public';
+const VIEW_FOLDER = APP_FOLDER.DS.'src_front'.DS.'view';
+
+

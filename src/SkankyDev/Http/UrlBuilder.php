@@ -11,8 +11,11 @@
  *
  */
 
-namespace SkankyDev\Routing;
+namespace SkankyDev\Http;
 
+use SkankyDev\Config\Config;
+use SkankyDev\Http\Request;
+use SkankyDev\Http\Routing\Router;
 use SkankyDev\Utilities\Traits\Singleton;
 use SkankyDev\Utilities\Traits\StringFacility;
 
@@ -22,11 +25,10 @@ class UrlBuilder
 	
 	public function build(array $link, $absolut = false){
 		$link = $this->completLink($link);
-		$collection = Router::_getRoutesCollection();
 		$route = $this->matcheWithRoute($link);
 		$url = '';
 		if($route){
-			$url = $this->createUrlFromRout($link,$route);
+			$url = $this->createUrlFromRoute($link,$route);
 		}else{
 			$url = $this->createUrlFromDefault($link);
 		}
@@ -35,8 +37,7 @@ class UrlBuilder
 		}
 		if($absolut){
 			$request = Request::getInstance();
-
-			$url = $request->sheme.'://'.$request->host.$url;
+			$url = $request->sheme().'://'.$request->host().$url;
 		}
 		return $url;
 	}
@@ -77,7 +78,7 @@ class UrlBuilder
 		return null;
 	}
 
-	public function createUrlFromRout($link,$route){
+	public function createUrlFromRoute($link,$route){
 		$shema = $route->getShema();
 		$tmp = trim($shema,'/');
 		$tmp = explode('/', $tmp);

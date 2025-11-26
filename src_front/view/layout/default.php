@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang=<?= '"'.SkankyDev\I18n\Localization::getLang().'"'; ?>>
+<html lang="FR_fr">
 <head>
 	<meta charset="UTF-8" />
 	<link rel="icon" type="image/png" href="/favicon.ico" />
@@ -23,7 +23,6 @@
 	?>
 </head>
 <body>
-	<?= $this->element('admin-menu'); ?>
 	<section id="Container">
 
 		<header id="Header">
@@ -35,19 +34,16 @@
 					</h1>
 				</div>
 				<div class="empty-space"></div>
-				<?= $this->element('user-statu'); ?>
 			</div>
 		</header>
 		
 		<section id="Contents">
-			<?= $this->Flash->display(); ?>
 			<?= $this->fetch('content'); ?>
 		</section>
 		<footer id="Footer">
-			<?= $this->element('footer'); ?>
+			<?= $this->part('part.footer'); ?>
 		</footer>
 	</section>
-	<?= $this->element('debug'); ?>
 	<?= $this->getScript(); ?>
 </body>
 </html>

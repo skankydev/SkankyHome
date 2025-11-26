@@ -2,14 +2,15 @@
 
 use App\Controller\HomeController;
 use SkankyDev\Http\Routing\Router;
-
+use App\Middlewares\BiduleMiddleware;
+use App\Middlewares\TrucMiddleware;
 
 
 Router::_add('/',[
-	'controller' => HomeController::class,
+	'controller' => 'Home',
 	'action'     => 'index',
 	'namespace'  => 'App'
-]);
+])->setMiddlewares(['bidule']);
 
 /*Router::_add('/articles',[
 	'controller' => 'Post',
@@ -18,9 +19,9 @@ Router::_add('/',[
 ]);*/
 
 Router::_add('/home/show/:slug',[
-	'controller' => HomeController::class,
+	'controller' => 'Home',
 	'action'     => 'show',
 	'namespace'  => 'App'
 ],[
 	'slug' => '[a-z0-9-]*'
-]);
+])->setMiddlewares([BiduleMiddleware::class,TrucMiddleware::class]);
