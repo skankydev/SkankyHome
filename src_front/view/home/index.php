@@ -1,5 +1,5 @@
 <?php 
-$this->setTitle(' - framework');
+$this->setTitle('Welcome');
 $this->setLayout('layout.default');
 ?>
 

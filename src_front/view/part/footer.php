@@ -17,7 +17,7 @@
 	</div>
 	<div>
 		<ul>
-			<li><span>application realiser par <a href="https://github.com/skank" target="_blanck">skank</a>.</span></li>
+			<li><span>application realiser par <a href="https://github.com/skankydev" target="_blanck">SkankyDev</a>.</span></li>
 		</ul>
 	</div>
 </div>

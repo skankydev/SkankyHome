@@ -41,6 +41,10 @@ class HomeController extends MasterController {
 		return view('home.form',['form'=>$form]);
 	}
 
+	public function base(){
+		return view('home.base');
+	}
+
 	public function pasla(){
 		return redirect(['action'=>'index','get'=>['is_redirect'=>'oui']]);
 	}

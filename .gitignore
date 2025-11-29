@@ -47,6 +47,7 @@ composer.lock
 .sass-cache/
 .phpintel/
 .phpunit.cache/
+node_modules/
 vendor/
 config/smtp.config.php
 public/img/upload
@@ -55,5 +56,7 @@ public/img/test
 public/coverage
 
 composer.lock
+package-lock.json
+
 
 *.sublime-workspace
