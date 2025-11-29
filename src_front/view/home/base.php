@@ -12,6 +12,6 @@ $this->setLayout('layout.default');
 	<h6> Ceci est un titre </h6>
 </section>
 
-<section id="LedEditor">
+<section id="MyLedEditor">
 	<led-editor></led-editor>
 </section>

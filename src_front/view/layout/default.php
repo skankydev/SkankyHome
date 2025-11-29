@@ -24,10 +24,8 @@
 	<section id="MainContainer">
 		<header id="Header">
 			<div class="layout-header">
-				<div class='sit-title'>
-					<h1>
-						<i class=""></i>SkankyDev
-					</h1>
+				<div class="sit-title">
+					<h1><i class=""></i>SkankyDev</h1>
 				</div>
 			</div>
 		</header>

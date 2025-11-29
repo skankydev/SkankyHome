@@ -133,8 +133,8 @@ class HtmlView {
 	 * add js file for header
 	 * @param string $path the path to the file
 	 */
-	public function addJs($path){
-		$this->js .= '<script type="text/javascript" src="'.$path.'" ></script>'.PHP_EOL;
+	public function addJs($path, $type = 'text/javascript'){
+		$this->js .= '<script type="'.$type.'" src="'.$path.'" ></script>'.PHP_EOL;
 	}
 
 	/**

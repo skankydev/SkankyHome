@@ -1,14 +1,19 @@
 import { createApp } from 'vue'
-import LedEditor from './vue/LedEditor'
+import LedEditor from './vue/LedEditor.vue'
+
 
 
 document.addEventListener('DOMContentLoaded', () => {
 
-	const target = document.getElementById('LedEditor')
-	if (target) {
-		const app = createApp({})
-		app.component('led-editor', LedEditor)
-		app.mount('#LedEditor')
-	}
+	let target = document.getElementById('MyLedEditor')
+	console.log('Target trouvé ?', target);
 
+	if (target) {
+		let editor = createApp({});
+		editor.component('led-editor', LedEditor);
+		editor.mount('#MyLedEditor');
+		console.log(editor);
+	}
 })
+
+//createApp(LedEditor).mount('#LedEditor')
