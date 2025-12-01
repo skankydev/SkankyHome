@@ -3,7 +3,14 @@ import vue from '@vitejs/plugin-vue'
 
 
 export default defineConfig({
-	plugins: [vue()],
+	plugins: [vue({
+		customElement:true,
+	})],
+	resolve: {
+		alias: {
+			vue: 'vue/dist/vue.esm-bundler.js',
+		},
+	},
 	publicDir: false,
 	build: {
 		outDir: 'public/dist',

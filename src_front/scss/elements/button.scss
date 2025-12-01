@@ -1,0 +1,137 @@
+@use '../settings/functions' as *;
+@use '../settings/mixins' as *;
+@use '../settings/variables' as *;
+@use '../settings/animations' as *;
+
+
+// ===== BUTTONS =====
+
+// Couleurs des boutons
+$button-colors: (
+	'primary': $neon-purple,
+	'success': $success,
+	'warning': $warning,
+	'error': $error,
+	'info': $info
+);
+
+// Base button
+.btn {
+	display: inline-flex;
+	align-items: center;
+	gap: $p-xs;
+	
+	padding: $p-s $p-l;
+	
+	font-family: $font-title;
+	font-size: $size-xl;
+	//font-weight: 600;
+	//letter-spacing: 0.05rem;
+	text-decoration: none;
+	
+	background: $bg-secondary;
+	border: 2px solid $text-secondary;
+	border-radius: 4px;
+	color: $text-primary;
+	
+	cursor: pointer;
+	transition: all 0.3s ease;
+	
+	border-color: $neon-blue;
+	color: $neon-blue;
+
+	i {
+		font-size: $size-xl;
+		@include neon-text($neon-blue,0);
+		transition: all 0.3s ease;
+	}
+
+	@include neon-border($neon-blue, 0.6);
+
+	
+	&:hover {
+		@include neon-border($neon-blue, 3);
+	}
+}
+
+// Générer les variantes de couleur
+@each $name, $color in $button-colors {
+	.btn-#{$name} {
+		border-color: $color;
+		color: $color;
+		@include neon-border($color, 0.6);
+		i {
+			@include neon-text($color, 0);
+		}
+		
+		&:hover {
+			@include neon-border($color, 3);
+			i {
+				@include neon-text($color, 1.2);
+			}
+		}
+	}
+}
+
+// Mini button
+.btn-mini {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	
+	padding: $p-xs;
+	min-width: 36px;
+	min-height: 36px;
+	
+	font-size: $size-l;
+	
+	background: $bg-secondary;
+	border: 2px solid $text-secondary;
+	border-radius: 4px;
+	color: $text-primary;
+	
+	cursor: pointer;
+	transition: all 0.3s ease;
+	@include neon-border($text-primary, 0.6);
+
+	i {
+		transition: all 0.3s ease;
+		@include neon-text($text-primary, 0);
+	}
+	&:hover {
+		@include neon-border($text-primary, 1.2);
+		i {
+			@include neon-text($text-primary, 0.4);
+		}
+	}
+	
+	// Variantes
+	@each $name, $color in $button-colors {
+		&.btn-#{$name} {
+			border-color: $color;
+			color: $color;
+			@include neon-border($color, 0.6);
+			i {
+				@include neon-text($color, 0);
+			}
+			&:hover {
+				@include neon-border($color, 1.2);
+				i {
+					@include neon-text($color, 0.4);
+				}
+			}
+		}
+	}
+}
+
+// States
+.btn:disabled,
+.btn-mini:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+	
+	&:hover {
+		box-shadow: none;
+		background: $bg-secondary;
+	}
+}

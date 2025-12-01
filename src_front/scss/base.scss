@@ -1,0 +1,20 @@
+@use 'settings/functions' as *;
+@use 'settings/mixins' as *;
+@use 'settings/variables' as *;
+
+html {
+	box-sizing: border-box;
+}
+
+*, *::before, *::after {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+body{
+	background-color: $bg-primary;
+	color:$text-primary;
+	font-size: $p-m;
+	font-family: $font;
+}

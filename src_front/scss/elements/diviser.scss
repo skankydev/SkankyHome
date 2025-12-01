@@ -1,0 +1,43 @@
+@use '../settings/functions' as *;
+@use '../settings/mixins' as *;
+@use '../settings/variables' as *;
+@use '../settings/animations' as *;
+
+.rainbow-diviser {
+	position: relative;
+	width: 100%;
+	height: 3px; // Épaisseur de la ligne
+
+	&::before {
+		content: ' ';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+
+		background: $neon-gradient;
+		background-size: 200% 100%;
+
+		animation: rainbow-slide 3s linear infinite;
+	}
+
+	// Glow
+	&::after {
+		content: ' ';
+		position: absolute;
+		top: 50%;
+		left: 0;
+		transform: translateY(-50%);
+		width: 100%;
+		height: 100%;
+
+		background: $neon-gradient;
+		background-size: 200% 100%;
+		filter: blur(15px);
+		opacity: 0.6;
+
+		animation: rainbow-slide 3s linear infinite;
+	}
+}
+

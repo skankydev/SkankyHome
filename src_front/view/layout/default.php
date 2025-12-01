@@ -15,8 +15,8 @@
 		$this->addKeyWords('php, apache, mongodb, javascript');
 		$this->addMeta('author','Schenck simon');
 		$this->addMeta('description','le blog d un développeur web');
-		$this->addJs("/dist/app.js");
-		$this->addCss("/dist/styles.css");
+		$this->addJs('/dist/app.js','module');
+		$this->addCss('/dist/styles.css');
 		echo $this->getHeader(); 
 	?>
 </head>
@@ -24,10 +24,9 @@
 	<section id="MainContainer">
 		<header id="Header">
 			<div class="layout-header">
-				<div class="sit-title">
-					<h1><i class=""></i>SkankyDev</h1>
-				</div>
+				<a href="<?= $this->url(['controller' => 'Home','action' => 'index','namespace' => 'App']) ?>" class="main-title">SkankyHome</a>
 			</div>
+			<hr class="rainbow-diviser">
 		</header>
 		
 		<section id="Contents">

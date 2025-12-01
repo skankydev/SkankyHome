@@ -1,0 +1,125 @@
+
+// ===== BACKGROUNDS =====
+$bg-primary:   #050510;
+$bg-secondary: #151526;
+$bg-tertiary:  #1F1F3A;
+
+// ===== NEON COLORS (Accents visuels) =====
+$neon-red: #FF073A;
+$neon-orange: #FF6B00;
+$neon-yellow: #FFFF00;
+$neon-lime: #CCFF00;
+$neon-green: #00FF41;
+$neon-cyan: #00F7F7;
+$neon-blue: #0066FF;
+$neon-purple: #7C3AED;
+$neon-magenta: #FF00FF;
+$neon-pink: #FF006E;
+
+$neon-colors: (
+	'cyan': $neon-cyan,
+	'green': $neon-green,
+	'magenta': $neon-magenta,
+	'pink': $neon-pink,
+	'orange': $neon-orange,
+	'yellow': $neon-yellow,
+	'blue': $neon-blue,
+	'purple': $neon-purple,
+	'red': $neon-red,
+	'lime': $neon-lime
+);
+
+$neon-gradient:linear-gradient(
+	90deg,
+	$neon-red 0%,
+	$neon-orange 10%,
+	$neon-yellow 20%,
+	$neon-lime 30%,
+	$neon-green 40%,
+	$neon-cyan 50%,
+	$neon-blue 60%,
+	$neon-purple 70%,
+	$neon-magenta 80%,
+	$neon-pink 90%,
+	$neon-red 100%
+);
+
+
+$success: #00FF41;
+$error: #FF073A;
+$warning: #FF6B00;
+$info: #00D9FF;
+
+// ===== TEXT =====
+$text-primary: #E0E5FF;
+$text-secondary: #B5BBCE;
+$text-muted: #949AAD;
+
+// ===== BORDERS & SHADOWS =====
+$border-color: #2A2A4A;
+
+// ===== SPACING =====
+$p-xxs: 2px;
+$p-xs: 4px;
+$p-s: 8px;
+$p-m: 16px;
+$p-l: 24px;
+$p-xl: 32px;
+$p-xxl: 48px;
+$p-xxxl: 64px;
+$p-huge: 96px;
+$p-massive: 128px;
+
+$spacings: (
+	'xxs': $p-xxs,
+	'xs': $p-xs,
+	's': $p-s,
+	'm': $p-m,
+	'l': $p-l,
+	'xl': $p-xl,
+	'xxl': $p-xxl,
+	'xxxl': $p-xxxl,
+	'huge': $p-huge,
+	'massive': $p-massive
+);
+
+// ===== FONT =====
+$font-title: 'Audiowide', sans-serif;
+$font: 'Electrolize', sans-serif;
+
+$size-xs: 0.75rem;
+$size-s: 0.875rem;
+$size-m: 1rem;
+$size-l: 1.125rem;
+$size-xl: 1.25rem;
+$size-2xl: 1.5rem;
+$size-3xl: 1.875rem;
+$size-4xl: 2.25rem;
+$size-5xl: 3rem;
+$size-6xl: 3.75rem;
+
+$font-sizes: (
+	'xs':$size-xs,
+	's':$size-s,
+	'm':$size-m,
+	'l':$size-l,
+	'xl':$size-xl,
+	'2xl':$size-2xl,
+	'3xl':$size-3xl,
+	'4xl':$size-4xl,
+	'5xl':$size-5xl,
+	'6xl':$size-6xl,
+);
+
+// Font weights
+$weight-light: 300;
+$weight-normal: 400;
+$weight-medium: 500;
+$weight-semibold: 600;
+$weight-bold: 700;
+$weight-black: 900;
+
+// Line heights
+$line-height-tight: 1.25;
+$line-height-normal: 1.5;
+$line-height-relaxed: 1.75;

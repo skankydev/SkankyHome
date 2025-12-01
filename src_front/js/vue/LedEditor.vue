@@ -1,6 +1,11 @@
 <script setup>
 import { ref } from 'vue'
 
+const props = defineProps({
+	value: String
+})
+
+
 const count = ref(0)
 
 console.log("LedEditor")
@@ -8,7 +13,7 @@ console.log("LedEditor")
 
 <template>
 <div class="led-editor">
-	<h2>Coucou</h2>
+	<h2>{{value}}</h2>
 	<p>Compteur: {{ count }}</p>
 	<button @click="count++">+1</button>
 </div>

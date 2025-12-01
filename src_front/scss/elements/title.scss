@@ -1,0 +1,163 @@
+@use '../settings/functions' as *;
+@use '../settings/mixins' as *;
+@use '../settings/variables' as *;
+@use '../settings/animations' as *;
+
+
+h1, .h1 {
+	font-family: $font-title;
+	font-size: $size-4xl;
+	font-weight: 400;
+	line-height: 1.2;
+	color: $text-primary;
+	margin-bottom: $p-l;
+}
+
+h2, .h2 {
+	font-family: $font-title;
+	font-size: $size-3xl;
+	font-weight: 400;
+	line-height: 1.3;
+	color: $text-primary;
+	margin-bottom: $p-m;
+}
+
+h3, .h3 {
+	font-family: $font-title;
+	font-size: $size-2xl;
+	font-weight: 400;
+	line-height: 1.3;
+	color: $text-primary;
+	margin-bottom: $p-m;
+}
+
+h4, .h4 {
+	font-family: $font;
+	font-size: $size-xl;
+	font-weight: 600; 
+	line-height: 1.4;
+	color: $text-secondary;
+	margin-bottom: $p-s;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+}
+
+h5, .h5 {
+	font-family: $font;
+	font-size: $size-l;
+	font-weight: 600;
+	line-height: 1.4;
+	color: $text-secondary;
+	margin-bottom: $p-s;
+}
+
+h6, .h6 {
+	font-family: $font;
+	font-size: $size-m;
+	font-weight: 600;
+	line-height: 1.4;
+	color: $text-muted;
+	margin-bottom: $p-xs;
+}
+
+
+.corner-accent {
+	position: relative;
+
+	&::before {
+		content: '';
+		position: absolute;
+		bottom: -$p-s;
+		left: 0;
+		width: 90px;
+		height: 3px;
+		background: $neon-gradient;
+		background-size: 200% 100%;
+		animation: rainbow-slide 3s linear infinite;
+	}
+}
+
+.rainbow-underline {
+	position: relative;
+	padding-bottom: $p-xs;
+	display: inline-block;
+
+	&::after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 2px;
+		background: $neon-gradient;
+		background-size: 200% 100%;
+		animation: rainbow-slide 3s linear infinite;
+		box-shadow: 0 2px 10px rgba(255, 255, 255, 0.3);
+	}
+}
+
+.glow-box {
+	display: inline-block;
+	padding: $p-m;
+	@include neon-border($neon-cyan, 0.8);
+	background: rgba($bg-secondary, 0.5);
+}
+
+.glitch {
+	position: relative;
+
+	&::before,
+	&::after {
+		content: attr(data-text);
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	&::before {
+		left: 2px;
+		text-shadow: -2px 0 $neon-red;
+		clip: rect(44px, 450px, 56px, 0);
+		animation: glitch-anim-1 5s infinite linear alternate-reverse;
+	}
+
+	&::after {
+		left: -2px;
+		text-shadow: -2px 0 $neon-blue;
+		clip: rect(44px, 450px, 56px, 0);
+		animation: glitch-anim-2 5s infinite linear alternate-reverse;
+	}
+}
+
+.pulse {
+	animation: neon-pulse 2s ease-in-out infinite;
+}
+
+.double-line {
+	position: relative;
+	padding-bottom: $p-s;
+	display: inline-block;
+
+	&::before,
+	&::after {
+		content: '';
+		position: absolute;
+		left: 0;
+		width: 100%;
+		height: 2px;
+		background: $neon-gradient;
+		background-size: 200% 100%;
+		animation: rainbow-slide 3s linear infinite;
+	}
+
+	&::before {
+		bottom: $p-xs;
+	}
+
+	&::after {
+		bottom: 0;
+	}
+}
+

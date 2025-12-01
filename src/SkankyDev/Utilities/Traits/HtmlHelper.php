@@ -33,6 +33,10 @@ trait HtmlHelper {
 		return $retour;
 	}
 
+	public function url($link){
+		return UrlBuilder::_build($link);
+	}
+
 	/**
 	 * creat the html attribute 
 	 * @param  array  $attr list of attribute 

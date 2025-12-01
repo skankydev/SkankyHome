@@ -1,0 +1,32 @@
+@use '../settings/functions' as *;
+@use '../settings/mixins' as *;
+@use '../settings/variables' as *;
+
+// Map des directions
+$directions: (
+	'': '',           // p-m  = padding
+	't': '-top',      // pt-m = padding-top
+	'r': '-right',    // pr-m = padding-right
+	'b': '-bottom',   // pb-m = padding-bottom
+	'l': '-left',     // pl-m = padding-left
+	'x': '-inline',   // px-m = padding-inline (left + right)
+	'y': '-block'     // py-m = padding-block (top + bottom)
+);
+
+// Générer les classes de padding
+@each $size-name, $size-value in $spacings {
+	@each $dir-name, $dir-value in $directions {
+		.p#{$dir-name}-#{$size-name} {
+			padding#{$dir-value}: $size-value;
+		}
+	}
+}
+
+// Pareil pour margin
+@each $size-name, $size-value in $spacings {
+	@each $dir-name, $dir-value in $directions {
+		.m#{$dir-name}-#{$size-name} {
+			margin#{$dir-value}: $size-value;
+		}
+	}
+}

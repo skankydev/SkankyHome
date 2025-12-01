@@ -1,0 +1,17 @@
+@use '../settings/functions' as *;
+@use '../settings/mixins' as *;
+@use '../settings/variables' as *;
+
+@each $name, $color in $neon-colors {
+	.neon-#{$name} {
+		@include neon-text($color, 1);
+	}
+
+	.neon-#{$name}-light {
+		@include neon-text($color, 0.5);
+	}
+
+	.neon-#{$name}-strong {
+		@include neon-text($color, 1.5);
+	}
+}

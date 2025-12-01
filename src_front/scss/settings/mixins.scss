@@ -1,0 +1,47 @@
+@use 'variables' as *;
+
+// Effet neon simple
+@mixin neon-glow($color, $intensity: 1) {
+	box-shadow: 
+		0 0 calc(5px * $intensity) $color,
+		0 0 calc(10px * $intensity) $color,
+		0 0 calc(20px * $intensity) rgba($color, 0.8),
+		0 0 calc(40px * $intensity) rgba($color, 0.5);
+}
+
+// Neon border (outline glow)
+@mixin neon-border($color, $intensity: 1) {
+	border: 1px solid $color;
+	box-shadow: 
+		0 0 calc(5px * $intensity) $color,
+		inset 0 0 calc(5px * $intensity) $color,
+		0 0 calc(10px * $intensity) rgba($color, 0.6);
+}
+
+@mixin neon-border-bottom($color, $thickness: 2px, $intensity: 1) {
+	border-bottom: $thickness solid $color;
+	box-shadow: 
+		0 calc(2px * $intensity) calc(5px * $intensity) $color,
+		0 calc(4px * $intensity) calc(10px * $intensity) rgba($color, 0.6),
+		0 calc(6px * $intensity) calc(15px * $intensity) rgba($color, 0.3);
+}
+
+// Neon text
+@mixin neon-text($color, $intensity: 1) {
+	color: $color;
+	text-shadow: 
+		0 0 calc(3px * $intensity) $color,
+		0 0 calc(6px * $intensity) $color,
+		0 0 calc(12px * $intensity) rgba($color, 0.8);
+}
+
+// Neon intense (pour les boutons hover)
+@mixin neon-glow-strong($color) {
+	box-shadow: 
+		0 0 10px $color,
+		0 0 20px $color,
+		0 0 30px $color,
+		0 0 40px rgba($color, 0.8),
+		0 0 70px rgba($color, 0.6),
+		0 0 100px rgba($color, 0.4);
+}

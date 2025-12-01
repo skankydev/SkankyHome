@@ -1,0 +1,20 @@
+@use 'variables' as *;
+
+
+@function neon-dark($color, $amount: 40%) {
+	@return darken($color, $amount);
+}
+
+// Version encore plus sombre
+@function neon-darker($color, $amount: 60%) {
+	@return darken($color, $amount);
+}
+
+// Ou avec HSL pour plus de contrôle
+@function neon-dimmed($color, $lightness: 30%) {
+	@return hsl(hue($color), saturation($color), $lightness);
+}
+
+@function space($size) {
+	@return map-get($spacings, $size);
+}

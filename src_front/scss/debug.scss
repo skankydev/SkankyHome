@@ -1,0 +1,50 @@
+
+
+#debug{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+}
+
+.debug-btn-containe-master{
+	vertical-align: top;
+	text-align: left;
+	display: inline-block;
+	background: #FFF;
+	border: 1px solid #EEE;
+	
+	bottom: 0;
+}
+.debug-btn-containe{
+	margin: 0px;
+}
+.debug-var{
+	color:#F5DA81;
+}
+.debug-keyword{
+	color:#7AA6dA;
+}
+.debug-integer{
+	color:#DF5F5F;
+}
+.debug-source{
+	color:#04B431;
+}
+.debug-text{
+	color:#58FA58;
+}
+.debug-php{
+	color:#E78C45;
+}
+.debug-message{
+	background-color: #000;
+	color:#C397D8;
+	border: solid 1px  #969896;
+	font-size: 16px;
+	border-radius: 4px;
+	padding: 4px;
+}
+.debug-message pre{
+	padding-top: 8px;
+	color: #FFF;
+}
