@@ -13,23 +13,22 @@
 
 namespace SkankyDev\Database;
 
-use SkankyDev\Config\Config;
-use MongoDB\Collection;
 use MongoDB\Client;
-use MongoDB\Driver\Manager;
+use MongoDB\Collection;
 use MongoDB\Database;
+use MongoDB\Driver\Manager;
+use SkankyDev\Config\Config;
+use SkankyDev\Utilities\Traits\Singleton;
 
 class MongoClient {
 
-	private static $_instance = null;
-
-	public static function getInstance() {
-		if(is_null(self::$_instance)) {
-			self::$_instance = new MongoClient();  
-		}
-		return self::$_instance;
-	}
 	
+	use Singleton;
+
+	private $manager;
+	private $client;
+	private $dbName;
+
 	public function __construct(){
 		
 		$dbConnect = Config::getDbConf('MongoDB');

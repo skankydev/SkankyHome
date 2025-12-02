@@ -13,15 +13,32 @@
 
 namespace App\Controller;
 
+use App\Form\SequenceForm;
+use App\Model\Document\Sequence;
+use App\Model\SequenceCollection;
 use SkankyDev\Controller\MasterController;
 use SkankyDev\Http\Request;
 use SkankyDev\Http\Routing\Router;
-use App\Form\SequenceForm;
 
 class SequenceController extends MasterController {
 
-	public function index(){
+	public function index(SequenceCollection $collection){
+
+		$sequences = $collection->paginate([],Request::_paginateInfo(1));
 		
+		/*$sec = new Sequence([
+			'name' => 'Youpi 3',
+			'color' => '#05FA12',
+			'duration' => 15000,
+			'active' => true,
+		]);
+
+			'name'=>[
+				'$regex' => '^Youpi', '$options' => 'i'
+			]
+		$collection->save($sec);
+		*/
+		debug($sequences);
 		return view('sequence.index');
 	}
 

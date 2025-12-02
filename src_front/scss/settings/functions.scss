@@ -7,6 +7,10 @@
 	@return color.scale($color, $lightness: -$amount);
 }
 
+@function neon-light($color, $amount: 40%) {
+	@return color.scale($color, $lightness: $amount);
+}
+
 // Version encore plus sombre
 @function neon-darker($color, $amount: 60%) {
 	 @return color.scale($color, $lightness: -$amount);
