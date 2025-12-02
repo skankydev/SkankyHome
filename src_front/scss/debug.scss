@@ -1,50 +1,62 @@
+@use 'settings/variables' as *;
+@use 'settings/functions' as *;
 
-
-#debug{
+#debug {
 	position: fixed;
 	bottom: 0;
 	left: 0;
+	z-index: 9999;
 }
 
-.debug-btn-containe-master{
+.debug-btn-containe-master {
 	vertical-align: top;
 	text-align: left;
 	display: inline-block;
-	background: #FFF;
-	border: 1px solid #EEE;
-	
+	background: $bg-primary;
+	border: 1px solid $border-color;
 	bottom: 0;
 }
-.debug-btn-containe{
-	margin: 0px;
+
+.debug-btn-containe {
+	margin: 0;
 }
-.debug-var{
-	color:#F5DA81;
+
+.debug-var {
+	color: $neon-yellow;
 }
-.debug-keyword{
-	color:#7AA6dA;
+
+.debug-keyword {
+	color: $neon-cyan;
 }
-.debug-integer{
-	color:#DF5F5F;
+
+.debug-integer {
+	color: $neon-pink;
 }
-.debug-source{
-	color:#04B431;
+
+.debug-source {
+	color: neon-darker($neon-green,50%);
 }
-.debug-text{
-	color:#58FA58;
+
+.debug-text {
+	color: $neon-green;
 }
-.debug-php{
-	color:#E78C45;
+
+.debug-php {
+	color: $neon-orange;
 }
-.debug-message{
-	background-color: #000;
-	color:#C397D8;
-	border: solid 1px  #969896;
-	font-size: 16px;
+
+.debug-message {
+	background-color: $bg-secondary;
+	color: $neon-magenta;
+	border: solid 1px $border-color;
+	font-size: $size-m;
 	border-radius: 4px;
-	padding: 4px;
+	padding: $p-xs;
+	font-family: $font;
 }
-.debug-message pre{
-	padding-top: 8px;
-	color: #FFF;
+
+.debug-message pre {
+	padding-top: $p-s;
+	color: $text-primary;
+	font-family: 'consolas', monospace;
 }

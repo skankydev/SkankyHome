@@ -50,6 +50,13 @@ $error: #FF073A;
 $warning: #FF6B00;
 $info: #00D9FF;
 
+$tool-colors : (
+	'success':$success,
+	'error':$error,
+	'warning':$warning,
+	'info':$info,
+);
+
 // ===== TEXT =====
 $text-primary: #E0E5FF;
 $text-secondary: #B5BBCE;

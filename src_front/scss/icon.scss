@@ -1,3 +1,7 @@
+@use 'settings/animations' as *;
+@use 'settings/variables' as *;
+
+
 @font-face {
 	font-family: 'icomoon';
 	src:  url('/fonts/icomoon.eot?qgi66c');
@@ -24,6 +28,22 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+
+.rainbow-icon {
+	[class^="icon-"],
+	[class*=" icon-"] {
+		&::before {
+			background: $neon-gradient;
+			background-size: 200% 100%;
+			-webkit-background-clip: text;
+			background-clip: text;
+			-webkit-text-fill-color: transparent;
+			animation: rainbow-slide 3s linear infinite;
+		}
+	}
+}
+
+
 
 .icon-activity:before {
 	content: "\e900";
@@ -596,6 +616,7 @@
 .icon-plus:before {
 	content: "\e9bc";
 }
+.icon-add:before,
 .icon-plus-circle:before {
 	content: "\e9bd";
 }

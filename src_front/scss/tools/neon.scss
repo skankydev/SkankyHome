@@ -15,3 +15,11 @@
 		@include neon-text($color, 1.5);
 	}
 }
+
+@each $name, $color in $tool-colors {
+	.text-#{$name}{
+		color:$color;
+		font-size: $size-l;
+		font-style: italic;
+	}
+}

@@ -321,6 +321,196 @@ template {
   display: none;
 }
 
+@keyframes rainbow-slide {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: -200% 50%;
+  }
+}
+@keyframes neon-pulse {
+  0%, 100% {
+    color: #00F7F7;
+    text-shadow: 0 0 2.4px #00F7F7, 0 0 4.8px #00F7F7, 0 0 9.6px rgba(0, 247, 247, 0.8);
+  }
+  50% {
+    color: #00F7F7;
+    text-shadow: 0 0 4.5px #00F7F7, 0 0 9px #00F7F7, 0 0 18px rgba(0, 247, 247, 0.8);
+  }
+}
+@keyframes glitch-anim-1 {
+  0% {
+    clip: rect(42px, 9999px, 44px, 0);
+    transform: skew(0.3deg);
+  }
+  5% {
+    clip: rect(12px, 9999px, 59px, 0);
+    transform: skew(0.1deg);
+  }
+  10% {
+    clip: rect(48px, 9999px, 29px, 0);
+    transform: skew(0.8deg);
+  }
+  15% {
+    clip: rect(25px, 9999px, 87px, 0);
+    transform: skew(0.5deg);
+  }
+  20% {
+    clip: rect(71px, 9999px, 55px, 0);
+    transform: skew(0.2deg);
+  }
+  25% {
+    clip: rect(8px, 9999px, 93px, 0);
+    transform: skew(0.9deg);
+  }
+  30% {
+    clip: rect(56px, 9999px, 15px, 0);
+    transform: skew(0.4deg);
+  }
+  35% {
+    clip: rect(34px, 9999px, 78px, 0);
+    transform: skew(0.6deg);
+  }
+  40% {
+    clip: rect(91px, 9999px, 24px, 0);
+    transform: skew(0.3deg);
+  }
+  45% {
+    clip: rect(17px, 9999px, 68px, 0);
+    transform: skew(0.7deg);
+  }
+  50% {
+    clip: rect(63px, 9999px, 41px, 0);
+    transform: skew(0.5deg);
+  }
+  55% {
+    clip: rect(5px, 9999px, 85px, 0);
+    transform: skew(0.2deg);
+  }
+  60% {
+    clip: rect(77px, 9999px, 33px, 0);
+    transform: skew(0.9deg);
+  }
+  65% {
+    clip: rect(22px, 9999px, 72px, 0);
+    transform: skew(0.4deg);
+  }
+  70% {
+    clip: rect(54px, 9999px, 19px, 0);
+    transform: skew(0.6deg);
+  }
+  75% {
+    clip: rect(38px, 9999px, 81px, 0);
+    transform: skew(0.3deg);
+  }
+  80% {
+    clip: rect(69px, 9999px, 47px, 0);
+    transform: skew(0.8deg);
+  }
+  85% {
+    clip: rect(14px, 9999px, 95px, 0);
+    transform: skew(0.5deg);
+  }
+  90% {
+    clip: rect(82px, 9999px, 28px, 0);
+    transform: skew(0.2deg);
+  }
+  95% {
+    clip: rect(51px, 9999px, 64px, 0);
+    transform: skew(0.7deg);
+  }
+  100% {
+    clip: rect(30px, 9999px, 76px, 0);
+    transform: skew(0.4deg);
+  }
+}
+@keyframes glitch-anim-2 {
+  0% {
+    clip: rect(65px, 9999px, 100px, 0);
+    transform: skew(0.5deg);
+  }
+  5% {
+    clip: rect(52px, 9999px, 74px, 0);
+    transform: skew(0.9deg);
+  }
+  10% {
+    clip: rect(79px, 9999px, 19px, 0);
+    transform: skew(0.3deg);
+  }
+  15% {
+    clip: rect(15px, 9999px, 90px, 0);
+    transform: skew(0.7deg);
+  }
+  20% {
+    clip: rect(43px, 9999px, 61px, 0);
+    transform: skew(0.2deg);
+  }
+  25% {
+    clip: rect(88px, 9999px, 32px, 0);
+    transform: skew(0.6deg);
+  }
+  30% {
+    clip: rect(21px, 9999px, 84px, 0);
+    transform: skew(0.4deg);
+  }
+  35% {
+    clip: rect(67px, 9999px, 45px, 0);
+    transform: skew(0.8deg);
+  }
+  40% {
+    clip: rect(11px, 9999px, 97px, 0);
+    transform: skew(0.5deg);
+  }
+  45% {
+    clip: rect(76px, 9999px, 28px, 0);
+    transform: skew(0.3deg);
+  }
+  50% {
+    clip: rect(39px, 9999px, 71px, 0);
+    transform: skew(0.9deg);
+  }
+  55% {
+    clip: rect(84px, 9999px, 16px, 0);
+    transform: skew(0.2deg);
+  }
+  60% {
+    clip: rect(26px, 9999px, 93px, 0);
+    transform: skew(0.6deg);
+  }
+  65% {
+    clip: rect(58px, 9999px, 49px, 0);
+    transform: skew(0.7deg);
+  }
+  70% {
+    clip: rect(7px, 9999px, 86px, 0);
+    transform: skew(0.4deg);
+  }
+  75% {
+    clip: rect(73px, 9999px, 35px, 0);
+    transform: skew(0.8deg);
+  }
+  80% {
+    clip: rect(44px, 9999px, 62px, 0);
+    transform: skew(0.5deg);
+  }
+  85% {
+    clip: rect(91px, 9999px, 23px, 0);
+    transform: skew(0.3deg);
+  }
+  90% {
+    clip: rect(18px, 9999px, 79px, 0);
+    transform: skew(0.9deg);
+  }
+  95% {
+    clip: rect(55px, 9999px, 41px, 0);
+    transform: skew(0.6deg);
+  }
+  100% {
+    clip: rect(33px, 9999px, 68px, 0);
+    transform: skew(0.2deg);
+  }
+}
 @font-face {
   font-family: "icomoon";
   src: url("/fonts/icomoon.eot?qgi66c");
@@ -341,6 +531,16 @@ template {
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.rainbow-icon [class^=icon-]::before,
+.rainbow-icon [class*=" icon-"]::before {
+  background: linear-gradient(90deg, #FF073A 0%, #FF6B00 10%, #FFFF00 20%, #CCFF00 30%, #00FF41 40%, #00F7F7 50%, #0066FF 60%, #7C3AED 70%, #FF00FF 80%, #FF006E 90%, #FF073A 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: rainbow-slide 3s linear infinite;
 }
 
 .icon-activity:before {
@@ -1102,6 +1302,7 @@ template {
   content: "\e9bc";
 }
 
+.icon-add:before,
 .icon-plus-circle:before {
   content: "\e9bd";
 }
@@ -1495,57 +1696,60 @@ body {
   position: fixed;
   bottom: 0;
   left: 0;
+  z-index: 9999;
 }
 
 .debug-btn-containe-master {
   vertical-align: top;
   text-align: left;
   display: inline-block;
-  background: #FFF;
-  border: 1px solid #EEE;
+  background: #050510;
+  border: 1px solid #2A2A4A;
   bottom: 0;
 }
 
 .debug-btn-containe {
-  margin: 0px;
+  margin: 0;
 }
 
 .debug-var {
-  color: #F5DA81;
+  color: #FFFF00;
 }
 
 .debug-keyword {
-  color: #7AA6dA;
+  color: #00F7F7;
 }
 
 .debug-integer {
-  color: #DF5F5F;
+  color: #FF006E;
 }
 
 .debug-source {
-  color: #04B431;
+  color: rgb(0, 127.5, 32.5);
 }
 
 .debug-text {
-  color: #58FA58;
+  color: #00FF41;
 }
 
 .debug-php {
-  color: #E78C45;
+  color: #FF6B00;
 }
 
 .debug-message {
-  background-color: #000;
-  color: #C397D8;
-  border: solid 1px #969896;
-  font-size: 16px;
+  background-color: #151526;
+  color: #FF00FF;
+  border: solid 1px #2A2A4A;
+  font-size: 1rem;
   border-radius: 4px;
   padding: 4px;
+  font-family: "Electrolize", sans-serif;
 }
 
 .debug-message pre {
   padding-top: 8px;
-  color: #FFF;
+  color: #E0E5FF;
+  font-family: "consolas", monospace;
 }
 
 .p-xxs {
@@ -2258,195 +2462,32 @@ body {
   text-shadow: 0 0 4.5px #CCFF00, 0 0 9px #CCFF00, 0 0 18px rgba(204, 255, 0, 0.8);
 }
 
-@keyframes rainbow-slide {
-  0% {
-    background-position: 0% 50%;
-  }
-  100% {
-    background-position: -200% 50%;
-  }
+.text-success {
+  color: #00FF41;
+  font-size: 1.125rem;
+  font-style: italic;
 }
-@keyframes neon-pulse {
-  0%, 100% {
-    color: #00F7F7;
-    text-shadow: 0 0 2.4px #00F7F7, 0 0 4.8px #00F7F7, 0 0 9.6px rgba(0, 247, 247, 0.8);
-  }
-  50% {
-    color: #00F7F7;
-    text-shadow: 0 0 4.5px #00F7F7, 0 0 9px #00F7F7, 0 0 18px rgba(0, 247, 247, 0.8);
-  }
+
+.text-error {
+  color: #FF073A;
+  font-size: 1.125rem;
+  font-style: italic;
 }
-@keyframes glitch-anim-1 {
-  0% {
-    clip: rect(42px, 9999px, 44px, 0);
-    transform: skew(0.3deg);
-  }
-  5% {
-    clip: rect(12px, 9999px, 59px, 0);
-    transform: skew(0.1deg);
-  }
-  10% {
-    clip: rect(48px, 9999px, 29px, 0);
-    transform: skew(0.8deg);
-  }
-  15% {
-    clip: rect(25px, 9999px, 87px, 0);
-    transform: skew(0.5deg);
-  }
-  20% {
-    clip: rect(71px, 9999px, 55px, 0);
-    transform: skew(0.2deg);
-  }
-  25% {
-    clip: rect(8px, 9999px, 93px, 0);
-    transform: skew(0.9deg);
-  }
-  30% {
-    clip: rect(56px, 9999px, 15px, 0);
-    transform: skew(0.4deg);
-  }
-  35% {
-    clip: rect(34px, 9999px, 78px, 0);
-    transform: skew(0.6deg);
-  }
-  40% {
-    clip: rect(91px, 9999px, 24px, 0);
-    transform: skew(0.3deg);
-  }
-  45% {
-    clip: rect(17px, 9999px, 68px, 0);
-    transform: skew(0.7deg);
-  }
-  50% {
-    clip: rect(63px, 9999px, 41px, 0);
-    transform: skew(0.5deg);
-  }
-  55% {
-    clip: rect(5px, 9999px, 85px, 0);
-    transform: skew(0.2deg);
-  }
-  60% {
-    clip: rect(77px, 9999px, 33px, 0);
-    transform: skew(0.9deg);
-  }
-  65% {
-    clip: rect(22px, 9999px, 72px, 0);
-    transform: skew(0.4deg);
-  }
-  70% {
-    clip: rect(54px, 9999px, 19px, 0);
-    transform: skew(0.6deg);
-  }
-  75% {
-    clip: rect(38px, 9999px, 81px, 0);
-    transform: skew(0.3deg);
-  }
-  80% {
-    clip: rect(69px, 9999px, 47px, 0);
-    transform: skew(0.8deg);
-  }
-  85% {
-    clip: rect(14px, 9999px, 95px, 0);
-    transform: skew(0.5deg);
-  }
-  90% {
-    clip: rect(82px, 9999px, 28px, 0);
-    transform: skew(0.2deg);
-  }
-  95% {
-    clip: rect(51px, 9999px, 64px, 0);
-    transform: skew(0.7deg);
-  }
-  100% {
-    clip: rect(30px, 9999px, 76px, 0);
-    transform: skew(0.4deg);
-  }
+
+.text-warning {
+  color: #FF6B00;
+  font-size: 1.125rem;
+  font-style: italic;
 }
-@keyframes glitch-anim-2 {
-  0% {
-    clip: rect(65px, 9999px, 100px, 0);
-    transform: skew(0.5deg);
-  }
-  5% {
-    clip: rect(52px, 9999px, 74px, 0);
-    transform: skew(0.9deg);
-  }
-  10% {
-    clip: rect(79px, 9999px, 19px, 0);
-    transform: skew(0.3deg);
-  }
-  15% {
-    clip: rect(15px, 9999px, 90px, 0);
-    transform: skew(0.7deg);
-  }
-  20% {
-    clip: rect(43px, 9999px, 61px, 0);
-    transform: skew(0.2deg);
-  }
-  25% {
-    clip: rect(88px, 9999px, 32px, 0);
-    transform: skew(0.6deg);
-  }
-  30% {
-    clip: rect(21px, 9999px, 84px, 0);
-    transform: skew(0.4deg);
-  }
-  35% {
-    clip: rect(67px, 9999px, 45px, 0);
-    transform: skew(0.8deg);
-  }
-  40% {
-    clip: rect(11px, 9999px, 97px, 0);
-    transform: skew(0.5deg);
-  }
-  45% {
-    clip: rect(76px, 9999px, 28px, 0);
-    transform: skew(0.3deg);
-  }
-  50% {
-    clip: rect(39px, 9999px, 71px, 0);
-    transform: skew(0.9deg);
-  }
-  55% {
-    clip: rect(84px, 9999px, 16px, 0);
-    transform: skew(0.2deg);
-  }
-  60% {
-    clip: rect(26px, 9999px, 93px, 0);
-    transform: skew(0.6deg);
-  }
-  65% {
-    clip: rect(58px, 9999px, 49px, 0);
-    transform: skew(0.7deg);
-  }
-  70% {
-    clip: rect(7px, 9999px, 86px, 0);
-    transform: skew(0.4deg);
-  }
-  75% {
-    clip: rect(73px, 9999px, 35px, 0);
-    transform: skew(0.8deg);
-  }
-  80% {
-    clip: rect(44px, 9999px, 62px, 0);
-    transform: skew(0.5deg);
-  }
-  85% {
-    clip: rect(91px, 9999px, 23px, 0);
-    transform: skew(0.3deg);
-  }
-  90% {
-    clip: rect(18px, 9999px, 79px, 0);
-    transform: skew(0.9deg);
-  }
-  95% {
-    clip: rect(55px, 9999px, 41px, 0);
-    transform: skew(0.6deg);
-  }
-  100% {
-    clip: rect(33px, 9999px, 68px, 0);
-    transform: skew(0.2deg);
-  }
+
+.text-info {
+  color: #00D9FF;
+  font-size: 1.125rem;
+  font-style: italic;
+}
+
+#Header {
+  overflow: hidden;
 }
 #Header .layout-header {
   padding: 16px 32px;
@@ -2484,6 +2525,12 @@ body {
 
 #Contents {
   padding: 16px 32px;
+}
+
+.page-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .rainbow-diviser {
@@ -2664,6 +2711,385 @@ h6, .h6 {
   bottom: 0;
 }
 
+.form-wrapper {
+  width: 100%;
+  max-width: 80vw;
+  margin: 0 auto;
+}
+
+fieldset {
+  border: none;
+  margin-bottom: 32px;
+  padding: 0;
+}
+
+legend {
+  color: #00F7F7;
+  font-size: 1.125rem;
+  font-family: "Audiowide", sans-serif;
+  margin-bottom: 16px;
+  padding-bottom: 4px;
+  border-bottom: 2px solid #00F7F7;
+  box-shadow: 0 2px 10px rgba(0, 247, 247, 0.3);
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.form-label,
+label {
+  display: block;
+  margin-bottom: 4px;
+  color: #E0E5FF;
+  font-size: 1.125rem;
+  font-family: "Electrolize", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+.form-label.required::after,
+label.required::after {
+  font-family: "icomoon" !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  font-size: 0.75rem;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  content: " \e9e1";
+  color: #FF073A;
+}
+
+.form-input,
+input:not([type=checkbox]):not([type=radio]):not([type=submit]),
+textarea {
+  display: block;
+  width: 100%;
+  padding: 8px 16px;
+  font-family: "Electrolize", sans-serif;
+  font-size: 1rem;
+  color: #E0E5FF;
+  background-color: rgba(21, 21, 38, 0.5);
+  border: 2px solid transparent;
+  border-bottom: 2px solid #7C3AED;
+  border-radius: 4px 4px 0 0;
+  outline: none;
+  transition: all 0.3s ease;
+}
+.form-input::placeholder,
+input:not([type=checkbox]):not([type=radio]):not([type=submit])::placeholder,
+textarea::placeholder {
+  color: #949AAD;
+  font-style: italic;
+}
+.form-input:focus,
+input:not([type=checkbox]):not([type=radio]):not([type=submit]):focus,
+textarea:focus {
+  background-color: rgba(21, 21, 38, 0.8);
+  border-color: #00F7F7;
+  border-bottom-width: 3px;
+  box-shadow: 0 0 20px rgba(0, 247, 247, 0.2), inset 0 -2px 10px rgba(0, 247, 247, 0.1);
+}
+.form-input:hover:not(:focus),
+input:not([type=checkbox]):not([type=radio]):not([type=submit]):hover:not(:focus),
+textarea:hover:not(:focus) {
+  border-bottom-color: rgb(155.0744186047, 104.7302325581, 241.2697674419);
+}
+
+textarea {
+  min-height: 120px;
+  max-height: 400px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+select {
+  display: block;
+  width: 100%;
+  padding: 8px 16px;
+  font-family: "Electrolize", sans-serif;
+  font-size: 1rem;
+  color: #E0E5FF;
+  background-color: #151526;
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  border: 2px solid transparent;
+  border-bottom: 2px solid #7C3AED;
+  border-radius: 4px 4px 0 0;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  padding-right: 32px;
+  transition: all 0.3s ease;
+}
+select:focus {
+  background-color: rgba(21, 21, 38, 0.8);
+  border-color: #00F7F7;
+  border-bottom-width: 3px;
+  box-shadow: 0 0 20px rgba(0, 247, 247, 0.2), inset 0 -2px 10px rgba(0, 247, 247, 0.1);
+}
+select:hover:not(:focus) {
+  border-bottom-color: rgb(155.0744186047, 104.7302325581, 241.2697674419);
+}
+
+input[type=checkbox] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+input[type=checkbox] + label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding-left: 32px;
+  cursor: pointer;
+  color: #E0E5FF;
+  text-transform: none;
+  letter-spacing: normal;
+  font-weight: 400;
+}
+input[type=checkbox] + label::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
+  background: #151526;
+  border: 2px solid #7C3AED;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+input[type=checkbox] + label::after {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 50%;
+  width: 8px;
+  height: 14px;
+  border: solid transparent;
+  border-width: 0 3px 3px 0;
+  transform: translateY(-65%) rotate(45deg) scale(0);
+  transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+input[type=checkbox]:hover + label::before {
+  border-color: rgb(155.0744186047, 104.7302325581, 241.2697674419);
+  box-shadow: 0 0 10px rgba(124, 58, 237, 0.3);
+}
+input[type=checkbox]:checked + label::before {
+  background: rgba(124, 58, 237, 0.2);
+  border-color: #00F7F7;
+  box-shadow: 0 0 15px rgba(0, 247, 247, 0.5), inset 0 0 10px rgba(0, 247, 247, 0.2);
+}
+input[type=checkbox]:checked + label::after {
+  border-color: #00F7F7;
+  transform: translateY(-65%) rotate(45deg) scale(1);
+  filter: drop-shadow(0 0 3px #00F7F7);
+}
+input[type=checkbox]:focus + label::before {
+  outline: 2px solid rgba(0, 247, 247, 0.5);
+  outline-offset: 2px;
+}
+
+input[type=radio] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+input[type=radio] + label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding-left: 32px;
+  cursor: pointer;
+  color: #E0E5FF;
+  text-transform: none;
+  letter-spacing: normal;
+  font-weight: 400;
+}
+input[type=radio] + label::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
+  background: #151526;
+  border: 2px solid #7C3AED;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+input[type=radio] + label::after {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 50%;
+  transform: translateY(-50%) scale(0);
+  width: 8px;
+  height: 8px;
+  background: #00F7F7;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #00F7F7;
+  transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+input[type=radio]:hover + label::before {
+  border-color: rgb(155.0744186047, 104.7302325581, 241.2697674419);
+  box-shadow: 0 0 10px rgba(124, 58, 237, 0.3);
+}
+input[type=radio]:checked + label::before {
+  border-color: #00F7F7;
+  box-shadow: 0 0 15px rgba(0, 247, 247, 0.5), inset 0 0 10px rgba(0, 247, 247, 0.2);
+}
+input[type=radio]:checked + label::after {
+  transform: translateY(-50%) scale(1);
+}
+input[type=radio]:focus + label::before {
+  outline: 2px solid rgba(0, 247, 247, 0.5);
+  outline-offset: 2px;
+}
+
+.form-check-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-check-inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.form-group.has-error .form-label,
+.form-group.error .form-label,
+.form-group.invalid .form-label {
+  color: #FF006E;
+}
+.form-group.has-error input,
+.form-group.has-error textarea,
+.form-group.has-error select,
+.form-group.error input,
+.form-group.error textarea,
+.form-group.error select,
+.form-group.invalid input,
+.form-group.invalid textarea,
+.form-group.invalid select {
+  border-bottom-color: #FF006E;
+}
+.form-group.has-error input:focus,
+.form-group.has-error textarea:focus,
+.form-group.has-error select:focus,
+.form-group.error input:focus,
+.form-group.error textarea:focus,
+.form-group.error select:focus,
+.form-group.invalid input:focus,
+.form-group.invalid textarea:focus,
+.form-group.invalid select:focus {
+  border-color: #FF006E;
+  box-shadow: 0 0 20px rgba(255, 0, 110, 0.3), inset 0 -2px 10px rgba(255, 0, 110, 0.1);
+}
+
+.form-group.success .form-label,
+.form-group.valid .form-label {
+  color: #00FF41;
+}
+.form-group.success input,
+.form-group.success textarea,
+.form-group.success select,
+.form-group.valid input,
+.form-group.valid textarea,
+.form-group.valid select {
+  border-bottom-color: #00FF41;
+}
+.form-group.success input:focus,
+.form-group.success textarea:focus,
+.form-group.success select:focus,
+.form-group.valid input:focus,
+.form-group.valid textarea:focus,
+.form-group.valid select:focus {
+  border-color: #00FF41;
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.3), inset 0 -2px 10px rgba(0, 255, 65, 0.1);
+}
+
+.form-error,
+.form-help {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.75rem;
+  font-style: italic;
+}
+
+.form-error {
+  color: #FF006E;
+}
+
+.form-help {
+  color: #949AAD;
+}
+
+input:disabled,
+textarea:disabled,
+select:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  border-bottom-style: dashed;
+}
+
+input[type=file]::file-selector-button {
+  padding: 4px 16px;
+  margin-right: 8px;
+  font-family: "Electrolize", sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #7C3AED;
+  background: rgba(124, 58, 237, 0.1);
+  border: 2px solid #7C3AED;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+input[type=file]::file-selector-button:hover {
+  background: rgba(124, 58, 237, 0.2);
+  box-shadow: 0 0 15px rgba(124, 58, 237, 0.5);
+}
+
+.form-inline .form-group {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.form-inline .form-label {
+  margin-bottom: 0;
+  flex-shrink: 0;
+  min-width: 120px;
+}
+.form-inline input,
+.form-inline select,
+.form-inline textarea {
+  flex: 1;
+}
+
+.form-compact .form-group {
+  margin-bottom: 16px;
+}
+.form-compact input,
+.form-compact select,
+.form-compact textarea {
+  padding: 4px 8px;
+  font-size: 0.875rem;
+}
+
+button,
 .btn {
   display: inline-flex;
   align-items: center;
@@ -2681,16 +3107,19 @@ h6, .h6 {
   border-color: #0066FF;
   color: #0066FF;
 }
+button i,
 .btn i {
   font-size: 1.25rem;
   color: #0066FF;
   text-shadow: 0 0 0px #0066FF, 0 0 0px #0066FF, 0 0 0px rgba(0, 102, 255, 0.8);
   transition: all 0.3s ease;
 }
+button,
 .btn {
   border: 1px solid #0066FF;
   box-shadow: 0 0 3px #0066FF, inset 0 0 3px #0066FF, 0 0 6px rgba(0, 102, 255, 0.6);
 }
+button:hover,
 .btn:hover {
   border: 1px solid #0066FF;
   box-shadow: 0 0 15px #0066FF, inset 0 0 15px #0066FF, 0 0 30px rgba(0, 102, 255, 0.6);

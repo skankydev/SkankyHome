@@ -130,3 +130,11 @@ $this->setLayout('layout.default');
 	<div><i class="icon-octagon"></i></div>
 	<div><i class="icon-x-octagon"></i></div>
 </section>
+
+
+<section class="pb-xxl">
+	<div class="text-success">text-success</div>
+	<div class="text-error">text-error</div>
+	<div class="text-warning">text-warning</div>
+	<div class="text-info">text-info</div>
+</section>

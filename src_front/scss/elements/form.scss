@@ -1,0 +1,448 @@
+@use '../settings/functions' as *;
+@use '../settings/mixins' as *;
+@use '../settings/variables' as *;
+@use '../settings/animations' as *;
+
+
+form {
+}
+
+.form-wrapper{
+	width: 100%;
+	max-width: 80vw;
+	margin: 0 auto;
+}
+
+fieldset {
+	border: none;
+	margin-bottom: $p-xl;
+	padding: 0;
+}
+
+legend {
+	color: $neon-cyan;
+	font-size: $size-l;
+	font-family: $font-title;
+	margin-bottom: $p-m;
+	padding-bottom: $p-xs;
+	border-bottom: 2px solid $neon-cyan;
+	box-shadow: 0 2px 10px rgba($neon-cyan, 0.3);
+}
+
+// Form group - le conteneur de chaque champ
+.form-group {
+	position: relative;
+	margin-bottom: $p-l;
+}
+
+// Labels
+.form-label,
+label {
+	display: block;
+	margin-bottom: $p-xs;
+	
+	color: $text-primary;
+	font-size: $size-l;
+	font-family: $font;
+	font-weight: 600;
+
+	letter-spacing: 0.1em;
+	
+	// Required star
+	&.required::after {
+		font-family: 'icomoon' !important;
+		speak: never;
+		font-style: normal;
+		font-weight: normal;
+		font-variant: normal;
+		text-transform: none;
+		line-height: 1;
+		font-size: $size-xs;
+		/* Better Font Rendering =========== */
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		content: ' \e9e1';
+		color: $neon-red;
+	}
+}
+
+// Inputs & Textarea base
+.form-input,
+input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]),
+textarea {
+	display: block;
+	width: 100%;
+	padding: $p-s $p-m;
+	
+	font-family: $font;
+	font-size: $size-m;
+	color: $text-primary;
+	
+	background-color: rgba($bg-secondary, 0.5);
+	border: 2px solid transparent;
+	border-bottom: 2px solid $neon-purple;
+	border-radius: 4px 4px 0 0;
+	outline: none;
+	
+	transition: all 0.3s ease;
+	
+	&::placeholder {
+		color: $text-muted;
+		font-style: italic;
+	}
+	
+	&:focus {
+		background-color: rgba($bg-secondary, 0.8);
+		border-color: $neon-cyan;
+		border-bottom-width: 3px;
+		box-shadow: 
+			0 0 20px rgba($neon-cyan, 0.2),
+			inset 0 -2px 10px rgba($neon-cyan, 0.1);
+	}
+	
+	&:hover:not(:focus) {
+		border-bottom-color: lighten($neon-purple, 10%);
+	}
+}
+
+// Textarea spécifique
+textarea {
+	min-height: 120px;
+	max-height: 400px;
+	resize: vertical;
+	line-height: 1.6;
+}
+
+// Select
+select {
+	display: block;
+	width: 100%;
+	padding: $p-s $p-m;
+	
+	font-family: $font;
+	font-size: $size-m;
+	color: $text-primary;
+	
+	background-color: $bg-secondary;
+	//background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%237C3AED' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: right $p-m center;
+	
+	border: 2px solid transparent;
+	border-bottom: 2px solid $neon-purple;
+	border-radius: 4px 4px 0 0;
+	outline: none;
+	
+	cursor: pointer;
+	appearance: none;
+	padding-right: $p-xl;
+	
+	transition: all 0.3s ease;
+	
+	&:focus {
+		background-color: rgba($bg-secondary, 0.8);
+		border-color: $neon-cyan;
+		border-bottom-width: 3px;
+		box-shadow: 
+			0 0 20px rgba($neon-cyan, 0.2),
+			inset 0 -2px 10px rgba($neon-cyan, 0.1);
+	}
+	
+	&:hover:not(:focus) {
+		border-bottom-color: lighten($neon-purple, 10%);
+	}
+}
+
+// Checkbox
+input[type="checkbox"] {
+	position: absolute;
+	opacity: 0;
+	pointer-events: none;
+	
+	+ label {
+		position: relative;
+		display: inline-flex;
+		align-items: center;
+		gap: $p-s;
+		padding-left: 32px;
+		cursor: pointer;
+		color: $text-primary;
+		text-transform: none;
+		letter-spacing: normal;
+		font-weight: 400;
+		
+		&::before {
+			content: '';
+			position: absolute;
+			left: 0;
+			top: 50%;
+			transform: translateY(-50%);
+			
+			width: 22px;
+			height: 22px;
+			
+			background: $bg-secondary;
+			border: 2px solid $neon-purple;
+			border-radius: 4px;
+			
+			transition: all 0.3s ease;
+		}
+		
+		&::after {
+			content: '';
+			position: absolute;
+			left: 7px;
+			top: 50%;
+			
+			width: 8px;
+			height: 14px;
+			
+			border: solid transparent;
+			border-width: 0 3px 3px 0;
+			transform: translateY(-65%) rotate(45deg) scale(0);
+			
+			transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+		}
+	}
+	
+	&:hover + label::before {
+		border-color: lighten($neon-purple, 10%);
+		box-shadow: 0 0 10px rgba($neon-purple, 0.3);
+	}
+	
+	&:checked + label::before {
+		background: rgba($neon-purple, 0.2);
+		border-color: $neon-cyan;
+		box-shadow: 
+			0 0 15px rgba($neon-cyan, 0.5),
+			inset 0 0 10px rgba($neon-cyan, 0.2);
+	}
+	
+	&:checked + label::after {
+		border-color: $neon-cyan;
+		transform: translateY(-65%) rotate(45deg) scale(1);
+		filter: drop-shadow(0 0 3px $neon-cyan);
+	}
+	
+	&:focus + label::before {
+		outline: 2px solid rgba($neon-cyan, 0.5);
+		outline-offset: 2px;
+	}
+}
+
+// Radio
+input[type="radio"] {
+	position: absolute;
+	opacity: 0;
+	pointer-events: none;
+	
+	+ label {
+		position: relative;
+		display: inline-flex;
+		align-items: center;
+		gap: $p-s;
+		padding-left: 32px;
+		cursor: pointer;
+		color: $text-primary;
+		text-transform: none;
+		letter-spacing: normal;
+		font-weight: 400;
+		
+		&::before {
+			content: '';
+			position: absolute;
+			left: 0;
+			top: 50%;
+			transform: translateY(-50%);
+			
+			width: 22px;
+			height: 22px;
+			
+			background: $bg-secondary;
+			border: 2px solid $neon-purple;
+			border-radius: 50%;
+			
+			transition: all 0.3s ease;
+		}
+		
+		&::after {
+			content: '';
+			position: absolute;
+			left: 7px;
+			top: 50%;
+			transform: translateY(-50%) scale(0);
+			
+			width: 8px;
+			height: 8px;
+			
+			background: $neon-cyan;
+			border-radius: 50%;
+			box-shadow: 0 0 10px $neon-cyan;
+			
+			transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+		}
+	}
+	
+	&:hover + label::before {
+		border-color: lighten($neon-purple, 10%);
+		box-shadow: 0 0 10px rgba($neon-purple, 0.3);
+	}
+	
+	&:checked + label::before {
+		border-color: $neon-cyan;
+		box-shadow: 
+			0 0 15px rgba($neon-cyan, 0.5),
+			inset 0 0 10px rgba($neon-cyan, 0.2);
+	}
+	
+	&:checked + label::after {
+		transform: translateY(-50%) scale(1);
+	}
+	
+	&:focus + label::before {
+		outline: 2px solid rgba($neon-cyan, 0.5);
+		outline-offset: 2px;
+	}
+}
+
+// Groupes de checkboxes/radios
+.form-check-group {
+	display: flex;
+	flex-direction: column;
+	gap: $p-s;
+}
+
+.form-check-inline {
+	display: flex;
+	flex-wrap: wrap;
+	gap: $p-m;
+}
+
+// États de validation
+.form-group.has-error,
+.form-group.error,
+.form-group.invalid {
+	.form-label {
+		color: $neon-pink;
+	}
+	
+	input,
+	textarea,
+	select {
+		border-bottom-color: $neon-pink;
+		
+		&:focus {
+			border-color: $neon-pink;
+			box-shadow: 
+				0 0 20px rgba($neon-pink, 0.3),
+				inset 0 -2px 10px rgba($neon-pink, 0.1);
+		}
+	}
+}
+
+.form-group.success,
+.form-group.valid {
+	.form-label {
+		color: $neon-green;
+	}
+	
+	input,
+	textarea,
+	select {
+		border-bottom-color: $neon-green;
+		
+		&:focus {
+			border-color: $neon-green;
+			box-shadow: 
+				0 0 20px rgba($neon-green, 0.3),
+				inset 0 -2px 10px rgba($neon-green, 0.1);
+		}
+	}
+}
+
+// Messages de validation
+.form-error,
+.form-help {
+	display: block;
+	margin-top: $p-xs;
+	font-size: $size-xs;
+	font-style: italic;
+}
+
+.form-error {
+	color: $neon-pink;
+}
+
+.form-help {
+	color: $text-muted;
+}
+
+// Disabled
+input:disabled,
+textarea:disabled,
+select:disabled {
+	opacity: 0.4;
+	cursor: not-allowed;
+	border-bottom-style: dashed;
+}
+
+// File input (styled)
+input[type="file"] {
+	&::file-selector-button {
+		padding: $p-xs $p-m;
+		margin-right: $p-s;
+		
+		font-family: $font;
+		font-size: $size-s;
+		font-weight: 600;
+		text-transform: uppercase;
+		
+		color: $neon-purple;
+		background: rgba($neon-purple, 0.1);
+		border: 2px solid $neon-purple;
+		border-radius: 4px;
+		
+		cursor: pointer;
+		transition: all 0.3s ease;
+		
+		&:hover {
+			background: rgba($neon-purple, 0.2);
+			box-shadow: 0 0 15px rgba($neon-purple, 0.5);
+		}
+	}
+}
+
+// Variante inline (label et input sur la même ligne)
+.form-inline {
+	.form-group {
+		display: flex;
+		align-items: center;
+		gap: $p-m;
+	}
+	
+	.form-label {
+		margin-bottom: 0;
+		flex-shrink: 0;
+		min-width: 120px;
+	}
+	
+	input,
+	select,
+	textarea {
+		flex: 1;
+	}
+}
+
+// Variante compact (moins d'espace)
+.form-compact {
+	.form-group {
+		margin-bottom: $p-m;
+	}
+	
+	input,
+	select,
+	textarea {
+		padding: $p-xs $p-s;
+		font-size: $size-s;
+	}
+}

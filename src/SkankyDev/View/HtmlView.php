@@ -15,9 +15,6 @@ namespace SkankyDev\View;
 use SkankyDev\Utilities\Traits\HtmlHelper;
 use SkankyDev\Utilities\Traits\StringFacility;
 
-
-
-
 class HtmlView {
 	
 	use HtmlHelper, StringFacility;

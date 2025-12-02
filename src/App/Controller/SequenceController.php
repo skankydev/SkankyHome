@@ -1,5 +1,4 @@
 <?php 
-
 /**
  * Copyright (c) 2015 SCHENCK Simon
  * 
@@ -14,30 +13,26 @@
 
 namespace App\Controller;
 
-use App\Form\TestForm;
 use SkankyDev\Controller\MasterController;
 use SkankyDev\Http\Request;
 use SkankyDev\Http\Routing\Router;
+use App\Form\SequenceForm;
 
-class HomeController extends MasterController {
-
-	public function __construct(protected Request $request){
-
-	}
+class SequenceController extends MasterController {
 
 	public function index(){
-		/*debug($this->request->input());*/
-		/*debug(Router::_getCurrentRoute());
-		debug(Router::_getRoutesCollection());*/
-
-		return view('home.index');
+		
+		return view('sequence.index');
 	}
 
-	public function base(){
-		return view('home.base');
+	public function create(){
+		$form = new SequenceForm(['action'=>'store']);
+
+		return view('sequence.create',['form'=>$form]);
 	}
 
-	public function pasla(){
-		return redirect(['action'=>'index','get'=>['is_redirect'=>'oui']]);
+	public function store(Request $request){
+		$input = $request->input();
+		dd($input);
 	}
 }

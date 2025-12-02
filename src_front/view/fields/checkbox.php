@@ -1,16 +1,17 @@
 <div class="form-group <?= $errors ? 'has-error' : '' ?>">
-	<?php if ($label): ?>
-		<label for="<?= $id ?>"  <?= $this->createAttr($labelAttr) ?> ><?= e($label) ?></label>
-	<?php endif; ?>
 	
 	<input 
 		type="<?= $type ?>" 
 		id="<?= $id ?>" 
 		name="<?= $name ?>" 
-		value="<?= $value ?>"
+		value="<?= e($value) ?>"
 		<?= $this->required() ?>
 		<?= $this->createAttr($attributes) ?>
 	>
+	
+	<?php if ($label): ?>
+		<label for="<?= $id ?>"  <?= $this->createAttr($labelAttr) ?> ><?= e($label) ?></label>
+	<?php endif; ?>
 	
 	<?php if ($errors): ?>
 		<span class="text-error"><?= e($errors[0]) ?></span>

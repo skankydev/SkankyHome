@@ -5,6 +5,6 @@ use SkankyDev\Form\FormField;
 
 
 class CheckboxField extends FormField {
-	protected string $type = 'chekbox';
-	protected string $viewHtml = 'fields.default';
+	protected string $type = 'checkbox';
+	protected string $viewHtml = 'fields.checkbox';
 }

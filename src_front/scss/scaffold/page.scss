@@ -5,6 +5,8 @@
 
 
 #Header{
+	overflow: hidden;
+
 	.layout-header{
 		padding:$p-m $p-xl;
 		background-color: $bg-primary;
@@ -53,6 +55,18 @@
 
 #Contents{
 	padding:$p-m $p-xl;
+}
+
+.page-header{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+.page-title{
+
+}
+.page-action{
+
 }
 
 #Footer{
