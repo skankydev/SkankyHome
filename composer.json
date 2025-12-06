@@ -9,7 +9,7 @@
         },
         "files": [
             "src/SkankyDev/constant.php",
-            "src/SkankyDev/Debug.php",
+            "src/SkankyDev/debug.php",
             "src/SkankyDev/function.php"
         ]
     },
