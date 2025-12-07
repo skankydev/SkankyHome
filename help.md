@@ -209,35 +209,9 @@ chmod -R 755 /home/skankydev/www
 sudo systemctl restart apache2
 ```
 
-## 📡 Architecture MQTT
-
-### Topics
-
-- **Commandes** : `skankyhome/led/{moduleId}/cmd`
-- **Status** : `skankyhome/led/{moduleId}/status`
-
-### Format des messages (JSON)
-
-**Serveur → ESP32 :**
-
-```json
-{"cmd":"setColor","data":{"r":255,"g":0,"b":0}}
-{"cmd":"setEffect","data":{"effect":"rainbow","speed":50}}
-{"cmd":"setBrightness","data":{"brightness":80}}
-{"cmd":"off"}
-```
-
-**ESP32 → Serveur :**
-
-```json
-{"cmd":"status","data":{"online":true,"brightness":80,"effect":"rainbow"}}
-{"cmd":"hello","data":{"module":"led_shelf_01","ip":"192.168.0.50"}}
-{"cmd":"error","data":{"message":"Connection lost"}}
-```
-
 ## 🎯 Projet LED
 
-Contrôle de bandes LED WS2812B via ESP32 pour étagères Lego.
+Contrôle de bandes LED WS2812B via ESP32.
 
 ### Matériel
 
@@ -249,7 +223,7 @@ Contrôle de bandes LED WS2812B via ESP32 pour étagères Lego.
 
 - **Protocole** : MQTT over WiFi
 - **Broker** : EMQX sur Raspberry Pi 4
-- **Contrôle** : Interface web SkankyDev + API REST
+- **Contrôle** : Interface web SkankyDev
 
 ## 🔐 Sécurité
 
@@ -262,45 +236,6 @@ Contrôle de bandes LED WS2812B via ESP32 pour étagères Lego.
 - **Apache** : `/var/log/apache2/`
 - **MongoDB** : `/var/log/mongodb/mongod.log`
 - **EMQX** : `/var/log/emqx/`
-
-## 🐛 Troubleshooting
-
-### MongoDB ne démarre pas
-
-```bash
-# Vérifier les logs
-sudo journalctl -u mongod -n 50
-
-# Vérifier les permissions
-ls -la /var/lib/mongodb
-ls -la /var/log/mongodb
-```
-
-### Extension PHP MongoDB non chargée
-
-```bash
-# Vérifier que le module existe
-ls -la /usr/lib/php/*/mongodb.so
-
-# Vérifier qu'il est activé
-php -m | grep mongodb
-
-# Recharger Apache
-sudo systemctl restart apache2
-```
-
-### MQTT ne fonctionne pas
-
-```bash
-# Statut EMQX
-sudo systemctl status emqx
-
-# Logs EMQX
-sudo tail -f /var/log/emqx/emqx.log
-
-# Test de connexion
-mosquitto_sub -h localhost -p 1883 -t '#' -v
-```
 
 ## 👨‍💻 Développement
 
