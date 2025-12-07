@@ -77,6 +77,35 @@ h6, .h6 {
 	}
 }
 
+@each $name, $color in $tool-colors {
+	.corner-accent-#{$name} {
+		position: relative;
+		
+		&::before {
+			content: '';
+			position: absolute;
+			bottom: -$p-s;
+			left: 0;
+			width: 90px;
+			height: 3px;
+			
+			// Dégradé avec teintes de la même couleur
+			background: linear-gradient(90deg, 
+				neon-scale($color, -30%) 0%,
+				$color 25%,
+				neon-scale($color, 20%) 50%,
+				$color 75%,
+				neon-scale($color, -30%) 100%
+			);
+			background-size: 200% 100%;
+			animation: rainbow-slide 3s linear infinite;
+			
+			// Petit glow de la couleur
+			box-shadow: 0 0 10px rgba($color, 0.5);
+		}
+	}
+}
+
 .rainbow-underline {
 	position: relative;
 	padding-bottom: $p-xs;
@@ -101,6 +130,7 @@ h6, .h6 {
 	padding: $p-m;
 	@include neon-border($neon-cyan, 0.8);
 	background: rgba($bg-secondary, 0.5);
+	border-radius: $p-m;
 }
 
 .glitch {

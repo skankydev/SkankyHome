@@ -30,3 +30,19 @@ $directions: (
 		}
 	}
 }
+
+// Alignement vertical
+.align-start { align-items: start; }
+.align-center { align-items: center; }
+.align-end { align-items: end; }
+.align-stretch { align-items: stretch; }
+
+// Alignement horizontal
+.justify-start { justify-items: start; }
+.justify-center { justify-items: center; }
+.justify-end { justify-items: end; }
+.justify-stretch { justify-items: stretch; }
+
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }

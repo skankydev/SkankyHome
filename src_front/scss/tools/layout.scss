@@ -1,0 +1,89 @@
+@use '../settings/functions' as *;
+@use '../settings/mixins' as *;
+@use '../settings/variables' as *;
+
+
+$gridsize : (
+	'short'         : 1,
+	'quarter'       : 3,
+	'third'         : 4,
+	'half'          : 6,
+	'double-third'  : 8,
+	'three-quarter' : 9,
+	'full'          : 12
+);
+
+
+.grid-layout {
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	gap: $p-m;
+	width: 100%;
+}
+
+.grid-layout.gap-xs { gap: $p-xs; }
+.grid-layout.gap-s { gap: $p-s; }
+.grid-layout.gap-m { gap: $p-m; }
+.grid-layout.gap-l { gap: $p-l; }
+.grid-layout.gap-xl { gap: $p-xl; }
+.grid-layout.gap-xxl { gap: $p-xxl; }
+
+@each $grid-name, $grid-value in $gridsize {
+	.grid-#{$grid-name}-short{
+		grid-column: span $grid-value;
+		grid-row: span 1;
+	}
+	.grid-#{$grid-name}{
+		grid-column: span $grid-value;
+		grid-row: span 2;
+	}
+	.grid-#{$grid-name}-long{
+		grid-column: span $grid-value;
+		grid-row: span 3;
+	}
+}
+
+
+// Mobile (max-width: 768px)
+@media (max-width: 768px) {
+	.grid-layout {
+		grid-template-columns: repeat(12, 1fr);
+		gap: $p-s;
+	}
+	
+	.grid-layout.mobile-half {
+		@each $grid-name, $grid-value in $gridsize {
+			.grid-#{$grid-name}-short,
+			.grid-#{$grid-name},
+			.grid-#{$grid-name}-long {
+				grid-column: span 6;
+			}
+		}
+	}
+	
+	@each $grid-name, $grid-value in $gridsize {
+		@if $grid-value > 6 {
+			.grid-#{$grid-name}-short,
+			.grid-#{$grid-name},
+			.grid-#{$grid-name}-long {
+				grid-column: span 12;
+			}
+		}
+	}
+}
+
+// Small mobile (max-width: 480px)
+@media (max-width: 480px) {
+	.grid-layout {
+		gap: $p-xs;
+	}
+	
+	@each $grid-name, $grid-value in $gridsize {
+		.grid-#{$grid-name}-short,
+		.grid-#{$grid-name},
+		.grid-#{$grid-name}-long {
+			grid-column: span 12;
+			grid-row: span 1;
+		}
+	}
+}

@@ -25,21 +25,8 @@ class SequenceController extends MasterController {
 	public function index(SequenceCollection $collection){
 
 		$sequences = $collection->paginate([],Request::_paginateInfo(1));
-		
-		/*$sec = new Sequence([
-			'name' => 'Youpi 3',
-			'color' => '#05FA12',
-			'duration' => 15000,
-			'active' => true,
-		]);
-
-			'name'=>[
-				'$regex' => '^Youpi', '$options' => 'i'
-			]
-		$collection->save($sec);
-		*/
-		debug($sequences);
-		return view('sequence.index');
+		return view('sequence.index',['sequences'=>$sequences]);
+	
 	}
 
 	public function create(){

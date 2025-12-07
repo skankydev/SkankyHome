@@ -19,5 +19,6 @@ $this->setLayout('layout.default');
 
 <section class="page-content">
 	<p>ca viendra avan j ai besoin de la db </p>
+	<?php debug($sequences); ?>
 </section>
 

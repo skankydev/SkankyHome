@@ -51,11 +51,13 @@ $warning: #FF6B00;
 $info: #00D9FF;
 
 $tool-colors : (
+	'primary':$neon-purple,
 	'success':$success,
 	'error':$error,
 	'warning':$warning,
 	'info':$info,
 );
+
 
 // ===== TEXT =====
 $text-primary: #E0E5FF;

@@ -6,15 +6,6 @@
 
 // ===== BUTTONS =====
 
-// Couleurs des boutons
-$button-colors: (
-	'primary': $neon-purple,
-	'success': $success,
-	'warning': $warning,
-	'error': $error,
-	'info': $info
-);
-
 // Base button
 button,
 .btn {
@@ -56,7 +47,7 @@ button,
 }
 
 // Générer les variantes de couleur
-@each $name, $color in $button-colors {
+@each $name, $color in $tool-colors {
 	.btn-#{$name} {
 		border-color: $color;
 		color: $color;
@@ -107,7 +98,7 @@ button,
 	}
 	
 	// Variantes
-	@each $name, $color in $button-colors {
+	@each $name, $color in $tool-colors {
 		&.btn-#{$name} {
 			border-color: $color;
 			color: $color;

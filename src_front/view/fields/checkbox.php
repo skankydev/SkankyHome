@@ -1,5 +1,5 @@
 <div class="form-group <?= $errors ? 'has-error' : '' ?>">
-	
+	<input type="hidden" name="<?= $name ?>"  value="0">
 	<input 
 		type="<?= $type ?>" 
 		id="<?= $id ?>" 

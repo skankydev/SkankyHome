@@ -2,6 +2,11 @@
 
 @use "sass:color";
 
+
+@function neon-scale($color, $amount: 20%) {
+	@return color.scale($color, $lightness: $amount);
+}
+
 // Darken une couleur neon (baisse la luminosité)
 @function neon-dark($color, $amount: 40%) {
 	@return color.scale($color, $lightness: -$amount);
