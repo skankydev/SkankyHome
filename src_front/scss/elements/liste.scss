@@ -1,0 +1,97 @@
+@use '../settings/functions' as *;
+@use '../settings/mixins' as *;
+@use '../settings/variables' as *;
+@use '../settings/animations' as *;
+
+ul, ol {
+	margin: 0 0 $p-m 0;
+	padding-left: $p-xl;
+	color: $text-secondary;
+	font-family: $font;
+	font-size: $size-m;
+	line-height: 1.6;
+}
+
+ul {
+	list-style: none;
+	
+	li {
+		position: relative;
+		margin-bottom: $p-xs;
+		vertical-align: center;
+		
+		&::before {
+			font-family: 'icomoon' !important;
+			font-style: normal;
+			font-weight: normal;
+			font-variant: normal;
+			text-transform: none;
+			line-height: 1.5;
+			content: "\e9ba";
+			vertical-align: center;
+			position: absolute;
+			left: -$p-l;
+			color: $neon-purple;
+			animation: neon-pulse 2s ease-in-out infinite;
+
+		}
+	}
+}
+
+ol {
+	counter-reset: ol-counter;
+	list-style: none;
+	
+	li {
+		position: relative;
+		margin-bottom: $p-xs;
+		counter-increment: ol-counter;
+		
+		&::before {
+			content: counter(ol-counter) '.';
+			position: absolute;
+			left: -$p-l;
+			color: $neon-purple;
+			font-weight: 600;
+		}
+	}
+}
+
+ul ul,
+ol ol,
+ul ol,
+ol ul {
+	margin: $p-xs 0 $p-xs 0;
+	
+	li::before {
+		color: $neon-cyan;
+	}
+}
+
+
+dl {
+	margin: 0 0 $p-m 0;
+	font-family: $font;
+	font-size: $size-m;
+	line-height: 1.6;
+	
+	display: grid;
+	grid-template-columns: 150px 1fr;
+	gap: $p-xs $p-m;
+}
+
+dt {
+	font-weight: 600;
+	color: $text-primary;
+	
+	&::after {
+		content: ' : ';
+		color: $neon-cyan;
+		margin-left: 2px;
+	}
+}
+
+dd {
+	margin: 0;
+	color: $text-secondary;
+}

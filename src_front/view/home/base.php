@@ -4,22 +4,7 @@ $this->setLayout('layout.default');
 ?>
 
 <section class="pb-xxl">
-	<h1> Ceci est un titre </h1>
-	<h2> Ceci est un titre </h2>
-	<h3> Ceci est un titre </h3>
-	<h4> Ceci est un titre </h4>
-	<h5> Ceci est un titre </h5>
-	<h6> Ceci est un titre </h6>
-</section>
-
-<section class="pb-xxl">
-	
-	
-	
-	<h2 class="glow-box"> Ceci est <u>glow-box</u></h2><br>
-	<h2 class="pulse"> Ceci est <u>pulse</u></h2><br>
-	<h2 class="glitch" data-text="Ceci est glitch"> Ceci est <u>glitch</u></h2><br>
-	
+	<h1 class="glow-box rainbow-icon"><i class="icon-cpu"></i>Page de construction</h1><br>
 </section>
 
 <section class="pb-xxl">
@@ -149,13 +134,13 @@ $this->setLayout('layout.default');
 				<h2 class="double-line">double-line</h2>
 			</div>
 			<div class="card-body">
-				<table border="1" cellpadding="5" cellspacing="0">
+				<table>
 					<thead>
 						<tr>
 							<th>En-tête 1</th>
 							<th>En-tête 2</th>
 							<th>En-tête 3</th>
-							<th>Action</th>
+							<th class="action">Action</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -163,27 +148,45 @@ $this->setLayout('layout.default');
 							<td>Cellule</td>
 							<td>Cellule</td>
 							<td>Cellule</td>
-							<td>
-								<a href="#" class="btn-mini">E</a>
-								<a href="#" class="btn-mini">V</a>
+							<td class="action">
+								<a href="#" class="btn-mini btn-info"><i class="icon-info"></i></a>
+								<a href="#" class="btn-mini btn-warning"><i class="icon-edit"></i></a>
 							</td>
 						</tr>
 						<tr>
 							<td>Cellule</td>
 							<td>Cellule</td>
 							<td>Cellule</td>
-							<td>
-								<a href="#" class="btn-mini">E</a>
-								<a href="#" class="btn-mini">V</a>
+							<td class="action">
+								<a href="#" class="btn-mini btn-info"><i class="icon-info"></i></a>
+								<a href="#" class="btn-mini btn-warning"><i class="icon-edit"></i></a>
 							</td>
 						</tr>
 						<tr>
 							<td>Cellule</td>
 							<td>Cellule</td>
 							<td>Cellule</td>
-							<td>
-								<a href="#" class="btn-mini">E</a>
-								<a href="#" class="btn-mini">V</a>
+							<td class="action">
+								<a href="#" class="btn-mini btn-info"><i class="icon-info"></i></a>
+								<a href="#" class="btn-mini btn-warning"><i class="icon-edit"></i></a>
+							</td>
+						</tr>
+						<tr>
+							<td>Cellule</td>
+							<td>Cellule</td>
+							<td>Cellule</td>
+							<td class="action">
+								<a href="#" class="btn-mini btn-info"><i class="icon-info"></i></a>
+								<a href="#" class="btn-mini btn-warning"><i class="icon-edit"></i></a>
+							</td>
+						</tr>
+						<tr>
+							<td>Cellule</td>
+							<td>Cellule</td>
+							<td>Cellule</td>
+							<td class="action">
+								<a href="#" class="btn-mini btn-info"><i class="icon-info"></i></a>
+								<a href="#" class="btn-mini btn-warning"><i class="icon-edit"></i></a>
 							</td>
 						</tr>
 					</tbody>

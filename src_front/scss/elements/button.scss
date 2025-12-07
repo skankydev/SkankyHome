@@ -86,6 +86,8 @@ button,
 	transition: all 0.3s ease;
 	@include neon-border($text-primary, 0.6);
 
+	text-decoration: none;
+
 	i {
 		transition: all 0.3s ease;
 		@include neon-text($text-primary, 0);

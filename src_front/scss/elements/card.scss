@@ -20,13 +20,30 @@
 	
 	backdrop-filter: blur(10px);
 
+	box-shadow: 
+		inset -1px -1px 2px rgba(neon-scale($border-color, 80%), 0.2),
+		inset 1px 1px 2px rgba(neon-scale($border-color, 80%), 0.2);
+	
+	transition: all 0.3s ease;
+
 	@each $name, $color in $tool-colors {
 		&.card-#{$name} {
 			border-color: rgba($color, 0.3);
+			
+			// Shadow colorée au repos
+			box-shadow: 
+				0 0 10px rgba($color, 0.15),
+				inset -1px -1px 2px rgba($color, 0.6),
+				inset 1px 1px 2px rgba($color, 0.6);
+			
 			&:hover {
 				box-shadow: 
-					0 8px 24px rgba(0, 0, 0, 0.4),
-					0 0 30px rgba($color, 0.3);
+					0 0 20px rgba($color, 0.4),
+					0 0 10px rgba($color, 0.3),
+					inset -1px -1px 4px rgba($color, 0.8),
+					inset 1px 1px 4px rgba($color, 0.8);
+				
+				border-color: rgba($color, 0.6);
 			}
 		}
 	}
@@ -62,10 +79,6 @@
 	align-items: center;
 }
 
-// Card compacte
-.card.card-compact {
-	padding: $p-m;
-}
 
 // Card avec image
 .card-image {

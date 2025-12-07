@@ -1,0 +1,109 @@
+@use '../settings/functions' as *;
+@use '../settings/mixins' as *;
+@use '../settings/variables' as *;
+
+// ===== TABLES =====
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	font-family: $font;
+	font-size: $size-m;
+	color: $text-primary;
+}
+
+// Header
+thead {
+	font-family: $font-title;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	
+	th {
+		padding: $p-m;
+		text-align: left;
+		font-weight: 400;
+		color: $text-primary;
+		border-bottom: 2px solid $neon-purple;
+		//box-shadow: 0 2px 10px rgba($neon-purple, 0.3);
+	}
+}
+
+// Body
+tbody {
+	tr {
+		transition: background-color 0.2s ease;
+		
+		// Alternance de couleurs
+		&:nth-child(odd) {
+			background-color: rgba($bg-tertiary, 0.5);
+		}
+		
+		&:nth-child(even) {
+			background-color: transparent;
+		}
+	}
+	
+	td {
+		padding: $p-s $p-m;
+		border-bottom: 1px solid rgba($border-color, 0.2);
+	}
+}
+
+// Footer
+tfoot {
+	font-family: $font-title;
+	
+	td {
+		padding: $p-m;
+		font-weight: 600;
+		color: $text-primary;
+		
+		border-top: 2px solid $neon-purple;
+	}
+}
+
+// Variantes de couleur
+@each $name, $color in $tool-colors {
+	table.table-#{$name} {
+		thead th {
+			border-bottom-color: $color;
+			box-shadow: 0 2px 10px rgba($color, 0.3);
+		}
+		
+		tfoot td {
+			border-top-color: $color;
+			box-shadow: 0 -2px 10px rgba($color, 0.3);
+		}
+	}
+}
+
+// Table striped (sans alternance)
+table.table-plain {
+	tbody tr {
+		background-color: transparent;
+	}
+}
+
+// Table compacte
+table.table-compact {
+	thead th,
+	tbody td,
+	tfoot td {
+		padding: $p-xs $p-s;
+	}
+}
+
+// Table bordée
+table.table-bordered {
+	border: 1px solid rgba($border-color, 0.3);
+	border-radius: $p-s;
+	overflow: hidden;
+	
+	tbody td {
+		border-right: 1px solid rgba($border-color, 0.1);
+		
+		&:last-child {
+			border-right: none;
+		}
+	}
+}

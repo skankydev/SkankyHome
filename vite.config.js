@@ -15,7 +15,7 @@ export default defineConfig({
 	build: {
 		outDir: 'public/dist',
 		emptyOutDir: false,
-		 minify: false,
+		minify: true,
 		rollupOptions: {
 			input: {
 				app: './src_front/js/app.js',
