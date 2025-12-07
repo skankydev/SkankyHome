@@ -32,8 +32,7 @@ ul {
 			position: absolute;
 			left: -$p-l;
 			color: $neon-purple;
-			animation: neon-pulse 2s ease-in-out infinite;
-
+			@include neon-pulse('purple');
 		}
 	}
 }
@@ -64,7 +63,9 @@ ol ul {
 	margin: $p-xs 0 $p-xs 0;
 	
 	li::before {
+
 		color: $neon-cyan;
+		@include neon-pulse('cyan');
 	}
 }
 

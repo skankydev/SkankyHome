@@ -35,7 +35,7 @@ trait ArrayPathable {
 			if(isset($retour[$key])){
 				$retour = $retour[$key];
 			}else{
-				return false;
+				return null;
 			}
 		}
 		return $retour;

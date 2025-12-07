@@ -18,6 +18,7 @@ use SkankyDev\Config\Config;
 use SkankyDev\Http\Middleware\MiddlewareManager;
 use SkankyDev\Http\Request;
 use SkankyDev\Http\Routing\Router;
+use SkankyDev\Utilities\Session;
 
 
 class Application {
@@ -29,11 +30,11 @@ class Application {
 
 	public function run(){
 		try {
+			Session::start();
 			Config::initConf();
 			include_once APP_FOLDER.DS.'config'.DS.'routes.php';
 			$request = Request::getInstance();
 			$current = Router::_findCurrentRoute($request->uri());
-
 			$manager = new MiddlewareManager();
         
 			$response = $manager->run($request, $current, function($request) use ($current) {
@@ -43,8 +44,6 @@ class Application {
 			if($response){
 				$response->send();
 			}
-			/*$view = Dispatcher::_execute($current);
-			$view->render();*/
 		} catch (Exception $e) {
 			var_dump($e);
 			die();

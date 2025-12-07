@@ -36,6 +36,7 @@ abstract class FormField {
 		$this->labelAttr = $options['labelAttributes'] ?? [];
 		$this->rules = $options['rules'] ?? [];
 		$this->id = $options['id'] ?? $this->toCap($name,'_');
+		$this->errors = $options['errors'] ?? [];
 	}
 	
 	public function makePath(string $name): string{

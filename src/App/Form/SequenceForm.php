@@ -16,7 +16,7 @@ class SequenceForm extends FormBuilder{
 
 		$this->add('name', 'text', [
 			'label' => 'Nom de la séquence',
-			'rules' => ['required', 'min:3']
+			'rules' => ['required', 'min_length:3']
 		]);
 		$this->add('content', 'textarea', [
 			'label' => 'Textarea',

@@ -3,6 +3,7 @@
 namespace SkankyDev\Http;
 
 use SkankyDev\View\HtmlView;
+use SkankyDev\Utilities\Session;
 
 class Response {
 
@@ -47,7 +48,7 @@ class Response {
 	}
 
 	public function send(): void {
-		if (!$this->built) {
+		if (!$this->built && $this->statusCode >= 200 && $this->statusCode < 300) {
 			$this->build();
 		}
 		
@@ -71,6 +72,22 @@ class Response {
 			}
 		}
 		echo $this->body;
+	}
+
+	/**
+	* Ajouter les erreurs en session pour le prochain affichage
+	*/
+	public function withErrors(array $errors): self {
+		Session::set('errors', $errors);
+		return $this;
+	}
+
+	/**
+	* Ajouter les anciennes données (old input) en session
+	*/
+	public function withInput(array $input): self {
+		Session::set('old', $input);
+		return $this;
 	}
 
 }

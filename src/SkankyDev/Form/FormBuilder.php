@@ -6,6 +6,8 @@ use SkankyDev\Config\Config;
 use SkankyDev\Http\UrlBuilder;
 use SkankyDev\Utilities\Traits\HtmlHelper;
 use SkankyDev\Utilities\Traits\StringFacility;
+use SkankyDev\Validation\Validator;
+use SkankyDev\Utilities\Session;
 
 abstract class FormBuilder {
 
@@ -20,13 +22,15 @@ abstract class FormBuilder {
 	protected array $submitAttributes = ['type'=>'submit','class'=>'btn-success'];
 	protected array $data = [];
 	protected array $errors = [];
+	protected array $old = [];
 	
 	public function __construct(array $link = [], string $method = 'POST', array $attributes = []) {
 		$this->action = UrlBuilder::_build($link);
 		$this->method = strtoupper($method);
 		$this->attributes = $attributes;
 		$this->fieldTypes = Config::get('class.fields');
-
+		$this->errors = Session::getAndClean('errors') ?? [];
+		$this->old = Session::getAndClean('old') ?? [];
 		$this->build();
 	}
 	
@@ -45,8 +49,9 @@ abstract class FormBuilder {
 		
 		$fieldClass = $this->fieldTypes[$type];
 		
-		// Ajouter la valeur depuis les données si disponible
-		if (isset($this->data[$name]) && !isset($options['value'])) {
+		if (isset($this->old[$name])) {
+			$options['value'] = $this->old[$name];
+		}else if (isset($this->data[$name])) {
 			$options['value'] = $this->data[$name];
 		}
 		
@@ -181,24 +186,26 @@ abstract class FormBuilder {
 	 */
 	public function validate(array $data): bool {
 		$this->setData($data);
-		$errors = [];
 		
+		// Récupérer les règles depuis les champs
+		$rules = [];
 		foreach ($this->fields as $name => $field) {
-			$rules = $field->getRules();
-			
-			// TODO: Implémenter la validation des règles
-			// Pour l'instant, juste vérifier 'required'
-			if (in_array('required', $rules) && empty($data[$name])) {
-				$errors[$name] = "Le champ {$field->getName()} est requis";
+			$fieldRules = $field->getRules();
+			if (!empty($fieldRules)) {
+				$rules[$name] = $fieldRules;
 			}
 		}
 		
-		if (!empty($errors)) {
-			$this->setErrors($errors);
+		
+		$validator = new Validator($rules, $data);
+		
+		if (!$validator->validate()) {
+			$this->setErrors($validator->errors());
 			return false;
 		}
 		
 		return true;
+		
 	}
 	
 	/**

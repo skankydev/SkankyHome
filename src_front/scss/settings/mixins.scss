@@ -45,3 +45,17 @@
 		0 0 70px rgba($color, 0.6),
 		0 0 100px rgba($color, 0.4);
 }
+
+@mixin neon-pulse($color, $duration: 2s) {
+	$colorValue: map-get($neon-colors,$color);
+	animation: neon-pulse-#{$color} $duration ease-in-out infinite;
+	
+	@keyframes neon-pulse-#{$color} {
+		0%, 100% {
+			@include neon-text($colorValue, 0.5);
+		}
+		50% {
+			@include neon-text($colorValue, 2);
+		}
+	}
+}

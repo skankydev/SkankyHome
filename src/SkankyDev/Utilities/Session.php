@@ -49,6 +49,18 @@ class Session
 	}
 
 	/**
+	 * delete value in session path
+	 * @param  string  $path  the path to the data separated by dot
+	 * @return mixed          the value
+	 */
+	static function getAndClean($path = ''){
+		$tmp = self::get($path);
+		self::delete($path);
+		return $tmp;
+	}
+
+	
+	/**
 	 * stat session
 	 */
 	static function start(){
@@ -61,4 +73,5 @@ class Session
 	static function destroy(){
 		session_destroy();
 	}
+
 }

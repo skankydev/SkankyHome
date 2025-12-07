@@ -50,7 +50,20 @@ return [
 			'datetime' => \SkankyDev\Form\Fields\DateTimeField::class,
 			'password' => \SkankyDev\Form\Fields\PasswordField::class,
 			'default'  => \SkankyDev\Form\Fields\TextField::class,
-		]
+		],
+		'rules' => [
+			'required'   => \SkankyDev\Validation\Rules\Required::class,
+			'email'      => \SkankyDev\Validation\Rules\Email::class,
+			'max_length' => \SkankyDev\Validation\Rules\MaxLength::class,
+			'min_length' => \SkankyDev\Validation\Rules\MinLength::class,
+			'numeric'    => \SkankyDev\Validation\Rules\Numeric::class,
+			'max'        => \SkankyDev\Validation\Rules\Max::class,
+			'min'        => \SkankyDev\Validation\Rules\Min::class,
+			'regex'      => \SkankyDev\Validation\Rules\Regex::class,
+			'confirmed'  => \SkankyDev\Validation\Rules\Confirmed::class,
+			'same'       => \SkankyDev\Validation\Rules\Same::class,
+			'hex_color'  => \SkankyDev\Validation\Rules\HexColor::class,
+		],
 	],
 	'timehelper'=> [
 		'format'=>'Y-m-d H:i:s',

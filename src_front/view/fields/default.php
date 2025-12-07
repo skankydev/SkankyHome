@@ -13,6 +13,6 @@
 	>
 	
 	<?php if ($errors): ?>
-		<span class="text-error"><?= e($errors[0]) ?></span>
+		<div class="text-error"><?= e($errors[0]) ?></div>
 	<?php endif; ?>
 </div>

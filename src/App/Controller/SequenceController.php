@@ -35,8 +35,13 @@ class SequenceController extends MasterController {
 		return view('sequence.create',['form'=>$form]);
 	}
 
-	public function store(Request $request){
+	public function store(Request $request,SequenceCollection $collection){
 		$input = $request->input();
+		$form = new SequenceForm(['action'=>'store']);
+		if(!$form->validate($input)){
+			return redirect(['action' => 'create'])->withErrors($form->getErrors())->withInput($input);
+		}
+
 		dd($input);
 	}
 }
