@@ -36,7 +36,7 @@ class Application {
 			$request = Request::getInstance();
 			$current = Router::_findCurrentRoute($request->uri());
 			$manager = new MiddlewareManager();
-        
+        	
 			$response = $manager->run($request, $current, function($request) use ($current) {
 				$controller = MasterFactory::_make($current->getController());
 				return MasterFactory::_call($controller, $current->getAction(), $current->getParams());

@@ -7,8 +7,10 @@ use SkankyDev\Utilities\Token;
 
 function redirect(array $link){
 	$url = UrlBuilder::_build($link);
+	debug($url);
 	$response = new Response();
 	$response->status(302)->header('Location', $url);
+	debug($response);
 	return $response;
 }
 
@@ -22,21 +24,21 @@ function view(string $name,array $data = []){
  * Échapper du HTML
  */
 function e($value) {
-    return htmlspecialchars($value ?? '', ENT_QUOTES, 'UTF-8');
+	return htmlspecialchars($value ?? '', ENT_QUOTES, 'UTF-8');
 }
 
 /**
  * Afficher un asset
  */
 function asset($path) {
-    return '/assets/' . ltrim($path, '/');
+	return '/assets/' . ltrim($path, '/');
 }
 
 /**
  * Générer une URL
  */
 function url(array $params) {
-    return UrlBuilder::build($params);
+	return UrlBuilder::build($params);
 }
 
 /**
@@ -71,33 +73,33 @@ function url(array $params) {
 	if(!$full){
 		$string = array_slice($string, 0, 1);
 	}
-	return $string ? implode(', ', $string) : _('just now');	
+	return $string ? implode(', ', $string) : _('just now');    
 }
 
 /**
  * Flash message
  */
 function flash($message = null, $type = 'success') {
-    if ($message === null) {
-        return Session::get('flash');
-    }
-    Session::set('flash', ['message' => $message, 'type' => $type]);
+	if ($message === null) {
+		return Session::getAndClean('flash');
+	}
+	Session::set('flash', ['message' => $message, 'type' => $type]);
 }
 
 function csrf_field() {
-    $token = new Token();
-    Session::set('csrf_token', $token);
-    return '<input type="hidden" name="_token" value="' . $token->getToken() . '">';
+	$token = new Token();
+	Session::set('csrf_token', $token);
+	return '<input type="hidden" name="_token" value="' . $token->getToken() . '">';
 }
 
 function old($key, $default = '') {
-    return Session::get('old.' . $key, $default);
+	return Session::get('old.' . $key, $default);
 }
 
 function error($key) {
-    $errors = Session::get('errors', []);
-    if (isset($errors[$key])) {
-        return '<span class="error">' . e($errors[$key]) . '</span>';
-    }
-    return '';
+	$errors = Session::get('errors', []);
+	if (isset($errors[$key])) {
+		return '<span class="error">' . e($errors[$key]) . '</span>';
+	}
+	return '';
 }

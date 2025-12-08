@@ -35,13 +35,18 @@ class SequenceController extends MasterController {
 		return view('sequence.create',['form'=>$form]);
 	}
 
-	public function store(Request $request,SequenceCollection $collection){
+	public function store(Request $request){
 		$input = $request->input();
 		$form = new SequenceForm(['action'=>'store']);
 		if(!$form->validate($input)){
 			return redirect(['action' => 'create'])->withErrors($form->getErrors())->withInput($input);
 		}
+		$sequence = new Sequence($input);
+		SequenceCollection::_save($sequence);
+		return redirect(['action' => 'show','params'=>['sequence'=>$sequence->_id]])->withFlash('success','ca marche');
+	}
 
-		dd($input);
+	public function show(Request $request, Sequence $sequence){
+		return view('sequence.show',['sequence'=>$sequence]);
 	}
 }

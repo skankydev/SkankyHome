@@ -26,6 +26,7 @@ class UrlBuilder
 	public function build(array $link, $absolut = false){
 		$link = $this->completLink($link);
 		$route = $this->matcheWithRoute($link);
+		
 		$url = '';
 		if($route){
 			$url = $this->createUrlFromRoute($link,$route);

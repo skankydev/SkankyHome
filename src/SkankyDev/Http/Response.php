@@ -90,4 +90,12 @@ class Response {
 		return $this;
 	}
 
+	/**
+	* Ajouter un flash messsage données (old input) en session
+	*/
+	public function withFlash(string $type , string $message): self {
+		Session::set('flash',['type' => $type, 'message' => $message]);
+		return $this;
+	}
+
 }

@@ -8,7 +8,9 @@ use ReflectionMethod;
 use ReflectionParameter;
 use SkankyDev\Exception\ClassNotFoundException;
 use SkankyDev\Exception\UnknownMethodException;
+use SkankyDev\Exception\ModelNotFoundException;
 use SkankyDev\Utilities\Traits\Singleton;
+use SkankyDev\Model\Document\MasterDocument;
 
 class MasterFactory {
 
@@ -67,16 +69,38 @@ class MasterFactory {
 
 	protected function resolveDependencies(array $parameters, array $value = []): array {
 		$dependencies = [];
+		$paramKey = 0;
 
 		foreach ($parameters as $parameter) {
 			$name = $parameter->getName();
+			$type = $parameter->getType();
+			$className = $type->getName();
+
+			if (is_subclass_of($className, MasterDocument::class)) {
+				$id = false;
+				if(isset($value[$name])){
+					$id = $value[$name];
+
+				}else if(isset($value[$paramKey])){
+					$id = $value[$paramKey];
+					$paramKey++;
+				}
+
+				if($id){
+					$model = $className::find($id);
+					if (!$model) {
+						throw new ModelNotFoundException("Document {$className} avec ID {$id} introuvable");
+					}
+					$dependencies[] = $model;
+                	continue;
+				}
+			}
 
 			if (array_key_exists($name, $value)) {
 				$dependencies[] = $value[$name];
 				continue;
 			}
 
-			$type = $parameter->getType();
 			// Si pas de type ou type primitif
 			if ($type === null || $type->isBuiltin()) {
 				// Utiliser la valeur par défaut si disponible
@@ -87,6 +111,7 @@ class MasterFactory {
 				}
 				continue;
 			}
+
 
 			// Résoudre la dépendance de classe
 			$className = $type->getName();

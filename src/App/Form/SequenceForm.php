@@ -13,13 +13,13 @@ class SequenceForm extends FormBuilder{
 		'date'
 		'datetime'
 		'password'*/
+		/*$this->add('content', 'textarea', [
+			'label' => 'Textarea',
+		]);*/
 
 		$this->add('name', 'text', [
 			'label' => 'Nom de la séquence',
 			'rules' => ['required', 'min_length:3']
-		]);
-		$this->add('content', 'textarea', [
-			'label' => 'Textarea',
 		]);
 		$this->add('color', 'color', [
 			'label' => 'Couleur',
@@ -29,10 +29,10 @@ class SequenceForm extends FormBuilder{
 			'label' => 'Durée (ms)',
 			'rules' => ['required', 'numeric', 'min:100']
 		]);
-		$this->add('is_ok', 'checkbox', [
+		/*$this->add('is_ok', 'checkbox', [
 			'label' => 'Checkbox',
 			
-		]);
+		]);*/
 
 		$this->add('effect', 'select', [
 			'label' => 'Effet',
@@ -41,7 +41,7 @@ class SequenceForm extends FormBuilder{
 			'rules' => ['required']
 		]);
 
-		$this->add('gender', 'radio', [
+		/*$this->add('gender', 'radio', [
 			'label' => 'Genre',
 			'options' => [
 				'male' => 'Homme',
@@ -50,7 +50,7 @@ class SequenceForm extends FormBuilder{
 			],
 			//'value' => 'male', // Valeur par défaut
 			'rules' => ['required']
-		]);
+		]);*/
 
 		$this->submit('<i class="icon-save"></i> SAVE');
 	}

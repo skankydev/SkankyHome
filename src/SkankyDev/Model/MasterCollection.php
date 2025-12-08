@@ -5,8 +5,11 @@ namespace SkankyDev\Model;
 use MongoDB\BSON\ObjectId;
 use MongoDB\Collection as MongoCollection;
 use SkankyDev\Database\MongoClient;
+use SkankyDev\Utilities\Traits\Singleton;
 
 abstract class MasterCollection {
+
+	use Singleton;
 	
 	protected MongoCollection $collection;
 	protected string $collectionName;
@@ -57,7 +60,7 @@ abstract class MasterCollection {
 	/**
 	 * FindOne - récupérer un seul document
 	 */
-	public function findOne(array $filter = []): ?object {
+	public function findOne(array $filter = [], array $options = []): ?object {
 		
 		$result = $this->collection->findOne($filter, $options);
 		
@@ -67,7 +70,7 @@ abstract class MasterCollection {
 	/**
 	 * FindById - récupérer par ID
 	 */
-	public function findById(string $id): ?object {
+	public function findById(string $id, array $options = []): ?object {
 		try {
 			$objectId = new ObjectId($id);
 			return $this->findOne(['_id' => $objectId]);

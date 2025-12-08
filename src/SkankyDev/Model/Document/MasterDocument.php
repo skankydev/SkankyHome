@@ -17,6 +17,21 @@ class MasterDocument implements Persistable {
 
 	public $_id;
 
+	static public function collectionName() : string{
+		$name = get_called_class();
+		$name = str_replace('Document\\', '', $name);
+		$name .= 'Collection';
+		return $name;
+	}
+
+	public static function find(string $id): ?static {
+		$collectionClass = static::collectionName();
+		if (!class_exists($collectionClass)) {
+			throw new \Exception("Collection {$collectionClass} introuvable pour " . static::class);
+		}
+		return $collectionClass::_findById($id);
+	}
+
 	/**
 	 * Magic Methods user for get mutable 
 	 * @param  string $name the name of the property

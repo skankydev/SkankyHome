@@ -11,13 +11,10 @@
  *
  */
 
+namespace SkankyDev\Exception;
 
-namespace SkankyDev\Controller;
+use Exception;
 
-class MasterController{
-
-	public function __construct(){
-
-	}
-
+class ModelNotFoundException extends Exception {
+	
 }
