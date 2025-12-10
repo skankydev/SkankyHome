@@ -11,11 +11,16 @@ use MongoDB\BSON\Document;
 use MongoDB\Model\BSONArray;
 use SkankyDev\Utilities\Traits\StringFacility;
 
+
+
+#[\AllowDynamicProperties]
 class MasterDocument implements Persistable {
 
 	use StringFacility;
 
 	public $_id;
+	/*public ?DateTime $created_at = null;
+	public ?DateTime $updated_at = null;*/
 
 	static public function collectionName() : string{
 		$name = get_called_class();
@@ -80,7 +85,7 @@ class MasterDocument implements Persistable {
 		foreach ($prop as $key=>$value) {
 			$prop[$key] = $this->{$key};
 			if($prop[$key] instanceof DateTime){
-				$prop[$key] = new UTCDateTime(strtotime($this->{$key}->format("Y-m-d H:i:s")));
+				$prop[$key] = new UTCDateTime($this->{$key});
 			}else if(preg_match('/[a-zA-Z0-9_-]*_id/', $key)){
 				if(empty($value)){
 					$prop[$key] = new ObjectID();
@@ -100,15 +105,13 @@ class MasterDocument implements Persistable {
 	public function bsonUnserialize(array $data) : void{
 		unset($data['__pclass']); 
 		foreach ($data as $key => $value) {
-			$this->{$key} = $value;
-			if($this->{$key} instanceof UTCDateTime ){
-				$date = $this->{$key};
-				$myDate = new DateTime();
-				$ts = (int)$date->__toString();
-				$myDate->setTimestamp($ts);
-				$this->{$key} = $myDate;
-			}elseif($this->{$key} instanceof BSONArray){
-				$this->{$key} = $this->{$key}->getArrayCopy();
+			if($value instanceof UTCDateTime ){
+				//debug($value);
+				$this->{$key} = $value->toDateTime();
+			}elseif($value instanceof BSONArray){
+				$this->{$key} = $value->getArrayCopy();
+			}else{
+				$this->{$key} = $value;
 			}
 		}
 	}	

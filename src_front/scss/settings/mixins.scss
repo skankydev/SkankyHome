@@ -1,4 +1,5 @@
 @use 'variables' as *;
+@use "sass:map";
 
 // Effet neon simple
 @mixin neon-glow($color, $intensity: 1) {
@@ -26,6 +27,14 @@
 		0 calc(6px * $intensity) calc(15px * $intensity) rgba($color, 0.3);
 }
 
+@mixin neon-border-top($color, $thickness: 2px, $intensity: 1) {
+	border-top: $thickness solid $color;
+	box-shadow: 
+		0 calc(2px * $intensity) calc(5px * $intensity) $color,
+		0 calc(4px * $intensity) calc(10px * $intensity) rgba($color, 0.6),
+		0 calc(6px * $intensity) calc(15px * $intensity) rgba($color, 0.3);
+}
+
 // Neon text
 @mixin neon-text($color, $intensity: 1) {
 	color: $color;
@@ -47,7 +56,7 @@
 }
 
 @mixin neon-pulse($color, $duration: 2s) {
-	$colorValue: map-get($neon-colors,$color);
+	$colorValue: map.get($neon-colors,$color);
 	animation: neon-pulse-#{$color} $duration ease-in-out infinite;
 	
 	@keyframes neon-pulse-#{$color} {

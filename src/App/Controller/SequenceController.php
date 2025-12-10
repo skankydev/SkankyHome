@@ -23,8 +23,8 @@ use SkankyDev\Http\Routing\Router;
 class SequenceController extends MasterController {
 
 	public function index(SequenceCollection $collection){
-
-		$sequences = $collection->paginate([],Request::_paginateInfo(1));
+		debug(new \DateTime);
+		$sequences = $collection->paginate([],Request::_paginateInfo());
 		return view('sequence.index',['sequences'=>$sequences]);
 	
 	}
@@ -43,10 +43,38 @@ class SequenceController extends MasterController {
 		}
 		$sequence = new Sequence($input);
 		SequenceCollection::_save($sequence);
-		return redirect(['action' => 'show','params'=>['sequence'=>$sequence->_id]])->withFlash('success','ca marche');
+		return redirect(['action' => 'show','params'=>[$sequence->_id]])->withFlash('success','ca marche');
 	}
 
 	public function show(Request $request, Sequence $sequence){
 		return view('sequence.show',['sequence'=>$sequence]);
+	}
+
+	public function edit(Sequence $sequence){
+		$form = new SequenceForm(['action'=>'update','params'=>[$sequence->_id]]);
+		$form->setData($sequence);
+		return view('sequence.edit',['form'=>$form,'sequence'=>$sequence]);
+	}
+
+	public function update(Request $request, Sequence $sequence){
+		$input = $request->input();
+		$form = new SequenceForm(['action'=>'update','params'=>[$sequence->_id]]);
+		//$form->setData($sequence);
+		if(!$form->validate($input)){
+			return redirect(['action'=>'update','params'=>[$sequence->_id]])->withErrors($form->getErrors())->withInput($input);
+		}
+
+		$sequence->name = $input['name'];
+		$sequence->color = $input['color'];
+		$sequence->duration = $input['duration'];
+		$sequence->effect = $input['effect'];
+		SequenceCollection::_save($sequence);
+
+		return redirect(['action' => 'show','params'=>[$sequence->_id]])->withFlash('success','ca marche');
+	}
+
+	public function delete(Sequence $sequence){
+		SequenceCollection::_deleteOne($sequence->_id);
+		return redirect(['action' => 'index',])->withFlash('success','ca marche');
 	}
 }

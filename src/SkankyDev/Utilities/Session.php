@@ -49,6 +49,21 @@ class Session
 	}
 
 	/**
+	 * insert value in array path
+	 * @param  string  $path     the path to the data separated by dot
+	 * @return void
+	 */
+	static function insert($path,$value){
+		$tmp = self::get($path) ?? [];
+		
+		if(is_array($tmp)){
+			$tmp[] = $value;
+			return self::set($path,$tmp);
+		}
+		return false;
+	}
+
+	/**
 	 * delete value in session path
 	 * @param  string  $path  the path to the data separated by dot
 	 * @return mixed          the value

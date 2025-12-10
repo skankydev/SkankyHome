@@ -21,7 +21,7 @@ trait IterableData {
 	/**
 	 * Rewind the Iterator to the first element
 	 */
-	public function rewind(){
+	public function rewind(): void{
 		reset($this->data);
 	}
 
@@ -29,7 +29,7 @@ trait IterableData {
 	 * Return the current element
 	 * @return mixed value
 	 */
-	public function current(){
+	public function current(): mixed{
 		$var = current($this->data);
 		return $var;
 	}
@@ -38,7 +38,7 @@ trait IterableData {
 	 * Return the key of the current element
 	 * @return mixed key
 	 */
-	public function key(){
+	public function key(): mixed{
 		$var = key($this->data);
 		return $var;
 	}
@@ -47,18 +47,18 @@ trait IterableData {
 	 * Move forward to next element
 	 * @return mixed value
 	 */
-	public function next(){
+	public function next(): void{
 		$var = next($this->data);
-		return $var;
+		//return $var;
 	}
 
 	/**
 	 * Checks if current position is valid
 	 * @return bool valid
 	 */
-	public function valid(){
+	public function valid(): bool{
 		$key = key($this->data);
-		$var = ($key !== NULL && $key !== FALSE);
+		$var = ($key !== null && $key !== false);
 		return $var;
 	}
 }

@@ -18,7 +18,32 @@ $this->setLayout('layout.default');
 </header>
 
 <section class="page-content">
-	<p>ca viendra avan j ai besoin de la db </p>
-	<?php debug($sequences); ?>
+	<table>
+		<thead>
+			<tr>
+				<th> name </th>
+				<th> color </th>
+				<th> duration </th>
+				<th> active </th>
+				<th class="action"></th>
+			</tr>
+		</thead>
+		<tbody>
+		<?php foreach ($sequences as $sequence): ?>
+		<tr>
+			<td><?= $sequence->name ?></td>
+			<td><?= $sequence->color ?></td>
+			<td><?= $sequence->duration ?></td>
+			<td><?= $sequence->active ? 'Oui': 'Non' ?></td>
+			<td class="action">
+				<a href="<?= $this->url(['action' => 'show','params'=>['sequence'=>$sequence->_id]]) ?>" class="btn-mini btn-info"><i class="icon-info"></i></a>
+				<a href="<?= $this->url(['action' => 'show','params'=>['sequence'=>$sequence->_id]]) ?>" class="btn-mini btn-warning"><i class="icon-edit"></i></a>
+			</td>
+		</tr>
+		<?php endforeach ?>
+		</tbody>
+	</table>
+
+	<?= $this->part('part.paginator',$sequences->getOption()); ?>
 </section>
 

@@ -10,5 +10,6 @@ class Sequence extends MasterDocument {
 	public string $color = '';
 	public int $duration = 0;
 	public bool $active = true;
+	public string $effect = '';
 	
 }

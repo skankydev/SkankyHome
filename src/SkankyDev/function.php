@@ -79,11 +79,11 @@ function url(array $params) {
 /**
  * Flash message
  */
-function flash($message = null, $type = 'success') {
+function flash($type = 'success',$message = null) {
 	if ($message === null) {
 		return Session::getAndClean('flash');
 	}
-	Session::set('flash', ['message' => $message, 'type' => $type]);
+	Session::insert('flash', ['type' => $type,'message' => $message,]);
 }
 
 function csrf_field() {

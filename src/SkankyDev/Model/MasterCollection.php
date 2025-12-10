@@ -4,7 +4,10 @@ namespace SkankyDev\Model;
 
 use MongoDB\BSON\ObjectId;
 use MongoDB\Collection as MongoCollection;
+use SkankyDev\Config\Config;
+use SkankyDev\Core\MasterFactory;
 use SkankyDev\Database\MongoClient;
+use SkankyDev\Utilities\Paginator;
 use SkankyDev\Utilities\Traits\Singleton;
 
 abstract class MasterCollection {
@@ -14,6 +17,7 @@ abstract class MasterCollection {
 	protected MongoCollection $collection;
 	protected string $collectionName;
 	protected string $documentClass;
+	protected array $behaviorsName = ['Timed'];
 	protected array $behaviors = [];
 	
 	public function __construct() {
@@ -27,9 +31,12 @@ abstract class MasterCollection {
 	 */
 	protected function loadBehaviors(): void {
 		$loadedBehaviors = [];
-		
-		foreach ($this->behaviors as $behaviorClass) {
-			$loadedBehaviors[] = MasterFactory::_make($behaviorClass);
+		$class = Config::get('class.behavior');
+		foreach ($this->behaviorsName as $name) {
+			if(!isset($class[$name])){
+				throw new BehaviorNotFoundException("La classe {$name} n'est pas defini");
+			}
+			$loadedBehaviors[] = MasterFactory::_make($class[$name]);
 		}
 		
 		$this->behaviors = $loadedBehaviors;
@@ -136,7 +143,7 @@ abstract class MasterCollection {
 	/**
 	 * Delete - supprimer un document par ID
 	 */
-	public function delete(string $id): bool {
+	public function deleteOne(string $id): bool {
 		try {
 			$result = $this->collection->deleteOne([
 				'_id' => new ObjectId($id)
@@ -151,10 +158,10 @@ abstract class MasterCollection {
 	/**
 	 * DeleteOne - supprimer un document par filtre
 	 */
-	public function deleteOne(array $filter): bool {
+	public function delete(array $filter): bool {
 		try {
-			$result = $this->collection->deleteOne($filter);
-			return $result->getDeletedCount() > 0;
+			$result = $this->collection->delete($filter);
+			return $result->getDeletedCount();
 		} catch (\Exception $e) {
 			throw $e;
 		}
@@ -178,8 +185,9 @@ abstract class MasterCollection {
 	/**
 	 * Paginate - pagination simple
 	 */
-	public function paginate(array $filter = [], array $paginateInfo = []): array {
-		
+	public function paginate(array $filter = [], array $paginateInfo = []): Paginator  {
+		$paginateInfo = array_merge(Config::get('paginator'),$paginateInfo);
+
 		$page = $paginateInfo['page'] ?? 1;
     	$limit = $paginateInfo['limit'] ?? 10;
     	$sort = $paginateInfo['sort'] ?? [];
@@ -188,7 +196,8 @@ abstract class MasterCollection {
 		
 		$options = [
 			'limit' => $limit,
-			'skip' => $skip
+			'skip' => $skip,
+
 		];
 		
 		if (!empty($sort)) {
@@ -196,15 +205,8 @@ abstract class MasterCollection {
 		}
 		
 		$items = $this->find($filter, $options);
-		$total = $this->count($filter);
-		
-		return [
-			'items' => $items,
-			'total' => $total,
-			'page' => $page,
-			'limit' => $limit,
-			'pages' => (int) ceil($total / $limit)
-		];
+		$paginateInfo['total'] = $this->count($filter);
+		return new Paginator($items,$paginateInfo);
 	}
 	
 	/**

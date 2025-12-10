@@ -60,3 +60,58 @@
 	color: $text-primary;
 	font-family: 'consolas', monospace;
 }
+
+/*--------------Error------------------*/
+#Error {
+	width: 80%;
+	margin: auto;
+}
+#Error header{
+	margin-bottom: 8px;
+}
+#Error .debug-message{
+	border: none;
+}
+.legend{
+	color: $text-muted;
+	line-height: 20px;
+	font-size: $size-l;
+}
+
+
+.trace-list{
+	.trace{
+		display: block;
+		width: 100%;
+		background-color:$bg-primary;
+		border-bottom: 1px solid $neon-purple;
+		padding: $p-s;
+		&:nth-child(odd) {
+			background-color: rgba($bg-tertiary, 0.5);
+		}
+		
+		&:nth-child(even) {
+			background-color: transparent;
+		}
+	}
+}
+
+span[class*="trace-"]{
+	display: inline-block;
+	line-height: 20px;
+	margin: 2px;
+}
+.trace-args{
+	text-align: left;
+	//display: none;
+}
+.trace-type,
+.trace-function{
+	color: $neon-cyan;
+}
+.trace-class{
+	color: $neon-green;
+}
+.trace-line{
+	color: $neon-pink;
+}

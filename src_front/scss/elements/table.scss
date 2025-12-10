@@ -10,6 +10,8 @@ table {
 	font-family: $font;
 	font-size: $size-m;
 	color: $text-primary;
+	table-layout: fixed;
+
 }
 
 // Header
@@ -17,7 +19,6 @@ thead {
 	font-family: $font-title;
 	text-transform: uppercase;
 	letter-spacing: 0.1em;
-	
 	th {
 		padding: $p-m;
 		text-align: left;
@@ -46,6 +47,7 @@ tbody {
 	td {
 		padding: $p-s $p-m;
 		border-bottom: 1px solid rgba($border-color, 0.2);
+		vertical-align: middle;
 	}
 }
 
@@ -59,6 +61,16 @@ tfoot {
 		color: $text-primary;
 		
 		border-top: 2px solid $neon-purple;
+	}
+}
+
+table,
+thead,
+tbody,
+tfoot{
+	.action{
+		width: 120px;
+		text-align: center;
 	}
 }
 

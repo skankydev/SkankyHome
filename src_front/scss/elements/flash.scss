@@ -1,0 +1,31 @@
+@use '../settings/functions' as *;
+@use '../settings/mixins' as *;
+@use '../settings/variables' as *;
+@use '../settings/animations' as *;
+
+.flash-message{
+	display: block;
+	padding: $p-s;
+	text-align: center;
+	cursor: pointer;
+	font-size: $size-l;
+	font-family: $font-title;
+	text-transform: uppercase;
+	margin-bottom: $p-s;
+	margin-top: $p-s;
+}
+
+@each $name, $color in $tool-colors {
+	.flash-#{$name} {
+		border-color: $color;
+		color:$color;
+		background-color: rgba(neon-light($color,30%), 0.2);
+		@include neon-border($color, 0.6);
+		i {
+			color:$color;
+		}
+		&:hover {
+			@include neon-border($color, 3);
+		}
+	}
+}

@@ -28,7 +28,7 @@
 			</div>
 			<hr class="rainbow-diviser">
 		</header>
-		
+		<?= $this->part('part.flash'); ?>
 		<section id="Contents">
 			<?= $this->fetch('content'); ?>
 		</section>

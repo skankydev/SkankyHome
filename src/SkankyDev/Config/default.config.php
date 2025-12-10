@@ -20,7 +20,7 @@ return [
 		'limit' => 10,
 		'page'  => 1,
 		'count' => 1,
-		'range' => 1,
+		'range' => 5,
 	],
 	'historique' => ['limit'=>10],
 	'autoloader' => [
@@ -34,7 +34,7 @@ return [
 	'debug' => true,
 	'class' => [
 		'behavior' => [
-			'Timed' => 'SkankyDev\Model\Behavior\TimedBehavior',
+			'Timed' => \SkankyDev\Model\Behavior\TimedBehavior::class,
 		],
 		'middleware' => [],
 		'fields' => [

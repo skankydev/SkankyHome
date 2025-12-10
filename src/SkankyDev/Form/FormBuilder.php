@@ -77,7 +77,11 @@ abstract class FormBuilder {
 	/**
 	 * Définir les données du formulaire (pour pré-remplir)
 	 */
-	public function setData(array $data): self {
+	public function setData(array|object $data): self {
+		if(is_object($data)){
+			$data = get_object_vars($data);
+			debug($data);
+		}
 		$this->data = $data;
 		
 		// Mettre à jour les valeurs des champs existants

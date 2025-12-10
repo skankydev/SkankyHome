@@ -26,10 +26,11 @@ class HomeController extends MasterController {
 	}
 
 	public function index(){
-		/*debug($this->request->input());*/
-		/*debug(Router::_getCurrentRoute());
-		debug(Router::_getRoutesCollection());*/
-
+		
+		flash('info','ceci est le message');
+		flash('success','ceci est le message');
+		flash('warning','ceci est le message');
+		flash('error','ceci est le message');
 		return view('home.index');
 	}
 
