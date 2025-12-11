@@ -1,0 +1,11 @@
+@use '../settings/functions' as *;
+@use '../settings/mixins' as *;
+@use '../settings/variables' as *;
+
+
+.scrollable {
+	display: block;
+	max-height: 45vh;
+	height: 45vh;
+	overflow-y: auto;
+}

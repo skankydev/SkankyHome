@@ -1,0 +1,47 @@
+@use '../settings/functions' as *;
+@use '../settings/mixins' as *;
+@use '../settings/variables' as *;
+@use '../settings/animations' as *;
+
+
+.effects-list{
+
+}
+
+.effect{
+	border-bottom: 1px solid $neon-purple;
+	padding: $p-xs 0;
+	
+	font-size: $fs-l;
+	line-height: $p-xl;
+	transition: all 0.2s;
+	cursor: pointer;
+
+	&:nth-child(odd) {
+		background-color: rgba($bg-tertiary, 0.5);
+	}
+	
+	&:nth-child(even) {
+		background-color: transparent;
+	}
+
+	&:hover{
+		border-bottom: 1px solid $neon-cyan;
+		background-color: $bg-tertiary;
+	}
+
+
+
+	.effect-key,
+	.effect-name,
+	.color-cyan{
+		display: inline-block;
+		padding-right: $p-xs;
+	}
+
+	.effect-key{
+		width: 35px;
+		text-align: right;
+		color: $neon-orange;
+	}
+}

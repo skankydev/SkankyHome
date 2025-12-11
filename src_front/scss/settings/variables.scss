@@ -1,8 +1,8 @@
 
 // ===== BACKGROUNDS =====
 $bg-primary:   #050510;
-$bg-secondary: #151526;
-$bg-tertiary:  #1F1F3A;
+$bg-secondary: #22223e;
+$bg-tertiary:  #302c54;
 
 // ===== NEON COLORS (Accents visuels) =====
 $neon-red: #FF073A;
@@ -96,28 +96,28 @@ $spacings: (
 $font-title: 'Audiowide', sans-serif;
 $font: 'Electrolize', sans-serif;
 
-$size-xs: 0.75rem;
-$size-s: 0.875rem;
-$size-m: 1rem;
-$size-l: 1.125rem;
-$size-xl: 1.25rem;
-$size-2xl: 1.5rem;
-$size-3xl: 1.875rem;
-$size-4xl: 2.25rem;
-$size-5xl: 3rem;
-$size-6xl: 3.75rem;
+$fs-xs  : 0.75rem;
+$fs-s   : 0.875rem;
+$fs-m   : 1rem;
+$fs-l   : 1.125rem;
+$fs-xl  : 1.25rem;
+$fs-2xl : 1.5rem;
+$fs-3xl : 1.875rem;
+$fs-4xl : 2.25rem;
+$fs-5xl : 3rem;
+$fs-6xl : 3.75rem;
 
 $font-sizes: (
-	'xs':$size-xs,
-	's':$size-s,
-	'm':$size-m,
-	'l':$size-l,
-	'xl':$size-xl,
-	'2xl':$size-2xl,
-	'3xl':$size-3xl,
-	'4xl':$size-4xl,
-	'5xl':$size-5xl,
-	'6xl':$size-6xl,
+	'xs'  : $fs-xs,
+	's'   : $fs-s,
+	'm'   : $fs-m,
+	'l'   : $fs-l,
+	'xl'  : $fs-xl,
+	'2xl' : $fs-2xl,
+	'3xl' : $fs-3xl,
+	'4xl' : $fs-4xl,
+	'5xl' : $fs-5xl,
+	'6xl' : $fs-6xl,
 );
 
 // Font weights

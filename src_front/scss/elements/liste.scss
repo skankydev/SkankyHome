@@ -8,7 +8,7 @@ ul, ol {
 	padding-left: $p-xl;
 	color: $text-secondary;
 	font-family: $font;
-	font-size: $size-m;
+	font-size: $fs-m;
 	line-height: 1.6;
 }
 
@@ -73,7 +73,7 @@ ol ul {
 dl {
 	margin: 0 0 $p-m 0;
 	font-family: $font;
-	font-size: $size-m;
+	font-size: $fs-m;
 	line-height: 1.6;
 	
 	display: grid;

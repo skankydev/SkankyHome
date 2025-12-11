@@ -2,7 +2,10 @@
 /**
  * congratulation you have found the master configuration file
  */
+
 $smtp = require_once 'smtp.config.php';
+$leds = require_once 'leds.config.php';
+
 $conf =  [
 	'db' => [
 		'MongoDB' =>[
@@ -25,7 +28,7 @@ $conf =  [
 	'smtp' => $smtp,
 	'debug' => 2,
 	'adminMail' => 'skankydev@gmail.com',
-	
+	'leds' => $leds,
 ];
 return $conf;
 

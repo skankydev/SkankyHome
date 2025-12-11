@@ -21,7 +21,7 @@ fieldset {
 
 legend {
 	color: $neon-cyan;
-	font-size: $size-l;
+	font-size: $fs-l;
 	font-family: $font-title;
 	margin-bottom: $p-m;
 	padding-bottom: $p-xs;
@@ -42,7 +42,7 @@ label {
 	margin-bottom: $p-xs;
 	
 	color: $text-primary;
-	font-size: $size-l;
+	font-size: $fs-l;
 	font-family: $font;
 	font-weight: 600;
 
@@ -57,7 +57,7 @@ label {
 		font-variant: normal;
 		text-transform: none;
 		line-height: 1;
-		font-size: $size-xs;
+		font-size: $fs-xs;
 		/* Better Font Rendering =========== */
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
@@ -75,16 +75,18 @@ textarea {
 	padding: $p-s $p-m;
 	
 	font-family: $font;
-	font-size: $size-m;
+	font-size: $fs-m;
 	color: $text-primary;
 	
-	background-color: rgba($bg-secondary, 0.5);
-	border: 2px solid transparent;
-	border-bottom: 2px solid $neon-purple;
-	border-radius: 4px 4px 0 0;
+	background: linear-gradient(135deg, 
+		rgba($bg-secondary, 0.8) 0%, 
+		rgba($bg-tertiary, 0.6) 100%
+	);
+	border: 2px solid $neon-purple;
+	border-radius: $p-s 0 $p-s $p-s;
 	outline: none;
-	
 	transition: all 0.3s ease;
+	@include neon-border($neon-purple,0.2);
 	
 	&::placeholder {
 		color: $text-muted;
@@ -92,17 +94,14 @@ textarea {
 	}
 	
 	&:focus {
-		background-color: rgba($bg-secondary, 0.8);
+		background: linear-gradient(315deg, 
+			rgba($bg-secondary, 0.8) 0%, 
+			rgba($bg-tertiary, 0.6) 100%
+		);
 		border-color: $neon-cyan;
-		border-bottom-width: 3px;
-		box-shadow: 
-			0 0 20px rgba($neon-cyan, 0.2),
-			inset 0 -2px 10px rgba($neon-cyan, 0.1);
+		@include neon-border($neon-cyan,1);
 	}
 	
-	&:hover:not(:focus) {
-		border-bottom-color: neon-light($neon-purple, -10%);
-	}
 }
 
 // Textarea spécifique
@@ -120,17 +119,15 @@ select {
 	padding: $p-s $p-m;
 	
 	font-family: $font;
-	font-size: $size-m;
+	font-size: $fs-m;
 	color: $text-primary;
 	
 	background-color: $bg-secondary;
-	//background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%237C3AED' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
 	background-repeat: no-repeat;
 	background-position: right $p-m center;
 	
-	border: 2px solid transparent;
-	border-bottom: 2px solid $neon-purple;
-	border-radius: 4px 4px 0 0;
+	border: 2px solid $neon-purple;
+	border-radius: $p-s 0 $p-s $p-s;
 	outline: none;
 	
 	cursor: pointer;
@@ -142,7 +139,6 @@ select {
 	&:focus {
 		background-color: rgba($bg-secondary, 0.8);
 		border-color: $neon-cyan;
-		border-bottom-width: 3px;
 		box-shadow: 
 			0 0 20px rgba($neon-cyan, 0.2),
 			inset 0 -2px 10px rgba($neon-cyan, 0.1);
@@ -365,7 +361,7 @@ input[type="radio"] {
 .form-help {
 	display: block;
 	margin-top: $p-xs;
-	font-size: $size-xs;
+	font-size: $fs-xs;
 	font-style: italic;
 }
 
@@ -393,7 +389,7 @@ input[type="file"] {
 		margin-right: $p-s;
 		
 		font-family: $font;
-		font-size: $size-s;
+		font-size: $fs-s;
 		font-weight: 600;
 		text-transform: uppercase;
 		
@@ -443,6 +439,6 @@ input[type="file"] {
 	select,
 	textarea {
 		padding: $p-xs $p-s;
-		font-size: $size-s;
+		font-size: $fs-s;
 	}
 }

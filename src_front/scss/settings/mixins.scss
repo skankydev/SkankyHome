@@ -22,9 +22,9 @@
 @mixin neon-border-bottom($color, $thickness: 2px, $intensity: 1) {
 	border-bottom: $thickness solid $color;
 	box-shadow: 
-		0 calc(2px * $intensity) calc(5px * $intensity) $color,
-		0 calc(4px * $intensity) calc(10px * $intensity) rgba($color, 0.6),
-		0 calc(6px * $intensity) calc(15px * $intensity) rgba($color, 0.3);
+		0 calc(1px * $intensity) calc(5px * $intensity) $color,
+		inset 0 0 calc(5px * $intensity) $color,
+		0 calc(3px * $intensity) calc(6px * $intensity) rgba($color, 0.3);
 }
 
 @mixin neon-border-top($color, $thickness: 2px, $intensity: 1) {

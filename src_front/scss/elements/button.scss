@@ -16,14 +16,14 @@ button,
 	padding: $p-s $p-l;
 	
 	font-family: $font-title;
-	font-size: $size-xl;
+	font-size: $fs-xl;
 	//font-weight: 600;
 	//letter-spacing: 0.05rem;
 	text-decoration: none;
 	
 	background: $bg-secondary;
 	border: 2px solid $text-secondary;
-	border-radius: 4px;
+	border-radius: $p-s 0 $p-s $p-s;
 	color: $text-primary;
 	
 	cursor: pointer;
@@ -33,7 +33,7 @@ button,
 	color: $neon-blue;
 
 	i {
-		font-size: $size-xl;
+		font-size: $fs-xl;
 		@include neon-text($neon-blue,0);
 		transition: all 0.3s ease;
 	}
@@ -75,11 +75,11 @@ button,
 	min-width: 36px;
 	min-height: 36px;
 	
-	font-size: $size-l;
+	font-size: $fs-l;
 	
 	background: $bg-secondary;
 	border: 2px solid $text-secondary;
-	border-radius: 4px;
+	border-radius: $p-s 0 $p-s $p-s;
 	color: $text-primary;
 	
 	cursor: pointer;

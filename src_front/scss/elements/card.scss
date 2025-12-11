@@ -8,11 +8,11 @@
 
 .card {
 	position: relative;
-	padding: $p-l;
+	
 	
 	background: linear-gradient(135deg, 
-		rgba($bg-secondary, 0.8) 0%, 
-		rgba($bg-tertiary, 0.6) 100%
+		rgba($bg-secondary, 0.6) 0%, 
+		rgba($bg-tertiary, 0.4) 100%
 	);
 	
 	border: 1px solid rgba($border-color, 0.3);
@@ -54,15 +54,15 @@
 // Header de card
 .card-header {
 	margin-bottom: $p-m;
-	padding-bottom: $p-s;
-	border-bottom: 1px solid rgba($border-color, 0.2);
+	padding: $p-m;
+	border-bottom: 1px solid rgba($border-color, 0.4);
 }
 
 // Body de card
 .card-body {
 	color: $text-secondary;
 	line-height: 1.6;
-	
+	padding: $p-m;
 	p:last-child {
 		margin-bottom: 0;
 	}
@@ -71,9 +71,8 @@
 // Footer de card
 .card-footer {
 	margin-top: $p-m;
-	padding-top: $p-s;
-	border-top: 1px solid rgba($border-color, 0.2);
-	
+	border-top: 1px solid rgba($border-color, 0.4);
+	padding: $p-m;
 	display: flex;
 	gap: $p-s;
 	align-items: center;

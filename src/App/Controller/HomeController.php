@@ -21,20 +21,15 @@ use SkankyDev\Http\Routing\Router;
 
 class HomeController extends MasterController {
 
-	public function __construct(protected Request $request){
-
-	}
-
 	public function index(){
-		
-		flash('info','ceci est le message');
-		flash('success','ceci est le message');
-		flash('warning','ceci est le message');
-		flash('error','ceci est le message');
 		return view('home.index');
 	}
 
 	public function base(){
+		flash('info','ceci est le message');
+		flash('success','ceci est le message');
+		flash('warning','ceci est le message');
+		flash('error','ceci est le message');
 		return view('home.base');
 	}
 

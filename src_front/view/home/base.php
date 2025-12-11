@@ -1,5 +1,5 @@
 <?php 
-$this->setTitle('Welcome');
+$this->setTitle('Base css');
 $this->setLayout('layout.default');
 ?>
 
@@ -16,10 +16,6 @@ $this->setLayout('layout.default');
 
 <section class="pb-xxl">
 
-</section>
-
-<section class="pb-xxl">
-
 	<!-- Mix de tailles -->
 	<div class="grid-layout pb-l pt-l">
 		<div class="grid-third card">
@@ -27,11 +23,8 @@ $this->setLayout('layout.default');
 				<h2 class="glitch" data-text="glitch">glitch</h2>
 			</div>
 			<div class="card-body">
-				grid-third
-			</div>
-			<div class="card-footer">
-				<button class="btn btn-primary"><i class="icon-info"></i>primary</button>
-				<button class="btn-mini btn-primary"><i class="icon-info"></i></button>
+				grid-third <br>
+				<a href="#" class="btn-mini"><i class="icon-save"></i></a>
 			</div>
 		</div>
 		<div class="grid-third card card-primary">
@@ -39,8 +32,11 @@ $this->setLayout('layout.default');
 				<h2 class="rainbow-underline rainbow-icon"><i class="icon-zap"></i>rainbow-underline</h2>
 			</div>
 			<div class="card-body">
-				grid-third <br>
-				<a href="#" class="btn-mini"><i class="icon-save"></i></a>
+				<span class="text-primary">text-primary</span>
+			</div>
+			<div class="card-footer">
+				<button class="btn btn-primary"><i class="icon-info"></i>primary</button>
+				<button class="btn-mini btn-primary"><i class="icon-info"></i></button>
 			</div>
 		</div>
 		<div class="grid-third card">

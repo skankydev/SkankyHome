@@ -14,21 +14,26 @@ $directions: (
 );
 
 // Générer les classes de padding
-@each $size-name, $size-value in $spacings {
-	@each $dir-name, $dir-value in $directions {
-		.p#{$dir-name}-#{$size-name} {
-			padding#{$dir-value}: $size-value;
-		}
-	}
+@each $name, $value in $spacings {
+	.p-#{$name}{padding: $value}
+	.pt-#{$name}{padding-top: $value}
+	.pt-#{$name}{padding-top: $value}
+	.pr-#{$name}{padding-right: $value}
+	.pb-#{$name}{padding-bottom: $value}
+	.pl-#{$name}{padding-left: $value}
+	.ph-#{$name}{padding-right: $value; padding-left: $value;}
+	.pv-#{$name}{padding-top: $value; padding-bottom: $value;}
 }
 
 // Pareil pour margin
-@each $size-name, $size-value in $spacings {
-	@each $dir-name, $dir-value in $directions {
-		.m#{$dir-name}-#{$size-name} {
-			margin#{$dir-value}: $size-value;
-		}
-	}
+@each $name, $value in $spacings {
+	.m-#{$name}{margin: $value}
+	.mt-#{$name}{margin-top: $value}
+	.mr-#{$name}{margin-right: $value}
+	.mb-#{$name}{margin-bottom: $value}
+	.ml-#{$name}{margin-left: $value}
+	.mh-#{$name}{margin-right: $value; margin-left: $value;}
+	.mv-#{$name}{margin-top: $value; margin-bottom: $value;}
 }
 
 // Alignement vertical

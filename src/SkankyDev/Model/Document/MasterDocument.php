@@ -56,24 +56,33 @@ class MasterDocument implements Persistable {
 
 	/**
 	 * convert the document to be saved in database
-	 * @return array the document
 	 */
 	public function __construct(array $data = []){
 		if(!empty($data)){
-			$properties = get_class_vars(get_class($this));
-			foreach ($properties as $key=>$value){
-				if(isset($data[$key])){
-					$this->{$key} = $data[$key];
-					if(preg_match('/[a-zA-Z0-9_-]*_id/', $key)){
-						if(empty($data[$key])){
-							$this->{$key} = new ObjectID();
-						}else{
-							$this->{$key} = new ObjectID($data[$key]);
-						}
+			$this->fill($data);
+		}
+	}
+
+
+	/**
+	 * 
+	 * @return the document
+	 */
+	public function fill(array $data){
+		$properties = get_class_vars(get_class($this));
+		foreach ($properties as $key=>$value){
+			if(isset($data[$key])){
+				$this->{$key} = $data[$key];
+				if(preg_match('/[a-zA-Z0-9_-]*_id/', $key)){
+					if(empty($data[$key])){
+						$this->{$key} = new ObjectID();
+					}else{
+						$this->{$key} = new ObjectID($data[$key]);
 					}
 				}
 			}
 		}
+		return $this;
 	}
 
 	/**

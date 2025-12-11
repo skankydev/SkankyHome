@@ -59,15 +59,11 @@ class SequenceController extends MasterController {
 	public function update(Request $request, Sequence $sequence){
 		$input = $request->input();
 		$form = new SequenceForm(['action'=>'update','params'=>[$sequence->_id]]);
-		//$form->setData($sequence);
 		if(!$form->validate($input)){
 			return redirect(['action'=>'update','params'=>[$sequence->_id]])->withErrors($form->getErrors())->withInput($input);
 		}
 
-		$sequence->name = $input['name'];
-		$sequence->color = $input['color'];
-		$sequence->duration = $input['duration'];
-		$sequence->effect = $input['effect'];
+		$sequence->fill($input);
 		SequenceCollection::_save($sequence);
 
 		return redirect(['action' => 'show','params'=>[$sequence->_id]])->withFlash('success','ca marche');

@@ -12,5 +12,6 @@ return [
 	],
 	'middlewares' => [
 		'truc',
-	]
+	],
+	
 ];
