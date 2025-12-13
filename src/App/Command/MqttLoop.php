@@ -11,17 +11,19 @@
  *
  */
 
-namespace App\Controller;
+namespace App\Command;
 
-use SkankyDev\Config\Config;
-use SkankyDev\Controller\MasterController;
+use SkankyDev\Command\MasterCommand;
 
-class LiveController extends MasterController {
 
-	public function index(){
-		$effects = Config::get('leds.effects');
-		return view('live.index',[
-			'effects' => $effects,
-		]);
+class MqttLoop extends MasterCommand {
+
+	static protected string $signature = 'mqtt-loop';
+	static protected string $help = 'ca viendra un jour mais je sais pas quand';
+
+
+	public function run(array $arg = []): void {
+		$this->info('Youpi');
 	}
+
 }

@@ -1,4 +1,15 @@
 <?php 
+/**
+ * Copyright (c) 2025 SCHENCK Simon
+ * 
+ * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
+ * @copyright     Copyright (c) SCHENCK Simon
+ *
+ */
 
 use SkankyDev\Http\Response;
 use SkankyDev\Http\UrlBuilder;
@@ -107,3 +118,24 @@ function error($key) {
 function json(array $data):string {
 	return json_encode($data,JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE );
 }
+
+
+function noir(string $message){return "\033[30m".$message."\033[0m";}
+function rouge(string $message){return "\033[31m".$message."\033[0m";}
+function vert(string $message){return "\033[32m".$message."\033[0m";}
+function jaune(string $message){return "\033[33m".$message."\033[0m";}
+function bleu(string $message){return "\033[34m".$message."\033[0m";}
+function violet(string $message){return "\033[35m".$message."\033[0m";}
+function cyan(string $message){return "\033[36m".$message."\033[0m";}
+function blanc(string $message){return "\033[37m".$message."\033[0m";}
+
+function grisClair(string $message){return "\033[90m".$message."\033[0m";}
+function rougeVif(string $message){return "\033[91m".$message."\033[0m";}
+function vertVif(string $message){return "\033[92m".$message."\033[0m";}
+function jauneVif(string $message){return "\033[93m".$message."\033[0m";}
+function bleuVif(string $message){return "\033[94m".$message."\033[0m";}
+function violetVif(string $message){return "\033[95m".$message."\033[0m";}
+function cyanVif(string $message){return "\033[96m".$message."\033[0m";}
+function blancVif(string $message){return "\033[97m".$message."\033[0m";}
+
+function orange(string $message) {return "\033[38;2;255;165;0m" . $message . "\033[0m";}

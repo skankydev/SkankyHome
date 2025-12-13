@@ -1,4 +1,15 @@
 <?php 
+/**
+ * Copyright (c) 2025 SCHENCK Simon
+ * 
+ * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
+ * @copyright     Copyright (c) SCHENCK Simon
+ *
+ */
 
 namespace App\Form;
 
@@ -7,15 +18,6 @@ use SkankyDev\Form\FormBuilder;
 class SequenceForm extends FormBuilder{
 
 	public function build() : void {
-
-		/*'email'
-		'radio'
-		'date'
-		'datetime'
-		'password'*/
-		/*$this->add('content', 'textarea', [
-			'label' => 'Textarea',
-		]);*/
 
 		$this->add('name', 'text', [
 			'label' => 'Nom de la séquence',
@@ -29,10 +31,6 @@ class SequenceForm extends FormBuilder{
 			'label' => 'Durée (ms)',
 			'rules' => ['required', 'numeric', 'min:100']
 		]);
-		/*$this->add('is_ok', 'checkbox', [
-			'label' => 'Checkbox',
-			
-		]);*/
 
 		$this->add('effect', 'select', [
 			'label' => 'Effet',
@@ -40,17 +38,6 @@ class SequenceForm extends FormBuilder{
 			'empty' => '',
 			'rules' => ['required']
 		]);
-
-		/*$this->add('gender', 'radio', [
-			'label' => 'Genre',
-			'options' => [
-				'male' => 'Homme',
-				'female' => 'Femme',
-				'other' => 'Autre'
-			],
-			//'value' => 'male', // Valeur par défaut
-			'rules' => ['required']
-		]);*/
 
 		$this->submit('<i class="icon-save"></i> SAVE');
 	}

@@ -11,17 +11,12 @@
  *
  */
 
-namespace App\Controller;
 
-use SkankyDev\Config\Config;
-use SkankyDev\Controller\MasterController;
+namespace SkankyDev\Exception;
 
-class LiveController extends MasterController {
+use Exception;
 
-	public function index(){
-		$effects = Config::get('leds.effects');
-		return view('live.index',[
-			'effects' => $effects,
-		]);
-	}
+class CommandException extends Exception {
+
 }
+

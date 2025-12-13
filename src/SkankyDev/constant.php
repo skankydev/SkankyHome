@@ -24,5 +24,6 @@ const TIME_YEAR   = 31536000;
 const DS = DIRECTORY_SEPARATOR;
 const PUBLIC_FOLDER = APP_FOLDER.DS.'public';
 const VIEW_FOLDER = APP_FOLDER.DS.'src_front'.DS.'view';
+const SRC_FOLDER = APP_FOLDER.DS.'src';
 
 

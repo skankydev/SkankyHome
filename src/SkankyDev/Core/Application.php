@@ -1,6 +1,6 @@
 <?php 
 /**
- * Copyright (c) 2015 SCHENCK Simon
+ * Copyright (c) 2025 SCHENCK Simon
  * 
  * Licensed under The MIT License
  * For full copyright and license information, please see the LICENSE.txt
@@ -28,6 +28,7 @@ class Application {
 	protected ExceptionHandler $exceptionHandler;
 	
 	public function __construct() {
+		Config::initConf();
 		// Initialiser le gestionnaire d'exceptions
 		$debug = Config::get('debug') ?? false;
 		$this->exceptionHandler = new ExceptionHandler($debug);
@@ -54,7 +55,6 @@ class Application {
 	public function run(){
 		try {
 			Session::start();
-			Config::initConf();
 			include_once APP_FOLDER.DS.'config'.DS.'routes.php';
 			$request = Request::getInstance();
 			$current = Router::_findCurrentRoute($request->uri());

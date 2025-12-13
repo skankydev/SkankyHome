@@ -1,6 +1,6 @@
 <?php 
 /**
- * Copyright (c) 2015 SCHENCK Simon
+ * Copyright (c) 2025 SCHENCK Simon
  * 
  * Licensed under The MIT License
  * For full copyright and license information, please see the LICENSE.txt
@@ -23,15 +23,12 @@ use SkankyDev\Http\Routing\Router;
 class SequenceController extends MasterController {
 
 	public function index(SequenceCollection $collection){
-		debug(new \DateTime);
 		$sequences = $collection->paginate([],Request::_paginateInfo());
 		return view('sequence.index',['sequences'=>$sequences]);
-	
 	}
 
 	public function create(){
 		$form = new SequenceForm(['action'=>'store']);
-
 		return view('sequence.create',['form'=>$form]);
 	}
 
@@ -62,15 +59,13 @@ class SequenceController extends MasterController {
 		if(!$form->validate($input)){
 			return redirect(['action'=>'update','params'=>[$sequence->_id]])->withErrors($form->getErrors())->withInput($input);
 		}
-
 		$sequence->fill($input);
 		SequenceCollection::_save($sequence);
-
 		return redirect(['action' => 'show','params'=>[$sequence->_id]])->withFlash('success','ca marche');
 	}
 
 	public function delete(Sequence $sequence){
-		SequenceCollection::_deleteOne($sequence->_id);
+		SequenceCollection::_deleteOne($sequence);
 		return redirect(['action' => 'index',])->withFlash('success','ca marche');
 	}
 }

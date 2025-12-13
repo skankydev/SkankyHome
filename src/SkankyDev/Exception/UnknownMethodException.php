@@ -1,6 +1,6 @@
 <?php	
 /**
- * Copyright (c) 2015 SCHENCK Simon
+ * Copyright (c) 2025 SCHENCK Simon
  * 
  * Licensed under The MIT License
  * For full copyright and license information, please see the LICENSE.txt

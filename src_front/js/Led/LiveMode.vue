@@ -95,13 +95,13 @@ onBeforeUnmount(() => {
 
 <template>
 <div class="grid-layout">
-	<div class="grid-half card card-primary">
+	<div class="grid-half card">
 		<div class="card-header">
 			<h2 class="corner-accent-primary">Color</h2>
 		</div>
 		<div class="card-body">
 			<div class="form-group ">
-				<label for="Color" class="form-label ">Couleur</label>
+				<label for="Color" class="form-label">Couleur</label>
 				<input 
 					id="Color"  
 					type="color" 
@@ -112,7 +112,7 @@ onBeforeUnmount(() => {
 			</div>
 		</div>
 	</div>
-	<div class="grid-half card card-primary">
+	<div class="grid-half card">
 		<div class="card-header">
 			<h2 class="corner-accent-primary">Effect</h2>
 		</div>

@@ -1,0 +1,7 @@
+<?php 
+require './vendor/autoload.php';
+
+use SkankyDev\Cli\CliApplication;
+
+
+$app = new CliApplication($argv);

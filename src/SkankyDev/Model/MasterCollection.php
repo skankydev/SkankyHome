@@ -1,4 +1,15 @@
 <?php
+/**
+ * Copyright (c) 2025 SCHENCK Simon
+ * 
+ * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
+ * @copyright     Copyright (c) SCHENCK Simon
+ *
+ */
 
 namespace SkankyDev\Model;
 
@@ -143,10 +154,25 @@ abstract class MasterCollection {
 	/**
 	 * Delete - supprimer un document par ID
 	 */
-	public function deleteOne(string $id): bool {
+	public function deleteById(string $id): bool {
 		try {
 			$result = $this->collection->deleteOne([
 				'_id' => new ObjectId($id)
+			]);
+			
+			return $result->getDeletedCount() > 0;
+		} catch (\Exception $e) {
+			throw $e;
+		}
+	}
+
+	/**
+	 * Delete - supprimer un document
+	 */
+	public function deleteOne(MasterDocument $document): bool {
+		try {
+			$result = $this->collection->deleteOne([
+				'_id' => $document->_id
 			]);
 			
 			return $result->getDeletedCount() > 0;
