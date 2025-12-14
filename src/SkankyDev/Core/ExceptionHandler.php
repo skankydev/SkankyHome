@@ -11,7 +11,7 @@
  *
  */
 
-namespace SkankyDev\Exception;
+namespace SkankyDev\Core;
 
 use Exception;
 use SkankyDev\Utilities\Log;

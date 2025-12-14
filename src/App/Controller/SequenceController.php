@@ -18,7 +18,6 @@ use App\Model\Document\Sequence;
 use App\Model\SequenceCollection;
 use SkankyDev\Controller\MasterController;
 use SkankyDev\Http\Request;
-use SkankyDev\Http\Routing\Router;
 
 class SequenceController extends MasterController {
 

@@ -9,7 +9,7 @@
 ![MQTT](https://img.shields.io/badge/MQTT-connected-7C3AED)
 ![WS2812B](https://img.shields.io/badge/LEDs-ARGB-0066FF)
 
-## 🌈 Ça fait quoi ?
+## 🌚 Ça fait quoi ?
 
 Des LEDs qui changent de couleur quand tu cliques sur des boutons. Pas mal non.
 

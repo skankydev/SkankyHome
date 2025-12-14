@@ -169,7 +169,7 @@ abstract class MasterCollection {
 	/**
 	 * Delete - supprimer un document
 	 */
-	public function deleteOne(MasterDocument $document): bool {
+	public function deleteOne(object $document): bool {
 		try {
 			$result = $this->collection->deleteOne([
 				'_id' => $document->_id

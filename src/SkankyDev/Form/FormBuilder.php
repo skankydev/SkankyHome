@@ -59,7 +59,7 @@ abstract class FormBuilder {
 		}
 		
 		$fieldClass = $this->fieldTypes[$type];
-		
+
 		if (isset($this->old[$name])) {
 			$options['value'] = $this->old[$name];
 		}else if (isset($this->data[$name])) {

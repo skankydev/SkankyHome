@@ -1,4 +1,4 @@
-<?php 
+%?php
 /**
  * Copyright (c) 2025 SCHENCK Simon
  * 
@@ -11,12 +11,14 @@
  *
  */
 
-namespace SkankyDev\Form\Fields;
+namespace App\Model;
 
-use SkankyDev\Form\FormField;
+use SkankyDev\Model\MasterCollection;
+use App\Model\Document\<?= $name ?>;
 
+class <?= $name ?>Collection extends MasterCollection {
 
-class DateTimeField extends FormField {
-	protected string $type = 'datetime';
-	protected string $viewHtml = 'fields.default';
+	protected string $collectionName = '<?= $collection ?>';
+	protected string $documentClass = <?= $name ?>::class;
+	
 }

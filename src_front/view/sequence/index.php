@@ -37,7 +37,7 @@ $this->setLayout('layout.default');
 			<td><?= $sequence->active ? 'Oui': 'Non' ?></td>
 			<td class="action">
 				<a href="<?= $this->url(['action' => 'show','params'=>['sequence'=>$sequence->_id]]) ?>" class="btn-mini btn-info"><i class="icon-info"></i></a>
-				<a href="<?= $this->url(['action' => 'show','params'=>['sequence'=>$sequence->_id]]) ?>" class="btn-mini btn-warning"><i class="icon-edit"></i></a>
+				<a href="<?= $this->url(['action' => 'edit','params'=>['sequence'=>$sequence->_id]]) ?>" class="btn-mini btn-warning"><i class="icon-edit"></i></a>
 			</td>
 		</tr>
 		<?php endforeach ?>
