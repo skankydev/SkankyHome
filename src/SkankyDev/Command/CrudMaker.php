@@ -32,7 +32,7 @@ class CrudMaker extends MasterCommand
 	private string $documentName;
 
 	function __construct(){
-		$this->fields = [
+		/*$this->fields = [
 			[
 				'name' => "name",
 				'type' => "string",
@@ -62,7 +62,7 @@ class CrudMaker extends MasterCommand
 				'type' => "array",
 				'required' => true
 			]
-		];
+		];*/
 	}
 
 	function run(array $arg = []) :void{
