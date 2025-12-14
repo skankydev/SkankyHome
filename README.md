@@ -50,18 +50,16 @@ Des LEDs qui changent de couleur quand tu cliques sur des boutons. Pas mal non.
 - **Production** : mon salon, ça marche nickel
 
 
-## 🐛 Bugs connus
+## 👾 Bugs connus
 
-oui c'est connus ya des bug
-
+Oui c'est connus ya des bug.
+J'ai un petit souci avec les dates.
 
 ## 🐼 Auteur 
 
 **SkankyDev** - Développeur qui préfère PHP au JavaScript
 - 📍 Perpignan, France 🇫🇷
 - 🔧 Fait des trucs qui brillent depuis 1634
-- ☕ Alimenté au café
+- 🕹️ Amateur de jeux vidéo / plateau
 - 🍔 Les burgers c'est bon
 - 🍺 santé
-
-
