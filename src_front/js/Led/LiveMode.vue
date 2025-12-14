@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 import mqtt from 'mqtt';
+import ColorPicker from '../Component/ColorPicker.vue';
 
 const props = defineProps({
 	effects: Array,
@@ -11,7 +12,7 @@ const connected = ref(false);
 const status = ref('Déconnecté');
 const search = ref('');
 
-const currentColor = ref('#ffffff');
+const currentColor = ref('#FFFFFF');
 const currentEffect = ref('none');
 
 const connectMQTT = () => {
@@ -19,8 +20,6 @@ const connectMQTT = () => {
 		clientId: 'web_client_' + Math.random().toString(16).substr(2, 8),
 		clean: true,
 		reconnectPeriod: 1000,
-		// username: 'user',
-		// password: 'pass'
 	});
 	
 	client.value.on('connect', () => {
@@ -102,13 +101,10 @@ onBeforeUnmount(() => {
 		<div class="card-body">
 			<div class="form-group ">
 				<label for="Color" class="form-label">Couleur</label>
-				<input 
-					id="Color"  
-					type="color" 
-        			class="form-input"
+				<ColorPicker 
 					v-model="currentColor"
-        			@input="changeColor(currentColor)" 
-        		>
+					@update:modelValue="changeColor"
+				/>
 			</div>
 		</div>
 	</div>

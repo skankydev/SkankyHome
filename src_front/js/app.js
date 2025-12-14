@@ -1,7 +1,7 @@
 "use strict";
 import { createApp } from 'vue'
 import LedEditor from './Component/LedEditor.vue'
-import ColorPiker from './Component/ColorPiker.vue'
+import ColorPicker from './Component/ColorPicker.vue'
 import LiveMode from './Led/LiveMode.vue'
 
 window.remove = function(element) {
@@ -17,9 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	if (target) {
 		var editor = createApp({});
 		editor.component('led-editor', LedEditor);
-		editor.component('color-piker', ColorPiker);
+		editor.component('color-picker', ColorPicker);
 		editor.mount('#MyLedEditor');
-		
 	}
 
 	target = document.getElementById('LiveMode');
