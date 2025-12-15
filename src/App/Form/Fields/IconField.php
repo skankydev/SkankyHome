@@ -11,24 +11,25 @@
  *
  */
 
-namespace SkankyDev\Form\Fields;
+namespace App\Form\Fields;
 
+use SkankyDev\Config\Config;
 use SkankyDev\Form\FormField;
 
 
-class SelectField extends FormField {
-	protected string $type = 'select';
-	protected string $viewHtml = 'fields.select';
+class IconField extends FormField {
+	protected string $type = 'icon';
+	protected string $viewHtml = 'fields.icon';
 
-	protected array $options = [];
+	protected array $icons = [];
 	protected $empty = false;
 
 	public function __construct(string $name, array $options = []) {
 		// Appeler le constructeur parent
 		parent::__construct($name, $options);
 		
-		$this->options = $options['options'] ?? [];
-		$this->empty = $options['empty'] ?? false;
+		
+		$this->icons = Config::get('icons') ?? [];
 	}
-
+		
 }

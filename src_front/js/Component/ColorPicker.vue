@@ -35,7 +35,7 @@ const drawPicker = () => {
 	const height = canvas.value.height;
 
 	 const whiteMix = 1 - (brightness.value / 100)
-  
+	
 	// Dessiner d'abord un rectangle blanc si brightness < 100
 	if (brightness.value < 100) {
 		ctx.fillStyle = '#fff'
@@ -197,7 +197,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="color-picker">
+	<div class="color-picker">
 	<div class="canva-wrapper">
 		<canvas 
 			ref="canvas" 
@@ -237,5 +237,5 @@ onMounted(() => {
 		<span class="color-text" >{{ color }}</span>
 	</div>
 	<input type="hidden" v-model="color" >
-  </div>
+	</div>
 </template>

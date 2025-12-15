@@ -6,7 +6,7 @@ $this->setLayout('layout.default');
 	<div class="page-title">
 		<h2 class="rainbow-icon">
 			<i class="icon-zap"></i>
-			%?= $<?= $singularCamel ?>-><?= $this->fields[0]['name'] ?> ?>
+			%?= e($<?= $singularCamel ?>-><?= $this->fields[0]['name'] ?>) ?>
 		</h2>
 	</div>
 	<div class="page-action">
@@ -25,7 +25,7 @@ $this->setLayout('layout.default');
 	<div class="grid-half card p-s">
 		<dl>
 <?php foreach($this->fields as $field): ?>
-			<dt><?= $field['name'] ?></dt>
+			<dt><?= $this->toHuman($field['name']) ?></dt>
 <?php if($field['type'] === 'bool'): ?>
 			<dd><span class="text-%?= $<?= $singularCamel ?>-><?= $field['name'] ?> ? 'success' : 'error' ?>">%?= $<?= $singularCamel ?>-><?= $field['name'] ?> ? 'oui' : 'non' ?></span></dd>
 <?php elseif($field['type'] === 'date'): ?>
@@ -38,9 +38,9 @@ $this->setLayout('layout.default');
 			<dd>%?= e($<?= $singularCamel ?>-><?= $field['name'] ?>) ?></dd>
 <?php endif; ?>
 <?php endforeach; ?>
-			<dt>created_at</dt>
+			<dt>created</dt>
 			<dd>%?= $<?= $singularCamel ?>->created_at?->format('d/m/Y H:i') ?></dd>
-			<dt>updated_at</dt>
+			<dt>updated</dt>
 			<dd>%?= $<?= $singularCamel ?>->updated_at?->format('d/m/Y H:i') ?></dd>
 		</dl>
 	</div>

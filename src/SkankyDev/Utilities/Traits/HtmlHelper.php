@@ -59,27 +59,10 @@ trait HtmlHelper {
 	 * @param  array  $attr    list of attribute 
 	 * @return string          the html
 	 */
-	public function surround($content,$tag,$attr = [],$default = true){
-		$this->addDefaultClass($tag,$attr,$default);
+	public function surround($content,$tag,$attr = []){
 		$retour = '<'.$tag.' '.$this->createAttr($attr).'>';
 		$retour .=  $content.'</'.$tag.'>';
 		return $retour;
-	}
-
-	/**
-	 * add default class 
-	 * @param strin $tag   tag html
-	 * @param array &$attr the attribut
-	 */
-	private function addDefaultClass($tag,&$attr,$default = true){
-		if(isset($this->dClass[$tag]) && $default){
-			$s = ' ';
-			if(!isset($attr['class'])){
-				$attr['class'] = '';
-				$s = '';
-			}
-			$attr['class'] = $this->dClass[$tag].$s.$attr['class'];
-		}
 	}
 
 }

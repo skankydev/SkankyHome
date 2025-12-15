@@ -82,7 +82,7 @@ textarea {
 		rgba($bg-secondary, 0.8) 0%, 
 		rgba($bg-tertiary, 0.6) 100%
 	);
-	border: 2px solid $neon-purple;
+
 	border-radius: $p-s 0 $p-s $p-s;
 	outline: none;
 	transition: all 0.3s ease;
@@ -98,12 +98,22 @@ textarea {
 			rgba($bg-secondary, 0.8) 0%, 
 			rgba($bg-tertiary, 0.6) 100%
 		);
-		border-color: $neon-cyan;
 		@include neon-border($neon-cyan,1);
 	}
 	
 }
 
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+input[type="number"] {
+	-moz-appearance: textfield;
+	appearance: textfield;
+}
 // Textarea spécifique
 textarea {
 	min-height: 120px;

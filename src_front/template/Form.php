@@ -15,7 +15,8 @@
 $defaultValue = [
 	'string' => 'text',
 	'text' => 'textarea',
-	'int', 'float' => 'number',
+	'int' => 'number',
+	'float' => 'number',
 	'bool' => 'checkbox',
 	'date' => 'datetime',
 	'datetime' => 'datetime',
@@ -32,7 +33,7 @@ class <?= $name ?>Form extends FormBuilder {
 		
 <?php foreach($this->fields as $field): ?>
 		$this->add('<?= $field['name'] ?>','<?= $defaultValue[$field['type']] ?? 'text' ?>',[
-			'label' => '<?= ucfirst($field['name']) ?>',
+			'label' => '<?= $this->toHuman($field['name']) ?>',
 			'rules' => [<?= $field['required'] ? "'required'" : '' ?>]
 		]);
 <?php endforeach; ?>

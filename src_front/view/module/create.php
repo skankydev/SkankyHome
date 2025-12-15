@@ -6,7 +6,7 @@ $this->setLayout('layout.default');
 	<div class="page-title">
 		<h2 class="rainbow-icon">
 			<i class="icon-zap"></i>
-			Ajouter Sequence
+			Ajouter Module
 		</h2>
 	</div>
 	<div class="page-action">

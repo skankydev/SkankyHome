@@ -22,16 +22,16 @@ $this->setLayout('layout.default');
 		<thead>
 			<tr>
 <?php foreach($this->fields as $field): ?>
-				<th> <?= $field['name'] ?> </th>
+				<th>%?= $this->link('<?= $this->toHuman($field['name']) ?>',['get'=> $<?= $pluralCamel ?>->sortParams('<?= $field['name'] ?>')]) ?></th>
 <?php endforeach; ?>
-				<th>created_at</th>
-				<th>updated_at</th>
+				<th>%?= $this->link('Updated',['get'=> $<?= $pluralCamel ?>->sortParams('updated_at')]) ?></th>
+				<th>%?= $this->link('Created',['get'=> $<?= $pluralCamel ?>->sortParams('created_at')]) ?></th>
 				<th class="action"></th>
 			</tr>
 		</thead>
 		<tbody>
 		%?php foreach ($<?= $pluralCamel ?> as $<?= $singularCamel ?>): ?>
-		<tr>
+		<tr class="clickable-row" href="%?= $this->url(['action' => 'show','params'=>['<?= $singularCamel ?>'=>$<?= $singularCamel ?>->_id]]) ?>">
 <?php foreach($this->fields as $field): ?>
 <?php if($field['type'] === 'bool'): ?>
 			<td>%?= $<?= $singularCamel ?>-><?= $field['name'] ?> ? '<i class="icon-check text-success"></i>' : '<i class="icon-x text-danger"></i>' ?></td>
@@ -45,8 +45,8 @@ $this->setLayout('layout.default');
 			<td>%?= $<?= $singularCamel ?>-><?= $field['name'] ?> ?></td>
 <?php endif; ?>
 <?php endforeach; ?>
-			<td>%?= $<?= $singularCamel ?>->created_at?->format('d/m/Y H:i') ?></td>
 			<td>%?= $<?= $singularCamel ?>->updated_at?->format('d/m/Y H:i') ?></td>
+			<td>%?= $<?= $singularCamel ?>->created_at?->format('d/m/Y H:i') ?></td>
 			<td class="action">
 				<a href="%?= $this->url(['action' => 'show','params'=>['<?= $singularCamel ?>'=>$<?= $singularCamel ?>->_id]]) ?>" class="btn-mini btn-info"><i class="icon-info"></i></a>
 				<a href="%?= $this->url(['action' => 'edit','params'=>['<?= $singularCamel ?>'=>$<?= $singularCamel ?>->_id]]) ?>" class="btn-mini btn-warning"><i class="icon-edit"></i></a>

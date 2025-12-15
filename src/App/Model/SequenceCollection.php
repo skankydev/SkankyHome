@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Copyright (c) 2025 SCHENCK Simon
  * 
@@ -20,10 +20,5 @@ class SequenceCollection extends MasterCollection {
 
 	protected string $collectionName = 'sequences';
 	protected string $documentClass = Sequence::class;
-
 	
-	public function findActive(): array {
-		return $this->find(['active' => true]);
-	}
-
 }

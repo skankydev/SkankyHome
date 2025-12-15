@@ -22,18 +22,6 @@
 			min-width: 42px;
 			text-align: right;
 		}
-
-		input[type="number"]::-webkit-outer-spin-button,
-		input[type="number"]::-webkit-inner-spin-button {
-			-webkit-appearance: none;
-			margin: 0;
-		}
-
-		input[type="number"] {
-			-moz-appearance: textfield;
-			appearance: textfield;
-			text-align: right;
-		}
 	}
 	.color-brightness-slider{
 		max-width: 450px;
@@ -57,5 +45,9 @@
 		line-height: $p-xl;
 		font-size: $fs-l;
 		text-transform: uppercase;
+	}
+
+	input[type="number"] {
+		text-align: right;
 	}
 }

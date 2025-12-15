@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (c) 2025 SCHENCK Simon
  * 
@@ -14,13 +15,13 @@
 namespace App\Model\Document;
 
 use SkankyDev\Model\Document\MasterDocument;
+use DateTime;
 
 class Sequence extends MasterDocument {
-
-	public string $name = '';
-	public string $color = '';
-	public int $duration = 0;
-	public bool $active = true;
-	public string $effect = '';
 	
+	public string $icon = '';
+	public string $name = '';
+	public string $module_id = '';
+	public array $config;
+
 }

@@ -76,14 +76,14 @@ trait StringFacility {
 	 * @param  string $string the string need to be convert
 	 * @return string         the result
 	 */
-	public function dotToFolder($string, $charset='utf-8'){
+	 function dotToFolder($string, $charset='utf-8'){
 		$list = explode('.', $string);
 		$string = implode(DS,$list);
 		return $string;
 	}
 
 
-	private function pluralize(string $word): string {
+	public function pluralize(string $word): string {
 		// Règles simples de pluriel
 		if (str_ends_with($word, 'y')) {
 			return substr($word, 0, -1) . 'ies';
@@ -94,7 +94,7 @@ trait StringFacility {
 		return $word . 's';
 	}
 
-	private function singularize(string $word): string {
+	public function singularize(string $word): string {
 		// Cas spéciaux (irréguliers)
 		$irregulars = [
 			'children' => 'child',
@@ -133,11 +133,18 @@ trait StringFacility {
 		return $word;
 	}
 
-	private function preserveCase(string $original, string $replacement): string {
+	public function preserveCase(string $original, string $replacement): string {
 		// Si le mot original commence par une majuscule
 		if (ctype_upper($original[0])) {
 			return ucfirst($replacement);
 		}
 		return $replacement;
+	}
+
+	public function toHuman(string $string){
+		$string = str_replace('-', ' ', $string);
+		$string = str_replace('_', ' ', $string);
+		$string = ucwords($string);
+		return $string;
 	}
 }

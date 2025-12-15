@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 /**
  * Copyright (c) 2025 SCHENCK Simon
  * 
@@ -11,21 +12,18 @@
  *
  */
 
-use App\Middlewares\BiduleMiddleware;
-use App\Middlewares\TrucMiddleware;
+namespace App\Model\Document;
 
-return [
-	'class' => [
-		'middleware' => [
-			'truc' => TrucMiddleware::class,
-			'bidule' => BiduleMiddleware::class,
-		],
-		'fields' => [
-			'icon'     => \App\Form\Fields\IconField::class,
-		]
-	],
-	'middlewares' => [
-		'truc',
-	],
+use SkankyDev\Model\Document\MasterDocument;
+use DateTime;
+
+class Module extends MasterDocument {
 	
-];
+	public string $icon = '';
+	public string $name = '';
+	public string $topic_message = '';
+	public string $topic_cmd = '';
+	public int $nb_line = 0;
+	public int $nb_led = 0;
+
+}

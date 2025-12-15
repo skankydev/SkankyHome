@@ -1,0 +1,71 @@
+@use '../settings/functions' as *;
+@use '../settings/mixins' as *;
+@use '../settings/variables' as *;
+@use '../settings/animations' as *;
+
+
+.picker-icon{
+	display: flex;
+	flex-direction: row;
+
+	.picker-preview-icon {
+		position: relative;
+		display: inline-block;
+		margin-right:$p-m;
+		
+	}
+
+	.picker-icon-dropdown{
+		position: absolute;
+		top: calc(100% + $p-s);
+		z-index: 10;
+		padding: $p-s;
+
+		background: $bg-secondary;
+		
+		border: 1px solid rgba($border-color, 0.3);
+		border-radius: $p-s 0 $p-s $p-s;
+
+		box-shadow: 
+			inset -1px -1px 2px rgba(neon-scale($border-color, 80%), 0.2),
+			inset 1px 1px 2px rgba(neon-scale($border-color, 80%), 0.2);
+		
+		transition: all 0.3s ease;
+	}
+
+	.picker-icon-item{
+		display: inline-block;
+		text-align: center;
+		height: 36px;
+		width: 36px;
+		line-height: 35px;
+		
+		font-size: $fs-m;
+		color: $text-primary;
+		border-radius: $p-s 0 $p-s $p-s;
+		transition: all 0.3s ease;
+
+		background: linear-gradient(135deg, 
+			rgba($bg-secondary, 0.8) 0%, 
+			rgba($bg-tertiary, 0.6) 100%
+		);
+
+		@include neon-border($neon-purple,0.2);
+
+		&:hover{
+			@include neon-border($neon-cyan,1);
+		}
+	}
+
+	.picker-icon-grid{
+		display: grid;
+		grid-template-columns: repeat(20,1fr);
+		grid-gap: $p-s;
+	}
+
+	.picker-icon-input{
+		flex-grow: 1;
+	}
+	
+}
+

@@ -5,8 +5,8 @@ $this->setLayout('layout.default');
 <header class="page-header">
 	<div class="page-title">
 		<h2 class="rainbow-icon">
-			<i class="icon-zap"></i>
-			<?= $sequence->name ?>
+			<i class="<?= e($sequence->icon) ?>"></i>
+			<?= e($sequence->name) ?>
 		</h2>
 	</div>
 	<div class="page-action">
@@ -24,17 +24,12 @@ $this->setLayout('layout.default');
 <section class="grid-layout">
 	<div class="grid-half card p-s">
 		<dl>
-			<dt>name</dt><dd><?= e($sequence->name) ?></dd>
-			<dt>color</dt><dd><?= e($sequence->color) ?></dd>
-			<dt>duration</dt><dd><?= e($sequence->duration) ?></dd>
-			<dt>active</dt><dd><span class="text-<?= $sequence->active ?'success':'error' ?>"><?= $sequence->active ?'oui':'non' ?></span></dd>
-			<dt>effect</dt><dd><?= e($sequence->effect) ?></dd>
+			<dt>Name</dt>
+			<dd><?= e($sequence->name) ?></dd>
+			<dt>Created</dt>
+			<dd><?= $sequence->created_at?->format('d/m/Y H:i') ?></dd>
+			<dt>Updated</dt>
+			<dd><?= $sequence->updated_at?->format('d/m/Y H:i') ?></dd>
 		</dl>
 	</div>
-	
 </section>
-
-
-
-
-

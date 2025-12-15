@@ -15,19 +15,36 @@ namespace App\Form;
 
 use SkankyDev\Form\FormBuilder;
 
-class SequenceForm extends FormBuilder {
+class ModuleForm extends FormBuilder {
 	
 	public function build() : void {
 		
-		$this->add('icon','text',[
+		$this->add('icon','icon',[
 			'label' => 'Icon',
 			'rules' => ['required']
 		]);
+
 		$this->add('name','text',[
 			'label' => 'Name',
 			'rules' => ['required']
 		]);
-		
+		$this->add('topic_message','text',[
+			'label' => 'Topic message',
+			'rules' => ['required']
+		]);
+		$this->add('topic_cmd','text',[
+			'label' => 'Topic cmd',
+			'rules' => ['required']
+		]);
+		$this->add('nb_line','number',[
+			'label' => 'Nb line',
+			'rules' => ['required','max:5']
+		]);
+		$this->add('nb_led','number',[
+			'label' => 'Nb led',
+			'rules' => ['required']
+		]);
+
 		$this->submit('<i class="icon-save"></i> SAVE');
 	}
 }

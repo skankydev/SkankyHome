@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Copyright (c) 2025 SCHENCK Simon
  * 
@@ -22,49 +22,49 @@ use SkankyDev\Http\Request;
 class SequenceController extends MasterController {
 
 	public function index(SequenceCollection $collection){
-		$sequences = $collection->paginate([],Request::_paginateInfo());
-		return view('sequence.index',['sequences'=>$sequences]);
+		$sequences = $collection->paginate([], Request::_paginateInfo());
+		return view('sequence.index', ['sequences' => $sequences]);
 	}
 
 	public function create(){
-		$form = new SequenceForm(['action'=>'store']);
-		return view('sequence.create',['form'=>$form]);
+		$form = new SequenceForm(['action' => 'store']);
+		return view('sequence.create', ['form' => $form]);
 	}
 
 	public function store(Request $request){
 		$input = $request->input();
-		$form = new SequenceForm(['action'=>'store']);
+		$form = new SequenceForm(['action' => 'store']);
 		if(!$form->validate($input)){
 			return redirect(['action' => 'create'])->withErrors($form->getErrors())->withInput($input);
 		}
 		$sequence = new Sequence($input);
 		SequenceCollection::_save($sequence);
-		return redirect(['action' => 'show','params'=>[$sequence->_id]])->withFlash('success','ca marche');
+		return redirect(['action' => 'show', 'params' => [$sequence->_id]])->withFlash('success', 'Enregistrement réussi');
 	}
 
 	public function show(Request $request, Sequence $sequence){
-		return view('sequence.show',['sequence'=>$sequence]);
+		return view('sequence.show', ['sequence' => $sequence]);
 	}
 
 	public function edit(Sequence $sequence){
-		$form = new SequenceForm(['action'=>'update','params'=>[$sequence->_id]]);
+		$form = new SequenceForm(['action' => 'update', 'params' => [$sequence->_id]]);
 		$form->setData($sequence);
-		return view('sequence.edit',['form'=>$form,'sequence'=>$sequence]);
+		return view('sequence.edit', ['form' => $form, 'sequence' => $sequence]);
 	}
 
 	public function update(Request $request, Sequence $sequence){
 		$input = $request->input();
-		$form = new SequenceForm(['action'=>'update','params'=>[$sequence->_id]]);
+		$form = new SequenceForm(['action' => 'update', 'params' => [$sequence->_id]]);
 		if(!$form->validate($input)){
-			return redirect(['action'=>'update','params'=>[$sequence->_id]])->withErrors($form->getErrors())->withInput($input);
+			return redirect(['action' => 'update', 'params' => [$sequence->_id]])->withErrors($form->getErrors())->withInput($input);
 		}
 		$sequence->fill($input);
 		SequenceCollection::_save($sequence);
-		return redirect(['action' => 'show','params'=>[$sequence->_id]])->withFlash('success','ca marche');
+		return redirect(['action' => 'show', 'params' => [$sequence->_id]])->withFlash('success', 'Modification réussie');
 	}
 
 	public function delete(Sequence $sequence){
 		SequenceCollection::_deleteOne($sequence);
-		return redirect(['action' => 'index',])->withFlash('success','ca marche');
+		return redirect(['action' => 'index'])->withFlash('success', 'Suppression réussie');
 	}
 }
