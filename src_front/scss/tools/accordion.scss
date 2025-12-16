@@ -1,0 +1,47 @@
+@use '../settings/functions' as *;
+@use '../settings/mixins' as *;
+@use '../settings/variables' as *;
+@use '../settings/animations' as *;
+
+.accordion {
+	gap: $p-s;
+}
+
+.accordion-item {
+
+	overflow: hidden;
+	transition: all 0.2s;
+	
+	&[open] {
+		.accordion-header::after {
+			transform: rotate(-90deg);
+		}
+	}
+}
+
+.accordion-header {
+	
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: $p-m;
+	cursor: pointer;
+	user-select: none;
+	transition: background 0.2s;
+	
+	&::after {
+		content: '▼';
+		font-size: 0.8em;
+		transition: transform 0.2s;
+	}
+	
+	// Retire le marker par défaut
+	&::-webkit-details-marker,
+	&::marker {
+		display: none;
+	}
+}
+
+.accordion-content {
+	overflow-y: auto;
+}

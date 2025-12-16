@@ -26,28 +26,32 @@
 	.color-brightness-slider{
 		max-width: 450px;
 	}
-	.color-result{
-		display: flex;
-		flex-direction: row;
-	}
-
-	.color-preview{
-		display: inline-block;
-		height: $p-xl;
-		width: $p-xl;
-		background-color: #FFF;
-		border-radius: 50%;
-		border: 2px solid $neon-cyan;
-		margin-right: $p-s;
-	}
-
-	.color-text{
-		line-height: $p-xl;
-		font-size: $fs-l;
-		text-transform: uppercase;
-	}
 
 	input[type="number"] {
 		text-align: right;
 	}
+}
+
+.color-result{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	span{
+		margin-left: $p-s;
+	}
+}
+
+.color-preview{
+	display: inline-block;
+	height: $p-xl;
+	width: $p-xl;
+	background-color: #FFF;
+	border-radius: 50%;
+	border: 2px solid $neon-cyan;
+}
+
+.color-text{
+	line-height: $p-xl;
+	font-size: $fs-l;
+	text-transform: uppercase;
 }

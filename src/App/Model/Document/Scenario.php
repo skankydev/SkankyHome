@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (c) 2025 SCHENCK Simon
  * 
@@ -11,23 +12,17 @@
  *
  */
 
-namespace App\Form;
+namespace App\Model\Document;
 
-use SkankyDev\Form\FormBuilder;
+use SkankyDev\Model\Document\MasterDocument;
+use DateTime;
 
-class SequenceForm extends FormBuilder {
+class Scenario extends MasterDocument {
 	
-	public function build() : void {
-		
-		$this->add('icon','text',[
-			'label' => 'Icon',
-			'rules' => ['required']
-		]);
-		$this->add('name','text',[
-			'label' => 'Name',
-			'rules' => ['required']
-		]);
-		
-		$this->submit('<i class="icon-save"></i> SAVE');
-	}
+	public string $name = '';
+	public string $icon = '';
+	public string $module_id = '';
+	public array $preference = ['colors'=>[],'effects'=>[]];
+	public array $lines = [];
+
 }

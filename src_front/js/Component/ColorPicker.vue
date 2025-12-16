@@ -232,10 +232,7 @@ onMounted(() => {
 			<input class="form-input" type="number" min="0" max="255" v-model="blue" @change="changeColor">
 		</div>
 	</div>
-	<div class="color-result">
-		<span class="color-preview" :style="{'background-color':color}"></span>
-		<span class="color-text" >{{ color }}</span>
-	</div>
+	
 	<input type="hidden" v-model="color" >
 	</div>
 </template>

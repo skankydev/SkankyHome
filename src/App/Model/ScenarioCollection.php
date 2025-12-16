@@ -14,11 +14,11 @@
 namespace App\Model;
 
 use SkankyDev\Model\MasterCollection;
-use App\Model\Document\Sequence;
+use App\Model\Document\Scenario;
 
-class SequenceCollection extends MasterCollection {
+class ScenarioCollection extends MasterCollection {
 
-	protected string $collectionName = 'sequences';
-	protected string $documentClass = Sequence::class;
+	protected string $collectionName = 'scenarios';
+	protected string $documentClass = Scenario::class;
 	
 }

@@ -4,6 +4,7 @@ import LedEditor from './Component/LedEditor.vue'
 import ColorPicker from './Component/ColorPicker.vue'
 import IconPicker from './Component/IconPicker.vue'
 import LiveMode from './Led/LiveMode.vue'
+import ScenarioMaker from './Led/ScenarioMaker.vue'
 
 window.remove = function(element) {
 	if (element && element.parentNode) {
@@ -40,6 +41,13 @@ document.addEventListener('DOMContentLoaded', () => {
 		var editor = createApp({});
 		editor.component('live-mode', LiveMode);
 		editor.mount('#LiveMode');
+	}
+
+	target = document.getElementById('ScenarioMaker');
+	if (target) {
+		var scenario = createApp({});
+		scenario.component('scenario-maker', ScenarioMaker);
+		scenario.mount('#ScenarioMaker');
 	}
 })
 

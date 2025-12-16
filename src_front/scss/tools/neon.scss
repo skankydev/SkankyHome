@@ -26,4 +26,8 @@
 		font-size: $fs-l;
 		font-style: italic;
 	}
+
+	.color-#{$name}{
+		color:$color;
+	}
 }

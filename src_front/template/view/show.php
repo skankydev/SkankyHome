@@ -6,7 +6,7 @@ $this->setLayout('layout.default');
 	<div class="page-title">
 		<h2 class="rainbow-icon">
 			<i class="icon-zap"></i>
-			%?= e($<?= $singularCamel ?>-><?= $this->fields[0]['name'] ?>) ?>
+			%?= e($<?= $singularCamel ?>-><?= $this->fields[0]['name'] ?>) ?> 
 		</h2>
 	</div>
 	<div class="page-action">
@@ -16,12 +16,12 @@ $this->setLayout('layout.default');
 		</a>
 		<a href="%?= $this->url(['action'=>'delete','params'=>[$<?= $singularCamel ?>->_id]]) ?>" class="btn btn-error">
 			<i class="icon-delete"></i>
-			delete
+			Delete
 		</a>
 	</div>
 </header>
 
-<section class="grid-layout">
+<section class="page-content grid-layout">
 	<div class="grid-half card p-s">
 		<dl>
 <?php foreach($this->fields as $field): ?>

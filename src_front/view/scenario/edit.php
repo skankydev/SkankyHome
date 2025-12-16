@@ -6,8 +6,7 @@ $this->setLayout('layout.default');
 	<div class="page-title">
 		<h2 class="rainbow-icon">
 			<i class="icon-zap"></i>
-			Ajouter Sequence
-		</h2>
+			Modifier Scenario		</h2>
 	</div>
 	<div class="page-action">
 		<a href="<?= $this->url(['action'=>'index']) ?>" class="btn btn-secondary">

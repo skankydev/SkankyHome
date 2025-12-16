@@ -5,7 +5,9 @@
 
 
 .effects-list{
-
+	.effect-name{
+		flex-grow: 1;
+	}
 }
 
 .effect{
@@ -29,15 +31,20 @@
 		border-bottom: 1px solid $neon-cyan;
 		background-color: $bg-tertiary;
 	}
+	display: flex;
+	flex-direction: row;
 
-
-
+	.effect-favorie,
+	.effect-trash,
 	.effect-key,
 	.effect-name,
 	.color-cyan{
 		display: inline-block;
 		padding-right: $p-xs;
+		padding-left: $p-xs;
 	}
+
+	
 
 	.effect-key{
 		width: 35px;
