@@ -2694,6 +2694,11 @@ span[class*=trace-] {
   color: #7C3AED;
 }
 
+.neon-primary-light {
+  color: #7C3AED;
+  text-shadow: 0 0 1.5px #7C3AED, 0 0 3px #7C3AED, 0 0 6px rgba(124, 58, 237, 0.8);
+}
+
 .text-success {
   color: #00FF41;
   font-size: 1.125rem;
@@ -2702,6 +2707,11 @@ span[class*=trace-] {
 
 .color-success {
   color: #00FF41;
+}
+
+.neon-success-light {
+  color: #00FF41;
+  text-shadow: 0 0 1.5px #00FF41, 0 0 3px #00FF41, 0 0 6px rgba(0, 255, 65, 0.8);
 }
 
 .text-error {
@@ -2714,6 +2724,11 @@ span[class*=trace-] {
   color: #FF073A;
 }
 
+.neon-error-light {
+  color: #FF073A;
+  text-shadow: 0 0 1.5px #FF073A, 0 0 3px #FF073A, 0 0 6px rgba(255, 7, 58, 0.8);
+}
+
 .text-warning {
   color: #FF6B00;
   font-size: 1.125rem;
@@ -2722,6 +2737,11 @@ span[class*=trace-] {
 
 .color-warning {
   color: #FF6B00;
+}
+
+.neon-warning-light {
+  color: #FF6B00;
+  text-shadow: 0 0 1.5px #FF6B00, 0 0 3px #FF6B00, 0 0 6px rgba(255, 107, 0, 0.8);
 }
 
 .text-favorie {
@@ -2734,6 +2754,11 @@ span[class*=trace-] {
   color: #FF00FF;
 }
 
+.neon-favorie-light {
+  color: #FF00FF;
+  text-shadow: 0 0 1.5px #FF00FF, 0 0 3px #FF00FF, 0 0 6px rgba(255, 0, 255, 0.8);
+}
+
 .text-info {
   color: #00D9FF;
   font-size: 1.125rem;
@@ -2742,6 +2767,11 @@ span[class*=trace-] {
 
 .color-info {
   color: #00D9FF;
+}
+
+.neon-info-light {
+  color: #00D9FF;
+  text-shadow: 0 0 1.5px #00D9FF, 0 0 3px #00D9FF, 0 0 6px rgba(0, 217, 255, 0.8);
 }
 
 .grid-layout {
@@ -3059,6 +3089,10 @@ span[class*=trace-] {
   -webkit-text-fill-color: transparent;
   filter: blur(20px);
   animation: rainbow-slide 6s linear infinite;
+}
+
+#ErrorBody {
+  padding: 24px;
 }
 
 .page-header {
@@ -3704,7 +3738,7 @@ input[type=file]::file-selector-button:hover {
 .form-inline .form-label {
   margin-bottom: 0;
   flex-shrink: 0;
-  min-width: 120px;
+  max-width: 120px;
 }
 .form-inline input,
 .form-inline select,
@@ -4621,6 +4655,7 @@ dd {
   grid-template-columns: 490px 1fr;
   height: calc(100vh - 110px);
   max-height: calc(100vh - 110px);
+  grid-gap: 8px;
 }
 .scenario-layout .scenario-side-bar {
   height: calc(100vh - 110px);
@@ -4631,8 +4666,25 @@ dd {
 .scenario-layout .scenario-content {
   height: calc(100vh - 110px);
   max-height: calc(100vh - 110px);
-  overflow-y: auto;
+  overflow-y: scroll;
   padding: 8px;
+}
+.scenario-layout .scenario-info {
+  display: grid;
+  grid-template-columns: 30% 55% 15%;
+  grid-gap: 8px;
+  width: 100%;
+}
+.scenario-layout .scenario-flash {
+  position: absolute;
+  top: 4px;
+  left: 30%;
+  right: 30%;
+}
+.scenario-layout .scenario-is-conneced {
+  position: absolute;
+  top: 16px;
+  right: 16px;
 }
 
 .pref-color-wrapper {

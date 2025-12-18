@@ -58,7 +58,36 @@ $this->setLayout('layout.default');
 			</div>
 		</header>
 		<div class="card-body">
-			au boulo mon grand !!
+			<table>
+				<thead>
+					<tr>
+						<th><?= $this->link('Name',['get'=> $scenarios->sortParams('name')]) ?></th>
+						<th><?= $this->link('Updated',['get'=> $scenarios->sortParams('updated_at')]) ?></th>
+						<th><?= $this->link('Created',['get'=> $scenarios->sortParams('created_at')]) ?></th>
+						<th class="action"></th>
+					</tr>
+				</thead>
+				<tbody>
+				<?php foreach ($scenarios as $scenario): ?>
+				<tr class="clickable-row" data-url="<?= $this->url(['controller'=>'scenario','action'=>'show','params'=>['scenario'=>$scenario->_id]]) ?>">
+					<td><i class="<?= $scenario->icon ?>"></i> <?= $scenario->name ?></td>
+					<td><?= $scenario->updated_at?->format('d/m/Y H:i') ?></td>
+					<td><?= $scenario->created_at?->format('d/m/Y H:i') ?></td>
+					<td class="action">
+						<a href="<?= $this->url(['controller'=>'scenario','action' => 'show','params'=>['scenario'=>$scenario->_id]]) ?>" class="btn-mini btn-info">
+							<i class="icon-info"></i>
+						</a>
+						<a href="<?= $this->url(['controller'=>'scenario','action' => 'edit','params'=>['scenario'=>$scenario->_id]]) ?>" class="btn-mini btn-warning">
+							<i class="icon-edit"></i>
+						</a>
+					</td>
+				</tr>
+				<?php endforeach ?>
+				</tbody>
+			</table>
+		</div>
+		<div class="card-footer">
+			<?= $this->part('part.paginator', $scenarios->getOption()); ?>
 		</div>
 	</div>
 </section>

@@ -15,23 +15,24 @@ namespace SkankyDev\Model\Document;
 
 use DateTime;
 use stdClass;
+use JsonSerializable;
 use MongoDB\BSON\ObjectID;
 use MongoDB\BSON\Persistable;
 use MongoDB\BSON\UTCDateTime;
 use MongoDB\BSON\Document;
 use MongoDB\Model\BSONArray;
+use MongoDB\Model\BSONDocument;
 use SkankyDev\Utilities\Traits\StringFacility;
 
 
 
 #[\AllowDynamicProperties]
-class MasterDocument implements Persistable {
+class MasterDocument implements JsonSerializable, Persistable {
 
 	use StringFacility;
 
 	public $_id;
-	/*public ?DateTime $created_at = null;
-	public ?DateTime $updated_at = null;*/
+	
 
 	static public function collectionName() : string{
 		$name = get_called_class();
@@ -43,7 +44,7 @@ class MasterDocument implements Persistable {
 	public static function find(string $id): ?static {
 		$collectionClass = static::collectionName();
 		if (!class_exists($collectionClass)) {
-			throw new \Exception("Collection {$collectionClass} introuvable pour " . static::class);
+			throw new \Exception("Collection {$collectionClass} introuvable pour " . static::class,404);
 		}
 		return $collectionClass::_findById($id);
 	}
@@ -125,15 +126,35 @@ class MasterDocument implements Persistable {
 	public function bsonUnserialize(array $data) : void{
 		unset($data['__pclass']); 
 		foreach ($data as $key => $value) {
-			if($value instanceof UTCDateTime ){
-				//debug($value);
-				$this->{$key} = $value->toDateTime();
-			}elseif($value instanceof BSONArray){
-				$this->{$key} = $value->getArrayCopy();
-			}else{
-				$this->{$key} = $value;
+			$this->{$key} = $this->convertBsonValue($value);
+		}
+	}
+
+	private function convertBsonValue($value) {
+		if ($value instanceof UTCDateTime) {
+			return $value->toDateTime();
+		}
+		
+		if ($value instanceof BSONArray || $value instanceof BSONDocument) {
+			$array = $value->getArrayCopy();
+			return array_map([$this, 'convertBsonValue'], $array);
+		}
+		
+		// Valeur normale
+		return $value;
+	}
+
+	public function jsonSerialize(): mixed {
+		$data = get_object_vars($this);
+		
+
+		foreach ($data as $key => $value) {
+			if(preg_match('/[a-zA-Z0-9_-]*_id/', $key) && $value instanceof ObjectId){
+				$data[$key] = (string) $value;
 			}
 		}
-	}	
+				
+		return $data;
+	}
 
 }

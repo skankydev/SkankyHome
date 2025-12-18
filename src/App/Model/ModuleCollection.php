@@ -13,10 +13,13 @@
 
 namespace App\Model;
 
-use SkankyDev\Model\MasterCollection;
 use App\Model\Document\Module;
+use SkankyDev\Model\MasterCollection;
+use SkankyDev\Utilities\Traits\Singleton;
 
 class ModuleCollection extends MasterCollection {
+
+	use Singleton;
 
 	protected string $collectionName = 'modules';
 	protected string $documentClass = Module::class;

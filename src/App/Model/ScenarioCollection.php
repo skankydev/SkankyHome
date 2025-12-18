@@ -13,10 +13,13 @@
 
 namespace App\Model;
 
-use SkankyDev\Model\MasterCollection;
 use App\Model\Document\Scenario;
+use SkankyDev\Model\MasterCollection;
+use SkankyDev\Utilities\Traits\Singleton;
 
 class ScenarioCollection extends MasterCollection {
+
+	use Singleton;
 
 	protected string $collectionName = 'scenarios';
 	protected string $documentClass = Scenario::class;

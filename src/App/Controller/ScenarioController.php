@@ -16,10 +16,12 @@ namespace App\Controller;
 use App\Form\ScenarioForm;
 use App\Model\Document\Module;
 use App\Model\Document\Scenario;
+use App\Model\ModuleCollection;
 use App\Model\ScenarioCollection;
 use SkankyDev\Config\Config;
 use SkankyDev\Controller\MasterController;
 use SkankyDev\Http\Request;
+use SkankyDev\Http\UrlBuilder;
 
 class ScenarioController extends MasterController {
 
@@ -43,7 +45,7 @@ class ScenarioController extends MasterController {
 	}
 
 	public function edit(Scenario $scenario){
-		$module = ModuleCollections::_findById($scenario->module_id);
+		$module = ModuleCollection::_findById($scenario->module_id);
 		$icons = Config::get('icons');
 		$effects = Config::get('leds.effects');
 		return view('scenario.create', [
@@ -60,7 +62,26 @@ class ScenarioController extends MasterController {
 
 	public function save(Request $request){
 		$input = $request->input();
-		dd($input);
+		$isNew = (bool)!$input['_id'];
+		if($isNew){
+			$scenario = new Scenario;
+		}else{
+			$scenario = ScenarioCollection::_findById($input['_id']);
+		}
+
+		$scenario->fill($input);
+		ScenarioCollection::_save($scenario);
+
+		return view('scenario.create', [
+			'scenario' => $scenario,
+			'result' => [
+				'status' => 'success',
+				'message' => 'Enregistrement réussi',
+				'url' => UrlBuilder::_build(['action'=>'edit','parmas'=>['scenario'=>$scenario]]),
+				'isNew' => $isNew,
+				'display' => true,
+			],
+		]);
 	}
 
 	public function delete(Scenario $scenario){

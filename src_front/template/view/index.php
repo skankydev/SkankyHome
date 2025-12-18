@@ -31,7 +31,7 @@ $this->setLayout('layout.default');
 		</thead>
 		<tbody>
 		%?php foreach ($<?= $pluralCamel ?> as $<?= $singularCamel ?>): ?>
-		<tr class="clickable-row" href="%?= $this->url(['action' => 'show','params'=>['<?= $singularCamel ?>'=>$<?= $singularCamel ?>->_id]]) ?>">
+		<tr class="clickable-row" data-url="%?= $this->url(['action' => 'show','params'=>['<?= $singularCamel ?>'=>$<?= $singularCamel ?>->_id]]) ?>">
 <?php foreach($this->fields as $field): ?>
 <?php if($field['type'] === 'bool'): ?>
 			<td>%?= $<?= $singularCamel ?>-><?= $field['name'] ?> ? '<i class="icon-check text-success"></i>' : '<i class="icon-x text-danger"></i>' ?></td>

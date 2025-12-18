@@ -8,7 +8,7 @@ $links = [
 ?>
 <section id="ScenarioMaker">
 	<scenario-maker
-		:scenario='<?= json($scenario) ?>'
+		:scenario-origin='<?= json($scenario) ?>'
 		:module='<?= json($module) ?>'
 		:icons='<?= json($icons) ?>'
 		:effects='<?= json($effects) ?>'

@@ -16,6 +16,7 @@ namespace App\Controller;
 use App\Form\ModuleForm;
 use App\Model\Document\Module;
 use App\Model\ModuleCollection;
+use App\Model\ScenarioCollection;
 use SkankyDev\Controller\MasterController;
 use SkankyDev\Http\Request;
 
@@ -43,7 +44,11 @@ class ModuleController extends MasterController {
 	}
 
 	public function show(Request $request, Module $module){
-		return view('module.show', ['module' => $module]);
+		$scenarios = ScenarioCollection::getInstance()->paginate([], Request::_paginateInfo());
+		return view('module.show', [
+			'module' => $module,
+			'scenarios' => $scenarios,
+		]);
 	}
 
 	public function edit(Module $module){

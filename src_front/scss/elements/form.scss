@@ -429,7 +429,7 @@ input[type="file"] {
 	.form-label {
 		margin-bottom: 0;
 		flex-shrink: 0;
-		min-width: 120px;
+		max-width: 120px;
 	}
 	
 	input,

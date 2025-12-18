@@ -10,6 +10,7 @@
 	grid-template-columns: 490px 1fr;
 	height: calc(100vh - 110px);
 	max-height: calc(100vh - 110px);
+	grid-gap: $p-s;
 
 	.scenario-side-bar{
 		height: calc(100vh - 110px);
@@ -21,10 +22,29 @@
 	.scenario-content{
 		height: calc(100vh - 110px);
 		max-height: calc(100vh - 110px);
-		overflow-y: auto;
+		overflow-y: scroll;
 		padding: $p-s;
 	}
 	
+	.scenario-info{
+		display: grid;
+		grid-template-columns: 30% 55% 15%;
+		grid-gap: $p-s;
+		width: 100%;
+	}
+
+	.scenario-flash{
+		position: absolute;
+		top: $p-xs;
+		left: 30%;
+		right: 30%;
+	}
+
+	.scenario-is-conneced{
+		position: absolute;
+		top: $p-m;
+		right: $p-m;
+	}
 }
 
 .pref-color-wrapper{

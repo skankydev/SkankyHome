@@ -18,6 +18,8 @@
 	.neon-#{$name}-strong {
 		@include neon-text($color, 1.5);
 	}
+
+
 }
 
 @each $name, $color in $tool-colors {
@@ -30,4 +32,9 @@
 	.color-#{$name}{
 		color:$color;
 	}
+
+	.neon-#{$name}-light {
+		@include neon-text($color, 0.5);
+	}
 }
+

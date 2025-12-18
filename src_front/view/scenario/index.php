@@ -31,7 +31,7 @@ $this->setLayout('layout.default');
 		</thead>
 		<tbody>
 		<?php foreach ($scenarios as $scenario): ?>
-		<tr class="clickable-row" href="<?= $this->url(['action' => 'show','params'=>['scenario'=>$scenario->_id]]) ?>">
+		<tr class="clickable-row" data-url="<?= $this->url(['action' => 'show','params'=>['scenario'=>$scenario->_id]]) ?>">
 			<td><?= $scenario->name ?></td>
 			<td><?= $scenario->icon ?></td>
 			<td><?= $scenario->module_id ?></td>

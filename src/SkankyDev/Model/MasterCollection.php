@@ -32,7 +32,7 @@ abstract class MasterCollection {
 	protected array $behaviors = [];
 	
 	public function __construct() {
-
+		
 		$this->collection = MongoClient::getInstance()->getCollection($this->collectionName);
 		$this->loadBehaviors();
 	}

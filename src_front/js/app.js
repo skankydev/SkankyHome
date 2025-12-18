@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	
 	document.querySelectorAll('.clickable-row').forEach(row => {
 		row.addEventListener('click', function() {
+			console.log(this.dataset.url);
 			window.location.href = this.dataset.url;
 		});
 	});
