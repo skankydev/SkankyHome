@@ -366,8 +366,8 @@ onBeforeUnmount(() => {
 						</div>
 						<div>
 							<div class="btn-mini btn-info mh-s" @click="addStep(keyLine)"><i class="icon-add"></i></div>
+							<div v-if=" line.steps.length > 1" class="btn-mini btn-error mh-s" @click="removeStep(keyLine,keySteps)"><i class="icon-trash"></i></div>
 							<div class="btn-mini btn-success mh-s" @click="previewSegments(step.segments)"><i class="icon-upload"></i></div>
-							<div class="btn-mini btn-error mh-s" @click="removeStep(keyLine,keySteps)"><i class="icon-trash"></i></div>
 						</div>
 					</div>
 					<div class="led-visualizer">

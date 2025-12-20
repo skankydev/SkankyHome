@@ -28660,17 +28660,18 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
                     }, [..._cache[21] || (_cache[21] = [
                       createBaseVNode("i", { class: "icon-add" }, null, -1)
                     ])], 8, _hoisted_41),
+                    line.steps.length > 1 ? (openBlock(), createElementBlock("div", {
+                      key: 0,
+                      class: "btn-mini btn-error mh-s",
+                      onClick: ($event) => $setup.removeStep(keyLine, keySteps)
+                    }, [..._cache[22] || (_cache[22] = [
+                      createBaseVNode("i", { class: "icon-trash" }, null, -1)
+                    ])], 8, _hoisted_42)) : createCommentVNode("", true),
                     createBaseVNode("div", {
                       class: "btn-mini btn-success mh-s",
                       onClick: ($event) => $setup.previewSegments(step.segments)
-                    }, [..._cache[22] || (_cache[22] = [
-                      createBaseVNode("i", { class: "icon-upload" }, null, -1)
-                    ])], 8, _hoisted_42),
-                    createBaseVNode("div", {
-                      class: "btn-mini btn-error mh-s",
-                      onClick: ($event) => $setup.removeStep(keyLine, keySteps)
                     }, [..._cache[23] || (_cache[23] = [
-                      createBaseVNode("i", { class: "icon-trash" }, null, -1)
+                      createBaseVNode("i", { class: "icon-upload" }, null, -1)
                     ])], 8, _hoisted_43)
                   ])
                 ]),
