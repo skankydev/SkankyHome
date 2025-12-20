@@ -36,13 +36,11 @@ const drawPicker = () => {
 
 	 const whiteMix = 1 - (brightness.value / 100)
 	
-	// Dessiner d'abord un rectangle blanc si brightness < 100
 	if (brightness.value < 100) {
 		ctx.fillStyle = '#fff'
 		ctx.fillRect(0, 0, width, height)
 	}
 
-	// Dégradé horizontal arc-en-ciel avec opacité basée sur brightness
 	const gradientH = ctx.createLinearGradient(0, 0, width, 0)
 	gradientH.addColorStop(0, `rgba(255, 0, 0, ${brightness.value / 100})`)
 	gradientH.addColorStop(0.20, `rgba(255, 255, 0, ${brightness.value / 100})`)

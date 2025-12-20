@@ -14,7 +14,7 @@ $this->setLayout('layout.default');
 	<div class="pb-s"><a href="#" class="btn"><i class="icon-play"></i> Lien stylisé comme un bouton</a> </div>
 </section>
 
-<section class="pb-xxl">
+<section class=" p-m pb-xxl">
 
 	<!-- Mix de tailles -->
 	<div class="grid-layout pb-l pt-l">
@@ -198,13 +198,25 @@ $this->setLayout('layout.default');
 			</div>
 		</div>
 		<div class="grid-quarter-short card text-left">
-			<h3><i class="icon-minus-circle"></i>grid-quarter-short h3</h3>
+			<div class="card-header">
+				<h3><i class="icon-minus-circle"></i>grid-quarter-short h3</h3>
+			</div>
 		</div>
 		<div class="grid-quarter-short card text-center">
-			<h4><i class="icon-alert-octagon"></i>grid-quarter-short h4</h4>
+			<div class="card-header">
+				<h4><i class="icon-alert-octagon"></i>grid-quarter-short h4</h4>
+			</div>
 		</div>
 		<div class="grid-quarter-short card text-right">
-			<h5><i class="icon-octagon"></i>grid-quarter-short h5</h5>
+			<div class="card-header">
+				<h5><i class="icon-octagon"></i>grid-quarter-short h5</h5>
+			</div>
 		</div>
+	</div>
+</section>
+
+<section class="p-m">
+	<div class="card p-m">
+		<?= $form->render() ?>
 	</div>
 </section>

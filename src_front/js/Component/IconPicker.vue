@@ -59,7 +59,6 @@ const openDropdown = () => {
 	isOpen.value = true
 }
 
-// Fermer le dropdown
 const closeDropdown = () => {
 	isOpen.value = false
 }

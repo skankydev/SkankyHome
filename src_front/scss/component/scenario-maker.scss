@@ -125,3 +125,104 @@
 	flex-wrap: wrap;
 	gap: $p-m;
 }
+
+.segment-form{
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	grid-gap: $p-s;
+}
+.segment-form-color{
+	display: flex;
+	flex-direction: row;
+	.quick-select-color{
+		margin-right: $p-s;
+	}
+}
+.segment-form-leds{
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-gap: $p-s;
+}
+
+
+.led-bar-container {
+	position: relative;
+}
+
+
+.led-bar {
+	display: grid;
+	grid-template-columns: repeat(100, 1fr); // 100 colonnes = 100 LEDs
+	gap: 2px;
+	padding: $p-s;
+}
+
+.led-point {
+	width: $p-m;
+	height: 20px;
+	background: rgba($neon-purple,0.5);
+	cursor: pointer;
+	transition: background 0.2s;
+
+	&:hover {
+		background: $neon-purple;
+	}
+
+	&.led-cursor-here {
+		background: $warning;
+	}
+}
+
+.cursors-layer {
+	display: grid;
+	gap: 2px;
+	padding: 0 $p-s;
+	margin-bottom: $p-l;
+}
+
+.led-cursor {
+	position: relative;
+	pointer-events: all;
+	background: rgba($neon-blue,0.5) ;
+	color: $text-primary;
+	padding: 2px 6px;
+	border-radius:$p-s;
+	font-size:$fs-xs;
+	cursor: pointer;
+	user-select: none;
+	cursor: grab;
+	&:hover {
+		background:$neon-purple;
+	}
+
+	&.cursor-locked{
+		background:$neon-purple;
+	}
+
+	&.cursor-dragging {
+		cursor: grabbing;
+
+		.cursor-label {
+			transform: scale(1.1);
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+		}
+	}
+
+	&.cursor-locked {
+		cursor: not-allowed;
+	}
+}
+
+
+
+.quick-select-color{
+	.pref-color-wrapper{
+
+	}
+	.pref-color{
+		height: 36px;
+		width: 36px;
+		display: inline-block;
+		margin-right: $p-s;
+	}
+}

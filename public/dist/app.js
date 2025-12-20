@@ -16176,7 +16176,7 @@ const _export_sfc = (sfc, props) => {
   }
   return target;
 };
-const _sfc_main$4 = {
+const _sfc_main$5 = {
   __name: "LedEditor",
   props: {
     value: String
@@ -16191,9 +16191,9 @@ const _sfc_main$4 = {
     return __returned__;
   }
 };
-const _hoisted_1$4 = { class: "led-editor" };
-function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createElementBlock("div", _hoisted_1$4, [
+const _hoisted_1$5 = { class: "led-editor" };
+function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", _hoisted_1$5, [
     createBaseVNode("h2", null, toDisplayString($props.value), 1),
     createBaseVNode("p", null, "Compteur: " + toDisplayString($setup.count), 1),
     createBaseVNode("button", {
@@ -16201,8 +16201,8 @@ function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
     }, "+1")
   ]);
 }
-const LedEditor = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$4], ["__file", "LedEditor.vue"]]);
-const _sfc_main$3 = {
+const LedEditor = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$5], ["__file", "LedEditor.vue"]]);
+const _sfc_main$4 = {
   __name: "ColorPicker",
   props: {
     modelValue: {
@@ -16352,16 +16352,16 @@ const _sfc_main$3 = {
     return __returned__;
   }
 };
-const _hoisted_1$3 = { class: "color-picker" };
-const _hoisted_2$3 = { class: "canva-wrapper" };
-const _hoisted_3$3 = { class: "color-brightness-slider" };
-const _hoisted_4$3 = { class: "color-value form-inline" };
-const _hoisted_5$3 = { class: "form-group" };
-const _hoisted_6$3 = { class: "form-group" };
+const _hoisted_1$4 = { class: "color-picker" };
+const _hoisted_2$4 = { class: "canva-wrapper" };
+const _hoisted_3$4 = { class: "color-brightness-slider" };
+const _hoisted_4$4 = { class: "color-value form-inline" };
+const _hoisted_5$4 = { class: "form-group" };
+const _hoisted_6$4 = { class: "form-group" };
 const _hoisted_7$3 = { class: "form-group" };
-function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createElementBlock("div", _hoisted_1$3, [
-    createBaseVNode("div", _hoisted_2$3, [
+function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", _hoisted_1$4, [
+    createBaseVNode("div", _hoisted_2$4, [
       createBaseVNode("canvas", {
         ref: "canvas",
         class: "color-picker-canva",
@@ -16371,7 +16371,7 @@ function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
         onMousemove: $setup.handleMouseMove
       }, null, 544)
     ]),
-    createBaseVNode("div", _hoisted_3$3, [
+    createBaseVNode("div", _hoisted_3$4, [
       _cache[6] || (_cache[6] = createBaseVNode("label", null, "Luminosité", -1)),
       withDirectives(createBaseVNode("input", {
         type: "range",
@@ -16383,8 +16383,8 @@ function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
         [vModelText, $setup.brightness]
       ])
     ]),
-    createBaseVNode("div", _hoisted_4$3, [
-      createBaseVNode("div", _hoisted_5$3, [
+    createBaseVNode("div", _hoisted_4$4, [
+      createBaseVNode("div", _hoisted_5$4, [
         _cache[7] || (_cache[7] = createBaseVNode("label", {
           for: "",
           class: "form-label"
@@ -16400,7 +16400,7 @@ function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
           [vModelText, $setup.red]
         ])
       ]),
-      createBaseVNode("div", _hoisted_6$3, [
+      createBaseVNode("div", _hoisted_6$4, [
         _cache[8] || (_cache[8] = createBaseVNode("label", {
           for: "",
           class: "form-label"
@@ -16441,8 +16441,8 @@ function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
     ])
   ]);
 }
-const ColorPicker = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$3], ["__file", "ColorPicker.vue"]]);
-const _sfc_main$2 = {
+const ColorPicker = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$4], ["__file", "ColorPicker.vue"]]);
+const _sfc_main$3 = {
   __name: "IconPicker",
   props: {
     modelValue: {
@@ -16523,20 +16523,20 @@ const _sfc_main$2 = {
     return __returned__;
   }
 };
-const _hoisted_1$2 = { class: "picker-icon" };
-const _hoisted_2$2 = { class: "picker-preview-icon" };
-const _hoisted_3$2 = {
+const _hoisted_1$3 = { class: "picker-icon" };
+const _hoisted_2$3 = { class: "picker-preview-icon" };
+const _hoisted_3$3 = {
   key: 0,
   class: "picker-icon-dropdown"
 };
-const _hoisted_4$2 = { class: "picker-icon-grid" };
-const _hoisted_5$2 = ["onClick"];
-const _hoisted_6$2 = { class: "picker-icon-input" };
+const _hoisted_4$3 = { class: "picker-icon-grid" };
+const _hoisted_5$3 = ["onClick"];
+const _hoisted_6$3 = { class: "picker-icon-input" };
 const _hoisted_7$2 = ["name", "value", "required"];
-function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createElementBlock("div", _hoisted_1$2, [
+function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", _hoisted_1$3, [
     createBaseVNode("div", null, [
-      createBaseVNode("div", _hoisted_2$2, [
+      createBaseVNode("div", _hoisted_2$3, [
         createBaseVNode("div", {
           class: "picker-icon-item",
           onClick: $setup.openDropdown
@@ -16545,8 +16545,8 @@ function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
             class: normalizeClass($setup.selectedIcon)
           }, null, 2)
         ]),
-        $setup.isOpen ? (openBlock(), createElementBlock("div", _hoisted_3$2, [
-          createBaseVNode("div", _hoisted_4$2, [
+        $setup.isOpen ? (openBlock(), createElementBlock("div", _hoisted_3$3, [
+          createBaseVNode("div", _hoisted_4$3, [
             (openBlock(true), createElementBlock(Fragment, null, renderList($props.icons, (icon, key) => {
               return openBlock(), createElementBlock(Fragment, null, [
                 $setup.matchSearch(icon) ? (openBlock(), createElementBlock("div", {
@@ -16557,14 +16557,14 @@ function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
                   createBaseVNode("i", {
                     class: normalizeClass(icon)
                   }, null, 2)
-                ], 8, _hoisted_5$2)) : createCommentVNode("", true)
+                ], 8, _hoisted_5$3)) : createCommentVNode("", true)
               ], 64);
             }), 256))
           ])
         ])) : createCommentVNode("", true)
       ])
     ]),
-    createBaseVNode("div", _hoisted_6$2, [
+    createBaseVNode("div", _hoisted_6$3, [
       withDirectives(createBaseVNode("input", {
         type: "text",
         class: "form-input",
@@ -16583,7 +16583,7 @@ function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
     }, null, 8, _hoisted_7$2)
   ]);
 }
-const IconPicker = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$2], ["__file", "IconPicker.vue"]]);
+const IconPicker = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$3], ["__file", "IconPicker.vue"]]);
 var as = Object.defineProperty;
 var Yb = Object.getOwnPropertyDescriptor;
 var Jb = Object.getOwnPropertyNames;
@@ -27809,7 +27809,7 @@ var XT = D((ot) => {
   YT(Ql(), ot);
 });
 const mqtt = XT();
-const _sfc_main$1 = {
+const _sfc_main$2 = {
   __name: "LiveMode",
   props: {
     effects: Array
@@ -27893,25 +27893,25 @@ const _sfc_main$1 = {
     return __returned__;
   }
 };
-const _hoisted_1$1 = { class: "grid-layout" };
-const _hoisted_2$1 = { class: "grid-half card" };
-const _hoisted_3$1 = { class: "card-body" };
-const _hoisted_4$1 = { class: "form-group" };
-const _hoisted_5$1 = { class: "grid-half card" };
-const _hoisted_6$1 = { class: "form-group ph-m" };
+const _hoisted_1$2 = { class: "grid-layout" };
+const _hoisted_2$2 = { class: "grid-half card" };
+const _hoisted_3$2 = { class: "card-body" };
+const _hoisted_4$2 = { class: "form-group" };
+const _hoisted_5$2 = { class: "grid-half card" };
+const _hoisted_6$2 = { class: "form-group ph-m" };
 const _hoisted_7$1 = { class: "effects-list pb-l" };
 const _hoisted_8$1 = { class: "scrollable" };
 const _hoisted_9$1 = ["onClick"];
 const _hoisted_10$1 = { class: "effect-key" };
 const _hoisted_11$1 = { class: "effect-name" };
-function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createElementBlock("div", _hoisted_1$1, [
-    createBaseVNode("div", _hoisted_2$1, [
+function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", _hoisted_1$2, [
+    createBaseVNode("div", _hoisted_2$2, [
       _cache[3] || (_cache[3] = createBaseVNode("div", { class: "card-header" }, [
         createBaseVNode("h2", { class: "corner-accent-primary" }, "Color")
       ], -1)),
-      createBaseVNode("div", _hoisted_3$1, [
-        createBaseVNode("div", _hoisted_4$1, [
+      createBaseVNode("div", _hoisted_3$2, [
+        createBaseVNode("div", _hoisted_4$2, [
           _cache[2] || (_cache[2] = createBaseVNode("label", {
             for: "Color",
             class: "form-label"
@@ -27926,12 +27926,12 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
         ])
       ])
     ]),
-    createBaseVNode("div", _hoisted_5$1, [
+    createBaseVNode("div", _hoisted_5$2, [
       _cache[6] || (_cache[6] = createBaseVNode("div", { class: "card-header" }, [
         createBaseVNode("h2", { class: "corner-accent-primary" }, "Effect")
       ], -1)),
       createBaseVNode("div", null, [
-        createBaseVNode("div", _hoisted_6$1, [
+        createBaseVNode("div", _hoisted_6$2, [
           _cache[4] || (_cache[4] = createBaseVNode("label", {
             for: "",
             class: "form-label"
@@ -27965,7 +27965,94 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
     ])
   ]);
 }
-const LiveMode = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["__file", "LiveMode.vue"]]);
+const LiveMode = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$2], ["__file", "LiveMode.vue"]]);
+const _sfc_main$1 = {
+  __name: "QuickSelectColor",
+  props: {
+    modelValue: {
+      type: String,
+      default: ""
+    },
+    list: {
+      type: Array,
+      default: []
+    }
+  },
+  emits: ["update:modelValue"],
+  setup(__props, { expose: __expose, emit: __emit }) {
+    __expose();
+    const props = __props;
+    const isOpen = ref(false);
+    const emit2 = __emit;
+    const internalValue = ref(props.modelValue);
+    const selectedItem = computed({
+      get: () => internalValue.value,
+      set: (newValue) => {
+        internalValue.value = newValue;
+        emit2("update:modelValue", newValue);
+      }
+    });
+    const selectItem = (color) => {
+      selectedItem.value = color;
+      closeDropdown();
+    };
+    const openDropdown = () => {
+      isOpen.value = true;
+    };
+    const closeDropdown = () => {
+      isOpen.value = false;
+    };
+    const handleClickOutside = (event) => {
+      if (!event.target.closest(".quick-select-color")) {
+        closeDropdown();
+      }
+    };
+    onMounted(() => {
+      document.addEventListener("click", handleClickOutside);
+    });
+    onBeforeUnmount(() => {
+      document.removeEventListener("click", handleClickOutside);
+    });
+    const __returned__ = { props, isOpen, emit: emit2, internalValue, selectedItem, selectItem, openDropdown, closeDropdown, handleClickOutside, ref, computed, onMounted, onBeforeUnmount };
+    Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
+    return __returned__;
+  }
+};
+const _hoisted_1$1 = { class: "quick-select-color" };
+const _hoisted_2$1 = { class: "picker-preview-icon" };
+const _hoisted_3$1 = {
+  key: 0,
+  class: "picker-icon-dropdown"
+};
+const _hoisted_4$1 = { class: "picker-icon-grid" };
+const _hoisted_5$1 = ["onClick"];
+function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", _hoisted_1$1, [
+    createBaseVNode("div", _hoisted_2$1, [
+      createBaseVNode("div", {
+        class: "picker-icon-item",
+        onClick: $setup.openDropdown
+      }, [
+        createBaseVNode("div", {
+          class: "pref-color",
+          style: normalizeStyle({ "background-color": $setup.internalValue })
+        }, null, 4)
+      ]),
+      $setup.isOpen ? (openBlock(), createElementBlock("div", _hoisted_3$1, [
+        createBaseVNode("div", _hoisted_4$1, [
+          (openBlock(true), createElementBlock(Fragment, null, renderList($props.list, (prefColor, key) => {
+            return openBlock(), createElementBlock("div", {
+              class: "pref-color",
+              style: normalizeStyle({ "background-color": prefColor }),
+              onClick: ($event) => $setup.selectItem(prefColor)
+            }, null, 12, _hoisted_5$1);
+          }), 256))
+        ])
+      ])) : createCommentVNode("", true)
+    ])
+  ]);
+}
+const QuickSelectColor = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["__file", "QuickSelectColor.vue"]]);
 class ModuleBridge extends EventTarget {
   constructor(module) {
     super();
@@ -28095,6 +28182,12 @@ const _sfc_main = {
       isNew: false,
       display: false
     });
+    const dragState = ref({
+      isDragging: false,
+      cursorIndex: null,
+      lineIndex: null,
+      stepIndex: null
+    });
     const colorAddPref = () => {
       if (!scenario.value.preference.colors.includes(currentColor.value)) {
         scenario.value.preference.colors.push(currentColor.value);
@@ -28150,18 +28243,96 @@ const _sfc_main = {
     const addStep = (lineIndex) => {
       scenario.value.lines[lineIndex].steps.push({
         duration: 5,
+        cursors: [0, props.module.nb_led - 1],
         segments: [{
           first: 0,
-          last: props.module.nb_leds - 1,
+          last: props.module.nb_led - 1,
           effect: 0,
-          colors: [currentColor.value, "", ""],
-          speed: 50,
+          colors: ["", "", ""],
+          speed: 1e3,
           reverse: false
         }]
       });
     };
     const removeStep = (lineIndex, stepIndex) => {
       scenario.value.lines[lineIndex].steps.splice(stepIndex, 1);
+    };
+    const addCursor = (lineIndex, stepIndex, position) => {
+      let cursors = scenario.value.lines[lineIndex].steps[stepIndex].cursors;
+      if (cursors.length >= 5) {
+        return;
+      }
+      if (!cursors.includes(position)) {
+        cursors.push(position);
+        cursors.sort((a, b) => a - b);
+      }
+      scenario.value.lines[lineIndex].steps[stepIndex].cursors = cursors;
+      splitSegment(lineIndex, stepIndex);
+    };
+    const removeCursor = (lineIndex, stepIndex, cursorIndex) => {
+      const cursors = scenario.value.lines[lineIndex].steps[stepIndex].cursors;
+      if (cursorIndex === 0 || cursorIndex === cursors.length - 1) {
+        return;
+      }
+      cursors.splice(cursorIndex, 1);
+      scenario.value.lines[lineIndex].steps[stepIndex].cursors = cursors;
+      splitSegment(lineIndex, stepIndex);
+    };
+    const splitSegment = (lineIndex, stepIndex) => {
+      let cursors = scenario.value.lines[lineIndex].steps[stepIndex].cursors;
+      let segments = scenario.value.lines[lineIndex].steps[stepIndex].segments;
+      for (let i = 0; i < cursors.length - 1; i++) {
+        if (segments[i] !== void 0) {
+          segments[i].first = cursors[i];
+          segments[i].last = cursors[i + 1] - 1;
+        } else {
+          let prev = segments[i - 1] || {};
+          segments.push({
+            first: cursors[i],
+            last: cursors[i + 1] - 1,
+            effect: prev?.effect ?? 0,
+            colors: prev?.colors ?? ["", "", ""],
+            speed: prev?.speed ?? 1e3,
+            reverse: prev?.reverse ?? false
+          });
+        }
+      }
+      segments[segments.length - 1].last = props.module.nb_led - 1;
+      scenario.value.lines[lineIndex].steps[stepIndex].segments = segments;
+    };
+    const startDrag = (lineIndex, stepIndex, cursorIndex, event) => {
+      const cursors = scenario.value.lines[lineIndex].steps[stepIndex].cursors;
+      if (cursorIndex === 0 || cursorIndex === cursors.length - 1) {
+        return;
+      }
+      dragState.value = {
+        isDragging: true,
+        cursorIndex,
+        lineIndex,
+        stepIndex
+      };
+      event.preventDefault();
+    };
+    const onDrag = (lineIndex, stepIndex, ledPosition, event) => {
+      if (!dragState.value.isDragging) return;
+      if (dragState.value.lineIndex !== lineIndex) return;
+      if (dragState.value.stepIndex !== stepIndex) return;
+      const cursors = scenario.value.lines[lineIndex].steps[stepIndex].cursors;
+      const cursorIndex = dragState.value.cursorIndex;
+      const prevCursor = cursors[cursorIndex - 1];
+      const nextCursor = cursors[cursorIndex + 1];
+      if (ledPosition <= prevCursor || ledPosition >= nextCursor) {
+        return;
+      }
+      cursors[cursorIndex] = ledPosition;
+      splitSegment(lineIndex, stepIndex);
+    };
+    const stopDrag = () => {
+      dragState.value.isDragging = false;
+    };
+    const previewSegments = (segments) => {
+      let message = { segments };
+      bridge.send(message);
     };
     onMounted(() => {
       bridge = new ModuleBridge(props.module);
@@ -28186,17 +28357,21 @@ const _sfc_main = {
           addStep(i);
         }
       }
+      window.addEventListener("mouseup", stopDrag);
+      window.addEventListener("mouseleave", stopDrag);
     });
     onBeforeUnmount(() => {
       if (bridge) {
         bridge.disconnect();
       }
+      window.removeEventListener("mouseup", stopDrag);
+      window.removeEventListener("mouseleave", stopDrag);
     });
     const __returned__ = { props, get bridge() {
       return bridge;
     }, set bridge(v) {
       bridge = v;
-    }, currentColor, searchEffect, scenario, isConnected, result, colorAddPref, effectAddPref, removePrefColor, removePrefEffect, matchSearch, setColor, setEffect, save, addStep, removeStep, ref, onMounted, onBeforeUnmount, ColorPicker, IconPicker, get ModuleBridge() {
+    }, currentColor, searchEffect, scenario, isConnected, result, dragState, colorAddPref, effectAddPref, removePrefColor, removePrefEffect, matchSearch, setColor, setEffect, save, addStep, removeStep, addCursor, removeCursor, splitSegment, startDrag, onDrag, stopDrag, previewSegments, ref, onMounted, onBeforeUnmount, ColorPicker, IconPicker, QuickSelectColor, get ModuleBridge() {
       return ModuleBridge;
     } };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
@@ -28238,15 +28413,45 @@ const _hoisted_29 = { class: "card mb-s" };
 const _hoisted_30 = { class: "scenario-info card-body form-inline" };
 const _hoisted_31 = { class: "form-group" };
 const _hoisted_32 = { class: "form-group" };
-const _hoisted_33 = { class: "accordion-item card card-primary mb-s" };
+const _hoisted_33 = {
+  class: "accordion-item card card-primary mb-s",
+  open: ""
+};
 const _hoisted_34 = { class: "accordion-header" };
-const _hoisted_35 = { class: "corner-accent" };
+const _hoisted_35 = { class: "rainbow-underline" };
 const _hoisted_36 = { class: "accordion-content card-body" };
-const _hoisted_37 = {
+const _hoisted_37 = { class: "accordion-header" };
+const _hoisted_38 = { class: "card-header-action" };
+const _hoisted_39 = { class: "form-group" };
+const _hoisted_40 = ["onUpdate:modelValue"];
+const _hoisted_41 = ["onClick"];
+const _hoisted_42 = ["onClick"];
+const _hoisted_43 = ["onClick"];
+const _hoisted_44 = { class: "led-visualizer" };
+const _hoisted_45 = { class: "led-bar-container" };
+const _hoisted_46 = ["onClick", "onMouseenter", "title"];
+const _hoisted_47 = ["onMousedown", "onClick"];
+const _hoisted_48 = { class: "cursor-label" };
+const _hoisted_49 = { class: "segment-form" };
+const _hoisted_50 = { class: "form-group" };
+const _hoisted_51 = { class: "segment-form-leds" };
+const _hoisted_52 = ["onUpdate:modelValue"];
+const _hoisted_53 = ["onUpdate:modelValue"];
+const _hoisted_54 = { class: "form-group" };
+const _hoisted_55 = ["onUpdate:modelValue"];
+const _hoisted_56 = ["value"];
+const _hoisted_57 = { class: "form-group" };
+const _hoisted_58 = { class: "segment-form-color" };
+const _hoisted_59 = { class: "form-group" };
+const _hoisted_60 = ["onUpdate:modelValue"];
+const _hoisted_61 = { class: "form-group" };
+const _hoisted_62 = ["id", "onUpdate:modelValue"];
+const _hoisted_63 = ["for"];
+const _hoisted_64 = {
   key: 0,
   class: "scenario-flash"
 };
-const _hoisted_38 = {
+const _hoisted_65 = {
   class: /* @__PURE__ */ normalizeClass("scenario-is-conneced ")
 };
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -28421,35 +28626,192 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       (openBlock(true), createElementBlock(Fragment, null, renderList($setup.scenario.lines, (line, keyLine) => {
         return openBlock(), createElementBlock("details", _hoisted_33, [
           createBaseVNode("summary", _hoisted_34, [
-            createBaseVNode("h3", _hoisted_35, "Ligne " + toDisplayString(keyLine), 1)
+            createBaseVNode("div", null, [
+              createBaseVNode("h2", _hoisted_35, "Ligne " + toDisplayString(keyLine + 1), 1)
+            ])
           ]),
           createBaseVNode("div", _hoisted_36, [
-            _cache[32] || (_cache[32] = createBaseVNode("h4", null, "line", -1)),
             (openBlock(true), createElementBlock(Fragment, null, renderList(line.steps, (step, keySteps) => {
-              return openBlock(), createElementBlock(Fragment, null, [
-                _cache[29] || (_cache[29] = createBaseVNode("h5", null, "step", -1)),
-                _cache[30] || (_cache[30] = createTextVNode(" ici duration + createur de segment ", -1)),
-                _cache[31] || (_cache[31] = createBaseVNode("br", null, null, -1)),
+              return openBlock(), createElementBlock("details", null, [
+                createBaseVNode("summary", _hoisted_37, [
+                  createBaseVNode("div", null, [
+                    createBaseVNode("h3", null, "Step " + toDisplayString(keySteps + 1), 1)
+                  ])
+                ]),
+                createBaseVNode("div", _hoisted_38, [
+                  createBaseVNode("div", _hoisted_39, [
+                    _cache[20] || (_cache[20] = createBaseVNode("label", {
+                      for: "Speed",
+                      class: "form-label"
+                    }, "Durée (sec)", -1)),
+                    withDirectives(createBaseVNode("input", {
+                      type: "number",
+                      name: "first",
+                      class: "form-input",
+                      "onUpdate:modelValue": ($event) => step.duration = $event
+                    }, null, 8, _hoisted_40), [
+                      [vModelText, step.duration]
+                    ])
+                  ]),
+                  createBaseVNode("div", null, [
+                    createBaseVNode("div", {
+                      class: "btn-mini btn-info mh-s",
+                      onClick: ($event) => $setup.addStep(keyLine)
+                    }, [..._cache[21] || (_cache[21] = [
+                      createBaseVNode("i", { class: "icon-add" }, null, -1)
+                    ])], 8, _hoisted_41),
+                    createBaseVNode("div", {
+                      class: "btn-mini btn-success mh-s",
+                      onClick: ($event) => $setup.previewSegments(step.segments)
+                    }, [..._cache[22] || (_cache[22] = [
+                      createBaseVNode("i", { class: "icon-upload" }, null, -1)
+                    ])], 8, _hoisted_42),
+                    createBaseVNode("div", {
+                      class: "btn-mini btn-error mh-s",
+                      onClick: ($event) => $setup.removeStep(keyLine, keySteps)
+                    }, [..._cache[23] || (_cache[23] = [
+                      createBaseVNode("i", { class: "icon-trash" }, null, -1)
+                    ])], 8, _hoisted_43)
+                  ])
+                ]),
+                createBaseVNode("div", _hoisted_44, [
+                  _cache[24] || (_cache[24] = createBaseVNode("label", null, "line", -1)),
+                  createBaseVNode("div", _hoisted_45, [
+                    createBaseVNode("div", {
+                      class: "led-bar",
+                      style: normalizeStyle({ gridTemplateColumns: `repeat(${$setup.props.module.nb_led}, 1fr)` })
+                    }, [
+                      (openBlock(true), createElementBlock(Fragment, null, renderList($setup.props.module.nb_led, (i) => {
+                        return openBlock(), createElementBlock("div", {
+                          key: i,
+                          class: normalizeClass(["led-point", { "led-cursor-here": step.cursors.includes(i - 1) }]),
+                          onClick: ($event) => $setup.addCursor(keyLine, keySteps, i - 1),
+                          onMouseenter: ($event) => $setup.onDrag(keyLine, keySteps, i - 1, $event),
+                          title: `LED ${i - 1}`
+                        }, null, 42, _hoisted_46);
+                      }), 128))
+                    ], 4),
+                    createBaseVNode("div", {
+                      class: "cursors-layer",
+                      style: normalizeStyle({ gridTemplateColumns: `repeat(${$setup.props.module.nb_led}, 1fr)` })
+                    }, [
+                      (openBlock(true), createElementBlock(Fragment, null, renderList(step.cursors, (pos, index) => {
+                        return openBlock(), createElementBlock("div", {
+                          key: "cursor-" + index,
+                          class: normalizeClass(["led-cursor", {
+                            "cursor-locked": index === 0 || index === step.cursors.length - 1,
+                            "cursor-dragging": $setup.dragState.isDragging && $setup.dragState.cursorIndex === index && $setup.dragState.lineIndex === keyLine && $setup.dragState.stepIndex === keySteps
+                          }]),
+                          style: normalizeStyle({ gridColumn: pos + 1 }),
+                          onMousedown: ($event) => $setup.startDrag(keyLine, keySteps, index, $event),
+                          onClick: withModifiers(($event) => $setup.removeCursor(keyLine, keySteps, index), ["stop"])
+                        }, [
+                          createBaseVNode("span", _hoisted_48, toDisplayString(pos), 1)
+                        ], 46, _hoisted_47);
+                      }), 128))
+                    ], 4)
+                  ])
+                ]),
                 (openBlock(true), createElementBlock(Fragment, null, renderList(step.segments, (segment, keySegment) => {
-                  return openBlock(), createElementBlock(Fragment, null, [
-                    _cache[20] || (_cache[20] = createBaseVNode("h6", null, "segment", -1)),
-                    _cache[21] || (_cache[21] = createTextVNode(" ici les info ", -1)),
-                    _cache[22] || (_cache[22] = createBaseVNode("br", null, null, -1)),
-                    _cache[23] || (_cache[23] = createTextVNode(" first - last ", -1)),
-                    _cache[24] || (_cache[24] = createBaseVNode("br", null, null, -1)),
-                    _cache[25] || (_cache[25] = createTextVNode(" effect - colors ", -1)),
-                    _cache[26] || (_cache[26] = createBaseVNode("br", null, null, -1)),
-                    _cache[27] || (_cache[27] = createTextVNode(" speed - reverse ", -1)),
-                    _cache[28] || (_cache[28] = createBaseVNode("br", null, null, -1))
-                  ], 64);
+                  return openBlock(), createElementBlock("div", _hoisted_49, [
+                    createBaseVNode("div", _hoisted_50, [
+                      _cache[25] || (_cache[25] = createBaseVNode("label", {
+                        for: "Speed",
+                        class: "form-label"
+                      }, "Led", -1)),
+                      createBaseVNode("div", _hoisted_51, [
+                        withDirectives(createBaseVNode("input", {
+                          type: "number",
+                          name: "first",
+                          class: "form-input",
+                          disabled: "",
+                          "onUpdate:modelValue": ($event) => segment.first = $event
+                        }, null, 8, _hoisted_52), [
+                          [vModelText, segment.first]
+                        ]),
+                        withDirectives(createBaseVNode("input", {
+                          type: "number",
+                          name: "last",
+                          class: "form-input",
+                          disabled: "",
+                          "onUpdate:modelValue": ($event) => segment.last = $event
+                        }, null, 8, _hoisted_53), [
+                          [vModelText, segment.last]
+                        ])
+                      ])
+                    ]),
+                    createBaseVNode("div", _hoisted_54, [
+                      _cache[27] || (_cache[27] = createBaseVNode("label", {
+                        for: "Effect",
+                        class: "form-label"
+                      }, "Effect", -1)),
+                      withDirectives(createBaseVNode("select", {
+                        name: "effect",
+                        id: "",
+                        "onUpdate:modelValue": ($event) => segment.effect = $event
+                      }, [
+                        _cache[26] || (_cache[26] = createBaseVNode("option", { value: "" }, null, -1)),
+                        (openBlock(true), createElementBlock(Fragment, null, renderList($setup.scenario.preference.effects, (prefEffect, keyEffect) => {
+                          return openBlock(), createElementBlock("option", { value: prefEffect }, toDisplayString(prefEffect) + " => " + toDisplayString($setup.props.effects[prefEffect]), 9, _hoisted_56);
+                        }), 256))
+                      ], 8, _hoisted_55), [
+                        [vModelSelect, segment.effect]
+                      ])
+                    ]),
+                    createBaseVNode("div", _hoisted_57, [
+                      _cache[28] || (_cache[28] = createBaseVNode("label", {
+                        for: "Effect",
+                        class: "form-label"
+                      }, "Color", -1)),
+                      createBaseVNode("div", _hoisted_58, [
+                        (openBlock(true), createElementBlock(Fragment, null, renderList(segment.colors, (color, keyColor) => {
+                          return openBlock(), createBlock($setup["QuickSelectColor"], {
+                            modelValue: segment.colors[keyColor],
+                            "onUpdate:modelValue": ($event) => segment.colors[keyColor] = $event,
+                            list: $setup.scenario.preference.colors
+                          }, null, 8, ["modelValue", "onUpdate:modelValue", "list"]);
+                        }), 256))
+                      ])
+                    ]),
+                    createBaseVNode("div", _hoisted_59, [
+                      _cache[29] || (_cache[29] = createBaseVNode("label", {
+                        for: "Speed",
+                        class: "form-label"
+                      }, "Speed", -1)),
+                      withDirectives(createBaseVNode("input", {
+                        type: "number",
+                        id: "Speed",
+                        name: "speed",
+                        class: "form-input",
+                        "onUpdate:modelValue": ($event) => segment.speed = $event
+                      }, null, 8, _hoisted_60), [
+                        [vModelText, segment.speed]
+                      ])
+                    ]),
+                    createBaseVNode("div", _hoisted_61, [
+                      withDirectives(createBaseVNode("input", {
+                        type: "checkbox",
+                        id: "reverse" + keyLine + "_" + keySteps + "_" + keySegment,
+                        name: "reverse",
+                        class: "form-input",
+                        "onUpdate:modelValue": ($event) => segment.reverse = $event
+                      }, null, 8, _hoisted_62), [
+                        [vModelCheckbox, segment.reverse]
+                      ]),
+                      createBaseVNode("label", {
+                        for: "reverse" + keyLine + "_" + keySteps + "_" + keySegment,
+                        class: "form-label"
+                      }, "reverse", 8, _hoisted_63)
+                    ])
+                  ]);
                 }), 256))
-              ], 64);
+              ]);
             }), 256))
           ])
         ]);
       }), 256))
     ]),
-    $setup.result.display ? (openBlock(), createElementBlock("div", _hoisted_37, [
+    $setup.result.display ? (openBlock(), createElementBlock("div", _hoisted_64, [
       createBaseVNode("div", {
         class: normalizeClass("flash-message flash-" + $setup.result.status),
         onClick: _cache[4] || (_cache[4] = ($event) => $setup.result.display = false)
@@ -28460,7 +28822,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         createTextVNode(toDisplayString($setup.result.message), 1)
       ], 2)
     ])) : createCommentVNode("", true),
-    createBaseVNode("div", _hoisted_38, [
+    createBaseVNode("div", _hoisted_65, [
       createBaseVNode("i", {
         class: normalizeClass("icon-" + $setup.isConnected + " neon-" + $setup.isConnected + "-light")
       }, null, 2)

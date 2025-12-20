@@ -44,7 +44,7 @@ class ModuleController extends MasterController {
 	}
 
 	public function show(Request $request, Module $module){
-		$scenarios = ScenarioCollection::getInstance()->paginate([], Request::_paginateInfo());
+		$scenarios = ScenarioCollection::_paginate(['module_id'=>$module->_id], Request::_paginateInfo());
 		return view('module.show', [
 			'module' => $module,
 			'scenarios' => $scenarios,
