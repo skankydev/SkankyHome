@@ -8,7 +8,8 @@
 @use 'tools/space';
 @use 'tools/neon';
 @use 'tools/layout';
-@use 'tools/scrollable';
+@use 'tools/scrollable'; 
+@use 'tools/accordion'; 
 
 @use 'scaffold/page';
 
@@ -23,3 +24,6 @@
 
 
 @use 'component/live';
+@use 'component/color-picker';
+@use 'component/icon-picker';
+@use 'component/scenario-maker';

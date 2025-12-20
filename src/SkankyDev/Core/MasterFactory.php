@@ -52,7 +52,7 @@ class MasterFactory {
 		$reflector = new ReflectionClass($className);
 
 		if (!$reflector->isInstantiable()) {
-			throw new ClassNotFoundException("La classe {$className} n'est pas instanciable");
+			throw new ClassNotFoundException("La classe {$className} n'est pas instanciable",404);
 		}
 
 		if (in_array(Singleton::class, $reflector->getTraitNames())) {
@@ -95,7 +95,7 @@ class MasterFactory {
 				if($id){
 					$model = $className::find($id);
 					if (!$model) {
-						throw new ModelNotFoundException("Document {$className} avec ID {$id} introuvable");
+						throw new ModelNotFoundException("Document {$className} avec ID {$id} introuvable",404);
 					}
 					$dependencies[] = $model;
                 	continue;
@@ -113,7 +113,7 @@ class MasterFactory {
 				if ($parameter->isDefaultValueAvailable()) {
 					$dependencies[] = $parameter->getDefaultValue();
 				} else {
-					throw new ClassNotFoundException("Impossible de résoudre le paramètre {$name}");
+					throw new ClassNotFoundException("Impossible de résoudre le paramètre {$name}",500);
 				}
 				continue;
 			}

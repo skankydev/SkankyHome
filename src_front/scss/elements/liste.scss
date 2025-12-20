@@ -77,13 +77,14 @@ dl {
 	line-height: 1.6;
 	
 	display: grid;
-	grid-template-columns: 150px 1fr;
+	grid-template-columns: 20% 1fr;
 	gap: $p-xs $p-m;
 }
 
 dt {
 	font-weight: 600;
 	color: $text-primary;
+	text-align: right;
 	
 	&::after {
 		content: ' : ';

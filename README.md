@@ -3,34 +3,15 @@
 *L'application que personne n'a demandé*
 
 ![Status](https://img.shields.io/badge/status-ça%20clignote-brightgreen)
-![Tests](https://img.shields.io/badge/tests-douter-red)
+![Tests](https://img.shields.io/badge/tests-douter-FF073A)
 ![PHP](https://img.shields.io/badge/PHP-8.4-777BB4?logo=php&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/MongoDB-ready-47A248?logo=mongodb&logoColor=white)
-![MQTT](https://img.shields.io/badge/MQTT-connected-660066)
-![WS2812B](https://img.shields.io/badge/LEDs-ARGB-ff69b4)
+![MQTT](https://img.shields.io/badge/MQTT-connected-7C3AED)
+![WS2812B](https://img.shields.io/badge/LEDs-ARGB-0066FF)
 
-## 🌈 Ça fait quoi ?
+## 🌚 Ça fait quoi ?
 
 Des LEDs qui changent de couleur quand tu cliques sur des boutons. Pas mal non.
-
-**Stack** : PHP + MongoDB + EMQX + Framework SkankyDev (fait maison, comme les bonnes confitures)
-
-## ⚠️ Disclaimers
-
-- 🎲 Testé c'est douter
-- 🤷 Documentation ? Je sais pas
-- 💣 Breaking changes à chaque commit
-- 🤡 Conçu par quelqu'un qui sais pas trop ce qu'il fait
-- 👀 100% des LEDs ont été testées visuellement
-
-
-## 🎨 Features
-
-- 💡 Contrôle RGB complet
-- 🎭 Effets et animations
-- 📱 Interface web
-- 🎯 Topics MQTT 
-
 
 ## 🚀 Installation
 
@@ -38,30 +19,27 @@ Des LEDs qui changent de couleur quand tu cliques sur des boutons. Pas mal non.
 2. Configure Apache, MongoDB, EMQX
 3. Flash les ESP32
 4. ???
-5. Profit (et LEDs qui clignotent)
+5. Profit
 
 *Note : bonne chance*
 
 
-## 🎯 État actuel
+## ⚠️ Disclaimers
 
-- **Branch `develop`** : trucs cassés et expérimentations
-- **Branch `master`** : trucs un peu moins cassés
-- **Production** : mon salon, ça marche nickel
+- 🎲 Testé c'est douter
+- 🤷 Documentation y a pas 
+- 💣 Breaking changes à chaque commit
+- 👀 100% des LEDs ont été testées visuellement
 
+## 👾 Bugs connus
 
-## 🐛 Bugs connus
-
-oui c'est connus ya des bug
-
+Oui
 
 ## 🐼 Auteur 
 
-**SkankyDev** - Développeur qui préfère PHP au JavaScript
+**SkankyDev** - Développeur 
 - 📍 Perpignan, France 🇫🇷
 - 🔧 Fait des trucs qui brillent depuis 1634
-- ☕ Alimenté au café
+- 🕹️ Amateur de jeux vidéo / plateau
 - 🍔 Les burgers c'est bon
 - 🍺 santé
-
-

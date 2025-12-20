@@ -16,12 +16,15 @@ namespace SkankyDev\Utilities\Traits;
 
 trait StringFacility {
 
+
+
 	/**
 	 * convert infoActionName to info-action-name
 	 * @param  string $string the string need to be convert
 	 * @return string         the result
 	 */
 	public function toDash($string,$delimiters = '-'){
+		$string = lcfirst($string);
 		$string = preg_replace('/[A-Z]/',$delimiters."$0",$string);
 		$string = strtolower($string);
 		return trim($string,' -');
@@ -59,13 +62,13 @@ trait StringFacility {
 	 */
 	public function cleanString($string, $charset='utf-8'){
 		$string = htmlentities($string, ENT_NOQUOTES, $charset);
-	    
-	    $string = preg_replace('/&([A-za-z])(?:acute|cedil|caron|circ|grave|orn|ring|slash|th|tilde|uml);/', '\1', $string);
-	    $string = preg_replace('/&([A-za-z]{2})(?:lig);/', '\1', $string); 
-	    $string = preg_replace('/&[^;]+;/', '', $string);
-	    $string = str_replace(' ', '', $string);
-	    
-	    return $string;
+		
+		$string = preg_replace('/&([A-za-z])(?:acute|cedil|caron|circ|grave|orn|ring|slash|th|tilde|uml);/', '\1', $string);
+		$string = preg_replace('/&([A-za-z]{2})(?:lig);/', '\1', $string); 
+		$string = preg_replace('/&[^;]+;/', '', $string);
+		$string = str_replace(' ', '', $string);
+		
+		return $string;
 	}
 
 	/**
@@ -73,9 +76,75 @@ trait StringFacility {
 	 * @param  string $string the string need to be convert
 	 * @return string         the result
 	 */
-	public function dotToFolder($string, $charset='utf-8'){
+	 function dotToFolder($string, $charset='utf-8'){
 		$list = explode('.', $string);
 		$string = implode(DS,$list);
+		return $string;
+	}
+
+
+	public function pluralize(string $word): string {
+		// Règles simples de pluriel
+		if (str_ends_with($word, 'y')) {
+			return substr($word, 0, -1) . 'ies';
+		}
+		if (str_ends_with($word, 's') || str_ends_with($word, 'x')) {
+			return $word . 'es';
+		}
+		return $word . 's';
+	}
+
+	public function singularize(string $word): string {
+		// Cas spéciaux (irréguliers)
+		$irregulars = [
+			'children' => 'child',
+			'people' => 'person',
+			'men' => 'man',
+			'women' => 'woman',
+			'teeth' => 'tooth',
+			'feet' => 'foot',
+			'mice' => 'mouse',
+			'geese' => 'goose',
+		];
+		
+		$lower = strtolower($word);
+		if (isset($irregulars[$lower])) {
+			// Préserver la casse originale
+			return $this->preserveCase($word, $irregulars[$lower]);
+		}
+		
+		// Règles de singularisation
+		$rules = [
+			'/ies$/i' => 'y',
+			'/ves$/i' => 'f',
+			'/ses$/i' => 's',
+			'/xes$/i' => 'x',
+			'/ches$/i' => 'ch', 
+			'/shes$/i' => 'sh',
+			'/s$/i' => '', 
+		];
+		
+		foreach ($rules as $pattern => $replacement) {
+			if (preg_match($pattern, $word)) {
+				return preg_replace($pattern, $replacement, $word);
+			}
+		}
+		
+		return $word;
+	}
+
+	public function preserveCase(string $original, string $replacement): string {
+		// Si le mot original commence par une majuscule
+		if (ctype_upper($original[0])) {
+			return ucfirst($replacement);
+		}
+		return $replacement;
+	}
+
+	public function toHuman(string $string){
+		$string = str_replace('-', ' ', $string);
+		$string = str_replace('_', ' ', $string);
+		$string = ucwords($string);
 		return $string;
 	}
 }

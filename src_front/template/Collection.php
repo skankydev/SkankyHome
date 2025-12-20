@@ -1,4 +1,4 @@
-<?php 
+%?php
 /**
  * Copyright (c) 2025 SCHENCK Simon
  * 
@@ -13,17 +13,15 @@
 
 namespace App\Model;
 
+use SkankyDev\Utilities\Traits\Singleton;
 use SkankyDev\Model\MasterCollection;
-use App\Model\Document\Sequence;
+use App\Model\Document\<?= $name ?>;
 
-class SequenceCollection extends MasterCollection {
+class <?= $name ?>Collection extends MasterCollection {
 
-	protected string $collectionName = 'sequences';
-	protected string $documentClass = Sequence::class;
+	use Singleton;
 
+	protected string $collectionName = '<?= $collection ?>';
+	protected string $documentClass = <?= $name ?>::class;
 	
-	public function findActive(): array {
-		return $this->find(['active' => true]);
-	}
-
 }

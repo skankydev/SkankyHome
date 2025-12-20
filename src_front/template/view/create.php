@@ -1,4 +1,4 @@
-<?php 
+%?php 
 $this->setLayout('layout.default');
 ?>
 
@@ -6,19 +6,17 @@ $this->setLayout('layout.default');
 	<div class="page-title">
 		<h2 class="rainbow-icon">
 			<i class="icon-zap"></i>
-			New Config Led
+			Ajouter <?= $name ?>
 		</h2>
 	</div>
 	<div class="page-action">
-		<a href="<?= $this->url(['action'=>'show','params'=>[$sequence->_id]]) ?>" class="btn btn-error">
-			<i class="icon-skip-back"></i>
+		<a href="%?= $this->url(['action'=>'index']) ?>" class="btn btn-secondary">
+			<i class="icon-arrow-left"></i>
 			Retour
 		</a>
 	</div>
 </header>
 
 <section class="page-content">
-	<div class="form-wrapper">
-		<?= $form->render() ?>
-	</div>
+	%?= $form->render() ?>
 </section>

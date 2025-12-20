@@ -15,7 +15,7 @@ namespace SkankyDev\Core;
 
 use Exception;
 use SkankyDev\Config\Config;
-use SkankyDev\Exception\ExceptionHandler;
+use SkankyDev\Core\ExceptionHandler;
 use SkankyDev\Http\Middleware\MiddlewareManager;
 use SkankyDev\Http\Request;
 use SkankyDev\Http\Routing\Router;

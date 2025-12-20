@@ -16,7 +16,7 @@ namespace SkankyDev\Form\Fields;
 use SkankyDev\Form\FormField;
 
 
-class DateTimeFields extends FormField {
+class DateTimeField extends FormField {
 	protected string $type = 'datetime';
 	protected string $viewHtml = 'fields.default';
 }

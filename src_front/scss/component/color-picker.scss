@@ -1,0 +1,57 @@
+@use '../settings/functions' as *;
+@use '../settings/mixins' as *;
+@use '../settings/variables' as *;
+@use '../settings/animations' as *;
+
+
+.color-picker{
+
+	.canva-wrapper{
+		padding-bottom: $p-m;
+	}
+	.color-picker-canva{
+		cursor: crosshair; 
+		border-radius: $p-s;
+	}
+	.color-value{
+		max-width: 450px;
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		grid-gap: $p-m;
+		.form-label{
+			min-width: 42px;
+			text-align: right;
+		}
+	}
+	.color-brightness-slider{
+		max-width: 450px;
+	}
+
+	input[type="number"] {
+		text-align: right;
+	}
+}
+
+.color-result{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	span{
+		margin-left: $p-s;
+	}
+}
+
+.color-preview{
+	display: inline-block;
+	height: $p-xl;
+	width: $p-xl;
+	background-color: #FFF;
+	border-radius: 50%;
+	border: 2px solid $neon-cyan;
+}
+
+.color-text{
+	line-height: $p-xl;
+	font-size: $fs-l;
+	text-transform: uppercase;
+}

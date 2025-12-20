@@ -3,14 +3,21 @@ $this->setTitle('Welcome');
 $this->setLayout('layout.default');
 ?>
 
-<header class="home-cover">
-	<div class="home-text">
-		<h1 class="debug-php">&lt;?=</span><span class="debug-keyword"> __(</span><span class="debug-text">"Hello World"</span><span class="debug-keyword">)</span> <span class="debug-php">?&gt;</h1>
+<header class="page-header pb-m">
+	<div class="page-title">
+		<h1>
+			<span class="debug-php">&lt;?=</span>
+			<span class="debug-keyword"> __(</span>
+			<span class="debug-text">"Hello World"</span>
+			<span class="debug-keyword">)</span>
+			<span class="debug-php">?&gt;</span>
+		</h1>
 	</div>
+	<div class="page-action"></div>
 </header>
 
 <section class="grid-layout">
-	<div class="grid-quarter card">
+	<div class="grid-quarter card p-s">
 		<div class="effect-wrapper">00 => Static</div>
 		<div class="effect-wrapper">01 => Blink</div>
 		<div class="effect-wrapper">02 => Breath</div>
@@ -22,7 +29,7 @@ $this->setLayout('layout.default');
 		<div class="effect-wrapper">08 => Random Color</div>
 		<div class="effect-wrapper">09 => Single Dynamic</div>
 	</div>
-	<div class="grid-quarter card">
+	<div class="grid-quarter card p-s">
 		<div class="effect-wrapper">10 => Multi Dynamic</div>
 		<div class="effect-wrapper">11 => Rainbow</div>
 		<div class="effect-wrapper">12 => Rainbow Cycle</div>
@@ -34,7 +41,7 @@ $this->setLayout('layout.default');
 		<div class="effect-wrapper">18 => Running Lights</div>
 		<div class="effect-wrapper">19 => Twinkle</div>
 	</div>
-	<div class="grid-quarter card">
+	<div class="grid-quarter card p-s">
 		<div class="effect-wrapper">20 => Twinkle Random</div>
 		<div class="effect-wrapper">21 => Twinkle Fade</div>
 		<div class="effect-wrapper">22 => Twinkle Fade Random</div>
@@ -46,7 +53,7 @@ $this->setLayout('layout.default');
 		<div class="effect-wrapper">28 => Multi Strobe</div>
 		<div class="effect-wrapper">29 => Blink Rainbow</div>
 	</div>
-	<div class="grid-quarter card">
+	<div class="grid-quarter card p-s">
 		<div class="effect-wrapper">30 => Chase White</div>
 		<div class="effect-wrapper">31 => Chase Color</div>
 		<div class="effect-wrapper">32 => Chase Random</div>
@@ -58,7 +65,7 @@ $this->setLayout('layout.default');
 		<div class="effect-wrapper">38 => Chase Blackout Rainbow</div>
 		<div class="effect-wrapper">39 => Color Sweep Random</div>
 	</div>
-	<div class="grid-quarter card">
+	<div class="grid-quarter card p-s">
 		<div class="effect-wrapper">40 => Running Color</div>
 		<div class="effect-wrapper">41 => Running Red Blue</div>
 		<div class="effect-wrapper">42 => Running Random</div>
@@ -70,7 +77,7 @@ $this->setLayout('layout.default');
 		<div class="effect-wrapper">48 => Fire Flicker</div>
 		<div class="effect-wrapper">49 => Fire Flicker (soft)</div>
 	</div>
-	<div class="grid-quarter card">
+	<div class="grid-quarter card p-s">
 		<div class="effect-wrapper">50 => Fire Flicker (intense)</div>
 		<div class="effect-wrapper">51 => Circus Combustus</div>
 		<div class="effect-wrapper">52 => Halloween</div>
@@ -82,7 +89,7 @@ $this->setLayout('layout.default');
 		<div class="effect-wrapper">58 => ICU</div>
 		<div class="effect-wrapper">59 => Dual Larson</div>
 	</div>
-	<div class="grid-quarter card">
+	<div class="grid-quarter card p-s">
 		<div class="effect-wrapper">60 => Running Random2</div>
 		<div class="effect-wrapper">61 => Filler Up</div>
 		<div class="effect-wrapper">62 => Rainbow Larson</div>
@@ -94,7 +101,7 @@ $this->setLayout('layout.default');
 		<div class="effect-wrapper">68 => Multi Comet</div>
 		<div class="effect-wrapper">69 => Flipbook</div>
 	</div>
-	<div class="grid-quarter card">
+	<div class="grid-quarter card p-s">
 		<div class="effect-wrapper">70 => Popcorn</div>
 		<div class="effect-wrapper">71 => Oscillator</div>
 	</div>

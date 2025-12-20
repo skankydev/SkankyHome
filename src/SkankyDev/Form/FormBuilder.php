@@ -38,11 +38,12 @@ abstract class FormBuilder {
 	public function __construct(array $link = [], string $method = 'POST', array $attributes = []) {
 		$this->action = UrlBuilder::_build($link);
 		$this->method = strtoupper($method);
-		$this->attributes = $attributes;
+		$defaultAttributes = ['id'=>'AppForm'];
+		$this->attributes =[...$defaultAttributes, ...$attributes];
 		$this->fieldTypes = Config::get('class.fields');
 		$this->errors = Session::getAndClean('errors') ?? [];
 		$this->old = Session::getAndClean('old') ?? [];
-		$this->build();
+		
 	}
 	
 	/**
@@ -59,7 +60,7 @@ abstract class FormBuilder {
 		}
 		
 		$fieldClass = $this->fieldTypes[$type];
-		
+
 		if (isset($this->old[$name])) {
 			$options['value'] = $this->old[$name];
 		}else if (isset($this->data[$name])) {
@@ -72,7 +73,6 @@ abstract class FormBuilder {
 		}
 		
 		$this->fields[$name] = new $fieldClass($name, $options);
-		
 		return $this;
 	}
 	
@@ -91,16 +91,15 @@ abstract class FormBuilder {
 	public function setData(array|object $data): self {
 		if(is_object($data)){
 			$data = get_object_vars($data);
-			debug($data);
 		}
 		$this->data = $data;
 		
 		// Mettre à jour les valeurs des champs existants
-		foreach ($this->fields as $name => $field) {
+		/*foreach ($this->fields as $name => $field) {
 			if (isset($data[$name])) {
 				$field->setValue($data[$name]);
 			}
-		}
+		}*/
 		
 		return $this;
 	}
@@ -144,12 +143,12 @@ abstract class FormBuilder {
 	 * Ouvrir la balise form
 	 */
 	public function open(): string {
-		$html = '<form action="' . $this->action . '" method="' . $this->method . '"';
-		
-		foreach ($this->attributes as $key => $value) {
-			$html .= ' ' . $key . '="' . htmlspecialchars($value) . '"';
+		if(empty($this->fields)){
+			$this->build();
 		}
-		
+
+		$html = '<form action="' . $this->action . '" method="' . $this->method . '" ';
+		$html .= $this->createAttr($this->attributes);
 		$html .= '>';
 		
 		// Ajouter le CSRF token si méthode POST
@@ -201,6 +200,9 @@ abstract class FormBuilder {
 	 */
 	public function validate(array $data): bool {
 		$this->setData($data);
+		if(empty($this->fields)){
+			$this->build();
+		}
 		
 		// Récupérer les règles depuis les champs
 		$rules = [];

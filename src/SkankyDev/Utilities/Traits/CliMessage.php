@@ -43,12 +43,12 @@ trait CliMessage
 		$this->info('────────────────────────────────');
 	}
 
-	function choice($choice){
+	function choice($choice,$message = ' ? '){
 		$this->line();
 		foreach($choice as $k => $v){
-			$this->info($k.' : '.$v);
+			$this->text(orange($k).' : '.cyan($v));
 		}
-		return readline(' ? ');
+		return readline($message);
 	}
 
 	function ask($str){

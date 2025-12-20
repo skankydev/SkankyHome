@@ -69,7 +69,7 @@ class Paginator implements Iterator {
 	 * @param  string $field the field
 	 * @return array         the params for sort link
 	 */
-	public function sortParams($field){
+	public function sortParams(string $field){
 		$sort = $this->option['sort'];
 		$key = array_keys($sort);
 		$params['page'] = 1;
@@ -81,4 +81,5 @@ class Paginator implements Iterator {
 		}
 		return $params;
 	}
+
 }

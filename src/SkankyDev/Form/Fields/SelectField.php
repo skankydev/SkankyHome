@@ -24,12 +24,11 @@ class SelectField extends FormField {
 	protected $empty = false;
 
 	public function __construct(string $name, array $options = []) {
-        // Appeler le constructeur parent
-        parent::__construct($name, $options);
-        
-        // Ton code spécifique à TextField ici si besoin
-        $this->options = $options['options'] ?? [];
-        $this->empty = $options['empty'] ?? false;
-    }
+		// Appeler le constructeur parent
+		parent::__construct($name, $options);
+		
+		$this->options = $options['options'] ?? [];
+		$this->empty = $options['empty'] ?? false;
+	}
 
 }

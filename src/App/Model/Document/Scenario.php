@@ -1,0 +1,28 @@
+<?php
+
+/**
+ * Copyright (c) 2025 SCHENCK Simon
+ * 
+ * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
+ * @copyright     Copyright (c) SCHENCK Simon
+ *
+ */
+
+namespace App\Model\Document;
+
+use SkankyDev\Model\Document\MasterDocument;
+use DateTime;
+
+class Scenario extends MasterDocument {
+	
+	public string $name = '';
+	public string $icon = '';
+	public string $module_id = '';
+	public array $preference = ['colors'=>['#FF0000','#00FF00','#0000FF','#FFFF00','#00FFFF','#FF00FF'],'effects'=>[]];
+	public array $lines = [];
+
+}

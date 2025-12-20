@@ -39,7 +39,7 @@ class CliApplication {
 			$this->help();
 			exit;
 		}
-		$target = $this->findCommande($this->arg['command']);
+		$target = $this->findCommand($this->arg['command']);
 
 		if(!$target){
 			$this->error('Command Not Found');
@@ -59,6 +59,9 @@ class CliApplication {
 
 		foreach ($modules as $key => $module) {
 			$dir = SRC_FOLDER.DS.$module.DS.'Command';
+			if(!is_dir($dir)){
+				continue;
+			}
 			$files = scandir($dir);
 			foreach($files as $file){
 				if(in_array($file, ['.','..','MasterCommand.php'])){
@@ -75,7 +78,7 @@ class CliApplication {
 		//$this->array($this->commandClass);
 	}
 
-	public function findCommande(string $signature){
+	public function findCommand(string $signature){
 		foreach ($this->commandsInfo as $name => $command) {
 			if($signature == $command['signature']){
 				return $command;
