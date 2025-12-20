@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 /**
  * Copyright (c) 2025 SCHENCK Simon
  * 
@@ -11,19 +12,18 @@
  *
  */
 
-namespace App\Model;
+namespace App\Model\Document;
 
-use SkankyDev\Model\MasterCollection;
-use App\Model\Document\Sequence;
+use SkankyDev\Model\Document\MasterDocument;
+use DateTime;
 
-class SequenceCollection extends MasterCollection {
-
-	protected string $collectionName = 'sequences';
-	protected string $documentClass = Sequence::class;
-
+class Module extends MasterDocument {
 	
-	public function findActive(): array {
-		return $this->find(['active' => true]);
-	}
+	public string $icon = '';
+	public string $name = '';
+	public string $topic_message = '';
+	public string $topic_cmd = '';
+	public int $nb_line = 0;
+	public int $nb_led = 0;
 
 }

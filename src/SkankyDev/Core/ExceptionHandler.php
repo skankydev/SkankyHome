@@ -60,9 +60,9 @@ class ExceptionHandler {
 		</header>
 	</section>
 
-	<section id="Contents">
+	<section id="ErrorBody">
 		<header class="pb-m">
-			<h1 class="glitch" data-text="Error <?= $exception->getCode() ?>">
+			<h1 class="corner-accent-error mb-m">
 				Error <?= $exception->getCode() ?><br>
 			</h1>
 			<div class="legend"><?= $exception->getMessage() ?></div>

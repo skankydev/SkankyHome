@@ -48,6 +48,7 @@ $neon-gradient:linear-gradient(
 $success: #00FF41;
 $error: #FF073A;
 $warning: #FF6B00;
+$favorie: #FF00FF;
 $info: #00D9FF;
 
 $tool-colors : (
@@ -55,6 +56,7 @@ $tool-colors : (
 	'success':$success,
 	'error':$error,
 	'warning':$warning,
+	'favorie':$favorie,
 	'info':$info,
 );
 
@@ -71,6 +73,7 @@ $border-color: #2A2A4A;
 $p-xxs: 2px;
 $p-xs: 4px;
 $p-s: 8px;
+$p-ms: 10px;
 $p-m: 16px;
 $p-l: 24px;
 $p-xl: 32px;

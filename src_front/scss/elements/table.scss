@@ -26,6 +26,18 @@ thead {
 		color: $text-primary;
 		border-bottom: 2px solid $neon-purple;
 		//box-shadow: 0 2px 10px rgba($neon-purple, 0.3);
+		a{
+			display: inline-flex;
+			align-items: center;
+			gap: $p-xs;
+			color: $text-primary;
+			text-decoration: none;
+			transition: color 0.2s ease;
+
+			&:hover {
+				color: $neon-purple;
+			}
+		}
 	}
 }
 
@@ -48,6 +60,15 @@ tbody {
 		padding: $p-s $p-m;
 		border-bottom: 1px solid rgba($border-color, 0.2);
 		vertical-align: middle;
+	}
+}
+
+.clickable-row {
+	cursor: pointer;
+	transition: background-color 0.2s;
+	
+	&:hover {
+		background-color: $bg-tertiary;
 	}
 }
 

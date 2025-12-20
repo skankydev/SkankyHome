@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Copyright (c) 2025 SCHENCK Simon
  * 
@@ -15,30 +15,47 @@ namespace App\Form;
 
 use SkankyDev\Form\FormBuilder;
 
-class SequenceForm extends FormBuilder{
-
+class BaseForm extends FormBuilder {
+	
 	public function build() : void {
-
-		$this->add('name', 'text', [
-			'label' => 'Nom de la séquence',
-			'rules' => ['required', 'min_length:3']
-		]);
-		$this->add('color', 'color', [
-			'label' => 'Couleur',
-			'default' => '#ffffff'
-		]);
-		$this->add('duration', 'number', [
-			'label' => 'Durée (ms)',
-			'rules' => ['required', 'numeric', 'min:100']
+		
+		$this->add('text','text',[
+			'label' => 'text',
 		]);
 
-		$this->add('effect', 'select', [
-			'label' => 'Effet',
+		$this->add('textarea','textarea',[
+			'label' => 'textarea',
+		]);
+
+		$this->add('number','number',[
+			'label' => 'number',
+		]);
+
+		$this->add('select','select',[
+			'label' => 'select',
 			'options' => ['fade' => 'Fade', 'blink' => 'Blink'],
 			'empty' => '',
-			'rules' => ['required']
 		]);
+
+		$this->add('checkbox','checkbox',[
+			'label' => 'checkbox',
+		]);
+
+		$this->add('email','email',[
+			'label' => 'email',
+		]);
+
+		$this->add('radio','radio',[
+			'label' => 'radio',
+			'options' => ['fade' => 'Fade', 'blink' => 'Blink'],
+		]);
+
+		$this->add('password','password',[
+			'label' => 'password',
+		]);
+
 
 		$this->submit('<i class="icon-save"></i> SAVE');
 	}
 }
+

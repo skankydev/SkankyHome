@@ -13,51 +13,31 @@
 
 Des LEDs qui changent de couleur quand tu cliques sur des boutons. Pas mal non.
 
-**Stack** : PHP + MongoDB + EMQX + Framework SkankyDev (fait maison, comme les bonnes confitures)
-
-## ⚠️ Disclaimers
-
-- 🎲 Testé c'est douter
-- 🤷 Documentation ? Je sais pas
-- 💣 Breaking changes à chaque commit
-- 🤡 Conçu par quelqu'un qui sais pas trop ce qu'il fait
-- 👀 100% des LEDs ont été testées visuellement
-
-
-## 🎨 Features
-
-- 💡 Contrôle RGB complet
-- 🎭 Effets et animations
-- 📱 Interface web
-- 🎯 Topics MQTT 
-
-
 ## 🚀 Installation
 
 1. Clone le repo
 2. Configure Apache, MongoDB, EMQX
 3. Flash les ESP32
 4. ???
-5. Profit (et LEDs qui clignotent)
+5. Profit
 
 *Note : bonne chance*
 
 
-## 🎯 État actuel
+## ⚠️ Disclaimers
 
-- **Branch `develop`** : trucs cassés et expérimentations
-- **Branch `master`** : trucs un peu moins cassés
-- **Production** : mon salon, ça marche nickel
-
+- 🎲 Testé c'est douter
+- 🤷 Documentation y a pas 
+- 💣 Breaking changes à chaque commit
+- 👀 100% des LEDs ont été testées visuellement
 
 ## 👾 Bugs connus
 
-Oui c'est connus ya des bug.
-J'ai un petit souci avec les dates.
+Oui
 
 ## 🐼 Auteur 
 
-**SkankyDev** - Développeur qui préfère PHP au JavaScript
+**SkankyDev** - Développeur 
 - 📍 Perpignan, France 🇫🇷
 - 🔧 Fait des trucs qui brillent depuis 1634
 - 🕹️ Amateur de jeux vidéo / plateau

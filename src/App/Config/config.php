@@ -20,6 +20,9 @@ return [
 			'truc' => TrucMiddleware::class,
 			'bidule' => BiduleMiddleware::class,
 		],
+		'fields' => [
+			'icon'     => \App\Form\Fields\IconField::class,
+		]
 	],
 	'middlewares' => [
 		'truc',

@@ -1,4 +1,4 @@
-%?php
+<?php
 /**
  * Copyright (c) 2025 SCHENCK Simon
  * 
@@ -13,15 +13,15 @@
 
 namespace App\Model;
 
-use SkankyDev\Utilities\Traits\Singleton;
+use App\Model\Document\Module;
 use SkankyDev\Model\MasterCollection;
-use App\Model\Document\<?= $name ?>;
+use SkankyDev\Utilities\Traits\Singleton;
 
-class <?= $name ?>Collection extends MasterCollection {
+class ModuleCollection extends MasterCollection {
 
 	use Singleton;
 
-	protected string $collectionName = '<?= $collection ?>';
-	protected string $documentClass = <?= $name ?>::class;
+	protected string $collectionName = 'modules';
+	protected string $documentClass = Module::class;
 	
 }

@@ -53,16 +53,21 @@
 
 // Header de card
 .card-header {
-	margin-bottom: $p-m;
-	padding: $p-m;
+	padding: $p-ms;
 	border-bottom: 1px solid rgba($border-color, 0.4);
+}
+
+.card-header-action{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 }
 
 // Body de card
 .card-body {
 	color: $text-secondary;
 	line-height: 1.6;
-	padding: $p-m;
+	padding: $p-ms;
 	p:last-child {
 		margin-bottom: 0;
 	}
@@ -70,9 +75,8 @@
 
 // Footer de card
 .card-footer {
-	margin-top: $p-m;
 	border-top: 1px solid rgba($border-color, 0.4);
-	padding: $p-m;
+	padding: $p-ms;
 	display: flex;
 	gap: $p-s;
 	align-items: center;

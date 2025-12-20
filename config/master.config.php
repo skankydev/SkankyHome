@@ -5,6 +5,7 @@
 
 $smtp = require_once 'smtp.config.php';
 $leds = require_once 'leds.config.php';
+$icons = require_once 'icons.config.php';
 
 $conf =  [
 	'db' => [
@@ -29,6 +30,7 @@ $conf =  [
 	'debug' => 2,
 	'adminMail' => 'skankydev@gmail.com',
 	'leds' => $leds,
+	'icons' => $icons,
 ];
 return $conf;
 

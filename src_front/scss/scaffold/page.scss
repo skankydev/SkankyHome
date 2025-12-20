@@ -47,26 +47,31 @@
 			-webkit-text-fill-color: transparent;
 			
 			filter: blur(20px);
-			
 			animation: rainbow-slide 6s linear infinite;
 		}
 	}
 }
-
-#Contents{
-	padding:$p-m $p-xl;
+#ErrorBody{
+	padding: $p-l;
 }
-
+#Contents{
+	
+}
 .page-header{
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+	padding:$p-m $p-xl;
 }
 .page-title{
 
 }
-.page-action{
 
+.page-action{
+}
+
+.page-content{
+	padding:$p-m $p-xl;
 }
 
 #Footer{
