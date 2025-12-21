@@ -55,13 +55,12 @@
 
 ### SkankyDev Framework
 - [ ] **Fix dates**
-- [ ] Ajouter plus de règles de validation (email, regex, min/max length) - *optionnel*
 
 
 ### MQTT Integration
-- [ ] Loop MQTT - Script PHP qui écoute en permanence les messages MQTT
-- [ ] MQTT Message handler - Traiter les messages entrants/sortants
-- [ ] Système de queue pour tâches asynchrones (jobs)
+- [x] Loop MQTT - Script PHP qui écoute en permanence les messages MQTT
+- [x] MQTT Message handler - Traiter les messages entrants/sortants
+- [x] Système de queue pour tâches asynchrones (jobs)
 
 ### Gestion horaires
 - [ ] Interface pour définir les plages autorisées
@@ -86,9 +85,9 @@
 - [ ] Tester avec plusieurs lignes simultanément
 
 ### Mises à jour
-- [ ] Mise à jour OTA (Over The Air)
-- [ ] Interface web pour uploader le firmware
-- [ ] Gestion des versions
+- [x] Mise à jour OTA (Over The Air)
+- [x] Interface web pour uploader le firmware
+- [x] Gestion des versions
 
 
 ---
@@ -122,9 +121,9 @@
 
 ### À tester
 - [ ] Scénario complet end-to-end (Interface → MQTT → ESP32 → LEDs)
-- [ ] Save/Load de scénarios complexes
+- [x] Save/Load de scénarios complexes
 - [ ] Gestion des erreurs MQTT (déconnexion, reconnexion)
-- [ ] Multiple utilisateurs simultanés
+
 
 ### Performance
 - [ ] Optimiser le nombre d'appels `splitSegment()`
@@ -141,8 +140,6 @@
 - [ ] Timeline pour prévisualiser le scénario dans le temps
 - [ ] Historique des modifications (undo/redo)
 - [ ] Présets de scénarios (Noël, Anniversaire, etc.)
-- [ ] Intégration avec Google Assistant / Alexa
-- [ ] Application mobile (PWA ou native)
 
 ---
 
@@ -166,7 +163,7 @@
 
 ---
 
-**Dernière mise à jour :** 20 décembre 2024
+**Dernière mise à jour :** 21 décembre 2025
 ---
 
 ## 🎯 Fonctionnalités prévues
