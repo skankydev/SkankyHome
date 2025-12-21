@@ -8,24 +8,22 @@ use SkankyDev\Utilities\Log;
 
 class MqttSender {
 	
-	private static ?MqttClient $client = null;
 	
 	public static function getClient(): MqttClient {
-		if (self::$client === null) {
-			$config = Config::get('mqtt');
-			
-			self::$client = new MqttClient(
-				$config['host'], 
-				$config['port'], 
-				'skanky-publisher',
-				MqttClient::MQTT_3_1
-			);
-			
-			self::$client->connect(null, true);
-			Log::mqtt('Connected to broker');
-		}
 		
-		return self::$client;
+		$config = Config::get('mqtt');
+		
+		$client = new MqttClient(
+			$config['host'], 
+			$config['port'], 
+			'skanky-publisher',
+			MqttClient::MQTT_3_1
+		);
+		
+		$client->connect(null, true);
+
+		
+		return $client;
 	}
 	
 	public static function publish(string $topic, array|string $message, int $qos = 0): void {
@@ -38,12 +36,13 @@ class MqttSender {
 		
 		$client->publish($topic, $message, $qos);
 		Log::mqtt('Published', $topic, $message);
+		self::getClient($client);
 	}
 	
-	public static function disconnect(): void {
-		if (self::$client !== null) {
-			self::$client->disconnect();
-			self::$client = null;
+	public static function disconnect(MqttClient $client): void {
+		if ($client !== null) {
+			$client->disconnect();
+			$client = null;
 			Log::mqtt('Disconnected from broker');
 		}
 	}

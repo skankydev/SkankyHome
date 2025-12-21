@@ -49,6 +49,8 @@ return [
 			'date'     => \SkankyDev\Form\Fields\DateField::class,
 			'datetime' => \SkankyDev\Form\Fields\DateTimeField::class,
 			'password' => \SkankyDev\Form\Fields\PasswordField::class,
+			'file'     => \SkankyDev\Form\Fields\FileField::class,
+			'hidden'   => \SkankyDev\Form\Fields\HiddenField::class,
 			'default'  => \SkankyDev\Form\Fields\TextField::class,
 		],
 		'rules' => [

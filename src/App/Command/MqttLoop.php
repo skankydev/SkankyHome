@@ -28,10 +28,8 @@ class MqttLoop extends MasterCommand {
 
 	public function run(array $arg = []): void {
 		try {
-			$this->info('Bonjour Mqtt');
+			$this->info('🚏 Mqtt Loop started');
 			$config = Config::get('mqtt');
-
-			$this->array($config);
 			$client = new MqttClient($config['host'], $config['port'], 'skanky-subscriber', MqttClient::MQTT_3_1);
 			$client->connect(null, true);
 

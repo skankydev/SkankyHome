@@ -18,7 +18,6 @@ use App\Job\HelloJob;
 use SkankyDev\Controller\MasterController;
 use SkankyDev\Http\Request;
 use SkankyDev\Http\Routing\Router;
-use SkankyDev\Queue\Queue;
 
 class HomeController extends MasterController {
 

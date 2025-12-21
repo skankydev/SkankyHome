@@ -206,16 +206,16 @@ class Request {
 	protected function normalizeFiles(): array {
 
 		$normalized = [];
-		foreach ($_FILES as $field => $files) { //pour tout les input file
+		foreach ($_FILES as $field => $files) {
 			$test = current($files);
-			if(is_array($test)){ //si multiple
-				foreach ($files as $index => $value) { //convertion du tableau
+			if(is_array($test)){
+				foreach ($files as $index => $value) {
 					foreach ($value as $key => $v) {
 						$normalized[$field][$key][$index] = $v;
 					}
 				}
-			}else{ //sinon tout va bien
-				$normalized[$key] = $file;
+			}else{
+				$normalized[$field] = $files;
 			}
 		}
 

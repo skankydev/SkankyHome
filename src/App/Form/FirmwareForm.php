@@ -15,41 +15,25 @@ namespace App\Form;
 
 use SkankyDev\Form\FormBuilder;
 
-class ModuleForm extends FormBuilder {
+class FirmwareForm extends FormBuilder {
 	
 	public function build() : void {
 		
-		$this->add('icon','icon',[
-			'label' => 'Icon',
-			'rules' => ['required']
-		]);
-
 		$this->add('name','text',[
 			'label' => 'Name',
 			'rules' => ['required']
 		]);
+		$this->add('version','number',[
+			'label' => 'Version',
+			'attributes' => ['step'=>'0.01'],
+			'rules' => ['required']
+		]);
+		$this->add('firmware','file',[
+			'label' => 'Firmware',
+			'attributes' => ['accept'=>'.bin']
+		]);
 
-		$this->add('slug','text',[
-			'label' => 'Slug',
-			'rules' => ['required']
-		]);
-
-		$this->add('topic_message','text',[
-			'label' => 'Topic message',
-			'rules' => ['required']
-		]);
-		$this->add('topic_cmd','text',[
-			'label' => 'Topic cmd',
-			'rules' => ['required']
-		]);
-		$this->add('nb_line','number',[
-			'label' => 'Nb line',
-			'rules' => ['required','max:5']
-		]);
-		$this->add('nb_led','number',[
-			'label' => 'Nb led',
-			'rules' => ['required']
-		]);
+		$this->add('module_id','hidden',[]);
 
 		$this->submit('<i class="icon-save"></i> SAVE');
 	}
