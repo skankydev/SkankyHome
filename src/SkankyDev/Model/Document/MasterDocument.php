@@ -139,8 +139,7 @@ class MasterDocument implements JsonSerializable, Persistable {
 			$array = $value->getArrayCopy();
 			return array_map([$this, 'convertBsonValue'], $array);
 		}
-		
-		// Valeur normale
+
 		return $value;
 	}
 

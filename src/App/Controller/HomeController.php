@@ -14,6 +14,7 @@
 namespace App\Controller;
 
 use App\Form\BaseForm;
+use App\Job\HelloJob;
 use SkankyDev\Controller\MasterController;
 use SkankyDev\Http\Request;
 use SkankyDev\Http\Routing\Router;
@@ -33,7 +34,7 @@ class HomeController extends MasterController {
 		return view('home.base',['form'=>$form]);
 	}
 
-	public function pasla(){
+	public function test(){
 		return redirect(['action'=>'index','get'=>['is_redirect'=>'oui']]);
 	}
 }

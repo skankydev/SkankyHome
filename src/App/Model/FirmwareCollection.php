@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright (c) 2025 SCHENCK Simon
  * 
@@ -12,20 +11,17 @@
  *
  */
 
-namespace App\Model\Document;
+namespace App\Model;
 
-use SkankyDev\Model\Document\MasterDocument;
-use DateTime;
+use SkankyDev\Utilities\Traits\Singleton;
+use SkankyDev\Model\MasterCollection;
+use App\Model\Document\Firmware;
 
-class Module extends MasterDocument {
+class FirmwareCollection extends MasterCollection {
+
+	use Singleton;
+
+	protected string $collectionName = 'firmwares';
+	protected string $documentClass = Firmware::class;
 	
-	public string $icon = '';
-	public string $name = '';
-	public string $slug = '';
-	public string $topic_message = '';
-	public string $topic_cmd = '';
-	public int $nb_line = 0;
-	public int $nb_led = 0;
-	public float $version;
-
 }

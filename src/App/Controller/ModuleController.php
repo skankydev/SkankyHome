@@ -15,6 +15,7 @@ namespace App\Controller;
 
 use App\Form\ModuleForm;
 use App\Model\Document\Module;
+use App\Model\FirmwareCollection;
 use App\Model\ModuleCollection;
 use App\Model\ScenarioCollection;
 use SkankyDev\Controller\MasterController;
@@ -45,9 +46,12 @@ class ModuleController extends MasterController {
 
 	public function show(Request $request, Module $module){
 		$scenarios = ScenarioCollection::_paginate(['module_id'=>$module->_id], Request::_paginateInfo());
+		$firmwares = FirmwareCollection::_find(['module_id'=>$module->_id],['limit' =>10]);
+
 		return view('module.show', [
 			'module' => $module,
 			'scenarios' => $scenarios,
+			'firmwares' => $firmwares,
 		]);
 	}
 
