@@ -22,12 +22,6 @@ return [
 		'count' => 1,
 		'range' => 5,
 	],
-	'historique' => ['limit'=>10],
-	'autoloader' => [
-		'Entity'     => 'Model',
-		'Collection' => 'Model',
-		'Behavior'   => 'Model',
-	],
 	'skankydev'  => [
 		'version'=>'0.0.2'
 	],

@@ -14,6 +14,7 @@
 namespace App\Controller;
 
 use App\Form\ScenarioForm;
+use App\Job\SendScenarioJob;
 use App\Model\Document\Module;
 use App\Model\Document\Scenario;
 use App\Model\ModuleCollection;
@@ -22,6 +23,7 @@ use SkankyDev\Config\Config;
 use SkankyDev\Controller\MasterController;
 use SkankyDev\Http\Request;
 use SkankyDev\Http\UrlBuilder;
+use SkankyDev\Queue\Queue;
 
 class ScenarioController extends MasterController {
 
@@ -87,5 +89,11 @@ class ScenarioController extends MasterController {
 	public function delete(Scenario $scenario){
 		ScenarioCollection::_deleteOne($scenario);
 		return redirect(['action' => 'index'])->withFlash('success', 'Suppression réussie');
+	}
+
+
+	public function send(Module $module, Scenario $scenario){
+		Queue::push(new SendScenarioJob($module,$scenario));
+		return redirect(['controller'=>'module', 'action' => 'show', 'params' => ['module'=>$module->_id]])->withFlash('success', 'Scenario Envoyer avec succès');
 	}
 }
