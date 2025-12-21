@@ -12,19 +12,19 @@
  *
  */
 
-namespace App\Model\Document;
+namespace SkankyDev\Model\Document;
 
 use SkankyDev\Model\Document\MasterDocument;
 use DateTime;
 
-class Module extends MasterDocument {
+class JobDoc extends MasterDocument {
 	
-	public string $icon = '';
-	public string $name = '';
-	public string $topic_message = '';
-	public string $topic_cmd = '';
-	public int $nb_line = 0;
-	public int $nb_led = 0;
-	public float $version;
+	public object $payload;
+	public string $status = 'pending';
+	public string $error;
+	public int $attempts = 0;
+	public int $max_attempts = 3;
+	public ?DateTime $started_at = null;
+	public ?DateTime $completed_at = null;
 
 }

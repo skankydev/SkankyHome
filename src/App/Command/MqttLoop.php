@@ -13,17 +13,39 @@
 
 namespace App\Command;
 
+use App\Job\MqttMessageJob;
+use PhpMqtt\Client\Exceptions\MqttClientException;
+use PhpMqtt\Client\MqttClient;
 use SkankyDev\Command\MasterCommand;
-
+use SkankyDev\Config\Config;
+use SkankyDev\Queue\Queue;
 
 class MqttLoop extends MasterCommand {
 
 	static protected string $signature = 'mqtt-loop';
-	static protected string $help = 'ca viendra un jour mais je sais pas quand';
+	static protected string $help = 'Ecout les message envoyer par les module';
 
 
 	public function run(array $arg = []): void {
-		$this->info('Youpi');
+		try {
+			$this->info('Bonjour Mqtt');
+			$config = Config::get('mqtt');
+
+			$this->array($config);
+			$client = new MqttClient($config['host'], $config['port'], 'skanky-subscriber', MqttClient::MQTT_3_1);
+			$client->connect(null, true);
+
+			$client->subscribe('skankyhome/info/#', function (string $topic, string $message, bool $retained) {
+				Queue::push(new MqttMessageJob($topic, $message));
+			}, MqttClient::QOS_AT_MOST_ONCE);
+
+			$client->loop(true);
+
+			$client->disconnect();
+		} catch (MqttClientException $e) {
+
+			$this->error('Ya un truc qui marche plus dans le mqtt.');
+		}
 	}
 
 }

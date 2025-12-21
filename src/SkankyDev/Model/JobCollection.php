@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright (c) 2025 SCHENCK Simon
  * 
@@ -12,19 +11,17 @@
  *
  */
 
-namespace App\Model\Document;
+namespace SkankyDev\Model;
 
-use SkankyDev\Model\Document\MasterDocument;
-use DateTime;
+use SkankyDev\Model\Document\JobDoc;
+use SkankyDev\Model\MasterCollection;
+use SkankyDev\Utilities\Traits\Singleton;
 
-class Module extends MasterDocument {
+class JobCollection extends MasterCollection {
+
+	use Singleton;
+
+	protected string $collectionName = 'jobs';
+	protected string $documentClass = JobDoc::class;
 	
-	public string $icon = '';
-	public string $name = '';
-	public string $topic_message = '';
-	public string $topic_cmd = '';
-	public int $nb_line = 0;
-	public int $nb_led = 0;
-	public float $version;
-
 }

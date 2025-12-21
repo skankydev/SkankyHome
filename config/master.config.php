@@ -17,6 +17,12 @@ $conf =  [
 			'database'=>'SkankyHome'
 		]
 	],
+	'mqtt' => [
+		'host' => 'skankyhome.local',
+		'port' => 1883,
+		'username'=>'',
+		'password'=>'',
+	],
 	'location'=>[
 		'fr'=>[
 			'domaine'=>'App',
@@ -45,11 +51,6 @@ return [
 		'port' => '465',
 		'sender' => 'no-reply@mail.com'
 	]
-];
-
-smtp.config.php exemple
-return [
-	
 ];
 
  */
