@@ -84,7 +84,7 @@ $this->setLayout('layout.default');
 							<a href="<?= $this->url(['controller'=>'firmware','action' => 'send','params'=>['module'=>$module->_id,'firmware'=>$firmware->_id]]) ?>" class="btn-mini btn-success">
 								<i class="icon-upload"></i>
 							</a>
-							<a href="<?= $this->url(['controller'=>'firmware','action' => 'delete','params'=>['scenario'=>$firmware->_id]]) ?>" class="btn-mini btn-error">
+							<a href="<?= $this->url(['controller'=>'firmware','action' => 'delete','params'=>['firmware'=>$firmware->_id]]) ?>" class="btn-mini btn-error">
 								<i class="icon-trash"></i>
 							</a>
 						</td>
@@ -115,16 +115,19 @@ $this->setLayout('layout.default');
 				</thead>
 				<tbody>
 				<?php foreach ($scenarios as $scenario): ?>
-				<tr class="clickable-row" data-url="<?= $this->url(['controller'=>'scenario','action'=>'show','params'=>['scenario'=>$scenario->_id]]) ?>">
+				<tr class="clickable-row" data-url="<?= $this->url(['controller'=>'scenario','action'=>'edit','params'=>['scenario'=>$scenario->_id]]) ?>">
 					<td><i class="<?= $scenario->icon ?>"></i> <?= $scenario->name ?></td>
 					<td><?= $scenario->updated_at?->format('d/m/Y H:i') ?></td>
 					<td><?= $scenario->created_at?->format('d/m/Y H:i') ?></td>
 					<td class="action">
-						<a href="<?= $this->url(['controller'=>'scenario','action' => 'show','params'=>['scenario'=>$scenario->_id]]) ?>" class="btn-mini btn-info">
-							<i class="icon-info"></i>
+						<a href="<?= $this->url(['controller'=>'scenario','action' => 'send','params'=>['module'=>$module->_id,'scenario'=>$scenario->_id]]) ?>" class="btn-mini btn-success">
+							<i class="icon-upload"></i>
 						</a>
 						<a href="<?= $this->url(['controller'=>'scenario','action' => 'edit','params'=>['scenario'=>$scenario->_id]]) ?>" class="btn-mini btn-warning">
 							<i class="icon-edit"></i>
+						</a>
+						<a href="<?= $this->url(['controller'=>'scenario','action' => 'delete','params'=>['scenario'=>$scenario->_id]]) ?>" class="btn-mini btn-error">
+							<i class="icon-trash"></i>
 						</a>
 					</td>
 				</tr>
