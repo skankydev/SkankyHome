@@ -31,8 +31,12 @@ $this->setLayout('layout.default');
 		</header>
 		<div class="card-body">
 			<dl>
-				<dt>Nom</dt>
+				<dt>Name</dt>
 				<dd><?= e($module->name) ?></dd>
+				<dt>Slug</dt>
+				<dd><?= e($module->slug) ?></dd>
+				<dt>Version</dt>
+				<dd><?= e($module->version ?? '') ?></dd>
 				<dt>Topic de Message</dt>
 				<dd><?= e($module->topic_message) ?></dd>
 				<dt>Topic de Commende</dt>
@@ -46,6 +50,48 @@ $this->setLayout('layout.default');
 				<dt>updated</dt>
 				<dd><?= $module->updated_at?->format('d/m/Y H:i') ?></dd>
 			</dl>
+		</div>
+	</div>
+	<div class="grid-half card">
+		<header class="card-header card-header-action">
+			<div>
+				<h2 class="corner-accent-success">
+					<i class="icon-cpu color-success"></i>
+					Firmware
+				</h2>
+			</div>
+			<div>
+				<a href="<?= $this->url(['controller'=>'firmware' ,'action'=>'create','params'=>[$module->_id]]) ?>" class="btn btn-warning">
+					<i class="icon icon-add"></i>Ajouter
+				</a>
+			</div>
+		</header>
+		<div class="card-body">
+			<table>
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Version</th>
+						<th class="action"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+					<?php foreach ($firmwares as $key => $firmware): ?>
+						<td><?= e($firmware->name) ?></td>
+						<td><?= e($firmware->version) ?></td>
+						<td class="action">
+							<a href="<?= $this->url(['controller'=>'firmware','action' => 'send','params'=>['module'=>$module->_id,'firmware'=>$firmware->_id]]) ?>" class="btn-mini btn-success">
+								<i class="icon-upload"></i>
+							</a>
+							<a href="<?= $this->url(['controller'=>'firmware','action' => 'delete','params'=>['scenario'=>$firmware->_id]]) ?>" class="btn-mini btn-error">
+								<i class="icon-trash"></i>
+							</a>
+						</td>
+					<?php endforeach ?>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 	<div class="grid-full card">

@@ -51,6 +51,7 @@ node_modules/
 vendor/
 config/smtp.config.php
 public/img/upload
+public/upload/*
 public/img/product
 public/img/test
 public/coverage

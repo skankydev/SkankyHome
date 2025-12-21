@@ -17,15 +17,11 @@ namespace App\Model\Document;
 use SkankyDev\Model\Document\MasterDocument;
 use DateTime;
 
-class Module extends MasterDocument {
+class Firmware extends MasterDocument {
 	
-	public string $icon = '';
 	public string $name = '';
-	public string $slug = '';
-	public string $topic_message = '';
-	public string $topic_cmd = '';
-	public int $nb_line = 0;
-	public int $nb_led = 0;
-	public float $version;
+	public string $module_id;
+	public float $version = 0;
+	public array $file;
 
 }
