@@ -330,7 +330,7 @@ onBeforeUnmount(() => {
 		</div>
 	</div>
 	<div class="scenario-content">
-		<div class="card mb-s">
+		<div class="scenario-title card mb-s">
 			<header class="card-header">
 				<h3 class="glitch" data-text="Info">Info</h3>
 			</header>

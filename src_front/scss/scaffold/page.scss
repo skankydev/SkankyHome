@@ -6,13 +6,17 @@
 
 #Header{
 	overflow: hidden;
+	height: $header;
 
 	.layout-header{
 		padding:$p-m $p-xl;
 		background-color: $bg-primary;
+		display: flex;
+		flex-direction: row;
+		gap: $p-m;
 	}
-
-	.main-title{
+	
+	.title-skankyhome {
 		font-family: $font-title;
 		font-size: $fs-6xl;
 		font-weight: 400;
@@ -57,6 +61,9 @@
 #Contents{
 	
 }
+
+
+
 .page-header{
 	display: flex;
 	flex-direction: row;

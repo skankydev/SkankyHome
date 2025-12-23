@@ -25,7 +25,9 @@
 		overflow-y: scroll;
 		padding: $p-s;
 	}
-	
+	.scenario-title{
+		z-index: 10;
+	}
 	.scenario-info{
 		display: grid;
 		grid-template-columns: 30% 55% 15%;
@@ -38,12 +40,14 @@
 		top: $p-xs;
 		left: 30%;
 		right: 30%;
+		z-index: 100;
 	}
 
 	.scenario-is-conneced{
 		position: absolute;
 		top: $p-m;
 		right: $p-m;
+		z-index: 100;
 	}
 }
 

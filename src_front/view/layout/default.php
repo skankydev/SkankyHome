@@ -2,7 +2,7 @@
 <html lang="FR_fr">
 <head>
 	<meta charset="UTF-8" />
-	<link rel="icon" type="image/png" href="/favicon.ico" />
+	<link rel="icon" type="image/png" href="/favicon.png" />
 	<title>
 		<?php
 			$titre = $this->getTitle();
@@ -14,7 +14,7 @@
 	<?php 
 		$this->addKeyWords('php, apache, mongodb, javascript');
 		$this->addMeta('author','Schenck simon');
-		$this->addMeta('description','le blog d un développeur web');
+		$this->addMeta('description','c\'est pour ma maison');
 		$this->addJs('/dist/app.js','module');
 		$this->addCss('/dist/styles.css');
 		echo $this->getHeader(); 
@@ -24,7 +24,11 @@
 	<section id="MainContainer">
 		<header id="Header">
 			<div class="layout-header">
-				<a href="<?= $this->url(['controller' => 'Home','action' => 'index','namespace' => 'App']) ?>" class="main-title">SkankyHome</a>
+				<?= $this->part('part.burger') ?>
+				<div class="main-title">
+					<a href="<?= $this->url(['controller' => 'Home','action' => 'index','namespace' => 'App']) ?>" class="title-skankyhome">SkankyHome</a>
+				</div>
+				<div class="empty-block"></div>
 			</div>
 			<hr class="rainbow-diviser">
 		</header>
