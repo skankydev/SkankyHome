@@ -10,6 +10,7 @@
 @use 'tools/layout';
 @use 'tools/scrollable'; 
 @use 'tools/accordion'; 
+@use 'tools/tooltips'; 
 
 @use 'scaffold/page';
 @use 'scaffold/burger';
@@ -22,6 +23,8 @@
 @use 'elements/table';
 @use 'elements/liste';
 @use 'elements/flash';
+@use 'elements/link';
+@use 'elements/breadcrumb';
 
 
 @use 'component/live';

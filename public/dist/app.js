@@ -28254,6 +28254,22 @@ const _sfc_main = {
         }]
       });
     };
+    const duplicateStep = (lineIndex, stepIndex) => {
+      const step = scenario.value.lines[lineIndex].steps[stepIndex];
+      const newStep = {
+        duration: step.duration,
+        cursors: [...step.cursors],
+        segments: step.segments.map((seg) => ({
+          first: seg.first,
+          last: seg.last,
+          effect: seg.effect,
+          colors: [...seg.colors],
+          speed: seg.speed,
+          reverse: seg.reverse
+        }))
+      };
+      scenario.value.lines[lineIndex].steps.splice(stepIndex + 1, 0, newStep);
+    };
     const removeStep = (lineIndex, stepIndex) => {
       scenario.value.lines[lineIndex].steps.splice(stepIndex, 1);
     };
@@ -28270,7 +28286,8 @@ const _sfc_main = {
       splitSegment(lineIndex, stepIndex);
     };
     const removeCursor = (lineIndex, stepIndex, cursorIndex) => {
-      const cursors = scenario.value.lines[lineIndex].steps[stepIndex].cursors;
+      let cursors = scenario.value.lines[lineIndex].steps[stepIndex].cursors;
+      cursors = JSON.parse(JSON.stringify(cursors));
       if (cursorIndex === 0 || cursorIndex === cursors.length - 1) {
         return;
       }
@@ -28281,24 +28298,20 @@ const _sfc_main = {
     const splitSegment = (lineIndex, stepIndex) => {
       let cursors = scenario.value.lines[lineIndex].steps[stepIndex].cursors;
       let segments = scenario.value.lines[lineIndex].steps[stepIndex].segments;
+      let newSegments = [];
       for (let i = 0; i < cursors.length - 1; i++) {
-        if (segments[i] !== void 0) {
-          segments[i].first = cursors[i];
-          segments[i].last = cursors[i + 1] - 1;
-        } else {
-          let prev = segments[i - 1] || {};
-          segments.push({
-            first: cursors[i],
-            last: cursors[i + 1] - 1,
-            effect: prev?.effect ?? 0,
-            colors: prev?.colors ?? ["", "", ""],
-            speed: prev?.speed ?? 1e3,
-            reverse: prev?.reverse ?? false
-          });
-        }
+        let template = segments[i] || segments[i - 1] || {};
+        newSegments.push({
+          first: cursors[i],
+          last: cursors[i + 1] - 1,
+          effect: template?.effect ?? 0,
+          colors: [...template?.colors ?? ["", "", ""]],
+          speed: template?.speed ?? 1e3,
+          reverse: template?.reverse ?? false
+        });
       }
-      segments[segments.length - 1].last = props.module.nb_led - 1;
-      scenario.value.lines[lineIndex].steps[stepIndex].segments = segments;
+      newSegments[newSegments.length - 1].last = props.module.nb_led - 1;
+      scenario.value.lines[lineIndex].steps[stepIndex].segments = newSegments;
     };
     const startDrag = (lineIndex, stepIndex, cursorIndex, event) => {
       const cursors = scenario.value.lines[lineIndex].steps[stepIndex].cursors;
@@ -28329,6 +28342,21 @@ const _sfc_main = {
     };
     const stopDrag = () => {
       dragState.value.isDragging = false;
+    };
+    const divideLeds = (lineIndex, stepIndex, parts) => {
+      const nbLeds = props.module.nb_led;
+      const step = Math.floor(nbLeds / parts);
+      let newCursors = [0];
+      for (let i = 1; i < parts; i++) {
+        newCursors.push(i * step);
+      }
+      newCursors.push(nbLeds - 1);
+      scenario.value.lines[lineIndex].steps[stepIndex].cursors = newCursors;
+      splitSegment(lineIndex, stepIndex);
+    };
+    const resetCursors = (lineIndex, stepIndex) => {
+      scenario.value.lines[lineIndex].steps[stepIndex].cursors = [0, props.module.nb_led - 1];
+      splitSegment(lineIndex, stepIndex);
     };
     const previewSegments = (segments) => {
       let message = { segments };
@@ -28371,7 +28399,7 @@ const _sfc_main = {
       return bridge;
     }, set bridge(v) {
       bridge = v;
-    }, currentColor, searchEffect, scenario, isConnected, result, dragState, colorAddPref, effectAddPref, removePrefColor, removePrefEffect, matchSearch, setColor, setEffect, save, addStep, removeStep, addCursor, removeCursor, splitSegment, startDrag, onDrag, stopDrag, previewSegments, ref, onMounted, onBeforeUnmount, ColorPicker, IconPicker, QuickSelectColor, get ModuleBridge() {
+    }, currentColor, searchEffect, scenario, isConnected, result, dragState, colorAddPref, effectAddPref, removePrefColor, removePrefEffect, matchSearch, setColor, setEffect, save, addStep, duplicateStep, removeStep, addCursor, removeCursor, splitSegment, startDrag, onDrag, stopDrag, divideLeds, resetCursors, previewSegments, ref, onMounted, onBeforeUnmount, ColorPicker, IconPicker, QuickSelectColor, get ModuleBridge() {
       return ModuleBridge;
     } };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
@@ -28424,34 +28452,41 @@ const _hoisted_37 = { class: "accordion-header" };
 const _hoisted_38 = { class: "card-header-action" };
 const _hoisted_39 = { class: "form-group" };
 const _hoisted_40 = ["onUpdate:modelValue"];
-const _hoisted_41 = ["onClick"];
+const _hoisted_41 = { class: "pb-m" };
 const _hoisted_42 = ["onClick"];
 const _hoisted_43 = ["onClick"];
-const _hoisted_44 = { class: "led-visualizer" };
-const _hoisted_45 = { class: "led-bar-container" };
-const _hoisted_46 = ["onClick", "onMouseenter", "title"];
-const _hoisted_47 = ["onMousedown", "onClick"];
-const _hoisted_48 = { class: "cursor-label" };
-const _hoisted_49 = { class: "segment-form" };
-const _hoisted_50 = { class: "form-group" };
-const _hoisted_51 = { class: "segment-form-leds" };
-const _hoisted_52 = ["onUpdate:modelValue"];
-const _hoisted_53 = ["onUpdate:modelValue"];
-const _hoisted_54 = { class: "form-group" };
-const _hoisted_55 = ["onUpdate:modelValue"];
-const _hoisted_56 = ["value"];
+const _hoisted_44 = ["onClick"];
+const _hoisted_45 = ["onClick"];
+const _hoisted_46 = { class: "flex" };
+const _hoisted_47 = ["onClick"];
+const _hoisted_48 = ["onClick"];
+const _hoisted_49 = ["onClick"];
+const _hoisted_50 = ["onClick"];
+const _hoisted_51 = { class: "led-visualizer" };
+const _hoisted_52 = { class: "led-bar-container" };
+const _hoisted_53 = ["onClick", "onMouseenter", "data-tooltip"];
+const _hoisted_54 = ["onMousedown", "onClick"];
+const _hoisted_55 = { class: "cursor-label" };
+const _hoisted_56 = { class: "segment-form" };
 const _hoisted_57 = { class: "form-group" };
-const _hoisted_58 = { class: "segment-form-color" };
-const _hoisted_59 = { class: "form-group" };
+const _hoisted_58 = { class: "segment-form-leds" };
+const _hoisted_59 = ["onUpdate:modelValue"];
 const _hoisted_60 = ["onUpdate:modelValue"];
 const _hoisted_61 = { class: "form-group" };
-const _hoisted_62 = ["id", "onUpdate:modelValue"];
-const _hoisted_63 = ["for"];
-const _hoisted_64 = {
+const _hoisted_62 = ["onUpdate:modelValue"];
+const _hoisted_63 = ["value"];
+const _hoisted_64 = { class: "form-group" };
+const _hoisted_65 = { class: "segment-form-color" };
+const _hoisted_66 = { class: "form-group" };
+const _hoisted_67 = ["onUpdate:modelValue"];
+const _hoisted_68 = { class: "form-group" };
+const _hoisted_69 = ["id", "onUpdate:modelValue"];
+const _hoisted_70 = ["for"];
+const _hoisted_71 = {
   key: 0,
   class: "scenario-flash"
 };
-const _hoisted_65 = {
+const _hoisted_72 = {
   class: /* @__PURE__ */ normalizeClass("scenario-is-conneced ")
 };
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -28654,30 +28689,60 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
                     ])
                   ]),
                   createBaseVNode("div", null, [
-                    createBaseVNode("div", {
-                      class: "btn-mini btn-info mh-s",
-                      onClick: ($event) => $setup.addStep(keyLine)
-                    }, [..._cache[21] || (_cache[21] = [
-                      createBaseVNode("i", { class: "icon-add" }, null, -1)
-                    ])], 8, _hoisted_41),
-                    line.steps.length > 1 ? (openBlock(), createElementBlock("div", {
-                      key: 0,
-                      class: "btn-mini btn-error mh-s",
-                      onClick: ($event) => $setup.removeStep(keyLine, keySteps)
-                    }, [..._cache[22] || (_cache[22] = [
-                      createBaseVNode("i", { class: "icon-trash" }, null, -1)
-                    ])], 8, _hoisted_42)) : createCommentVNode("", true),
-                    createBaseVNode("div", {
-                      class: "btn-mini btn-success mh-s",
-                      onClick: ($event) => $setup.previewSegments(step.segments)
-                    }, [..._cache[23] || (_cache[23] = [
-                      createBaseVNode("i", { class: "icon-upload" }, null, -1)
-                    ])], 8, _hoisted_43)
+                    createBaseVNode("div", _hoisted_41, [
+                      createBaseVNode("div", {
+                        class: "btn-mini btn-info mh-s",
+                        onClick: ($event) => $setup.addStep(keyLine)
+                      }, [..._cache[21] || (_cache[21] = [
+                        createBaseVNode("i", { class: "icon-add" }, null, -1)
+                      ])], 8, _hoisted_42),
+                      createBaseVNode("div", {
+                        class: "btn-mini btn-warning mh-s",
+                        onClick: ($event) => $setup.duplicateStep(keyLine, keySteps),
+                        title: "Dupliquer step"
+                      }, [..._cache[22] || (_cache[22] = [
+                        createBaseVNode("i", { class: "icon-copy" }, null, -1)
+                      ])], 8, _hoisted_43),
+                      line.steps.length > 1 ? (openBlock(), createElementBlock("div", {
+                        key: 0,
+                        class: "btn-mini btn-error mh-s",
+                        onClick: ($event) => $setup.removeStep(keyLine, keySteps)
+                      }, [..._cache[23] || (_cache[23] = [
+                        createBaseVNode("i", { class: "icon-trash" }, null, -1)
+                      ])], 8, _hoisted_44)) : createCommentVNode("", true),
+                      createBaseVNode("div", {
+                        class: "btn-mini btn-success mh-s",
+                        onClick: ($event) => $setup.previewSegments(step.segments)
+                      }, [..._cache[24] || (_cache[24] = [
+                        createBaseVNode("i", { class: "icon-upload" }, null, -1)
+                      ])], 8, _hoisted_45)
+                    ]),
+                    createBaseVNode("div", _hoisted_46, [
+                      createBaseVNode("div", {
+                        class: "btn-mini mh-s",
+                        onClick: ($event) => $setup.divideLeds(keyLine, keySteps, 2)
+                      }, "2", 8, _hoisted_47),
+                      createBaseVNode("div", {
+                        class: "btn-mini mh-s",
+                        onClick: ($event) => $setup.divideLeds(keyLine, keySteps, 3)
+                      }, "3", 8, _hoisted_48),
+                      createBaseVNode("div", {
+                        class: "btn-mini mh-s",
+                        onClick: ($event) => $setup.divideLeds(keyLine, keySteps, 4)
+                      }, "4", 8, _hoisted_49),
+                      createBaseVNode("div", {
+                        class: "btn-mini btn-error mh-s",
+                        onClick: ($event) => $setup.resetCursors(keyLine, keySteps),
+                        title: "Reset"
+                      }, [..._cache[25] || (_cache[25] = [
+                        createBaseVNode("i", { class: "icon-refresh-cw" }, null, -1)
+                      ])], 8, _hoisted_50)
+                    ])
                   ])
                 ]),
-                createBaseVNode("div", _hoisted_44, [
-                  _cache[24] || (_cache[24] = createBaseVNode("label", null, "line", -1)),
-                  createBaseVNode("div", _hoisted_45, [
+                createBaseVNode("div", _hoisted_51, [
+                  _cache[26] || (_cache[26] = createBaseVNode("label", null, "line", -1)),
+                  createBaseVNode("div", _hoisted_52, [
                     createBaseVNode("div", {
                       class: "led-bar",
                       style: normalizeStyle({ gridTemplateColumns: `repeat(${$setup.props.module.nb_led}, 1fr)` })
@@ -28688,8 +28753,9 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
                           class: normalizeClass(["led-point", { "led-cursor-here": step.cursors.includes(i - 1) }]),
                           onClick: ($event) => $setup.addCursor(keyLine, keySteps, i - 1),
                           onMouseenter: ($event) => $setup.onDrag(keyLine, keySteps, i - 1, $event),
-                          title: `LED ${i - 1}`
-                        }, null, 42, _hoisted_46);
+                          "data-tooltip": "LED " + (i - 1),
+                          "data-variant": "warning"
+                        }, null, 42, _hoisted_53);
                       }), 128))
                     ], 4),
                     createBaseVNode("div", {
@@ -28707,27 +28773,27 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
                           onMousedown: ($event) => $setup.startDrag(keyLine, keySteps, index, $event),
                           onClick: withModifiers(($event) => $setup.removeCursor(keyLine, keySteps, index), ["stop"])
                         }, [
-                          createBaseVNode("span", _hoisted_48, toDisplayString(pos), 1)
-                        ], 46, _hoisted_47);
+                          createBaseVNode("span", _hoisted_55, toDisplayString(pos), 1)
+                        ], 46, _hoisted_54);
                       }), 128))
                     ], 4)
                   ])
                 ]),
                 (openBlock(true), createElementBlock(Fragment, null, renderList(step.segments, (segment, keySegment) => {
-                  return openBlock(), createElementBlock("div", _hoisted_49, [
-                    createBaseVNode("div", _hoisted_50, [
-                      _cache[25] || (_cache[25] = createBaseVNode("label", {
+                  return openBlock(), createElementBlock("div", _hoisted_56, [
+                    createBaseVNode("div", _hoisted_57, [
+                      _cache[27] || (_cache[27] = createBaseVNode("label", {
                         for: "Speed",
                         class: "form-label"
                       }, "Led", -1)),
-                      createBaseVNode("div", _hoisted_51, [
+                      createBaseVNode("div", _hoisted_58, [
                         withDirectives(createBaseVNode("input", {
                           type: "number",
                           name: "first",
                           class: "form-input",
                           disabled: "",
                           "onUpdate:modelValue": ($event) => segment.first = $event
-                        }, null, 8, _hoisted_52), [
+                        }, null, 8, _hoisted_59), [
                           [vModelText, segment.first]
                         ]),
                         withDirectives(createBaseVNode("input", {
@@ -28736,13 +28802,13 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
                           class: "form-input",
                           disabled: "",
                           "onUpdate:modelValue": ($event) => segment.last = $event
-                        }, null, 8, _hoisted_53), [
+                        }, null, 8, _hoisted_60), [
                           [vModelText, segment.last]
                         ])
                       ])
                     ]),
-                    createBaseVNode("div", _hoisted_54, [
-                      _cache[27] || (_cache[27] = createBaseVNode("label", {
+                    createBaseVNode("div", _hoisted_61, [
+                      _cache[29] || (_cache[29] = createBaseVNode("label", {
                         for: "Effect",
                         class: "form-label"
                       }, "Effect", -1)),
@@ -28751,20 +28817,20 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
                         id: "",
                         "onUpdate:modelValue": ($event) => segment.effect = $event
                       }, [
-                        _cache[26] || (_cache[26] = createBaseVNode("option", { value: "" }, null, -1)),
+                        _cache[28] || (_cache[28] = createBaseVNode("option", { value: "" }, null, -1)),
                         (openBlock(true), createElementBlock(Fragment, null, renderList($setup.scenario.preference.effects, (prefEffect, keyEffect) => {
-                          return openBlock(), createElementBlock("option", { value: prefEffect }, toDisplayString(prefEffect) + " => " + toDisplayString($setup.props.effects[prefEffect]), 9, _hoisted_56);
+                          return openBlock(), createElementBlock("option", { value: prefEffect }, toDisplayString(prefEffect) + " => " + toDisplayString($setup.props.effects[prefEffect]), 9, _hoisted_63);
                         }), 256))
-                      ], 8, _hoisted_55), [
+                      ], 8, _hoisted_62), [
                         [vModelSelect, segment.effect]
                       ])
                     ]),
-                    createBaseVNode("div", _hoisted_57, [
-                      _cache[28] || (_cache[28] = createBaseVNode("label", {
+                    createBaseVNode("div", _hoisted_64, [
+                      _cache[30] || (_cache[30] = createBaseVNode("label", {
                         for: "Effect",
                         class: "form-label"
                       }, "Color", -1)),
-                      createBaseVNode("div", _hoisted_58, [
+                      createBaseVNode("div", _hoisted_65, [
                         (openBlock(true), createElementBlock(Fragment, null, renderList(segment.colors, (color, keyColor) => {
                           return openBlock(), createBlock($setup["QuickSelectColor"], {
                             modelValue: segment.colors[keyColor],
@@ -28774,8 +28840,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
                         }), 256))
                       ])
                     ]),
-                    createBaseVNode("div", _hoisted_59, [
-                      _cache[29] || (_cache[29] = createBaseVNode("label", {
+                    createBaseVNode("div", _hoisted_66, [
+                      _cache[31] || (_cache[31] = createBaseVNode("label", {
                         for: "Speed",
                         class: "form-label"
                       }, "Speed", -1)),
@@ -28785,24 +28851,24 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
                         name: "speed",
                         class: "form-input",
                         "onUpdate:modelValue": ($event) => segment.speed = $event
-                      }, null, 8, _hoisted_60), [
+                      }, null, 8, _hoisted_67), [
                         [vModelText, segment.speed]
                       ])
                     ]),
-                    createBaseVNode("div", _hoisted_61, [
+                    createBaseVNode("div", _hoisted_68, [
                       withDirectives(createBaseVNode("input", {
                         type: "checkbox",
                         id: "reverse" + keyLine + "_" + keySteps + "_" + keySegment,
                         name: "reverse",
                         class: "form-input",
                         "onUpdate:modelValue": ($event) => segment.reverse = $event
-                      }, null, 8, _hoisted_62), [
+                      }, null, 8, _hoisted_69), [
                         [vModelCheckbox, segment.reverse]
                       ]),
                       createBaseVNode("label", {
                         for: "reverse" + keyLine + "_" + keySteps + "_" + keySegment,
                         class: "form-label"
-                      }, "reverse", 8, _hoisted_63)
+                      }, "reverse", 8, _hoisted_70)
                     ])
                   ]);
                 }), 256))
@@ -28812,7 +28878,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         ]);
       }), 256))
     ]),
-    $setup.result.display ? (openBlock(), createElementBlock("div", _hoisted_64, [
+    $setup.result.display ? (openBlock(), createElementBlock("div", _hoisted_71, [
       createBaseVNode("div", {
         class: normalizeClass("flash-message flash-" + $setup.result.status),
         onClick: _cache[4] || (_cache[4] = ($event) => $setup.result.display = false)
@@ -28823,7 +28889,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         createTextVNode(toDisplayString($setup.result.message), 1)
       ], 2)
     ])) : createCommentVNode("", true),
-    createBaseVNode("div", _hoisted_65, [
+    createBaseVNode("div", _hoisted_72, [
       createBaseVNode("i", {
         class: normalizeClass("icon-" + $setup.isConnected + " neon-" + $setup.isConnected + "-light")
       }, null, 2)

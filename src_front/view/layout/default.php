@@ -28,7 +28,7 @@
 				<div class="main-title">
 					<a href="<?= $this->url(['controller' => 'Home','action' => 'index','namespace' => 'App']) ?>" class="title-skankyhome">SkankyHome</a>
 				</div>
-				<div class="empty-block"></div>
+				<div class="breadcrumb-wrapper"><?= $this->part('part.breadcrumb') ?></div>
 			</div>
 			<hr class="rainbow-diviser">
 		</header>

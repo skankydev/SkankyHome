@@ -1,0 +1,120 @@
+@use '../settings/functions' as *;
+@use '../settings/mixins' as *;
+@use '../settings/variables' as *;
+@use '../settings/animations' as *;
+
+.breadcrumb-wrapper{
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+}
+
+.breadcrumb {
+	display: flex;
+	align-items: center;
+	gap: $p-xs;
+	flex-wrap: wrap;
+	
+	
+	backdrop-filter: blur(10px);
+
+}
+
+.breadcrumb-item {
+	display: inline-flex;
+	gap: $p-xs;
+	
+	color: $text-secondary;
+	text-decoration: none;
+	padding: $p-xs;
+	
+	border-radius: $p-xs;
+	transition: all 0.3s ease;
+	
+	// Icône
+	i {
+		transition: all 0.3s ease;
+	}
+	
+	// Pas de underline sur les breadcrumbs
+	&::after {
+		display: none;
+	}
+	
+	&:hover {
+		color: $neon-cyan;
+		background: rgba($neon-cyan, 0.1);
+		text-shadow: 0 0 5px rgba($neon-cyan, 0.3);
+		
+		i {
+			@include neon-text($neon-cyan, 0.8);
+		}
+	}
+	
+	// Page actuelle (sans lien)
+	&.breadcrumb-current {
+		color: $neon-purple;
+		font-weight: 600;
+		
+		i {
+			@include neon-text($neon-purple, 0.5);
+		}
+	}
+}
+
+// Séparateur
+.breadcrumb-separator {
+	display: inline-flex;
+	align-items: center;
+	font-size: $fs-xs;
+	
+	i {
+		transition: all 0.3s ease;
+	}
+}
+
+// Animation du séparateur au hover du breadcrumb
+.breadcrumb-item:hover + .breadcrumb-separator i {
+	color: $neon-cyan;
+	transform: translateX(2px);
+}
+
+// Variante compacte
+.breadcrumb.breadcrumb-compact {
+	padding: $p-xs $p-s;
+	font-size: $fs-xs;
+	
+	.breadcrumb-item {
+		padding: $p-xxs $p-xs;
+	}
+}
+
+// Variante sans background
+.breadcrumb.breadcrumb-minimal {
+	background: transparent;
+	backdrop-filter: none;
+	border: none;
+	padding: $p-s 0;
+}
+
+// Mobile
+@media (max-width: 768px) {
+	.breadcrumb {
+		font-size: $fs-xs;
+		padding: $p-s;
+		gap: $p-xs;
+	}
+	
+	.breadcrumb-item {
+		padding: $p-xxs $p-xs;
+		
+		// Cacher le texte, garder juste l'icône sur mobile
+		span {
+			display: none;
+		}
+		
+		i {
+			margin: 0;
+		}
+	}
+}

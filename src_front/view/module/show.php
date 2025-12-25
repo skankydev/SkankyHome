@@ -1,5 +1,7 @@
 <?php 
 $this->setLayout('layout.default');
+$this->addCrumb('Module',['action'=>'index'],'icon-zap');
+$this->addCrumb($module->name,['action'=>'show','params'=>['module'=>$module->_id]],$module->icon);
 ?>
 
 <header class="page-header">

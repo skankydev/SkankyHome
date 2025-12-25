@@ -32,6 +32,8 @@ class HtmlView {
 	public $layout = 'layout.default';
 	public $helpers = [];
 
+	public $breadcrumbInfo = [];
+
 	function __construct(
 		protected string $viewName = '',
 		protected array $data = []
@@ -192,5 +194,17 @@ class HtmlView {
 	public function addMeta($name,$content){
 		$this->meta[$name] = $content;
 	}
+	
+	public function addCrumb(string $label, string|array $url,string $icon = ''){
+		if(is_array($url)){
+			$url = $this->url($url);
+		}
 
+		$this->breadcrumbInfo[] = [
+			'label' => $label,
+			'url' => $url,
+			'icon' => $icon,
+		];
+
+	}
 }
