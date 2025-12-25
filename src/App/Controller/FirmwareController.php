@@ -30,7 +30,10 @@ class FirmwareController extends MasterController {
 		$firmware = new Firmware();
 		$firmware->module_id = $module->_id;
 		$form->setData($firmware);
-		return view('firmware.create', ['form' => $form]);
+		return view('firmware.create', [
+			'form' => $form,
+			'module' => $module,
+		]);
 	}
 
 	public function store(Request $request,Module $module){

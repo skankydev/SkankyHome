@@ -18,7 +18,7 @@
 
 // Version encore plus sombre
 @function neon-darker($color, $amount: 60%) {
-	 @return color.scale($color, $lightness: -$amount);
+	@return color.scale($color, $lightness: -$amount);
 }
 
 // Ou avec HSL pour plus de contrôle

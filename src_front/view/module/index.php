@@ -1,12 +1,14 @@
 <?php 
 $this->setLayout('layout.default');
+$this->addCrumb('Module',['action'=>'index'],'icon-zap');
 ?>
 
 <header class="page-header">
 	<div class="page-title">
 		<h2 class="rainbow-icon">
 			<i class="icon-zap"></i>
-			Module		</h2>
+			Module
+		</h2>
 	</div>
 	<div class="page-action">
 		<a href="<?= $this->url(['action'=>'create']) ?>" class="btn btn-primary">

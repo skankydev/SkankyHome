@@ -11,8 +11,8 @@
 }
 
 // Neon border (outline glow)
-@mixin neon-border($color, $intensity: 1) {
-	border: 1px solid $color;
+@mixin neon-border($color, $intensity: 1,$thickness: 1px) {
+	border: $thickness solid $color;
 	box-shadow: 
 		0 0 calc(5px * $intensity) $color,
 		inset 0 0 calc(5px * $intensity) $color,

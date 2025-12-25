@@ -14,6 +14,33 @@ $this->setLayout('layout.default');
 	<div class="pb-s"><a href="#" class="btn"><i class="icon-play"></i> Lien stylisé comme un bouton</a> </div>
 </section>
 
+<section class="p-m">
+	<!-- Lien classique -->
+	<a href="/page">Lien normal</a> <br>
+
+	<!-- Lien sans underline -->
+	<a href="/page" class="no-underline">Sans soulignement</a> <br>
+
+	<!-- Lien avec effet neon -->
+	<a href="/page" class="neon">Lien neon</a> <br>
+
+	<!-- Lien externe -->
+	<a href="https://google.com" target="_blank">Lien externe</a> <br>
+
+	<!-- Lien coloré -->
+	<a href="/page" class="link-success">Succès</a> <br>
+	<a href="/page" class="link-error">Erreur</a> <br>
+	<a href="/page" class="link-warning">Warning</a> <br>
+
+	<!-- Lien discret -->
+	<a href="/page" class="link-muted">Lien discret</a> <br>
+
+	<!-- Lien style bouton -->
+	<a href="/page" class="link-button">
+		<i class="icon-arrow-right"></i>Voir plus
+	</a> <br>	
+</section>
+
 <section class=" p-m pb-xxl">
 
 	<!-- Mix de tailles -->
@@ -218,5 +245,57 @@ $this->setLayout('layout.default');
 <section class="p-m">
 	<div class="card p-m">
 		<?= $form->render() ?>
+	</div>
+</section>
+
+
+<section class="p-m">
+	<div class="card p-m">
+		<!-- Tooltip simple (top par défaut) -->
+		<button data-tooltip="Enregistrer le scénario">
+			<i class="icon-save"></i>
+		</button>
+
+		<!-- Tooltip avec position -->
+		<button data-tooltip="Ajouter un segment" data-position="bottom">
+			<i class="icon-add"></i>
+		</button>
+
+		<button data-tooltip="Supprimer" data-position="right">
+			<i class="icon-trash"></i>
+		</button>
+
+		<!-- Tooltip avec couleur -->
+		<button data-tooltip="Attention !" data-variant="warning">
+			<i class="icon-warning"></i>
+		</button>
+
+		<button data-tooltip="Erreur détectée" data-variant="error">
+			<i class="icon-error"></i>
+		</button>
+
+		<button data-tooltip="Action réussie" data-variant="success">
+			<i class="icon-success"></i>
+		</button>
+
+		<!-- Tooltip multiline -->
+		<button data-tooltip="Ce bouton permet de prévisualiser&#10;le segment sur le module" data-multiline>
+			<i class="icon-eye"></i>
+		</button>
+
+		<!-- Tooltip large -->
+		<button data-tooltip="Information détaillée importante" data-size="large">
+			<i class="icon-info"></i>
+		</button>
+
+		<!-- Tooltip avec delay -->
+		<button data-tooltip="Attend 0.5s avant d'apparaître" data-delay>
+			<i class="icon-help"></i>
+		</button>
+
+		<!-- Sur du texte -->
+		<span data-tooltip="Ceci est un tooltip sur du texte">
+			Survolez-moi
+		</span>
 	</div>
 </section>

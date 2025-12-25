@@ -1,0 +1,136 @@
+
+@use '../settings/functions' as *;
+@use '../settings/mixins' as *;
+@use '../settings/variables' as *;
+@use '../settings/animations' as *;
+
+
+
+a:not([class^="btn"]):not([class*=" btn"]):not(.title-skankyhome){
+	color: $neon-purple;
+	text-decoration: none;
+	transition: all 0.3s ease;
+	position: relative;
+	i {
+		font-size: $fs-m;
+		transition: all 0.3s ease;
+	}
+
+	
+	// Underline animé
+	&::after {
+		content: '';
+		position: absolute;
+		bottom: -2px;
+		left: 0;
+		width: 0;
+		height: 2px;
+		background: $neon-purple;
+		transition: all 0.3s ease;
+	}
+
+	&:hover,
+	&:visited:hover{
+		color: $neon-cyan;
+		text-shadow: 0 0 5px rgba($neon-cyan, 0.5);
+		
+		&::after {
+			width: 100%;
+			background: $neon-cyan;
+			box-shadow: 0 0 10px rgba($neon-cyan, 0.5);
+		}
+		i {
+			@include neon-text($neon-cyan, 0.8);
+		}
+	}
+	
+	&:active {
+		color: $neon-pink;
+	}
+	
+	// Lien visité
+	&:visited {
+		color: $neon-purple;
+	}
+}
+
+// Lien sans underline
+a.no-underline {
+	&::after {
+		display: none;
+	}
+}
+
+// Lien avec effet neon permanent
+a.neon {
+	@include neon-text($neon-purple, 0.5);
+	
+	&:hover {
+		@include neon-text($neon-cyan, 1);
+	}
+}
+
+// Lien externe avec icône
+a[target="_blank"],
+a.external {
+	&::before {
+		content: '\e95e'; // icon-external-link
+		font-family: 'icomoon' !important;
+		margin-right: 4px;
+		font-size: 0.8em;
+	}
+}
+
+// Variantes de couleur
+@each $name, $color in $tool-colors {
+	a.link-#{$name} {
+		color: $color;
+		
+		&::after {
+			background: $color;
+		}
+		
+		&:hover {
+			@include neon-text($color, 0.8);
+			
+			&::after {
+				box-shadow: 0 0 10px rgba($color, 0.5);
+			}
+		}
+	}
+}
+
+// Lien discret (style texte)
+a.link-muted {
+	color: $text-secondary;
+	
+	&:hover {
+		color: $text-primary;
+	}
+	
+	&::after {
+		display: none;
+	}
+}
+
+// Lien en mode "bouton"
+a.link-button {
+	display: inline-flex;
+	align-items: center;
+	gap: $p-xs;
+	padding: $p-xs $p-s;
+	
+	background: rgba($neon-purple, 0.1);
+	border: 1px solid $neon-purple;
+	border-radius: $p-xs;
+	
+	&::after {
+		display: none;
+	}
+	
+	&:hover {
+		background: rgba($neon-cyan, 0.2);
+		border-color: $neon-cyan;
+		box-shadow: 0 0 15px rgba($neon-cyan, 0.3);
+	}
+}

@@ -114,6 +114,26 @@ const addStep = (lineIndex) => {
 		}]
 	})
 }
+const duplicateStep = (lineIndex, stepIndex) => {
+	const step = scenario.value.lines[lineIndex].steps[stepIndex];
+
+	// Clone profond du step
+	const newStep = {
+		duration: step.duration,
+		cursors: [...step.cursors],
+		segments: step.segments.map(seg => ({
+			first: seg.first,
+			last: seg.last,
+			effect: seg.effect,
+			colors: [...seg.colors],
+			speed: seg.speed,
+			reverse: seg.reverse
+		}))
+	};
+
+	// Insérer juste après le step actuel
+	scenario.value.lines[lineIndex].steps.splice(stepIndex + 1, 0, newStep);
+}
 
 const removeStep = (lineIndex, stepIndex) => {
 	scenario.value.lines[lineIndex].steps.splice(stepIndex, 1)
@@ -133,7 +153,8 @@ const addCursor = (lineIndex,stepIndex,position) => {
 }
 
 const removeCursor = (lineIndex, stepIndex, cursorIndex) => {
-	const cursors = scenario.value.lines[lineIndex].steps[stepIndex].cursors
+	let cursors = scenario.value.lines[lineIndex].steps[stepIndex].cursors
+	cursors = JSON.parse(JSON.stringify(cursors))
 	if (cursorIndex === 0 || cursorIndex === cursors.length - 1) {
 		return
 	}
@@ -146,30 +167,29 @@ const removeCursor = (lineIndex, stepIndex, cursorIndex) => {
 const splitSegment = (lineIndex,stepIndex) => {
 	let cursors = scenario.value.lines[lineIndex].steps[stepIndex].cursors;
 	let segments = scenario.value.lines[lineIndex].steps[stepIndex].segments;
+	let newSegments = [];
+  
 	for (let i = 0; i < cursors.length - 1; i++) {
-		if (segments[i] !== undefined) {
-			segments[i].first = cursors[i];
-			segments[i].last = cursors[i + 1] - 1;
-		}else{
-			let prev = segments[i - 1] || {}
-			segments.push({
-				first: cursors[i],
-				last: cursors[i + 1] - 1,
-				effect:prev?.effect ??  0,
-				colors:prev?.colors ?? ['','',''],
-				speed:prev?.speed ?? 1000,
-				reverse:prev?.reverse  ?? false
-			})
-		}
+	
+		let template = segments[i] || segments[i - 1] || {};
+
+		newSegments.push({
+			first: cursors[i],
+			last: cursors[i + 1] - 1,
+			effect: template?.effect ?? 0,
+			colors: [...(template?.colors ?? ['','',''])],
+			speed: template?.speed ?? 1000,
+			reverse: template?.reverse ?? false
+		});
 	}
-	segments[segments.length - 1].last = props.module.nb_led - 1;
-	scenario.value.lines[lineIndex].steps[stepIndex].segments = segments
+
+	newSegments[newSegments.length - 1].last = props.module.nb_led - 1;
+	scenario.value.lines[lineIndex].steps[stepIndex].segments = newSegments
 }
 
 const startDrag = (lineIndex, stepIndex, cursorIndex, event) => {
 	const cursors = scenario.value.lines[lineIndex].steps[stepIndex].cursors
 
-	// Ne pas drag le premier ni le dernier
 	if (cursorIndex === 0 || cursorIndex === cursors.length - 1) {
 		return
 	}
@@ -210,6 +230,26 @@ const onDrag = (lineIndex, stepIndex, ledPosition, event) => {
 // Arrêter le drag
 const stopDrag = () => {
 	dragState.value.isDragging = false
+}
+
+const divideLeds = (lineIndex, stepIndex, parts) => {
+	const nbLeds = props.module.nb_led;
+	const step = Math.floor(nbLeds / parts);
+
+	// Créer les nouveaux curseurs
+	let newCursors = [0];
+	for (let i = 1; i < parts; i++) {
+		newCursors.push(i * step);
+	}
+	newCursors.push(nbLeds - 1);
+
+	scenario.value.lines[lineIndex].steps[stepIndex].cursors = newCursors;
+	splitSegment(lineIndex, stepIndex);
+}
+
+const resetCursors = (lineIndex, stepIndex) => {
+	scenario.value.lines[lineIndex].steps[stepIndex].cursors = [0, props.module.nb_led - 1];
+	splitSegment(lineIndex, stepIndex);
 }
 
 const previewSegments = (segments) => {
@@ -330,7 +370,7 @@ onBeforeUnmount(() => {
 		</div>
 	</div>
 	<div class="scenario-content">
-		<div class="card mb-s">
+		<div class="scenario-title card mb-s">
 			<header class="card-header">
 				<h3 class="glitch" data-text="Info">Info</h3>
 			</header>
@@ -365,9 +405,18 @@ onBeforeUnmount(() => {
 							<input type="number" name="first" class="form-input" v-model="step.duration">
 						</div>
 						<div>
-							<div class="btn-mini btn-info mh-s" @click="addStep(keyLine)"><i class="icon-add"></i></div>
-							<div v-if=" line.steps.length > 1" class="btn-mini btn-error mh-s" @click="removeStep(keyLine,keySteps)"><i class="icon-trash"></i></div>
-							<div class="btn-mini btn-success mh-s" @click="previewSegments(step.segments)"><i class="icon-upload"></i></div>
+							<div class="pb-m">
+								<div class="btn-mini btn-info mh-s" @click="addStep(keyLine)"><i class="icon-add"></i></div>
+								<div class="btn-mini btn-warning mh-s" @click="duplicateStep(keyLine, keySteps)" title="Dupliquer step"><i class="icon-copy"></i></div>
+								<div v-if=" line.steps.length > 1" class="btn-mini btn-error mh-s" @click="removeStep(keyLine,keySteps)"><i class="icon-trash"></i></div>
+								<div class="btn-mini btn-success mh-s" @click="previewSegments(step.segments)"><i class="icon-upload"></i></div>
+							</div>
+							<div class="flex">
+								<div class="btn-mini mh-s" @click="divideLeds(keyLine,keySteps,2)">2</div>
+								<div class="btn-mini mh-s" @click="divideLeds(keyLine,keySteps,3)">3</div>
+								<div class="btn-mini mh-s" @click="divideLeds(keyLine,keySteps,4)">4</div>
+								<div class="btn-mini btn-error mh-s" @click="resetCursors(keyLine, keySteps)" title="Reset"><i class="icon-refresh-cw"></i></div>
+							</div>
 						</div>
 					</div>
 					<div class="led-visualizer">
@@ -381,7 +430,7 @@ onBeforeUnmount(() => {
 									:class="{ 'led-cursor-here': step.cursors.includes(i - 1) }"
 									@click="addCursor(keyLine, keySteps, i - 1)"
 									@mouseenter="onDrag(keyLine, keySteps, i - 1, $event)"
-									:title="`LED ${i - 1}`"
+									:data-tooltip="'LED '+(i - 1)" data-variant="warning"
 								></div>
 							</div>
 							<div class="cursors-layer" :style="{ gridTemplateColumns: `repeat(${props.module.nb_led}, 1fr)` }">

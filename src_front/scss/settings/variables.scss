@@ -44,6 +44,13 @@ $neon-gradient:linear-gradient(
 	$neon-red 100%
 );
 
+$neo-gradient: linear-gradient(
+	90deg, 
+	$neon-cyan, // Cyan électrique
+	$neon-purple, // Violet profond
+	$neon-magenta, // Magenta néon
+	$neon-cyan  // Retour au Cyan pour une boucle parfaite
+);
 
 $success: #00FF41;
 $error: #FF073A;
@@ -135,3 +142,7 @@ $weight-black: 900;
 $line-height-tight: 1.25;
 $line-height-normal: 1.5;
 $line-height-relaxed: 1.75;
+
+// ===== MAIN ELEMENT =====
+
+$header:110px;
