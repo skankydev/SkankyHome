@@ -4928,17 +4928,17 @@ dd {
   box-shadow: 0 0 15px #00D9FF, inset 0 0 15px #00D9FF, 0 0 30px rgba(0, 217, 255, 0.6);
 }
 
-a:not([class^=btn]):not([class*=" btn"]) {
+a:not([class^=btn]):not([class*=" btn"]):not(.title-skankyhome) {
   color: #7C3AED;
   text-decoration: none;
   transition: all 0.3s ease;
   position: relative;
 }
-a:not([class^=btn]):not([class*=" btn"]) i {
+a:not([class^=btn]):not([class*=" btn"]):not(.title-skankyhome) i {
   font-size: 1rem;
   transition: all 0.3s ease;
 }
-a:not([class^=btn]):not([class*=" btn"])::after {
+a:not([class^=btn]):not([class*=" btn"]):not(.title-skankyhome)::after {
   content: "";
   position: absolute;
   bottom: -2px;
@@ -4948,23 +4948,23 @@ a:not([class^=btn]):not([class*=" btn"])::after {
   background: #7C3AED;
   transition: all 0.3s ease;
 }
-a:not([class^=btn]):not([class*=" btn"]):hover, a:not([class^=btn]):not([class*=" btn"]):visited:hover {
+a:not([class^=btn]):not([class*=" btn"]):not(.title-skankyhome):hover, a:not([class^=btn]):not([class*=" btn"]):not(.title-skankyhome):visited:hover {
   color: #00F7F7;
   text-shadow: 0 0 5px rgba(0, 247, 247, 0.5);
 }
-a:not([class^=btn]):not([class*=" btn"]):hover::after, a:not([class^=btn]):not([class*=" btn"]):visited:hover::after {
+a:not([class^=btn]):not([class*=" btn"]):not(.title-skankyhome):hover::after, a:not([class^=btn]):not([class*=" btn"]):not(.title-skankyhome):visited:hover::after {
   width: 100%;
   background: #00F7F7;
   box-shadow: 0 0 10px rgba(0, 247, 247, 0.5);
 }
-a:not([class^=btn]):not([class*=" btn"]):hover i, a:not([class^=btn]):not([class*=" btn"]):visited:hover i {
+a:not([class^=btn]):not([class*=" btn"]):not(.title-skankyhome):hover i, a:not([class^=btn]):not([class*=" btn"]):not(.title-skankyhome):visited:hover i {
   color: #00F7F7;
   text-shadow: 0 0 2.4px #00F7F7, 0 0 4.8px #00F7F7, 0 0 9.6px rgba(0, 247, 247, 0.8);
 }
-a:not([class^=btn]):not([class*=" btn"]):active {
+a:not([class^=btn]):not([class*=" btn"]):not(.title-skankyhome):active {
   color: #FF006E;
 }
-a:not([class^=btn]):not([class*=" btn"]):visited {
+a:not([class^=btn]):not([class*=" btn"]):not(.title-skankyhome):visited {
   color: #7C3AED;
 }
 
@@ -5120,8 +5120,9 @@ a.link-button:hover {
   gap: 4px;
   color: #B5BBCE;
   text-decoration: none;
-  padding: 4px;
-  border-radius: 4px;
+  padding: 4px 8px;
+  font-weight: 600;
+  border-radius: 8px 0 8px 8px;
   transition: all 0.3s ease;
 }
 .breadcrumb-item i {
