@@ -35,7 +35,7 @@ class ScenarioController extends MasterController {
 	public function create(Module $module){
 		
 		$scenario = new Scenario;
-		$scenario->module_id = $module->id;
+		$scenario->module_id = $module->_id;
 		$icons = Config::get('icons');
 		$effects = Config::get('leds.effects');
 		return view('scenario.create', [
@@ -70,7 +70,7 @@ class ScenarioController extends MasterController {
 		}else{
 			$scenario = ScenarioCollection::_findById($input['_id']);
 		}
-
+		
 		$scenario->fill($input);
 		ScenarioCollection::_save($scenario);
 
@@ -79,7 +79,7 @@ class ScenarioController extends MasterController {
 			'result' => [
 				'status' => 'success',
 				'message' => 'Enregistrement réussi',
-				'url' => UrlBuilder::_build(['action'=>'edit','parmas'=>['scenario'=>$scenario]]),
+				'url' => UrlBuilder::_build(['action'=>'edit','params'=>['scenario'=>$scenario->_id]]),
 				'isNew' => $isNew,
 				'display' => true,
 			],
@@ -87,8 +87,9 @@ class ScenarioController extends MasterController {
 	}
 
 	public function delete(Scenario $scenario){
+		$moduleId = $scenario->module_id;
 		ScenarioCollection::_deleteOne($scenario);
-		return redirect(['action' => 'index'])->withFlash('success', 'Suppression réussie');
+		return redirect(['controller'=>'module', 'action' => 'show', 'params' => ['module'=>$moduleId]])->withFlash('success', 'Suppression réussie');
 	}
 
 

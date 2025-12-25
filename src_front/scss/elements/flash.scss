@@ -13,6 +13,7 @@
 	text-transform: uppercase;
 	margin-bottom: $p-s;
 	margin-top: $p-s;
+	z-index: 100;
 }
 
 @each $name, $color in $tool-colors {

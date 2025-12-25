@@ -50,5 +50,52 @@ document.addEventListener('DOMContentLoaded', () => {
 		scenario.component('scenario-maker', ScenarioMaker);
 		scenario.mount('#ScenarioMaker');
 	}
+
+	initBurger();
+
+	
+	
 })
 
+function initBurger(){
+	const burgerWrapper = document.getElementById('BurgerWrapper');
+	const burgerMenu = burgerWrapper?.querySelector('.burger-menu');
+	const burgerContent = burgerWrapper?.querySelector('.burger-content');
+	const logoClose = burgerWrapper?.querySelector('.logo-skankyhome');
+	
+	if (!burgerWrapper || !burgerMenu) return;
+	
+	// Créer l'overlay
+	const overlay = document.createElement('div');
+	overlay.className = 'burger-overlay';
+	burgerWrapper.parentNode.insertBefore(overlay, burgerWrapper.nextSibling);
+	
+	// Fonction pour ouvrir
+	window.openBurger = function() {
+		burgerWrapper.classList.add('active');
+		document.body.style.overflow = 'hidden'; // Empêcher le scroll
+	}
+	
+	// Fonction pour fermer
+	window.closeBurger = function() {
+		burgerWrapper.classList.remove('active');
+		document.body.style.overflow = ''; // Rétablir le scroll
+	}
+	
+	// Toggle au clic sur le burger
+	burgerMenu.addEventListener('click', () => {
+		if (burgerWrapper.classList.contains('active')) {
+			closeBurger();
+		} else {
+			openBurger();
+		}
+	});
+	
+	// Fermer au clic sur le logo
+	if (logoClose) {
+		logoClose.addEventListener('click', closeBurger);
+	}
+	
+	// Fermer au clic sur l'overlay
+	overlay.addEventListener('click', closeBurger);
+}
