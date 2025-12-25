@@ -26,9 +26,11 @@
 	
 	color: $text-secondary;
 	text-decoration: none;
-	padding: $p-xs;
+	padding: $p-xs $p-s;
+
+	font-weight: 600;
 	
-	border-radius: $p-xs;
+	border-radius: $p-s 0 $p-s $p-s;
 	transition: all 0.3s ease;
 	
 	// Icône

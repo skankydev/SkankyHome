@@ -6,7 +6,7 @@
 
 
 
-a:not([class^="btn"]):not([class*=" btn"]) {
+a:not([class^="btn"]):not([class*=" btn"]):not(.title-skankyhome){
 	color: $neon-purple;
 	text-decoration: none;
 	transition: all 0.3s ease;
