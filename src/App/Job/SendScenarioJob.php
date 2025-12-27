@@ -11,9 +11,11 @@ class SendScenarioJob extends MasterJob {
 
 	public array $cmd;
 	public string $topic;
+	public string $scenarioId;
 
 	public function __construct(Module $module, Scenario $scenario){
 		$datas = $scenario->lines;
+		$this->scenarioId = $scenario->id;
 		$result = [];
 		foreach ($datas as $key => $value) {
 			$result['line_'.$key] = $value;
@@ -24,7 +26,43 @@ class SendScenarioJob extends MasterJob {
 	}
 
 	public function run():void{
-		MqttSender::publish($this->topic, $this->cmd);
+		$json = json_encode($this->cmd['scenario']);
+		$totalSize = strlen($json);
+		$chunkSize = 1000; // bytes par chunk
+		$totalChunks = ceil($totalSize / $chunkSize);
+		
+		// Message de début
+		MqttSender::publish($this->topic, [
+			'scenario_start' => [
+				'id' => $this->scenarioId,
+				'total_chunks' => $totalChunks,
+				'total_size' => $totalSize
+			],
+		]);
+		
+		usleep(100000);
+		
+		// Envoyer chaque chunk
+		for ($i = 0; $i < $totalChunks; $i++) {
+			$chunk = substr($json, $i * $chunkSize, $chunkSize);
+			
+			MqttSender::publish($this->topic, [
+				'scenario_chunk' => [
+					'id' => $this->scenarioId,
+					'chunk_index' => $i,
+					'chunk_data' => $chunk
+				]
+			]);
+			
+			usleep(50000);
+		}
+		
+		// Message de fin
+		MqttSender::publish($this->topic, [
+			'scenario_end' => [
+				'id' => $this->scenarioId
+			]
+		]);
 	}
 
 }
