@@ -2,6 +2,8 @@
 
 *L'application que personne n'a demandé*
 
+[![Why PHP](https://img.shields.io/badge/Why_PHP-in_2026-7A86E8?style=for-the-badge&labelColor=18181b)](https://whyphp.dev)
+
 ![Status](https://img.shields.io/badge/status-ça%20clignote-brightgreen)
 ![Tests](https://img.shields.io/badge/tests-douter-FF073A)
 ![PHP](https://img.shields.io/badge/PHP-8.4-777BB4?logo=php&logoColor=white)
