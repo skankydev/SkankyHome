@@ -32,6 +32,9 @@ $conf =  [
 	'Module'=>[
 		'App'
 	],
+	'timehelper'=> [
+		'timezone'=>'Europe/Paris'
+	],
 	'smtp' => $smtp,
 	'debug' => 2,
 	'adminMail' => 'skankydev@gmail.com',

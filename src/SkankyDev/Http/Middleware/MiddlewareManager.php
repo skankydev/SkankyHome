@@ -26,7 +26,7 @@ class MiddlewareManager {
 
 	public function __construct(){
 		$this->default = Config::get('middlewares');
-		$this->asso  = Config::get('class.middleware');
+		$this->asso  = Config::get('class.middlewares');
 	}
 
 	public function run(Request $request, CurrentRoute $route, callable $callback){

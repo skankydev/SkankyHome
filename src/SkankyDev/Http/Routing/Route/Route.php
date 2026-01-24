@@ -14,6 +14,8 @@
 
 namespace SkankyDev\Http\Routing\Route;
 
+use SkankyDev\Config\Config;
+
 /**
  * 	
  */
@@ -54,12 +56,15 @@ class Route
 	 */
 	private function initLink(){
 		if(!isset($this->link['action'])){
-			$this->link['action'] = 'index';
+			$this->link['action'] = Config::getDefaultAction();
 		}
 		if(!isset($this->link['namespace'])){
-			$this->link['namespace'] = 'App';	
+			$this->link['namespace'] = Config::getDefaultNamespace();	
 		}		
 	}
+
+	
+	
 
 	/**
 	 * get the link array

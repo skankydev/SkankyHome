@@ -113,7 +113,6 @@ class Config {
 			$dConf = require $basePath.DS.'src'.DS.'SkankyDev'.DS.'Config'.DS.'default.config.php';
 			self::$conf = array_replace_recursive($dConf,$conf);
 		}
-		
 		return self::$conf;
 	}
 

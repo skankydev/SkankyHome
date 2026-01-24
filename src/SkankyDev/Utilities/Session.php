@@ -81,6 +81,7 @@ class Session
 	 */
 	static function start(){
 		session_start();
+
 	}
 
 	/**

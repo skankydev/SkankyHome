@@ -54,8 +54,8 @@ class Application {
 
 	public function run(){
 		try {
-			Session::start();
-			include_once APP_FOLDER.DS.'config'.DS.'routes.php';
+			
+			include_once APP_FOLDER.DS.'routes'.DS.'routes.php';
 			$request = Request::getInstance();
 			$current = Router::_findCurrentRoute($request->uri());
 			$manager = new MiddlewareManager();

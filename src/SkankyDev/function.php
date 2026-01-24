@@ -18,10 +18,8 @@ use SkankyDev\Utilities\Token;
 
 function redirect(array $link){
 	$url = UrlBuilder::_build($link);
-	debug($url);
 	$response = new Response();
 	$response->status(302)->header('Location', $url);
-	debug($response);
 	return $response;
 }
 

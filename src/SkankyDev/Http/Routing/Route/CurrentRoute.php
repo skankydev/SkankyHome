@@ -91,10 +91,10 @@ class CurrentRoute
 			$this->link['namespace'] = $namespace;
 			array_shift($tmp);
 		}else{
-			$this->link['namespace']  = 'App';
+			$this->link['namespace']  = Config::getDefaultNamespace();
 		}
 		$this->link['controller'] = $this->toCap($tmp[0]);
-		$this->link['action']     = isset($tmp[1]) ? lcfirst($this->toCap(trim($tmp[1],'_'))) : 'index';
+		$this->link['action']     = isset($tmp[1]) ? lcfirst($this->toCap(trim($tmp[1],'_'))) : Config::getDefaultAction();
 
 		if(isset($tmp[2])&&!empty($tmp[2])){
 			$this->link['params'] = array_slice($tmp,2);

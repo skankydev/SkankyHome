@@ -10,13 +10,5 @@ Router::_add('/',[
 	'controller' => 'Home',
 	'action'     => 'index',
 	'namespace'  => 'App'
-])->setMiddlewares(['bidule']);
-
-/*Router::_add('/sequences/:sequence', [
-	'controller' => 'Sequence',
-	'action' => 'show',
-	'namespace'  => 'App'
-],[
-	'sequence'=> '[a-z0-9]*'
-]);*/
+]);
 
