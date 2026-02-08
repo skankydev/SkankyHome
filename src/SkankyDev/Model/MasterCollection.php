@@ -215,8 +215,8 @@ abstract class MasterCollection {
 		$paginateInfo = array_merge(Config::get('paginator'),$paginateInfo);
 
 		$page = $paginateInfo['page'] ?? 1;
-    	$limit = $paginateInfo['limit'] ?? 10;
-    	$sort = $paginateInfo['sort'] ?? [];
+		$limit = $paginateInfo['limit'] ?? 10;
+		$sort = $paginateInfo['sort'] ?? [];
 
 		$skip = ($page - 1) * $limit;
 		

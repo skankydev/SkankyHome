@@ -34,14 +34,16 @@ class Paginator implements Iterator {
 	function __construct(iterable $data,array $option){
 		$this->data = $data;
 		$this->option = array_merge($this->option,$option);
-		$this->initInfo();
 	}
 
 	/**
 	 * get option for pagination
 	 * @return array the option
 	 */
-	function getOption(){
+	function getOption(array $link = [],array $get = []){
+		$this->initInfo();
+		$this->option['link'] = $link;
+		$this->option['get'] = $get;
 		return $this->option;
 	}
 

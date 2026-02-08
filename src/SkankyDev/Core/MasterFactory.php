@@ -32,7 +32,7 @@ class MasterFactory {
 		if (!method_exists($object, $method)) {
 			throw new UnknownMethodException(
 				'Unknown method : ' . $method . ' in Class : ' . get_class($object),
-				101
+				404
 			);
 		}
 
@@ -49,7 +49,11 @@ class MasterFactory {
 
 	public function make(string $className, array $parameters = []){
 
-		$reflector = new ReflectionClass($className);
+		try {
+			$reflector = new ReflectionClass($className);
+		} catch (\ReflectionException $e) {
+			throw new ClassNotFoundException("La classe {$className} n'existe pas", 404);
+		}
 
 		if (!$reflector->isInstantiable()) {
 			throw new ClassNotFoundException("La classe {$className} n'est pas instanciable",404);
@@ -112,6 +116,9 @@ class MasterFactory {
 				// Utiliser la valeur par défaut si disponible
 				if ($parameter->isDefaultValueAvailable()) {
 					$dependencies[] = $parameter->getDefaultValue();
+				} else if(isset($value[$paramKey])){
+					$dependencies[] = $value[$paramKey];
+					$paramKey++;
 				} else {
 					throw new ClassNotFoundException("Impossible de résoudre le paramètre {$name}",500);
 				}

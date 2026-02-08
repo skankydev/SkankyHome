@@ -228,10 +228,9 @@ class Request {
 		return $this->input($name);
 	}
 
-	public function paginateInfo(int $defaultLimit = 25,array $defaultSort = []){
+	public function paginateInfo(array $defaultSort = []){
 		return [
 			'page' => (int)($this->query('page') ?? 1),
-			'limit' => (int) ($this->query('limit') ?? $defaultLimit),
 			'sort' => $this->getSort($defaultSort),
 		];
 	}

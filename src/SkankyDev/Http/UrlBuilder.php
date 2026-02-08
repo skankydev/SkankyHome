@@ -109,7 +109,7 @@ class UrlBuilder
 			$url .= '/'.$this->toDash($link['namespace']);
 		}
 		$url .= '/'.$this->toDash($link['controller']);
-		if($link['action'] !== Config::getDefaultAction()){
+		if($link['action'] !== Config::getDefaultAction() || isset($link['params'])&&!empty($link['params'])){
 			$url .= '/'.$this->toDash($link['action']);
 		}
 
