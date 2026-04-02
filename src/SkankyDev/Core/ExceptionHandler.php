@@ -20,10 +20,13 @@ use Throwable;
 class ExceptionHandler {
 	
 	
-	public function __construct(protected bool $debug = true) { }
-	
 	/**
-	 * Gérer une exception
+	 * @param bool $debug true renders the full stack trace, false renders a generic error page
+	 */
+	public function __construct(protected bool $debug = true) { }
+
+	/**
+	 * Logs the exception and renders the appropriate error page based on debug mode.
 	 */
 	public function handle(Throwable $exception): void {
 		// Logger l'erreur
@@ -38,7 +41,8 @@ class ExceptionHandler {
 	}
 	
 	/**
-	 * Affichage debug (développement)
+	 * Renders a detailed error page with class, file, line and full stack trace.
+	 * Only shown in debug mode.
 	 */
 	protected function renderDebug(Throwable $exception): void {
 		http_response_code(500);
@@ -98,7 +102,8 @@ class ExceptionHandler {
 	}
 	
 	/**
-	 * Affichage production (utilisateur)
+	 * Renders a generic error page without exposing any internal details.
+	 * Shown in production mode.
 	 */
 	protected function renderProduction(Throwable $exception): void {
 		http_response_code(500);

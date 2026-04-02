@@ -17,10 +17,11 @@ use SkankyDev\Http\Request;
 
 interface MiddlewareInterface {
     /**
-     * @param Request $request
-     * @param callable $next Le prochain middleware/controller
-     * @return mixed
+     * Handles the request and passes it to the next middleware or controller.
+     * @param  Request  $request the current HTTP request
+     * @param  callable $next    the next layer in the middleware pipeline
+     * @return mixed             the response returned by the pipeline
      */
-    public function handle(Request $request, callable $next);
+    public function handle(Request $request, callable $next): mixed;
     
 }

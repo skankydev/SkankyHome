@@ -24,7 +24,20 @@ class ArgParser {
 	private $options = [];
 
 
-	public function pars($arg){
+	/**
+	 * Parses argv into an associative array.
+	 *
+	 * Conventions:
+	 * - First argument without `-` → `command` key
+	 * - `-h` → alias for `help`
+	 * - `--key=value` or `--key value` → `['key' => 'value']`
+	 * - `--flag` alone → `['flag' => true]`
+	 * - Positional value without key → numerically indexed
+	 *
+	 * @param  array $arg raw argv (including script name at index 0)
+	 * @return array      parsed options array
+	 */
+	public function pars(array $arg): array {
 		unset($arg[0]);
 		$arg = array_values($arg);
 

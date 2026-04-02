@@ -34,13 +34,22 @@ class MasterDocument implements JsonSerializable, Persistable {
 	public $_id;
 	
 
-	static public function collectionName() : string{
+	/**
+	 * Derives the fully qualified Collection class name from the Document class name.
+	 * e.g. `App\Model\Document\Module` → `App\Model\ModuleCollection`
+	 */
+	static public function collectionName(): string {
 		$name = get_called_class();
 		$name = str_replace('Document\\', '', $name);
 		$name .= 'Collection';
 		return $name;
 	}
 
+	/**
+	 * Shortcut to find this document by ID via its Collection.
+	 * Used by MasterFactory for automatic model binding in controllers.
+	 * @throws \Exception if the corresponding Collection class does not exist
+	 */
 	public static function find(string $id): ?static {
 		$collectionClass = static::collectionName();
 		if (!class_exists($collectionClass)) {
@@ -67,9 +76,10 @@ class MasterDocument implements JsonSerializable, Persistable {
 	}
 
 	/**
-	 * convert the document to be saved in database
+	 * Optionally fills the document from an array on construction.
+	 * Note: Persistable documents are reconstructed via bsonUnserialize(), bypassing this constructor.
 	 */
-	public function __construct(array $data = []){
+	public function __construct(array $data = []) {
 		if(!empty($data)){
 			$this->fill($data);
 		}
@@ -77,10 +87,10 @@ class MasterDocument implements JsonSerializable, Persistable {
 
 
 	/**
-	 * 
-	 * @return the document
+	 * Fills document properties from an array, only for declared class properties.
+	 * Fields matching `*_id` are automatically cast to ObjectId.
 	 */
-	public function fill(array $data){
+	public function fill(array $data): static {
 		$properties = get_class_vars(get_class($this));
 		foreach ($properties as $key=>$value){
 			if(isset($data[$key])){
@@ -98,10 +108,11 @@ class MasterDocument implements JsonSerializable, Persistable {
 	}
 
 	/**
-	 * convert the document to be saved in database
-	 * @return array the document
+	 * Serializes the document for MongoDB storage.
+	 * Converts DateTime to UTCDateTime and *_id fields to ObjectId.
+	 * Called automatically by the MongoDB driver on insert/update.
 	 */
-	public function bsonSerialize(): stdClass|Document|array{
+	public function bsonSerialize(): stdClass|Document|array {
 		$prop = get_object_vars($this);
 		foreach ($prop as $key=>$value) {
 			$prop[$key] = $this->{$key};
@@ -119,18 +130,22 @@ class MasterDocument implements JsonSerializable, Persistable {
 	}
 
 	/**
-	 * convert the result to the database in document
-	 * @param  array  $data the data form database
-	 * @return void
+	 * Reconstructs the document from MongoDB data without going through the constructor.
+	 * Called automatically by the MongoDB driver when reading documents.
+	 * Converts BSON types (UTCDateTime, BSONArray, BSONDocument) to native PHP types.
 	 */
-	public function bsonUnserialize(array $data) : void{
+	public function bsonUnserialize(array $data): void {
 		unset($data['__pclass']); 
 		foreach ($data as $key => $value) {
 			$this->{$key} = $this->convertBsonValue($value);
 		}
 	}
 
-	private function convertBsonValue($value) {
+	/**
+	 * Recursively converts a BSON value to its native PHP equivalent.
+	 * UTCDateTime → DateTime, BSONArray/BSONDocument → array.
+	 */
+	private function convertBsonValue(mixed $value): mixed {
 		if ($value instanceof UTCDateTime) {
 			return $value->toDateTime();
 		}
@@ -143,6 +158,10 @@ class MasterDocument implements JsonSerializable, Persistable {
 		return $value;
 	}
 
+	/**
+	 * Serializes the document for JSON output.
+	 * ObjectId fields are converted to strings for API responses.
+	 */
 	public function jsonSerialize(): mixed {
 		$data = get_object_vars($this);
 		

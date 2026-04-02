@@ -36,6 +36,10 @@ abstract class FormField {
 		'labelAttributes' =>  ['class'=>'form-label'],
 	];
 	
+	/**
+	 * @param string $name    HTML name attribute of the field
+	 * @param array  $options label, value, default, rules, attributes, labelAttributes, id, errors
+	 */
 	public function __construct(string $name, array $options = []) {
 
 		$options = [...$this->defaults, ...$options];
@@ -50,7 +54,11 @@ abstract class FormField {
 		$this->errors = $options['errors'] ?? [];
 	}
 	
-	public function makePath(string $name): string{
+	/**
+	 * Resolves a dot-notation view name to an absolute file path.
+	 * @throws \Exception if the template file does not exist
+	 */
+	public function makePath(string $name): string {
 		$name = $this->dotToFolder($name);
 		$fileName = VIEW_FOLDER.DS.$name.'.php';
 		if(!file_exists($fileName)){
@@ -59,6 +67,10 @@ abstract class FormField {
 		return $fileName;
 	}
 	
+	/**
+	 * Renders the field by including its PHP template.
+	 * Exposes all field properties to the template via extract().
+	 */
 	public function render(): string {
 		if(isset($this->labelAttr['class'])){
 			$this->labelAttr['class'] .= ' '.$this->required();
@@ -105,11 +117,18 @@ abstract class FormField {
 		return $this->rules;
 	}
 
-	public function isRequired() : bool {
+	/**
+	 * Returns true if the `required` rule is present on this field.
+	 */
+	public function isRequired(): bool {
 		return in_array('required', $this->rules);
 	}
 
-	public function required() : string {
+	/**
+	 * Returns the string `'required'` if the field is required, empty string otherwise.
+	 * Used to append a CSS class to the label.
+	 */
+	public function required(): string {
 		return $this->isRequired() ? 'required' : '' ;
 	}
 

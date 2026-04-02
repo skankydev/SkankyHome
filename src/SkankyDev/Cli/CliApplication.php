@@ -26,6 +26,10 @@ class CliApplication {
 	private array $arg = [];
 	private array $commandsInfo = [];
 
+	/**
+	 * Initializes config, parses CLI arguments and starts execution.
+	 * @param array $info raw argv passed by the `craft` entry point
+	 */
 	public function __construct(array $info){
 		Config::initConf();
 		$this->arg = ArgParser::_pars($info);
@@ -33,7 +37,11 @@ class CliApplication {
 
 	}
 
-	public function run(){
+	/**
+	 * Registers available commands, resolves the requested command and executes it.
+	 * Displays help if no command is provided or if the command is `help`.
+	 */
+	public function run(): void {
 		$this->autoRegister();
 		if(!isset($this->arg['command']) || $this->arg['command'] == 'help'){
 			$this->help();
@@ -48,12 +56,15 @@ class CliApplication {
 		$arg = $this->arg;
 		unset($arg['command']);
 		$command = MasterFactory::_make($target['class']);
-		return $command->run($arg);
+		$command->run($arg);
 	}
 
-
-
-	public function autoRegister(){
+	/**
+	 * Auto-discovers commands from all modules declared in config and from SkankyDev itself.
+	 * Scans each `Command/` folder, skips `MasterCommand.php`,
+	 * and registers the info of every valid command class found.
+	 */
+	public function autoRegister(): void {
 		$modules = Config::get('Module');
 		$modules[] = 'SkankyDev';
 
@@ -75,10 +86,14 @@ class CliApplication {
 				}
 			}
 		}
-		//$this->array($this->commandClass);
 	}
 
-	public function findCommand(string $signature){
+	/**
+	 * Finds a registered command by its signature.
+	 * @param  string      $signature CLI signature e.g. `queue:work`
+	 * @return array|null  command info array or null if not found
+	 */
+	public function findCommand(string $signature): ?array {
 		foreach ($this->commandsInfo as $name => $command) {
 			if($signature == $command['signature']){
 				return $command;
@@ -88,7 +103,10 @@ class CliApplication {
 
 	}
 
-	public function help(){
+	/**
+	 * Displays the help screen with the ASCII logo and the list of available commands.
+	 */
+	public function help(): void {
 		$this->info("");
 		$this->success("╭──────────────────────────────────────────────────────╮");
 		$this->success("│    _____ __ __            __             __          │");
@@ -117,7 +135,12 @@ class CliApplication {
 		$this->text("");
 	}
 
-	public function cmdHelp(string $signature, string $help){
+	/**
+	 * Renders a single command help line in the command list.
+	 * @param string $signature command signature e.g. `queue:work`
+	 * @param string $help      short description of the command
+	 */
+	public function cmdHelp(string $signature, string $help): void {
 		echo '  '.vert(str_pad($signature, 20)) . str_pad($help, 40)."\n";
 	}
 }

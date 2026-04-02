@@ -19,7 +19,10 @@ use SkankyDev\Utilities\Session;
 
 class SessionMiddleware  implements MiddlewareInterface{
 
-	public function handle(Request $request,callable $next){
+	/**
+	 * Starts the session then passes the request to the next middleware.
+	 */
+	public function handle(Request $request, callable $next): mixed {
 		Session::start();
 		return $next($request);
 	}

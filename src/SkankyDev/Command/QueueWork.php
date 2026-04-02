@@ -14,22 +14,33 @@ class QueueWork extends MasterCommand {
 	static protected string $signature = 'queue-worker';
 	static protected string $help = 'La description';
 
+	/**
+	 * Starts the queue worker loop.
+	 * Polls for the next pending job every second and processes it.
+	 * Runs indefinitely until the process is killed.
+	 * @param array $arg unused
+	 */
 	public function run(array $arg = []): void {
 		$this->info('🚀 Queue worker started');
-		
+
 		while (true) {
 			$jobInfo = Queue::next();
-			
+
 			if (!$jobInfo) {
 				sleep(1);
 				continue;
 			}
-			
+
 			$this->processJob($jobInfo);
 		}
 	}
 
-	
+	/**
+	 * Processes a single job: marks it as processing, runs the payload,
+	 * then marks it as succeeded or increments the attempt counter on failure.
+	 * Sets status to `failed` when `max_attempts` is reached.
+	 * @param object $jobInfo the JobDoc instance pulled from MongoDB
+	 */
 	private function processJob(object $jobInfo): void {
 		try {
 			$jobInfo->status = Queue::PROCESSING;

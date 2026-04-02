@@ -17,11 +17,17 @@ namespace SkankyDev\Utilities\Traits;
 use SkankyDev\Exception\UnknownMethodException;
 
 
+/**
+ * Provides a Singleton pattern with a magic static proxy via __callStatic.
+ * Static calls prefixed with `_` are forwarded to the instance method of the same name.
+ * Example: `MyClass::_save($doc)` → `MyClass::getInstance()->save($doc)`
+ */
 trait Singleton {
 
 	private static $_instance = null;
 
-	public static function getInstance() {
+	/** Returns the unique instance of the class, creating it if needed. */
+	public static function getInstance(): static {
 		if(is_null(self::$_instance)) {
 			$name = get_called_class();
 			self::$_instance = new $name();
@@ -30,7 +36,12 @@ trait Singleton {
 	}
 
 
-	public static function __callStatic($name, $arguments){
+	/**
+	 * Forwards static calls to the singleton instance.
+	 * Strips the leading `_` from the method name before dispatching.
+	 * @throws UnknownMethodException if the method does not exist on the instance
+	 */
+	public static function __callStatic(string $name, array $arguments): mixed {
 		if(is_null(self::$_instance)) {
 			self::getInstance();
 		}

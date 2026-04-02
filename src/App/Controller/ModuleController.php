@@ -17,7 +17,6 @@ use App\Form\ModuleForm;
 use App\Model\Document\Module;
 use App\Model\FirmwareCollection;
 use App\Model\ModuleCollection;
-use App\Model\ScenarioCollection;
 use SkankyDev\Controller\MasterController;
 use SkankyDev\Http\Request;
 
@@ -44,13 +43,11 @@ class ModuleController extends MasterController {
 		return redirect(['action' => 'show', 'params' => [$module->_id]])->withFlash('success', 'Enregistrement réussi');
 	}
 
-	public function show(Request $request, Module $module){
-		$scenarios = ScenarioCollection::_paginate(['module_id'=>$module->_id], Request::_paginateInfo());
+	public function show(Module $module){
 		$firmwares = FirmwareCollection::_find(['module_id'=>$module->_id],['limit' =>10]);
 
 		return view('module.show', [
-			'module' => $module,
-			'scenarios' => $scenarios,
+			'module'    => $module,
 			'firmwares' => $firmwares,
 		]);
 	}

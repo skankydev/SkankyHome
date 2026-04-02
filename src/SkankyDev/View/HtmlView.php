@@ -13,69 +13,74 @@
 
 namespace SkankyDev\View;
 
+use SkankyDev\Core\MasterFactory;
 use SkankyDev\Utilities\Traits\HtmlHelper;
 use SkankyDev\Utilities\Traits\StringFacility;
 
+/**
+ * Renders PHP view templates with layout support, output buffering, and view parts.
+ * Used as `$this` inside every template file — exposes helpers from HtmlHelper and StringFacility.
+ */
 class HtmlView {
-	
+
 	use HtmlHelper, StringFacility;
 
-	public $keywords = '';
-	public $title = '';
-	public $meta = [];
-	public $css = '';
-	public $js = '';
-	public $content = '';
+	public string $keywords      = '';
+	public string $title         = '';
+	public array  $meta          = [];
+	public string $css           = '';
+	public string $js            = '';
+	public string $content       = '';
+	public string $script        = '';
+	public ?string $layout       = 'layout.default';
+	public array  $helpers       = [];
+	public array  $breadcrumbInfo = [];
 
-	public $script = '';
-
-	public $layout = 'layout.default';
-	public $helpers = [];
-
-	public $breadcrumbInfo = [];
-
-	function __construct(
+	public function __construct(
 		protected string $viewName = '',
-		protected array $data = []
-	){
-		
-	}
+		protected array  $data     = []
+	) {}
 
-	public function makePath(string $name): string{
-		$name = $this->dotToFolder($name);
-		$fileName = VIEW_FOLDER.DS.$name.'.php';
-		if(!file_exists($fileName)){
+	/**
+	 * Resolves a dot-notation view name to an absolute file path.
+	 * @throws \Exception (code 601) if the file does not exist
+	 */
+	public function makePath(string $name): string {
+		$fileName = VIEW_FOLDER . DS . $this->dotToFolder($name) . '.php';
+		if (!file_exists($fileName)) {
 			throw new \Exception("the file : {$fileName} does not exist", 601);
 		}
 		return $fileName;
 	}
 
-	public function viewPath(){
+	/** Returns the absolute path for the current view. */
+	public function viewPath(): string {
 		return $this->makePath($this->viewName);
 	}
 
-	public function layoutPath(){
+	/** Returns the absolute path for the current layout. */
+	public function layoutPath(): string {
 		return $this->makePath($this->layout);
 	}
 
 	/**
-	 * render the view
+	 * Renders the view then wraps it in the layout (if set).
+	 * The rendered view is available as `$content` inside the layout template.
 	 */
 	public function render(): string {
-		// Rendre la vue
 		$this->content = $this->renderView($this->viewName, $this->data);
-		
-		// Rendre le layout si défini
+
 		if ($this->layout) {
 			return $this->renderLayout($this->layout, [
 				'content' => $this->content,
 				...$this->data
 			]);
 		}
-		
+
 		return $this->content;
 	}
-	
+
+	/** Renders a view template in isolation and returns its output. */
 	protected function renderView(string $view, array $data): string {
 		$viewPath = $this->makePath($view);
 		extract($data);
@@ -83,7 +88,8 @@ class HtmlView {
 		require $viewPath;
 		return ob_get_clean();
 	}
-	
+
+	/** Renders a layout template in isolation and returns its output. */
 	protected function renderLayout(string $layout, array $data): string {
 		$layoutPath = $this->makePath($layout);
 		extract($data);
@@ -91,120 +97,127 @@ class HtmlView {
 		require $layoutPath;
 		return ob_get_clean();
 	}
-	
+
+	/** Overrides the layout. Pass null to render without a layout. */
 	public function setLayout(?string $layout): self {
 		$this->layout = $layout;
 		return $this;
 	}
 
 	/**
-	 * render a part of view 
-	 * @param string $element element name
-	 * @param  array  $option  variable for view
-	 * @return view element just say echo
+	 * Renders a view part (sub-template) and returns its HTML.
+	 * If a matching Part class exists in `App\View\Part\`, its data() method
+	 * is called first to inject extra variables into the template.
+	 * @param string $name   dot-notation path e.g. `module.part.scenario`
+	 * @param array  $option variables to pass to the template
 	 */
-	public function part($name,$option = []){
-		$fileName = $this->makePath($name);
+	public function part(string $name, array $option = []): string {
+		$fileName  = $this->makePath($name);
+		$partClass = 'App\\View\\Part\\' . implode('', array_map(fn($s) => $this->toCap($s), explode('.', $name))) . 'Part';
+
+		if (class_exists($partClass)) {
+			$part   = MasterFactory::_make($partClass);
+			$option = array_merge($option, $part->data($option));
+		}
 
 		extract($option);
 		ob_start();
-		require($fileName);
+		require $fileName;
 		return ob_get_clean();
 	}
 
 	/**
-	 * pour afficher un element crée avant layout (la view du controller pour le momant) mais c pas fini 
-	 * @param  string $name the name
-	 * @return  view element just say echo
+	 * Echoes a named property of this view object.
+	 * Used in layouts to output buffered sections (e.g. `$this->fetch('script')`).
 	 */
-	public function fetch($var){
+	public function fetch(string $var): void {
 		echo $this->{$var};
 	}
 
 	/**
-	 * add css file for header
-	 * @param string $path the path to the file
+	 * Appends a `<link>` stylesheet tag to the header buffer.
+	 * @param string $path public path to the CSS file
 	 */
-	public function addCss($path){
-		$this->css .= '<link href="'.$path.'" rel="stylesheet" type="text/css">'.PHP_EOL;
+	public function addCss(string $path): void {
+		$this->css .= '<link href="' . $path . '" rel="stylesheet" type="text/css">' . PHP_EOL;
 	}
 
 	/**
-	 * add js file for header
-	 * @param string $path the path to the file
+	 * Appends a `<script>` tag to the header buffer.
+	 * @param string $path public path to the JS file
+	 * @param string $type MIME type (default `text/javascript`)
 	 */
-	public function addJs($path, $type = 'text/javascript'){
-		$this->js .= '<script src="'.$path.'" type="'.$type.'" ></script>'.PHP_EOL;
+	public function addJs(string $path, string $type = 'text/javascript'): void {
+		$this->js .= '<script src="' . $path . '" type="' . $type . '" ></script>' . PHP_EOL;
 	}
 
 	/**
-	 * get header option 
-	 * @return string html header option
+	 * Returns the full `<head>` meta/CSS/JS block.
+	 * Called inside the layout template: `<?= $this->getHeader() ?>`.
 	 */
-	public function getHeader(){
-		$retour = '';
-		$retour .= '<meta name="keywords" content="'.$this->keywords.'" />'.PHP_EOL;
+	public function getHeader(): string {
+		$retour  = '<meta name="keywords" content="' . $this->keywords . '" />' . PHP_EOL;
 		foreach ($this->meta as $name => $content) {
-			$retour .= '<meta name="'.$name.'" content="'.$content.'" />'.PHP_EOL;
+			$retour .= '<meta name="' . $name . '" content="' . $content . '" />' . PHP_EOL;
 		}
 		$retour .= $this->css;
 		$retour .= $this->js;
 		return $retour;
 	}
 
-	/**
-	 * start the buffuring view for script in end of the page
-	 * @return void
-	 */
-	public function startScript(){
+	/** Starts output buffering for an inline `<script>` block. */
+	public function startScript(): void {
 		ob_start();
 	}
-	
-	/**
-	 * stop the buffuring for script
-	 * @return void
-	 */
-	public function stopScript(){
+
+	/** Stops buffering and appends the captured output to the script buffer. */
+	public function stopScript(): void {
 		$this->script .= ob_get_clean();
 	}
 
-	/**
-	 * get the script 
-	 * @return string the script
-	 */
-	public function getScript(){
-		$retour = '';
-		$retour .= $this->script;
-		return $retour;
+	/** Returns the accumulated inline script content. */
+	public function getScript(): string {
+		return $this->script;
 	}
 
-	
-	public function setTitle($title){
+	/** Sets the page title. */
+	public function setTitle(string $title): void {
 		$this->title = $title;
 	}
 
-	public function getTitle(){
+	/** Returns the page title. */
+	public function getTitle(): string {
 		return $this->title;
 	}
 
-	public function addKeyWords($words){
+	/** Appends keywords to the meta keywords string. */
+	public function addKeyWords(string $words): void {
 		$this->keywords .= $words;
 	}
 
-	public function addMeta($name,$content){
+	/**
+	 * Adds a `<meta name="…">` tag to the header buffer.
+	 * @param string $name    meta name attribute
+	 * @param string $content meta content attribute
+	 */
+	public function addMeta(string $name, string $content): void {
 		$this->meta[$name] = $content;
 	}
-	
-	public function addCrumb(string $label, string|array $url,string $icon = ''){
-		if(is_array($url)){
+
+	/**
+	 * Appends a breadcrumb entry.
+	 * @param string       $label display text
+	 * @param string|array $url   URL string or route array passed to UrlBuilder
+	 * @param string       $icon  optional icon class
+	 */
+	public function addCrumb(string $label, string|array $url, string $icon = ''): void {
+		if (is_array($url)) {
 			$url = $this->url($url);
 		}
-
 		$this->breadcrumbInfo[] = [
 			'label' => $label,
-			'url' => $url,
-			'icon' => $icon,
+			'url'   => $url,
+			'icon'  => $icon,
 		];
-
 	}
 }

@@ -28,6 +28,10 @@ class Request {
 	protected ?string $body;     // Body brut
 	protected ?array $json;      // Body parsé si JSON
 
+	/**
+	 * Populates all request data from PHP superglobals.
+	 * Files are normalized so multiple-file fields have a consistent structure.
+	 */
 	public function __construct(){
 		$this->query = $_GET;
 		$this->post = $_POST;
@@ -39,51 +43,54 @@ class Request {
 		$this->json = $this->parseJson();
 	}
 
-	// Méthode HTTP
+	/** Returns the HTTP method (GET, POST, PUT, etc.). */
 	public function method(): string {
 		return strtoupper($this->server['REQUEST_METHOD'] ?? 'GET');
 	}
 
-	// Http ou Https
+	/** Returns the request scheme (http or https). */
 	public function sheme(): string {
 		return $this->server['REQUEST_SCHEME'] ?? 'http';
 	}
 
-	// Host name
+	/** Returns the HTTP host (e.g. `skankyhome.local`). */
 	public function host(): string {
 		return $this->server['HTTP_HOST'] ?? '';
 	}
 
 	
 
-	// URI demandée
+	/** Returns the URI path without the query string (e.g. `/module/show/abc`). */
 	public function uri(): string {
 		return strtok($this->server['REQUEST_URI'] ?? '/', '?');
 	}
 
-	// Full URL avec query string
+	/** Returns the full URI including query string. */
 	public function fullUri(): string {
 		return $this->server['REQUEST_URI'] ?? '/';
 	}
 
-	// Récupérer un paramètre GET
-	public function query(?string $key = null, $default = null) {
+	/** Returns a GET parameter by key, all GET params if key is null, or $default if not found. */
+	public function query(?string $key = null, mixed $default = null): mixed {
 		if ($key === null) {
 			return $this->query;
 		}
 		return $this->query[$key] ?? $default;
 	}
 
-	// Récupérer un paramètre POST
-	public function post(?string $key = null, $default = null) {
+	/** Returns a POST parameter by key, all POST params if key is null, or $default if not found. */
+	public function post(?string $key = null, mixed $default = null): mixed {
 		if ($key === null) {
 			return $this->post;
 		}
 		return $this->post[$key] ?? $default;
 	}
 
-	// Récupérer dans POST ou query string ou JSON
-	public function input(?string $key = null, $default = null) {
+	/**
+	 * Returns merged input from POST, JSON body and GET, in that priority order.
+	 * Returns all merged input if key is null.
+	 */
+	public function input(?string $key = null, mixed $default = null): mixed {
 		if ($key === null) {
 			return array_merge($this->query, $this->post, $this->json ?? []);
 		}
@@ -95,27 +102,24 @@ class Request {
 			?? $default;
 	}
 
-	// Récupérer un fichier uploadé
-	public function file(?string $key = null)
-	{
+	/** Returns a normalized uploaded file array by key, or all files if key is null. */
+	public function file(?string $key = null): mixed {
 		if ($key === null) {
 			return $this->files;
 		}
 		return $this->files[$key] ?? null;
 	}
 
-	// Récupérer un cookie
-	public function cookie(?string $key = null, $default = null)
-	{
+	/** Returns a cookie value by key, all cookies if key is null, or $default if not found. */
+	public function cookie(?string $key = null, mixed $default = null): mixed {
 		if ($key === null) {
 			return $this->cookies;
 		}
 		return $this->cookies[$key] ?? $default;
 	}
 
-	// Récupérer un header
-	public function header(?string $key = null, $default = null)
-	{
+	/** Returns a request header by lowercase key, all headers if key is null, or $default if not found. */
+	public function header(?string $key = null, mixed $default = null): mixed {
 		if ($key === null) {
 			return $this->headers;
 		}
@@ -123,15 +127,13 @@ class Request {
 		return $this->headers[$key] ?? $default;
 	}
 
-	// Body brut
-	public function body(): ?string
-	{
+	/** Returns the raw request body. */
+	public function body(): ?string {
 		return $this->body;
 	}
 
-	// Body JSON parsé
-	public function json(?string $key = null, $default = null)
-	{
+	/** Returns the parsed JSON body by key, all decoded JSON if key is null, or $default if not found. */
+	public function json(?string $key = null, mixed $default = null): mixed {
 		if ($this->json === null) {
 			return $default;
 		}
@@ -141,7 +143,7 @@ class Request {
 		return $this->json[$key] ?? $default;
 	}
 
-	// IP du client
+	/** Returns the client IP, respecting X-Forwarded-For for proxied requests. */
 	public function ip(): string {
 		// Gérer les proxies
 		if (!empty($this->server['HTTP_X_FORWARDED_FOR'])) {
@@ -151,32 +153,34 @@ class Request {
 		return $this->server['REMOTE_ADDR'] ?? '0.0.0.0';
 	}
 
-	// User agent
+	/** Returns the User-Agent string, or null if not present. */
 	public function userAgent(): ?string {
 		return $this->server['HTTP_USER_AGENT'] ?? null;
 	}
 
-	// Est-ce une requête AJAX ?
+	/** Returns true if the request was made via XMLHttpRequest (X-Requested-With header). */
 	public function isAjax(): bool {
 		return strtolower($this->header('x-requested-with', '')) === 'xmlhttprequest';
 	}
 
-	// Est-ce une requête JSON ?
-	public function isJson(): bool
-	{
+	/** Returns true if the Content-Type header indicates a JSON body. */
+	public function isJson(): bool {
 		return str_contains(
 			strtolower($this->header('content-type', '')), 
 			'application/json'
 		);
 	}
 
-	// Attend du JSON en retour ?
+	/** Returns true if the client accepts a JSON response (Accept header). */
 	public function wantsJson(): bool {
 		$accept = strtolower($this->header('accept', ''));
 		return str_contains($accept, 'application/json');
 	}
 
-	// Parser les headers HTTP
+	/**
+	 * Extracts HTTP headers from $_SERVER into a lowercase-keyed array.
+	 * Also captures CONTENT_TYPE and CONTENT_LENGTH which are not prefixed with HTTP_.
+	 */
 	protected function parseHeaders(): array {
 		$headers = [];
 		foreach ($this->server as $key => $value) {
@@ -193,7 +197,7 @@ class Request {
 		return $headers;
 	}
 
-	// Parser le JSON du body
+	/** Decodes the raw body as JSON if Content-Type is application/json. Returns null on failure. */
 	protected function parseJson(): ?array {
 		if ($this->isJson() && !empty($this->body)) {
 			$decoded = json_decode($this->body, true);
@@ -202,7 +206,10 @@ class Request {
 		return null;
 	}
 
-	// Normaliser $_FILES pour avoir un joli tableau
+	/**
+	 * Normalizes $_FILES so that multi-file fields are indexed as array of files
+	 * rather than PHP's default structure of arrays of properties.
+	 */
 	protected function normalizeFiles(): array {
 
 		$normalized = [];
@@ -222,19 +229,27 @@ class Request {
 		return $normalized;
 	}
 
-	// Accès magique aux propriétés
-	public function __get(string $name)
-	{
+	/** Magic property access — proxies to input() so `$request->name` works. */
+	public function __get(string $name): mixed {
 		return $this->input($name);
 	}
 
-	public function paginateInfo(array $defaultSort = []){
+	/**
+	 * Returns pagination info extracted from the query string: current page and sort order.
+	 * @param  array $defaultSort fallback sort if no `field`/`order` params are present
+	 * @return array{page: int, sort: array}
+	 */
+	public function paginateInfo(array $defaultSort = []): array {
 		return [
 			'page' => (int)($this->query('page') ?? 1),
 			'sort' => $this->getSort($defaultSort),
 		];
 	}
 
+	/**
+	 * Builds the sort array from `field` and `order` query params.
+	 * Returns $default if either param is missing.
+	 */
 	protected function getSort(array $default = []): array {
 		$field = $this->query('field');
 		$order = $this->query('order');

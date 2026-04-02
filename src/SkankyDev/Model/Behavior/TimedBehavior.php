@@ -18,35 +18,23 @@ use SkankyDev\Model\Behavior\MasterBehavior;
 use MongoDB\BSON\UTCDateTime as MongoDate;
 use DateTime;
 
+/**
+ * Automatically manages `created_at` and `updated_at` timestamps on documents.
+ * Sets both on insert, updates only `updated_at` on update.
+ */
 class TimedBehavior extends MasterBehavior {
-	
-	public function __construct(){
-	}
 
-	public function beforeInsert($data,$entity=null){
+	public function __construct() {}
+
+	/** Sets created_at and updated_at to now before insert. */
+	public function beforeInsert(object $data, mixed $entity = null): void {
 		$data->created_at = new DateTime;
 		$data->updated_at = new DateTime;
 	}
 
-
-	public function afterInsert($data,$entity=null){
-
-	}
-
-	public function beforeUpdate($data,$entity=null){
+	/** Updates updated_at to now before update. */
+	public function beforeUpdate(object $data, mixed $entity = null): void {
 		$data->updated_at = new DateTime;
 	}
 
-	public function afterUpdate($data,$entity=null){
-
-	}
-
-	public function beforeCreateEntity($data,$entity=null){
-
-	}
-
-	public function afterCreateEntity($data,$entity=null){
-		
-	}
-	
 }

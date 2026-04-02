@@ -19,6 +19,12 @@ class ModuleForm extends FormBuilder {
 	
 	public function build() : void {
 		
+		$this->add('type','select',[
+			'label'   => 'Type',
+			'options' => ['scenario' => 'Scenario', 'screen' => 'Screen'],
+			'rules'   => ['required']
+		]);
+
 		$this->add('icon','icon',[
 			'label' => 'Icon',
 			'rules' => ['required']

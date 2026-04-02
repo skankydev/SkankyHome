@@ -15,6 +15,7 @@ namespace SkankyDev\Validation\Rules;
 
 use SkankyDev\Validation\Rules\Rule;
 
+/** Validates that the string length (mb_strlen) is at least $min characters. Passes on empty values. */
 class MinLength extends Rule {
 
     public function __construct(protected int $min) {}

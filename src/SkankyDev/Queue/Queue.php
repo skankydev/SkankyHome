@@ -13,6 +13,11 @@ class Queue {
 	const SUCCESS = 'success';
 	const FAILED = 'failed';
 
+	/**
+	 * Pushes a job onto the queue by wrapping it in a JobDoc and saving to MongoDB.
+	 * The job must implement Persistable so it is stored and restored without a constructor.
+	 * @param object $job a MasterJob instance with all payload data set
+	 */
 	public static function push(object $job): void {
 		$jobInfo = new  JobDoc([
 			'payload' => $job,
@@ -27,6 +32,9 @@ class Queue {
 	
 
 
+	/**
+	 * Returns the oldest pending job (FIFO by created_at), or null if the queue is empty.
+	 */
 	public static function next(): ?object {
 		return JobCollection::_findOne(['status' => 'pending'], ['sort' => ['created_at' => 1]]);
 	}

@@ -16,6 +16,11 @@ namespace SkankyDev\Validation\Rules;
 use SkankyDev\Validation\Rules\Rule;
 
 
+/**
+ * Validates that the value matches a given regex pattern.
+ * The full pattern including delimiters must be provided: e.g. `/^\d{4}$/`.
+ * Passes on empty values.
+ */
 class Regex extends Rule {
 
 	public function __construct(protected string $pattern) {}

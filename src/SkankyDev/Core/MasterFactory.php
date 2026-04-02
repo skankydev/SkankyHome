@@ -27,7 +27,15 @@ class MasterFactory {
 
 	use Singleton;
 
-	public function call(object $object,string $method, array $parameters = [] ){
+	/**
+	 * Calls a method on an existing object, resolving its dependencies automatically.
+	 * @param object $object     the target object
+	 * @param string $method     the method name to call
+	 * @param array  $parameters optional raw parameters to resolve from
+	 * @return mixed             the return value of the called method
+	 * @throws UnknownMethodException if the method does not exist
+	 */
+	public function call(object $object, string $method, array $parameters = []): mixed {
 
 		if (!method_exists($object, $method)) {
 			throw new UnknownMethodException(
@@ -47,7 +55,15 @@ class MasterFactory {
 	}
 
 
-	public function make(string $className, array $parameters = []){
+	/**
+	 * Instantiates a class by resolving its constructor dependencies automatically.
+	 * Handles Singleton classes, classes without constructors, and full DI resolution.
+	 * @param string $className  fully qualified class name
+	 * @param array  $parameters optional raw parameters to resolve from
+	 * @return object            the instantiated object
+	 * @throws ClassNotFoundException if the class does not exist or is not instantiable
+	 */
+	public function make(string $className, array $parameters = []): object {
 
 		try {
 			$reflector = new ReflectionClass($className);
@@ -77,6 +93,18 @@ class MasterFactory {
 		return $reflector->newInstanceArgs($dependencies);
 	}
 
+	/**
+	 * Resolves an array of ReflectionParameters into concrete values.
+	 * Resolution order for each parameter:
+	 * - MasterDocument subclass → fetched from DB using route param ID
+	 * - Named key match in $value → used directly
+	 * - Builtin/no type → uses default value or positional value from $value
+	 * - Class type → recursively resolved via make()
+	 * @param  \ReflectionParameter[] $parameters constructor or method parameters
+	 * @param  array                  $value      raw values to resolve from (route params, etc.)
+	 * @return array                  resolved dependency instances
+	 * @throws ClassNotFoundException if a required dependency cannot be resolved
+	 */
 	protected function resolveDependencies(array $parameters, array $value = []): array {
 		$dependencies = [];
 		$paramKey = 0;

@@ -16,8 +16,7 @@ namespace SkankyDev\Exception;
 
 use Exception;
 
-class ModelException extends Exception
-{
+class ModelException extends Exception {
 
 }
 
