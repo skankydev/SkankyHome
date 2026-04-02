@@ -1,63 +1,26 @@
-# Windows image file caches
-Thumbs.db
-ehthumbs.db
+# Dépendances
+vendor/
+node_modules/
 
-# Folder config file
-Desktop.ini
+# Environnement (NE JAMAIS COMMITER)
+.env
 
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
+# Config locale
+config/smtp.config.php
 
-# Windows Installer files
-*.cab
-*.msi
-*.msm
-*.msp
+# Logs
+/logs
 
-# Windows shortcuts
-*.lnk
-
-
-#
-# =========================
-# Operating System Files
-# =========================
-
-# OSX
-
-.DS_Store
-.AppleDouble
-.LSOverride
-
-# Thumbnails
-._*
-
-# Files that might appear on external disk
-.Spotlight-V100
-.Trashes
-
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
-
-composer.lock
+# Cache
 .sass-cache/
 .phpintel/
 .phpunit.cache/
-node_modules/
-vendor/
-config/smtp.config.php
-public/img/upload
-public/upload/*
-public/img/product
-public/img/test
 public/coverage
 
-composer.lock
-package-lock.json
-
+# IDE & OS
+.claude
 *.sublime-workspace
-/logs
+.DS_Store
+Thumbs.db
+Desktop.ini
+public/upload/*

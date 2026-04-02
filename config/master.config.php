@@ -10,18 +10,18 @@ $icons = require_once 'icons.config.php';
 $conf =  [
 	'db' => [
 		'MongoDB' =>[
-			'host'=>'localhost',
-			'port'=>'27017',
-			'username'=>'',
-			'password'=>'',
-			'database'=>'SkankyHome'
+			'host'     => getenv('DB_MONGO_HOST')     ?: 'localhost',
+			'port'     => getenv('DB_MONGO_PORT')     ?: '27017',
+			'username' => getenv('DB_MONGO_USERNAME') ?: '',
+			'password' => getenv('DB_MONGO_PASSWORD') ?: '',
+			'database' => getenv('DB_MONGO_DATABASE') ?: 'SkankyHome',
 		]
 	],
 	'mqtt' => [
-		'host' => 'skankyhome.local',
-		'port' => 1883,
-		'username'=>'',
-		'password'=>'',
+		'host' =>getenv('MQTT_HOST') ?: 'skankyhome.local',
+		'port' =>getenv('MQTT_PORT') ?: 1883,
+		'username'=>getenv('MQTT_USERNAME') ?: '',
+		'password'=>getenv('MQTT_PASSWORD') ?: '',
 	],
 	'location'=>[
 		'fr'=>[
@@ -33,8 +33,8 @@ $conf =  [
 		'App'
 	],
 	'smtp' => $smtp,
-	'debug' => 2,
-	'adminMail' => 'skankydev@gmail.com',
+	'debug'     => (int)(getenv('APP_DEBUG') !== false ? getenv('APP_DEBUG') : 2),
+	'adminMail' => getenv('APP_ADMIN_MAIL') ?: 'skankydev@gmail.com',
 	'leds' => $leds,
 	'icons' => $icons,
 ];

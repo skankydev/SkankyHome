@@ -51,7 +51,6 @@ class MqttMessageJob extends MasterJob {
 		} catch (Exception $e) {
 			Log::mqtt('error : '.$e->getMessage());
 			$this->error('error : '.$e->getMessage());
-			
 		}
 	}
 
