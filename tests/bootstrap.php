@@ -19,6 +19,18 @@ Config::$conf = [];
 Config::set('default.namespace', 'App');
 Config::set('default.action', 'index');
 
+Config::set('class.fields', [
+    'text'     => \SkankyDev\Form\Fields\TextField::class,
+    'textarea' => \SkankyDev\Form\Fields\TextareaField::class,
+    'number'   => \SkankyDev\Form\Fields\NumberField::class,
+    'select'   => \SkankyDev\Form\Fields\SelectField::class,
+    'checkbox' => \SkankyDev\Form\Fields\CheckboxField::class,
+    'email'    => \SkankyDev\Form\Fields\EmailField::class,
+    'hidden'   => \SkankyDev\Form\Fields\HiddenField::class,
+    'password' => \SkankyDev\Form\Fields\PasswordField::class,
+    'file'     => \SkankyDev\Form\Fields\FileField::class,
+]);
+
 Config::set('class.rules', [
     'required'   => \SkankyDev\Validation\Rules\Required::class,
     'email'      => \SkankyDev\Validation\Rules\Email::class,

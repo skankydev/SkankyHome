@@ -1,6 +1,7 @@
 # Dépendances
 vendor/
 node_modules/
+build/
 
 # Environnement (NE JAMAIS COMMITER)
 .env
