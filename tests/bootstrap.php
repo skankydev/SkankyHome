@@ -8,6 +8,9 @@ if (!defined('DS')) {
 if (!defined('TIME_HOUR')) {
     define('TIME_HOUR', 3600);
 }
+if (!defined('APP_FOLDER')) {
+    define('APP_FOLDER', sys_get_temp_dir() . '/skankydev_test');
+}
 
 // Minimal config required by the framework components under test.
 // No database, no filesystem — pure unit test context.
@@ -18,6 +21,20 @@ Config::$conf = [];
 
 Config::set('default.namespace', 'App');
 Config::set('default.action', 'index');
+
+Config::set('db.MongoDB', [
+    'host'     => '127.0.0.1',
+    'port'     => 27017,
+    'database' => 'skankydev_test',
+    'username' => '',
+    'password' => '',
+]);
+
+Config::set('paginator', ['limit' => 10, 'page' => 1, 'count' => 1, 'range' => 5]);
+
+Config::set('class.behavior', [
+    'Timed' => \SkankyDev\Model\Behavior\TimedBehavior::class,
+]);
 
 Config::set('class.fields', [
     'text'     => \SkankyDev\Form\Fields\TextField::class,

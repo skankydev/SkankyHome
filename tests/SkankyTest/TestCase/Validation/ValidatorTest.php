@@ -111,6 +111,23 @@ class ValidatorTest extends TestCase
         $this->assertTrue($rule->check('year', '')); // empty = optional
     }
 
+    // ── message() coverage ────────────────────────────────────────────────────
+
+    public function testRuleMessagesContainFieldName(): void {
+        $field = 'email';
+        $this->assertStringContainsString($field, (new Required())->message($field));
+        $this->assertStringContainsString($field, (new Email())->message($field));
+        $this->assertStringContainsString($field, (new Min(5))->message($field));
+        $this->assertStringContainsString($field, (new Max(100))->message($field));
+        $this->assertStringContainsString($field, (new MinLength(3))->message($field));
+        $this->assertStringContainsString($field, (new MaxLength(5))->message($field));
+        $this->assertStringContainsString($field, (new Numeric())->message($field));
+        $this->assertStringContainsString($field, (new HexColor())->message($field));
+        $this->assertStringContainsString($field, (new Confirmed())->message($field));
+        $this->assertStringContainsString($field, (new Same('other'))->message($field));
+        $this->assertStringContainsString($field, (new Regex('/^\d+$/'))->message($field));
+    }
+
     // ── Validator integration tests ───────────────────────────────────────────
 
     public function testValidatorPassesWhenAllRulesPass(): void {

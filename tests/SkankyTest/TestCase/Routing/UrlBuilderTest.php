@@ -73,4 +73,25 @@ class UrlBuilderTest extends TestCase
         $url = UrlBuilder::_addGet('/article/youpi-test', ['page' => 1, 'order' => 'field']);
         $this->assertEquals('/article/youpi-test?page=1&order=field', $url);
     }
+
+    public function testBuildCurrentReturnsUrlOfCurrentRoute(): void {
+        // Current route is /post/index, default action = index → /post
+        $url = UrlBuilder::_buildCurrent();
+        $this->assertEquals('/post', $url);
+    }
+
+    public function testBuildCurrentAbsoluteIncludesSchemeAndHost(): void {
+        // Reset Request singleton so it picks up $_SERVER
+        $refRequest = new \ReflectionProperty(\SkankyDev\Http\Request::class, '_instance');
+        $refRequest->setValue(null, null);
+
+        $_SERVER['REQUEST_SCHEME'] = 'http';
+        $_SERVER['HTTP_HOST']      = 'skankyhome.local';
+        $_SERVER['REQUEST_METHOD'] = 'GET';
+        $_SERVER['REQUEST_URI']    = '/post/index';
+        $_SERVER['REMOTE_ADDR']    = '127.0.0.1';
+
+        $url = UrlBuilder::_buildCurrent(true);
+        $this->assertStringStartsWith('http://skankyhome.local', $url);
+    }
 }

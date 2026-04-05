@@ -53,36 +53,44 @@ function url(array $params) {
 /**
  * Ancien timestamp en format lisible
  */
- function since(DateTime $date, $full = false){
-	//TO DO ca fait le taf mais c'est pas tip top 
-	$now = new DateTime();
-	$diff = $now->diff($date);
+function since(\DateTime $date, bool $full = false): string
+{
+    $diff  = (new \DateTime())->diff($date);
+    $weeks = (int) floor($diff->d / 7);
+    $days  = $diff->d - $weeks * 7;
 
-	$diff->w = floor($diff->d / 7);
-	$diff->d -= $diff->w * 7;
+    $parts = [
+        'y' => $diff->y,
+        'm' => $diff->m,
+        'w' => $weeks,
+        'd' => $days,
+        'h' => $diff->h,
+        'i' => $diff->i,
+        's' => $diff->s,
+    ];
 
-	$string = [
-		'y' => _('year'),
-		'm' => _('month'),
-		'w' => _('week'),
-		'd' => _('day'),
-		'h' => _('hour'),
-		'i' => _('minute'),
-		's' => _('second'),
-	];
-	
-	foreach ($string as $k => &$v) {
-		if ($diff->$k) {
-			$v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
-		} else {
-			unset($string[$k]);
-		}
-	}
+    $labels = [
+        'y' => _('year'),
+        'm' => _('month'),
+        'w' => _('week'),
+        'd' => _('day'),
+        'h' => _('hour'),
+        'i' => _('minute'),
+        's' => _('second'),
+    ];
 
-	if(!$full){
-		$string = array_slice($string, 0, 1);
-	}
-	return $string ? implode(', ', $string) : _('just now');    
+    $string = [];
+    foreach ($labels as $k => $label) {
+        if ($parts[$k]) {
+            $string[$k] = $parts[$k] . ' ' . $label . ($parts[$k] > 1 ? 's' : '');
+        }
+    }
+
+    if (!$full) {
+        $string = array_slice($string, 0, 1);
+    }
+
+    return $string ? implode(', ', $string) : _('just now');
 }
 
 /**

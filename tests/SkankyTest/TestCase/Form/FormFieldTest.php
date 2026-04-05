@@ -5,6 +5,7 @@ namespace SkankyTest\TestCase\Form;
 use PHPUnit\Framework\TestCase;
 use SkankyDev\Form\Fields\TextField;
 use SkankyDev\Form\Fields\SelectField;
+use SkankyDev\Form\Fields\RadioField;
 
 class FormFieldTest extends TestCase
 {
@@ -99,5 +100,33 @@ class FormFieldTest extends TestCase
         $field = new SelectField('type', ['options' => [], 'empty' => true]);
         $ref = new \ReflectionProperty($field, 'empty');
         $this->assertTrue($ref->getValue($field));
+    }
+
+    // ── RadioField ────────────────────────────────────────────────────────────
+
+    public function testRadioFieldStoresOptions(): void {
+        $field = new RadioField('color', [
+            'options' => ['red' => 'Rouge', 'blue' => 'Bleu'],
+        ]);
+        $ref = new \ReflectionProperty($field, 'options');
+        $this->assertEquals(['red' => 'Rouge', 'blue' => 'Bleu'], $ref->getValue($field));
+    }
+
+    public function testRadioFieldEmptyOptionsWhenNoneProvided(): void {
+        $field = new RadioField('color');
+        $ref = new \ReflectionProperty($field, 'options');
+        $this->assertEmpty($ref->getValue($field));
+    }
+
+    public function testRadioFieldInheritsFormFieldBehaviour(): void {
+        $field = new RadioField('color', ['rules' => ['required']]);
+        $this->assertEquals('color', $field->getName());
+        $this->assertTrue($field->isRequired());
+    }
+
+    public function testRadioFieldTypeIsRadio(): void {
+        $field = new RadioField('color');
+        $ref = new \ReflectionProperty($field, 'type');
+        $this->assertEquals('radio', $ref->getValue($field));
     }
 }

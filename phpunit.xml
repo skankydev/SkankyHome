@@ -16,5 +16,8 @@
         <testsuite name="SkankyDev">
             <directory>tests/SkankyTest/TestCase</directory>
         </testsuite>
+        <testsuite name="Integration">
+            <directory>tests/SkankyTest/Integration</directory>
+        </testsuite>
     </testsuites>
 </phpunit>
