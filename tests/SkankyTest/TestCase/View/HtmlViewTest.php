@@ -187,4 +187,48 @@ class HtmlViewTest extends TestCase
         $view->addCrumb('Modules', '/module');
         $this->assertCount(2, $view->breadcrumbInfo);
     }
+
+    // ── HtmlHelper ────────────────────────────────────────────────────────────
+
+    public function testCreateAttrBuildsAttributeString(): void
+    {
+        $view   = new HtmlView();
+        $result = $view->createAttr(['class' => 'btn', 'id' => 'submit']);
+        $this->assertStringContainsString('class="btn"', $result);
+        $this->assertStringContainsString('id="submit"', $result);
+    }
+
+    public function testCreateAttrReturnsEmptyStringForNoAttributes(): void
+    {
+        $view = new HtmlView();
+        $this->assertEquals('', $view->createAttr([]));
+    }
+
+    public function testSurroundWrapsContentInTag(): void
+    {
+        $view   = new HtmlView();
+        $result = $view->surround('texte', 'span', ['class' => 'highlight']);
+        $this->assertStringStartsWith('<span', $result);
+        $this->assertStringContainsString('texte', $result);
+        $this->assertStringEndsWith('</span>', $result);
+        $this->assertStringContainsString('class="highlight"', $result);
+    }
+
+    public function testLinkGeneratesAnchorTag(): void
+    {
+        $view   = new HtmlView();
+        $result = $view->link('Modules', ['controller' => 'Module', 'action' => 'index']);
+        $this->assertStringContainsString('<a', $result);
+        $this->assertStringContainsString('href=', $result);
+        $this->assertStringContainsString('Modules', $result);
+        $this->assertStringContainsString('</a>', $result);
+    }
+
+    public function testUrlReturnsString(): void
+    {
+        $view = new HtmlView();
+        $url  = $view->url(['controller' => 'Module', 'action' => 'index']);
+        $this->assertIsString($url);
+        $this->assertStringContainsString('/module', $url);
+    }
 }

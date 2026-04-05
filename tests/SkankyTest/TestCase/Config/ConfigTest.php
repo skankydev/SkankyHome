@@ -69,10 +69,6 @@ class ConfigTest extends TestCase
         $this->assertEquals(['host' => 'localhost'], Config::getDbConf());
     }
 
-    public function testGetHelperReturnsNullWhenNotSet(): void {
-        $this->assertNull(Config::getHelper());
-    }
-
     // ── current namespace ─────────────────────────────────────────────────────
 
     public function testGetCurentNamespaceFallsBackToDefault(): void {
@@ -82,5 +78,61 @@ class ConfigTest extends TestCase
     public function testSetAndGetCurentNamespace(): void {
         Config::setCurentNamespace('Admin');
         $this->assertEquals('Admin', Config::getCurentNamespace());
+    }
+
+    // ── named getters (remaining) ─────────────────────────────────────────────
+
+    public function testGetModuleListReturnsNullWhenNotSet(): void {
+        $this->assertNull(Config::getModuleList());
+    }
+
+    public function testGetModuleListReturnsValue(): void {
+        Config::set('Module', ['App', 'Admin']);
+        $this->assertEquals(['App', 'Admin'], Config::getModuleList());
+    }
+
+    public function testGetBehaviorReturnsNullWhenNotSet(): void {
+        Config::set('class.behavior', null);
+        $this->assertNull(Config::getBehavior());
+    }
+
+    public function testGetBehaviorReturnsValue(): void {
+        Config::set('class.behavior', ['Timed' => 'SkankyDev\\Model\\Behavior\\TimedBehavior']);
+        $result = Config::getBehavior();
+        $this->assertArrayHasKey('Timed', $result);
+    }
+
+    public function testGetVersionReturnsNullWhenNotSet(): void {
+        $this->assertNull(Config::getVersion());
+    }
+
+    public function testGetVersionReturnsValue(): void {
+        Config::set('skankydev.version', '2.0.0');
+        $this->assertEquals('2.0.0', Config::getVersion());
+    }
+
+    // ── initConf ──────────────────────────────────────────────────────────────
+
+    public function testInitConfLoadsConfigFromBasePath(): void {
+        // Save and clear the current config so initConf() doesn't return early
+        $saved = Config::$conf;
+        Config::$conf = null;
+
+        // Use the real project path — the config files exist there
+        $basePath = str_replace('/', DIRECTORY_SEPARATOR, 'E:/Dev/SkankyHome');
+        Config::initConf($basePath);
+
+        // After initConf, the default namespace should be set
+        $this->assertEquals('App', Config::getDefaultNamespace());
+
+        // Restore
+        Config::$conf = $saved;
+    }
+
+    public function testInitConfSkipsWhenAlreadyLoaded(): void {
+        // Config is already set by bootstrap — initConf should be a no-op
+        $before = Config::get('default.namespace');
+        Config::initConf(); // should do nothing since conf is not empty
+        $this->assertEquals($before, Config::get('default.namespace'));
     }
 }

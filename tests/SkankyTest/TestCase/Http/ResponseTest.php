@@ -88,6 +88,46 @@ class ResponseTest extends TestCase
         $this->assertSame($response, $response->withFlash('info', 'hello'));
     }
 
+    // ── build() ───────────────────────────────────────────────────────────────
+
+    public function testBuildJsonResponseWhenClientWantsJson(): void {
+        $ref = new \ReflectionProperty(Request::class, '_instance');
+        $ref->setValue(null, null);
+        $_SERVER['HTTP_ACCEPT'] = 'application/json';
+
+        $response = new Response('', ['key' => 'value']);
+        $response->build();
+
+        $ref2 = new \ReflectionProperty($response, 'body');
+        $body = $ref2->getValue($response);
+
+        $this->assertJson($body);
+        $this->assertStringContainsString('value', $body);
+    }
+
+    public function testBuildHtmlResponseRendersView(): void {
+        $ref = new \ReflectionProperty(Request::class, '_instance');
+        $ref->setValue(null, null);
+        $_SERVER['HTTP_ACCEPT'] = 'text/html';
+
+        $response = new Response('_test.index', ['title' => 'Test Build']);
+        $response->build();
+
+        $ref2 = new \ReflectionProperty($response, 'body');
+        $body = $ref2->getValue($response);
+
+        $this->assertStringContainsString('Test Build', $body);
+    }
+
+    public function testBuildReturnsSelf(): void {
+        $ref = new \ReflectionProperty(Request::class, '_instance');
+        $ref->setValue(null, null);
+        $_SERVER['HTTP_ACCEPT'] = 'application/json';
+
+        $response = new Response('', []);
+        $this->assertSame($response, $response->build());
+    }
+
     // ── chaining ─────────────────────────────────────────────────────────────
 
     public function testFluentChainingWorks(): void {

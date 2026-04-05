@@ -122,4 +122,55 @@ class FunctionTest extends TestCase
         $this->assertStringContainsString('year', $result);
         $this->assertStringContainsString('month', $result);
     }
+
+    // ── noir() ────────────────────────────────────────────────────────────────
+
+    public function testNoirWrapsWithAnsi(): void {
+        $result = noir('test');
+        $this->assertStringStartsWith("\033[", $result);
+        $this->assertStringContainsString('test', $result);
+    }
+
+    // ── url() ─────────────────────────────────────────────────────────────────
+
+    public function testUrlReturnsString(): void {
+        $url = url(['controller' => 'Module', 'action' => 'index']);
+        $this->assertIsString($url);
+        $this->assertStringContainsString('module', $url);
+    }
+
+    // ── csrf_field() ─────────────────────────────────────────────────────────
+
+    public function testCsrfFieldReturnsHiddenInput(): void {
+        $html = csrf_field();
+        $this->assertStringContainsString('_token', $html);
+        $this->assertStringContainsString('type="hidden"', $html);
+    }
+
+    // ── old() ─────────────────────────────────────────────────────────────────
+
+    public function testOldReturnsDefaultWhenEmpty(): void {
+        $_SESSION = [];
+        $this->assertEquals('', old('name'));
+        $this->assertEquals('fallback', old('name', 'fallback'));
+    }
+
+    public function testOldReturnsSessionValue(): void {
+        $_SESSION['old'] = ['name' => 'Simon'];
+        $this->assertEquals('Simon', old('name'));
+    }
+
+    // ── error() ──────────────────────────────────────────────────────────────
+
+    public function testErrorReturnsEmptyStringWhenNoErrors(): void {
+        $_SESSION = [];
+        $this->assertEquals('', error('name'));
+    }
+
+    public function testErrorReturnsSpanWhenErrorExists(): void {
+        $_SESSION['errors'] = ['name' => 'Champ requis'];
+        $result = error('name');
+        $this->assertStringContainsString('Champ requis', $result);
+        $this->assertStringContainsString('<span', $result);
+    }
 }

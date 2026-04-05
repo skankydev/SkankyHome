@@ -62,4 +62,15 @@ class StringFacilityTest extends TestCase
         $this->assertEquals('My Field Name', $this->str->toHuman('my_field-name'));
         $this->assertEquals('Module Type', $this->str->toHuman('module_type'));
     }
+
+    public function testDotToFolder(): void {
+        $expected = implode(DIRECTORY_SEPARATOR, ['module', 'part', 'scenario']);
+        $this->assertEquals($expected, $this->str->dotToFolder('module.part.scenario'));
+        $this->assertEquals('single', $this->str->dotToFolder('single'));
+    }
+
+    public function testPreserveCase(): void {
+        $this->assertEquals('Child', $this->str->preserveCase('Children', 'child'));
+        $this->assertEquals('child', $this->str->preserveCase('children', 'child'));
+    }
 }

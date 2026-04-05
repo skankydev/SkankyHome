@@ -4,7 +4,7 @@ namespace SkankyDev\Queue\Job;
 
 use DateTime;
 use stdClass;
-use MongoDB\BSON\ObjectID;
+use MongoDB\BSON\ObjectId;
 use MongoDB\BSON\Persistable;
 use MongoDB\BSON\UTCDateTime;
 use MongoDB\BSON\Document;

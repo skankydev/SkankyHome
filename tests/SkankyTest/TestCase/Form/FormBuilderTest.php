@@ -102,4 +102,58 @@ class FormBuilderTest extends TestCase
         $form->build();
         $form->renderField('does_not_exist');
     }
+
+    // ── render / open / close ─────────────────────────────────────────────────
+
+    public function testOpenReturnsFormOpenTag(): void {
+        $form = $this->makeForm();
+        $form->build();
+        $html = $form->open();
+
+        $this->assertStringContainsString('<form', $html);
+        $this->assertStringContainsString('method="POST"', $html);
+    }
+
+    public function testOpenCallsBuildWhenFieldsEmpty(): void {
+        $form = $this->makeForm();
+        // Fields are empty — open() should auto-call build()
+        $html = $form->open();
+        $this->assertNotEmpty($form->getFields());
+        $this->assertStringContainsString('<form', $html);
+    }
+
+    public function testOpenIncludesCsrfForPost(): void {
+        $form = $this->makeForm();
+        $form->build();
+        $html = $form->open();
+
+        $this->assertStringContainsString('_token', $html);
+    }
+
+    public function testCloseReturnsClosingTag(): void {
+        $form = $this->makeForm();
+        $this->assertEquals('</form>', $form->close());
+    }
+
+    public function testRenderProducesFullForm(): void {
+        $form = $this->makeForm();
+        $form->build();
+        $html = $form->render();
+
+        $this->assertStringContainsString('<form', $html);
+        $this->assertStringContainsString('</form>', $html);
+        $this->assertStringContainsString('<input', $html);
+        $this->assertStringContainsString('name="name"', $html);
+        $this->assertStringContainsString('<button', $html);
+    }
+
+    public function testAddWithOldInputUsesFlashedValue(): void {
+        // Simuler un ancien input flashé en session
+        $_SESSION['old'] = ['name' => 'Simon flashé'];
+
+        $form = new TestForm();
+        $form->build();
+
+        $this->assertEquals('Simon flashé', $form->getFields()['name']->getValue());
+    }
 }

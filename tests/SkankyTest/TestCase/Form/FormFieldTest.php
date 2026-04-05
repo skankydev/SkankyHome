@@ -129,4 +129,41 @@ class FormFieldTest extends TestCase
         $ref = new \ReflectionProperty($field, 'type');
         $this->assertEquals('radio', $ref->getValue($field));
     }
+
+    // ── render / makePath ────────────────────────────────────────────────────��
+
+    public function testRenderProducesHtml(): void {
+        $field = new TextField('username', ['label' => 'Nom', 'value' => 'Simon']);
+        $html  = $field->render();
+
+        $this->assertStringContainsString('<input', $html);
+        $this->assertStringContainsString('name="username"', $html);
+        $this->assertStringContainsString('Simon', $html);
+    }
+
+    public function testRenderWithErrors(): void {
+        $field = new TextField('username', ['errors' => ['Champ requis']]);
+        $html  = $field->render();
+
+        $this->assertStringContainsString('Champ requis', $html);
+        $this->assertStringContainsString('has-error', $html);
+    }
+
+    public function testRenderRequiredAddsClass(): void {
+        $field = new TextField('username', ['rules' => ['required'], 'label' => 'Nom']);
+        $html  = $field->render();
+
+        $this->assertStringContainsString('required', $html);
+    }
+
+    public function testMakePathThrowsForMissingTemplate(): void {
+        $field = new TextField('test', ['viewHtml' => 'fields.nonexistent']);
+        // Override the protected viewHtml property via reflection
+        $ref = new \ReflectionProperty($field, 'viewHtml');
+        $ref->setValue($field, 'fields.nonexistent');
+
+        $this->expectException(\Exception::class);
+        $this->expectExceptionCode(601);
+        $field->render();
+    }
 }

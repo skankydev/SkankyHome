@@ -21,6 +21,7 @@ Config::$conf = [];
 
 Config::set('default.namespace', 'App');
 Config::set('default.action', 'index');
+Config::set('view.folder', __DIR__ . '/App/View');
 
 Config::set('db.MongoDB', [
     'host'     => '127.0.0.1',

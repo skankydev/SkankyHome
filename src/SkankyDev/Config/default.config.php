@@ -66,6 +66,9 @@ return [
 			'hex_color'  => \SkankyDev\Validation\Rules\HexColor::class,
 		],
 	],
+	'view' => [
+		'folder' => VIEW_FOLDER,
+	],
 	'timehelper'=> [
 		'format'=>'Y-m-d H:i:s',
 		'timezone'=>'UTC'

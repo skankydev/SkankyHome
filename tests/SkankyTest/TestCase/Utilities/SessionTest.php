@@ -77,4 +77,19 @@ class SessionTest extends TestCase
     public function testGetAndCleanReturnsNullOnMissingKey(): void {
         $this->assertNull(Session::getAndClean('nonexistent'));
     }
+
+    // ── start / destroy ───────────────────────────────────────────────────────
+
+    public function testStartDoesNotThrow(): void
+    {
+        // session_start() en mode CLI peut émettre une notice mais ne doit pas planter
+        @Session::start();
+        $this->assertTrue(true);
+    }
+
+    public function testDestroyDoesNotThrow(): void
+    {
+        @Session::destroy();
+        $this->assertTrue(true);
+    }
 }

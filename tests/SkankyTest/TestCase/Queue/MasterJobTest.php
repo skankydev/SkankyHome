@@ -3,6 +3,8 @@
 namespace SkankyTest\TestCase\Queue;
 
 use MongoDB\BSON\UTCDateTime;
+use MongoDB\Model\BSONArray;
+use MongoDB\Model\BSONDocument;
 use PHPUnit\Framework\TestCase;
 use SkankyDev\Queue\Job\MasterJob;
 
@@ -20,6 +22,14 @@ class TestJob extends MasterJob
 class TimedJob extends MasterJob
 {
     public ?\DateTime $scheduled_at = null;
+
+    public function run(): void {}
+}
+
+#[\AllowDynamicProperties]
+class ArrayJob extends MasterJob
+{
+    public array $items = [];
 
     public function run(): void {}
 }
@@ -104,5 +114,26 @@ class MasterJobTest extends TestCase
         $job->bsonUnserialize(['__pclass' => 'X', 'scheduled_at' => $utcDate]);
 
         $this->assertInstanceOf(\DateTime::class, $job->scheduled_at);
+    }
+
+    public function testBsonUnserializeConvertsBsonArrayToArray(): void
+    {
+        $job  = new ArrayJob();
+        $bson = new BSONArray(['a', 'b', 'c']);
+        $job->bsonUnserialize(['__pclass' => 'X', 'items' => $bson]);
+
+        $this->assertIsArray($job->items);
+        $this->assertEquals(['a', 'b', 'c'], $job->items);
+    }
+
+    public function testBsonUnserializeConvertsBsonDocumentToArray(): void
+    {
+        $job  = new ArrayJob();
+        $bson = new BSONDocument(['key' => 'value']);
+        $job->bsonUnserialize(['__pclass' => 'X', 'items' => $bson]);
+
+        $this->assertIsArray($job->items);
+        $this->assertArrayHasKey('key', $job->items);
+        $this->assertEquals('value', $job->items['key']);
     }
 }

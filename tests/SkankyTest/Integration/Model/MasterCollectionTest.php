@@ -2,6 +2,7 @@
 
 namespace SkankyTest\Integration\Model;
 
+use DateTime;
 use MongoDB\BSON\ObjectId;
 use SkankyDev\Database\MongoClient;
 use SkankyDev\Model\MasterCollection;
@@ -22,6 +23,23 @@ class TestItemCollection extends MasterCollection
     protected string $collectionName = 'test_items';
     protected string $documentClass  = TestItem::class;
     protected array  $behaviorsName  = []; // pas de behaviors pour l'isolation
+}
+
+// ── Fixtures avec Behaviors ───────────────────────────────────────────────────
+
+#[\AllowDynamicProperties]
+class TimedItem extends MasterDocument
+{
+    public string    $name       = '';
+    public ?DateTime $created_at = null;
+    public ?DateTime $updated_at = null;
+}
+
+class TimedItemCollection extends MasterCollection
+{
+    protected string $collectionName = 'timed_items';
+    protected string $documentClass  = TimedItem::class;
+    // behaviorsName defaults to ['Timed'] from MasterCollection
 }
 
 // ── Tests ─────────────────────────────────────────────────────────────────────
@@ -233,5 +251,68 @@ class MasterCollectionTest extends IntegrationTestCase
         $original = new ObjectId();
         $fromStr  = $this->col->createId((string) $original);
         $this->assertEquals((string) $original, (string) $fromStr);
+    }
+
+    // ── aggregate ─────────────────────────────────────────────────────────────
+
+    public function testAggregateReturnsResults(): void
+    {
+        $this->col->insert(new TestItem(['name' => 'a', 'value' => 1]));
+        $this->col->insert(new TestItem(['name' => 'b', 'value' => 1]));
+        $this->col->insert(new TestItem(['name' => 'c', 'value' => 2]));
+
+        $pipeline = [
+            ['$group' => ['_id' => '$value', 'count' => ['$sum' => 1]]],
+            ['$sort'  => ['_id' => 1]],
+        ];
+
+        $results = $this->col->aggregate($pipeline);
+        $this->assertIsArray($results);
+        $this->assertCount(2, $results);
+        $this->assertEquals(2, $results[0]['count']); // value=1 → 2 documents
+        $this->assertEquals(1, $results[1]['count']); // value=2 → 1 document
+    }
+
+    // ── delete() ─────────────────────────────────────────────────────────────
+
+    public function testDeleteRemovesMatchingDocuments(): void
+    {
+        $this->col->insert(new TestItem(['name' => 'del-a', 'value' => 99]));
+        $this->col->insert(new TestItem(['name' => 'del-b', 'value' => 99]));
+        $this->col->insert(new TestItem(['name' => 'keep', 'value' => 1]));
+
+        $this->col->delete(['value' => 99]);
+
+        $this->assertEquals(1, $this->col->count());
+        $remaining = $this->col->findOne();
+        $this->assertEquals('keep', $remaining->name);
+    }
+
+    // ── callBehaviors via TimedBehavior ───────────────────────────────────────
+
+    public function testBehaviorSetsTimestampsOnInsert(): void
+    {
+        $this->dropCollection('timed_items');
+        $col  = new TimedItemCollection();
+        $item = new TimedItem(['name' => 'with-behavior']);
+
+        $col->insert($item);
+
+        $this->assertInstanceOf(DateTime::class, $item->created_at);
+        $this->assertInstanceOf(DateTime::class, $item->updated_at);
+    }
+
+    public function testBehaviorSetsUpdatedAtOnUpdate(): void
+    {
+        $this->dropCollection('timed_items');
+        $col  = new TimedItemCollection();
+        $item = new TimedItem(['name' => 'before']);
+        $col->insert($item);
+
+        $item->name = 'after';
+        $col->update($item);
+
+        $updated = $col->findById((string) $item->_id);
+        $this->assertNotNull($updated->updated_at);
     }
 }

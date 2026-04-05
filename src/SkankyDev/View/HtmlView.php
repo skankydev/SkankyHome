@@ -13,6 +13,7 @@
 
 namespace SkankyDev\View;
 
+use SkankyDev\Config\Config;
 use SkankyDev\Core\MasterFactory;
 use SkankyDev\Utilities\Traits\HtmlHelper;
 use SkankyDev\Utilities\Traits\StringFacility;
@@ -46,7 +47,7 @@ class HtmlView {
 	 * @throws \Exception (code 601) if the file does not exist
 	 */
 	public function makePath(string $name): string {
-		$fileName = VIEW_FOLDER . DS . $this->dotToFolder($name) . '.php';
+		$fileName = Config::get('view.folder') . DS . $this->dotToFolder($name) . '.php';
 		if (!file_exists($fileName)) {
 			throw new \Exception("the file : {$fileName} does not exist", 601);
 		}

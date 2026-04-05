@@ -13,6 +13,7 @@
 
 namespace SkankyDev\Form;
 
+use SkankyDev\Config\Config;
 use SkankyDev\Utilities\Traits\HtmlHelper;
 use SkankyDev\Utilities\Traits\StringFacility;
 
@@ -60,7 +61,7 @@ abstract class FormField {
 	 */
 	public function makePath(string $name): string {
 		$name = $this->dotToFolder($name);
-		$fileName = VIEW_FOLDER.DS.$name.'.php';
+		$fileName = Config::get('view.folder').DS.$name.'.php';
 		if(!file_exists($fileName)){
 			throw new \Exception("the file : {$fileName} does not exist", 601);
 		}

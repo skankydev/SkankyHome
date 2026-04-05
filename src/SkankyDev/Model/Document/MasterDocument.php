@@ -16,7 +16,7 @@ namespace SkankyDev\Model\Document;
 use DateTime;
 use stdClass;
 use JsonSerializable;
-use MongoDB\BSON\ObjectID;
+use MongoDB\BSON\ObjectId;
 use MongoDB\BSON\Persistable;
 use MongoDB\BSON\UTCDateTime;
 use MongoDB\BSON\Document;
@@ -97,9 +97,9 @@ class MasterDocument implements JsonSerializable, Persistable {
 				$this->{$key} = $data[$key];
 				if(preg_match('/[a-zA-Z0-9_-]*_id/', $key)){
 					if(empty($data[$key])){
-						$this->{$key} = new ObjectID();
+						$this->{$key} = new ObjectId();
 					}else{
-						$this->{$key} = new ObjectID($data[$key]);
+						$this->{$key} = new ObjectId($data[$key]);
 					}
 				}
 			}
@@ -120,9 +120,9 @@ class MasterDocument implements JsonSerializable, Persistable {
 				$prop[$key] = new UTCDateTime($this->{$key});
 			}else if(preg_match('/[a-zA-Z0-9_-]*_id/', $key)){
 				if(empty($value)){
-					$prop[$key] = new ObjectID();
+					$prop[$key] = new ObjectId();
 				}else{
-					$prop[$key] = new ObjectID($value);
+					$prop[$key] = new ObjectId($value);
 				}
 			}
 		}

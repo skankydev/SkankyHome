@@ -14,8 +14,9 @@
         ]
     },
     "autoload-dev": {
-        "psr-4":{
-            "SkankyTest\\":"tests/SkankyTest"
+        "psr-4": {
+            "SkankyTest\\": "tests/SkankyTest",
+            "TestApp\\":    "tests/App"
         }
     },
     "authors": [

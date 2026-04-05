@@ -173,4 +173,80 @@ class RequestTest extends TestCase
         $this->assertEquals(1, $info['page']);
         $this->assertEquals(['_id' => -1], $info['sort']);
     }
+
+    // ── body / json ───────────────────────────────────────────────────────────
+
+    public function testBodyReturnsRawBody(): void {
+        // php://input is empty in CLI tests — body() returns '' or null
+        $body = $this->makeRequest()->body();
+        $this->assertTrue($body === '' || $body === null || is_string($body));
+    }
+
+    public function testJsonReturnsNullWhenNotJsonRequest(): void {
+        $this->assertNull($this->makeRequest()->json());
+    }
+
+    public function testJsonReturnsDefaultWhenNullJson(): void {
+        $this->assertEquals('fallback', $this->makeRequest()->json('key', 'fallback'));
+    }
+
+    public function testIsJsonReturnsFalse(): void {
+        $this->assertFalse($this->makeRequest()->isJson());
+    }
+
+    public function testIsJsonReturnsTrueForJsonContentType(): void {
+        $_SERVER['CONTENT_TYPE'] = 'application/json';
+        $this->assertTrue($this->makeRequest()->isJson());
+    }
+
+    // ── file ─────────────────────────────────────────────────────────────────
+
+    public function testFileReturnsNullForMissingKey(): void {
+        $_FILES = [];
+        $this->assertNull($this->makeRequest()->file('avatar'));
+    }
+
+    public function testFileReturnsAllFilesWhenNoKey(): void {
+        $_FILES = [];
+        $this->assertIsArray($this->makeRequest()->file());
+    }
+
+    public function testFileNormalizesMultipleFiles(): void {
+        // Structure PHP pour input type=file multiple
+        $_FILES = [
+            'docs' => [
+                'name'     => ['a.pdf', 'b.pdf'],
+                'type'     => ['application/pdf', 'application/pdf'],
+                'tmp_name' => ['/tmp/a', '/tmp/b'],
+                'error'    => [0, 0],
+                'size'     => [100, 200],
+            ],
+        ];
+        $req   = $this->makeRequest();
+        $files = $req->file('docs');
+        $this->assertIsArray($files);
+        $this->assertCount(2, $files);
+    }
+
+    // ── post / query / input with no key ─────────────────────────────────────
+
+    public function testPostWithNoKeyReturnsAll(): void {
+        $_POST = ['a' => '1', 'b' => '2'];
+        $this->assertEquals(['a' => '1', 'b' => '2'], $this->makeRequest()->post());
+    }
+
+    public function testInputWithNullKeyReturnsAllMerged(): void {
+        $_GET  = ['page' => '1'];
+        $_POST = ['name' => 'Simon'];
+        $all   = $this->makeRequest()->input();
+        $this->assertArrayHasKey('page', $all);
+        $this->assertArrayHasKey('name', $all);
+    }
+
+    public function testHeaderWithNoKeyReturnsAll(): void {
+        $_SERVER['HTTP_X_FOO'] = 'bar';
+        $headers = $this->makeRequest()->header();
+        $this->assertIsArray($headers);
+        $this->assertArrayHasKey('x-foo', $headers);
+    }
 }

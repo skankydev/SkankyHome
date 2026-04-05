@@ -198,7 +198,7 @@ abstract class MasterCollection {
 	 */
 	public function delete(array $filter): bool {
 		try {
-			$result = $this->collection->delete($filter);
+			$result = $this->collection->deleteMany($filter);
 			return $result->getDeletedCount();
 		} catch (\Exception $e) {
 			throw $e;

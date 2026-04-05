@@ -185,4 +185,12 @@ class ValidatorTest extends TestCase
         $validator = new Validator(['name' => 'does_not_exist'], ['name' => 'Simon']);
         $validator->validate();
     }
+
+    public function testSetRulesReplacesRules(): void {
+        $validator = new Validator(['name' => 'required'], ['name' => '']);
+        $this->assertFalse($validator->validate()); // required fails on empty
+
+        $validator->setRules(['name' => 'email']); // email passes on empty
+        $this->assertTrue($validator->validate());
+    }
 }

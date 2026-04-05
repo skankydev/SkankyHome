@@ -47,7 +47,7 @@ function asset($path) {
  * Générer une URL
  */
 function url(array $params) {
-	return UrlBuilder::build($params);
+	return UrlBuilder::_build($params);
 }
 
 /**
@@ -110,11 +110,11 @@ function csrf_field() {
 }
 
 function old($key, $default = '') {
-	return Session::get('old.' . $key, $default);
+	return Session::get('old.' . $key) ?? $default;
 }
 
 function error($key) {
-	$errors = Session::get('errors', []);
+	$errors = Session::get('errors') ?? [];
 	if (isset($errors[$key])) {
 		return '<span class="error">' . e($errors[$key]) . '</span>';
 	}
