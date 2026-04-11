@@ -24,7 +24,14 @@ class UrlBuilder
 {
 	use Singleton, StringFacility;
 	
-	public function build(array $link, $absolut = false){
+	/**
+	 * Builds a URL from a link array. Tries to match a declared route first,
+	 * falls back to the convention-based URL. Appends GET params if provided.
+	 * @param  array $link     route link (controller, action, namespace, params, get)
+	 * @param  bool  $absolut  if true, prepends scheme + host for an absolute URL
+	 * @return string          the generated URL
+	 */
+	public function build(array $link, bool $absolut = false): string {
 		$link = $this->completLink($link);
 		$route = $this->matcheWithRoute($link);
 		
@@ -44,12 +51,16 @@ class UrlBuilder
 		return $url;
 	}
 
-	public function buildCurrent( $absolut = false){
+	/** Builds the URL for the current route. Useful for canonical links. */
+	public function buildCurrent(bool $absolut = false): string {
 		$current = Router::_getCurrentRoute()->getLink();
 		return $this->build($current,$absolut);
 	}
 
-	public function completLink(array $link){
+	/**
+	 * Fills in missing link keys (namespace, controller, action) from the current route.
+	 */
+	public function completLink(array $link): array {
 		$current = Router::_getCurrentRoute()->getLink();
 		if(!isset($link['namespace'])){
 			$link['namespace'] = $current['namespace'];
@@ -63,7 +74,11 @@ class UrlBuilder
 		return $link;
 	}
 
-	public function matcheWithRoute($link){
+	/**
+	 * Tries to find a declared route matching the given link (controller + action + namespace).
+	 * @return \SkankyDev\Http\Routing\Route\Route|null
+	 */
+	public function matcheWithRoute(array $link): mixed {
 		$collection = Router::_getRoutesCollection();
 		if(!empty($collection)){
 			//find
@@ -80,7 +95,11 @@ class UrlBuilder
 		return null;
 	}
 
-	public function createUrlFromRoute($link,$route){
+	/**
+	 * Builds a URL by filling in the route schema with the provided params.
+	 * Named params (`:slug`) are matched by key first, then by position.
+	 */
+	public function createUrlFromRoute(array $link, mixed $route): string {
 		$shema = $route->getShema();
 		$tmp = trim($shema,'/');
 		$tmp = explode('/', $tmp);
@@ -103,13 +122,17 @@ class UrlBuilder
 		return '/'.$url;
 	}
 
-	public function createUrlFromDefault($link){
+	/**
+	 * Builds a convention-based URL: /namespace/controller/action/param1/param2.
+	 * Omits namespace if it is the default, omits action if it is the default and there are no params.
+	 */
+	public function createUrlFromDefault(array $link): string {
 		$url = '';
 		if($link['namespace']!==Config::getDefaultNamespace()){
 			$url .= '/'.$this->toDash($link['namespace']);
 		}
 		$url .= '/'.$this->toDash($link['controller']);
-		if($link['action'] !== Config::getDefaultAction()){
+		if($link['action'] !== Config::getDefaultAction() || isset($link['params'])&&!empty($link['params'])){
 			$url .= '/'.$this->toDash($link['action']);
 		}
 
@@ -121,7 +144,10 @@ class UrlBuilder
 		return $url;
 	}
 
-	public function addGet($url,$get){
+	/**
+	 * Appends a GET query string to a URL, URL-encoding all keys and values.
+	 */
+	public function addGet(string $url, array $get): string {
 		$url .= '?';
 		foreach ($get as $key => $value) {
 			$url .= urlencode($key).'='.urlencode($value).'&';

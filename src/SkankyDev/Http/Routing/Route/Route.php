@@ -14,6 +14,8 @@
 
 namespace SkankyDev\Http\Routing\Route;
 
+use SkankyDev\Config\Config;
+
 /**
  * 	
  */
@@ -40,7 +42,12 @@ class Route
 	 * @param array  $link   ['controller'=>'','action'=>'','params'=>['name'=>'value','name'=>'value'...]]
 	 * @param array  $rules  the rules for match with uri ex ['slug'=>'[a-zA-Z0-9-]*']
 	 */
-	public function __construct(string $shema, array $link,$rules = []){
+	/**
+	 * @param string $shema  route pattern e.g. `/article/:slug`
+	 * @param array  $link   target: controller, action, namespace
+	 * @param array  $rules  regex rules for named segments e.g. `['slug' => '[a-z0-9-]+']`
+	 */
+	public function __construct(string $shema, array $link, array $rules = []){
 		$this->shema = $shema;
 		$this->link = $link;
 		$this->initLink();
@@ -52,14 +59,18 @@ class Route
 	/**
 	 * init the link with the default value
 	 */
-	private function initLink(){
+	/** Fills in default action and namespace if not provided in the link array. */
+	private function initLink(): void {
 		if(!isset($this->link['action'])){
-			$this->link['action'] = 'index';
+			$this->link['action'] = Config::getDefaultAction();
 		}
 		if(!isset($this->link['namespace'])){
-			$this->link['namespace'] = 'App';	
+			$this->link['namespace'] = Config::getDefaultNamespace();	
 		}		
 	}
+
+	
+	
 
 	/**
 	 * get the link array
@@ -88,7 +99,11 @@ class Route
 	/**
 	 * create te regex for matchin route
 	 */
-	private function makeRegex(){
+	/**
+	 * Compiles the route schema into a regex pattern.
+	 * Named segments (`:slug`) are replaced with their corresponding rule pattern.
+	 */
+	private function makeRegex(): void {
 		$tmp = str_replace('/','\/',$this->shema);
 		$tmp = preg_replace_callback('/:[a-z0-9]*/',[$this,'pregCallback'],$tmp);
 		$this->regex = '/^'.$tmp.'$/';
@@ -112,7 +127,10 @@ class Route
 	 * get the regex for matche with uri
 	 * @return string the regex
 	 */
-	public function getMatcheRules(){
+	/**
+	 * Returns the compiled regex for this route. Compiles it on first call.
+	 */
+	public function getMatcheRules(): string {
 		if(!$this->regex){
 			$this->makeRegex();
 		}

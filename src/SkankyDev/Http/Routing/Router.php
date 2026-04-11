@@ -40,7 +40,13 @@ class Router
 	 * @param array  $link   ['controller'=>'','action'=>'','params'=>['name'=>'value','name'=>'value'...]]
 	 * @param array  $rules  the rules for match with uri ex ['slug'=>'[a-zA-Z0-9-]*']
 	 */
-	public function add(string $schema,array $link,$rules = []){
+	/**
+	 * Registers a named route in the collection.
+	 * @param string $schema the route pattern e.g. `/article/:slug`
+	 * @param array  $link   target: controller, action, namespace
+	 * @param array  $rules  regex rules for pattern segments e.g. `['slug' => '[a-z0-9-]+']`
+	 */
+	public function add(string $schema, array $link, array $rules = []): Route {
 		$route = new Route($schema,$link,$rules);
 		$this->routesCollection[] = $route;
 		return $route;
@@ -50,7 +56,8 @@ class Router
 	 * get the routes collection
 	 * @return arra a array with all routes
 	 */
-	public function getRoutesCollection(){
+	/** Returns the full declared route collection. */
+	public function getRoutesCollection(): ?array {
 		return $this->routesCollection;
 	}
 
@@ -58,7 +65,8 @@ class Router
 	 * get the current route
 	 * @return SkankyDev\Routing\Route\CurrenteRoute the currente route object
 	 */
-	public function getCurrentRoute(){
+	/** Returns the current resolved route. */
+	public function getCurrentRoute(): CurrentRoute|false {
 		return $this->current;
 	}
 
@@ -67,7 +75,12 @@ class Router
 	 * @param  string $uri the uri form user request 
 	 * @return SkankyDev\Routing\Route\CurrenteRoute   the currente route
 	 */
-	public function findCurrentRoute(string $uri){
+	/**
+	 * Resolves the current route from a URI.
+	 * Tries declared routes first, falls back to convention-based parsing.
+	 * @param  string $uri the request URI path
+	 */
+	public function findCurrentRoute(string $uri): CurrentRoute {
 		$tmp = explode('?', $uri);
 		$uri = $tmp[0];
 		$route = $this->matchRouteUri($uri);
@@ -80,7 +93,11 @@ class Router
 	 * @param  string $uri                         the uri form user request 
 	 * @return SkankyDev\Routing\Route\Route|null  if a route matche return route or null
 	 */
-	public function matchRouteUri(string $uri){
+	/**
+	 * Iterates the route collection and returns the first route whose regex matches the URI.
+	 * @return Route|null null if no declared route matches
+	 */
+	public function matchRouteUri(string $uri): ?Route {
 		if(!empty($this->routesCollection)){
 			foreach ($this->routesCollection as $route) {
 				$regex = $route->getMatcheRules();

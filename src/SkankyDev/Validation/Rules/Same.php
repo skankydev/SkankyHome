@@ -16,17 +16,19 @@ namespace SkankyDev\Validation\Rules;
 use SkankyDev\Validation\Rules\Rule;
 
 
+/**
+ * Validates that the field value is strictly equal to another named field.
+ * Similar to Confirmed but the target field name is explicit: `same:other_field`.
+ */
 class Same extends Rule {
 
-    public function __construct(protected string $otherField) {}
-    
-    public function check(string $field, mixed $value, array $data = []): bool {
-        $otherValue = $this->getValue($this->otherField, $data);
-        return $value === $otherValue;
-    }
-    
-    public function message(string $field): string {
-        return "Le champ {$field} doit être identique à {$this->otherField}";
-    }
-    
+	public function __construct(protected string $otherField) {}
+
+	public function check(string $field, mixed $value, array $data = []): bool {
+		return $value === $this->getValue($this->otherField, $data);
+	}
+
+	public function message(string $field): string {
+		return "Le champ {$field} doit être identique à {$this->otherField}";
+	}
 }

@@ -16,53 +16,53 @@ namespace SkankyDev\Utilities\Traits;
 use SkankyDev\Http\UrlBuilder;
 
 /**
-* 
-*/
+ * View helper methods for generating HTML snippets.
+ * Used by HtmlView and any class that needs to produce links or wrapped tags.
+ */
 trait HtmlHelper {
-	
+
 	/**
-	 * creat the html <a> balise
-	 * @param  string $content the content of the a balise
-	 * @param  array  $link    the link see url for mor info
-	 * @param  array  $attr    the attribute of <a> balise
-	 * @return string          the <a> balise
+	 * Generates an `<a>` tag pointing to a framework URL.
+	 * @param  string $content inner HTML/text of the anchor
+	 * @param  array  $link    route array passed to UrlBuilder::build()
+	 * @param  array  $attr    additional HTML attributes (class, id, …)
+	 * @return string          the rendered `<a>` tag
 	 */
-	public function link($content,$link = [],$attr=[]){
+	public function link(string $content, array $link = [], array $attr = []): string {
 		$attr['href'] = UrlBuilder::_build($link);
-		$retour = $this->surround($content,'a',$attr);
-		return $retour;
+		return $this->surround($content, 'a', $attr);
 	}
 
-	public function url($link){
+	/**
+	 * Resolves a route array to a URL string.
+	 * @param  array $link route array passed to UrlBuilder::build()
+	 * @return string      the URL string
+	 */
+	public function url(array $link): string {
 		return UrlBuilder::_build($link);
 	}
 
 	/**
-	 * creat the html attribute 
-	 * @param  array  $attr list of attribute 
-	 * @return string       the attribute
+	 * Converts a key-value array to an HTML attribute string.
+	 * @param  array  $attr e.g. `['class' => 'btn', 'id' => 'submit']`
+	 * @return string       e.g. `class="btn" id="submit" `
 	 */
-	public function createAttr($attr = []){
+	public function createAttr(array $attr = []): string {
 		$retour = '';
-		if(isset($attr) && !empty($attr)){
-			foreach ($attr as $key => $value) {
-				$retour.= $key .'="'.$value.'" ';
-			}
+		foreach ($attr as $key => $value) {
+			$retour .= $key . '="' . $value . '" ';
 		}
 		return $retour;
 	}
 
 	/**
-	 * surround html tag
-	 * @param  string $content the content text
-	 * @param  string $tag     tag html
-	 * @param  array  $attr    list of attribute 
-	 * @return string          the html
+	 * Wraps content in an HTML tag with optional attributes.
+	 * @param  string $content inner HTML/text
+	 * @param  string $tag     tag name e.g. `div`, `span`
+	 * @param  array  $attr    HTML attributes
+	 * @return string          the rendered HTML element
 	 */
-	public function surround($content,$tag,$attr = []){
-		$retour = '<'.$tag.' '.$this->createAttr($attr).'>';
-		$retour .=  $content.'</'.$tag.'>';
-		return $retour;
+	public function surround(string $content, string $tag, array $attr = []): string {
+		return '<' . $tag . ' ' . $this->createAttr($attr) . '>' . $content . '</' . $tag . '>';
 	}
-
 }

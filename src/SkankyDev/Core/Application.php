@@ -27,6 +27,10 @@ class Application {
 	
 	protected ExceptionHandler $exceptionHandler;
 	
+	/**
+	 * Bootstraps the application: initializes config, sets up the exception handler
+	 * and registers a shutdown function to catch fatal errors.
+	 */
 	public function __construct() {
 		Config::initConf();
 		// Initialiser le gestionnaire d'exceptions
@@ -52,10 +56,14 @@ class Application {
 		});
 	}
 
-	public function run(){
+	/**
+	 * Loads routes, resolves the current route from the request URI,
+	 * runs the middleware pipeline and sends the response.
+	 */
+	public function run(): void {
 		try {
-			Session::start();
-			include_once APP_FOLDER.DS.'config'.DS.'routes.php';
+			
+			include_once APP_FOLDER.DS.'routes'.DS.'routes.php';
 			$request = Request::getInstance();
 			$current = Router::_findCurrentRoute($request->uri());
 			$manager = new MiddlewareManager();

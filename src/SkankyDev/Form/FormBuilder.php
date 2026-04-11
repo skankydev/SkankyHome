@@ -35,6 +35,11 @@ abstract class FormBuilder {
 	protected array $errors = [];
 	protected array $old = [];
 	
+	/**
+	 * @param array  $link       route link array passed to UrlBuilder to build the form action
+	 * @param string $method     HTTP method, defaults to POST
+	 * @param array  $attributes extra HTML attributes on the <form> tag
+	 */
 	public function __construct(array $link = [], string $method = 'POST', array $attributes = []) {
 		$this->action = UrlBuilder::_build($link);
 		$this->method = strtoupper($method);
@@ -47,12 +52,18 @@ abstract class FormBuilder {
 	}
 	
 	/**
-	 * Méthode abstraite à implémenter dans les classes enfants
+	 * Defines the form fields. Must be implemented in concrete form classes.
 	 */
 	abstract public function build(): void;
-	
+
 	/**
-	 * Ajouter un champ au formulaire
+	 * Adds a field to the form.
+	 * Pre-fills the value from old input (flash) or from setData(), in that order.
+	 * Attaches validation errors if any exist for this field name.
+	 * @param string $name    field name, used as HTML name attribute and error key
+	 * @param string $type    field type key as declared in config `class.fields`
+	 * @param array  $options field options (label, rules, value, attributes, etc.)
+	 * @throws \Exception if the field type is not registered
 	 */
 	public function add(string $name, string $type, array $options = []): self {
 		if (!isset($this->fieldTypes[$type])) {
@@ -77,7 +88,7 @@ abstract class FormBuilder {
 	}
 	
 	/**
-	 * Définir le bouton submit
+	 * Sets the submit button label and optional extra attributes.
 	 */
 	public function submit(string $label, array $attributes = []): self {
 		$this->submitLabel = $label;
@@ -86,7 +97,8 @@ abstract class FormBuilder {
 	}
 	
 	/**
-	 * Définir les données du formulaire (pour pré-remplir)
+	 * Pre-fills the form with existing data (e.g. a Document for an edit form).
+	 * Accepts an object — properties are extracted via get_object_vars().
 	 */
 	public function setData(array|object $data): self {
 		if(is_object($data)){
@@ -105,7 +117,7 @@ abstract class FormBuilder {
 	}
 	
 	/**
-	 * Définir les erreurs de validation
+	 * Sets validation errors on the form and propagates them to the corresponding fields.
 	 */
 	public function setErrors(array $errors): self {
 		$this->errors = $errors;
@@ -121,7 +133,7 @@ abstract class FormBuilder {
 	}
 	
 	/**
-	 * Rendre le formulaire complet
+	 * Renders the full form: opening tag, all fields, submit button and closing tag.
 	 */
 	public function render(): string {
 		$html = $this->open();
@@ -140,7 +152,8 @@ abstract class FormBuilder {
 	}
 	
 	/**
-	 * Ouvrir la balise form
+	 * Renders the opening <form> tag, calls build() if fields are not yet initialized,
+	 * and injects a CSRF token for POST forms.
 	 */
 	public function open(): string {
 		if(empty($this->fields)){
@@ -160,14 +173,15 @@ abstract class FormBuilder {
 	}
 	
 	/**
-	 * Fermer la balise form
+	 * Renders the closing </form> tag.
 	 */
 	public function close(): string {
 		return '</form>';
 	}
 	
 	/**
-	 * Rendre un champ spécifique
+	 * Renders a single field by name, useful for custom form layouts.
+	 * @throws \Exception if the field name is not registered
 	 */
 	public function renderField(string $name): string {
 		if (!isset($this->fields[$name])) {
@@ -178,7 +192,7 @@ abstract class FormBuilder {
 	}
 	
 	/**
-	 * Rendre le bouton submit
+	 * Renders the submit button wrapped in a form-group div.
 	 */
 	protected function renderSubmit(): string {
 		$html = '<div class="form-group">';
@@ -189,14 +203,17 @@ abstract class FormBuilder {
 	}
 	
 	/**
-	 * Obtenir tous les champs
+	 * Returns all registered field instances.
 	 */
 	public function getFields(): array {
 		return $this->fields;
 	}
 	
 	/**
-	 * Valider le formulaire
+	 * Validates submitted data against the rules defined in each field.
+	 * Calls build() if fields are not yet initialized.
+	 * Populates errors on the form and its fields on failure.
+	 * @param array $data raw input data (typically from Request::input())
 	 */
 	public function validate(array $data): bool {
 		$this->setData($data);
@@ -226,14 +243,14 @@ abstract class FormBuilder {
 	}
 	
 	/**
-	 * Obtenir les données validées
+	 * Returns the data currently set on the form.
 	 */
 	public function getData(): array {
 		return $this->data;
 	}
 	
 	/**
-	 * Obtenir les erreurs
+	 * Returns the validation errors indexed by field name.
 	 */
 	public function getErrors(): array {
 		return $this->errors;

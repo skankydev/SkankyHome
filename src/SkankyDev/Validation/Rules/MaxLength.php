@@ -15,8 +15,9 @@ namespace SkankyDev\Validation\Rules;
 
 use SkankyDev\Validation\Rules\Rule;
 
+/** Validates that the string length (mb_strlen) does not exceed $max characters. Passes on empty values. */
 class MaxLength extends Rule {
-	
+
 	public function __construct(protected int $max) {}
 	
 	public function check(string $field, mixed $value, array $data = []): bool {

@@ -15,63 +15,66 @@ namespace SkankyDev\Utilities;
 
 use SkankyDev\Utilities\Traits\ArrayPathable;
 
+/**
+ * Wraps a named browser cookie with dot-notation get/set/delete access.
+ * The cookie payload is stored as a JSON-encoded string.
+ */
 class Cookie {
 
 	use ArrayPathable;
 
-	private $data = [];
-	private $name;
-	private $time;
-	private $secure;
-	private $httponly;
+	private array  $data     = [];
+	private string $name;
+	private int    $time;
+	private bool   $secure;
+	private bool   $httponly;
 
-	public function __construct($name,$time = 0,$secure=false,$httponly=true){
-		$this->name = $name;
-		$this->time = ($time)?time()+$time:0;
-		$this->secure = $secure;
+	/**
+	 * @param string $name     cookie name
+	 * @param int    $time     lifetime in seconds from now; 0 = session cookie
+	 * @param bool   $secure   transmit over HTTPS only
+	 * @param bool   $httponly inaccessible to JavaScript
+	 */
+	public function __construct(string $name, int $time = 0, bool $secure = false, bool $httponly = true) {
+		$this->name     = $name;
+		$this->time     = $time ? time() + $time : 0;
+		$this->secure   = $secure;
 		$this->httponly = $httponly;
-		if(isset($_COOKIE[$this->name])){
-			$this->data = unserialize($_COOKIE[$this->name]);
+		if (isset($_COOKIE[$this->name])) {
+			$this->data = json_decode($_COOKIE[$this->name], true) ?? [];
 		}
 	}
 
-	/**
-	 * set cookie
-	 */
-	public function setCookie(){
-		//voir pour $path = uri mais je sais pas si ca peux etre utile
-		//voir pour $domaine = server mais je sais pas si ca peux etre utile
-		setcookie($this->name, serialize($this->data), $this->time,'/',$_SERVER['HTTP_HOST'],$this->secure,$this->httponly);
+	/** Writes the current data array back to the browser cookie. */
+	public function setCookie(): void {
+		setcookie($this->name, json_encode($this->data), $this->time, '/', $_SERVER['HTTP_HOST'], $this->secure, $this->httponly);
 	}
 
 	/**
-	 * set value in cookie path
-	 * @param string  $path     the path to the data separated by dot
-	 * @param mixed   $value    the value
-	 * @return  void
+	 * Returns a value from the cookie using a dot-notation path.
+	 * Returns the full data array when $path is empty.
+	 * @param string $path dot-separated key e.g. `user.name`
 	 */
-	public function get($path = ''){
-		return $this->arrayGet($path,$this->data);
+	public function get(string $path = ''): mixed {
+		return $this->arrayGet($path, $this->data);
 	}
 
 	/**
-	 * set value in cookie path
-	 * @param string  $path     the path to the data separated by dot
-	 * @param mixed   $value    the value
-	 * @return  void
+	 * Sets a value in the cookie at a dot-notation path and persists immediately.
+	 * @param string $path  dot-separated key e.g. `user.name`
+	 * @param mixed  $value the value to store
 	 */
-	public function set($path,$value){
-		$result = $this->arraySet($path,$value,$this->data);
-		return $this->setCookie();
+	public function set(string $path, mixed $value): void {
+		$this->arraySet($path, $value, $this->data);
+		$this->setCookie();
 	}
 
 	/**
-	 * delete value in cookie path
-	 * @param  string  $path     the path to the data separated by dot
-	 * @return void
+	 * Deletes a value from the cookie at a dot-notation path and persists immediately.
+	 * @param string $path dot-separated key e.g. `user.name`
 	 */
-	public function delete($path = ''){
-		$this->arrayDelete($path,$this->data);
-		return $this->setCookie();
+	public function delete(string $path = ''): void {
+		$this->arrayDelete($path, $this->data);
+		$this->setCookie();
 	}
 }

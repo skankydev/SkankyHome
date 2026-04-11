@@ -162,7 +162,7 @@
 }
 
 .led-point {
-	width: $p-m;
+	max-width: $p-m;
 	height: 20px;
 	background: rgba($neon-purple,0.5);
 	cursor: pointer;

@@ -15,7 +15,7 @@ class SendScenarioJob extends MasterJob {
 
 	public function __construct(Module $module, Scenario $scenario){
 		$datas = $scenario->lines;
-		$this->scenarioId = $scenario->id;
+		$this->scenarioId = $scenario->_id;
 		$result = [];
 		foreach ($datas as $key => $value) {
 			$result['line_'.$key] = $value;

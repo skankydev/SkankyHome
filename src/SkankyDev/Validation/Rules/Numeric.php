@@ -15,18 +15,17 @@ namespace SkankyDev\Validation\Rules;
 
 use SkankyDev\Validation\Rules\Rule;
 
+/** Validates that the value is numeric (integer or float string). Passes on empty values. */
 class Numeric extends Rule {
 
 	public function check(string $field, mixed $value, array $data = []): bool {
 		if ($this->isEmpty($value)) {
 			return true;
 		}
-		
 		return is_numeric($value);
 	}
-	
+
 	public function message(string $field): string {
 		return "Le champ {$field} doit être un nombre";
 	}
-
 }

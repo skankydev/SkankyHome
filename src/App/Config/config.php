@@ -16,16 +16,8 @@ use App\Middlewares\TrucMiddleware;
 
 return [
 	'class' => [
-		'middleware' => [
-			'truc' => TrucMiddleware::class,
-			'bidule' => BiduleMiddleware::class,
-		],
 		'fields' => [
-			'icon'     => \App\Form\Fields\IconField::class,
+			'icon' => \App\Form\Fields\IconField::class,
 		]
 	],
-	'middlewares' => [
-		'truc',
-	],
-	
 ];

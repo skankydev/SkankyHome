@@ -36,14 +36,14 @@ class MqttSender {
 		
 		$client->publish($topic, $message, $qos);
 		Log::mqtt('Published', $topic, $message);
-		self::getClient($client);
+		self::disconnect($client);
 	}
 	
 	public static function disconnect(MqttClient $client): void {
 		if ($client !== null) {
 			$client->disconnect();
 			$client = null;
-			Log::mqtt('Disconnected from broker');
+			//Log::mqtt('Disconnected from broker');
 		}
 	}
 }

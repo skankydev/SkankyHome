@@ -406,16 +406,16 @@ onBeforeUnmount(() => {
 						</div>
 						<div>
 							<div class="pb-m">
-								<div class="btn-mini btn-info mh-s" @click="addStep(keyLine)"><i class="icon-add"></i></div>
-								<div class="btn-mini btn-warning mh-s" @click="duplicateStep(keyLine, keySteps)" title="Dupliquer step"><i class="icon-copy"></i></div>
-								<div v-if=" line.steps.length > 1" class="btn-mini btn-error mh-s" @click="removeStep(keyLine,keySteps)"><i class="icon-trash"></i></div>
-								<div class="btn-mini btn-success mh-s" @click="previewSegments(step.segments)"><i class="icon-upload"></i></div>
+								<div class="btn-mini btn-info mh-s" @click="addStep(keyLine)" data-tooltip="Ajouter un step"><i class="icon-add"></i></div>
+								<div class="btn-mini btn-warning mh-s" @click="duplicateStep(keyLine, keySteps)" data-tooltip="Dupliquer le step"><i class="icon-copy"></i></div>
+								<div v-if="line.steps.length > 1" class="btn-mini btn-error mh-s" @click="removeStep(keyLine,keySteps)" data-position="left" data-tooltip="Supprimer le step"><i class="icon-trash"></i></div>
+								<div class="btn-mini btn-success mh-s" @click="previewSegments(step.segments)" data-tooltip="Prévisualiser"><i class="icon-upload"></i></div>
 							</div>
 							<div class="flex">
-								<div class="btn-mini mh-s" @click="divideLeds(keyLine,keySteps,2)">2</div>
-								<div class="btn-mini mh-s" @click="divideLeds(keyLine,keySteps,3)">3</div>
-								<div class="btn-mini mh-s" @click="divideLeds(keyLine,keySteps,4)">4</div>
-								<div class="btn-mini btn-error mh-s" @click="resetCursors(keyLine, keySteps)" title="Reset"><i class="icon-refresh-cw"></i></div>
+								<div class="btn-mini mh-s" @click="divideLeds(keyLine,keySteps,2)" data-tooltip="Diviser en 2">2</div>
+								<div class="btn-mini mh-s" @click="divideLeds(keyLine,keySteps,3)" data-tooltip="Diviser en 3">3</div>
+								<div class="btn-mini mh-s" @click="divideLeds(keyLine,keySteps,4)" data-tooltip="Diviser en 4">4</div>
+								<div class="btn-mini btn-error mh-s" @click="resetCursors(keyLine, keySteps)" data-tooltip="Reset curseurs"><i class="icon-refresh-cw"></i></div>
 							</div>
 						</div>
 					</div>

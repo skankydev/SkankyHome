@@ -44,6 +44,7 @@ $this->addCrumb('Module',['action'=>'index'],'icon-zap');
 			<td><?= $module->updated_at?->format('d/m/Y H:i') ?></td>
 			<td class="action">
 				<a href="<?= $this->url(['action' => 'show','params'=>['module'=>$module->_id]]) ?>" class="btn-mini btn-info"><i class="icon-info"></i></a>
+				<a href="<?= $this->url(['action' => 'reboot','params'=>['module'=>$module->_id]]) ?>" class="btn-mini btn-success"><i class="icon-refresh-cw"></i></a>
 				<a href="<?= $this->url(['action' => 'edit','params'=>['module'=>$module->_id]]) ?>" class="btn-mini btn-warning"><i class="icon-edit"></i></a>
 			</td>
 		</tr>

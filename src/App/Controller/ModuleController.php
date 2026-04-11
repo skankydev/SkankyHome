@@ -14,12 +14,13 @@
 namespace App\Controller;
 
 use App\Form\ModuleForm;
+use App\Job\SendCommandJob;
 use App\Model\Document\Module;
 use App\Model\FirmwareCollection;
 use App\Model\ModuleCollection;
-use App\Model\ScenarioCollection;
 use SkankyDev\Controller\MasterController;
 use SkankyDev\Http\Request;
+use SkankyDev\Queue\Queue;
 
 class ModuleController extends MasterController {
 
@@ -44,13 +45,11 @@ class ModuleController extends MasterController {
 		return redirect(['action' => 'show', 'params' => [$module->_id]])->withFlash('success', 'Enregistrement réussi');
 	}
 
-	public function show(Request $request, Module $module){
-		$scenarios = ScenarioCollection::_paginate(['module_id'=>$module->_id], Request::_paginateInfo());
+	public function show(Module $module){
 		$firmwares = FirmwareCollection::_find(['module_id'=>$module->_id],['limit' =>10]);
 
 		return view('module.show', [
-			'module' => $module,
-			'scenarios' => $scenarios,
+			'module'    => $module,
 			'firmwares' => $firmwares,
 		]);
 	}
@@ -75,5 +74,10 @@ class ModuleController extends MasterController {
 	public function delete(Module $module){
 		ModuleCollection::_deleteOne($module);
 		return redirect(['action' => 'index'])->withFlash('success', 'Suppression réussie');
+	}
+
+	public function reboot(Module $module){
+		Queue::push(new SendCommandJob($module, 'reboot'));
+		return redirect(['action' => 'show', 'params' => [$module->_id]])->withFlash('success', 'Commande reboot envoyée');
 	}
 }

@@ -15,12 +15,13 @@ namespace SkankyDev\Validation\Rules;
 
 use SkankyDev\Validation\Rules\Rule;
 
+/** Fails if the value is null, an empty string, or an empty array. */
 class Required extends Rule {
-	
+
 	public function check(string $field, mixed $value, array $data = []): bool {
 		return !$this->isEmpty($value);
 	}
-	
+
 	public function message(string $field): string {
 		return "Le champ {$field} est requis";
 	}

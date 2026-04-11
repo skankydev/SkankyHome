@@ -32,39 +32,14 @@ class CrudMaker extends MasterCommand
 	private string $documentName;
 
 	function __construct(){
-		/*$this->fields = [
-			[
-				'name' => "name",
-				'type' => "string",
-				'required' => true
-			],[
-				'name' => "intf",
-				'type' => "int",
-				'required' => true
-			],[
-				'name' => "floatf",
-				'type' => "float",
-				'required' => true
-			],[
-				'name' => "boolf",
-				'type' => "bool",
-				'required' => true
-			],[
-				'name' => "datef",
-				'type' => "date",
-				'required' => false
-			],[
-				'name' => "datetimef",
-				'type' => "datetime",
-				'required' => false
-			],[
-				'name' => "arrayf",
-				'type' => "array",
-				'required' => true
-			]
-		];*/
+
 	}
 
+	/**
+	 * Entry point of the command. Expects the document name as first argument.
+	 * Runs the interactive field configuration then generates all CRUD files.
+	 * @param array $arg parsed argv, index 0 must be the document name e.g. `Article`
+	 */
 	function run(array $arg = []) :void{
 		$this->info('═══════════════════════════════════════');
 		$this->success('    CRUD Maker - SkankyDev');
@@ -87,6 +62,11 @@ class CrudMaker extends MasterCommand
 		$this->generateFiles();
 	}
 
+	/**
+	 * Interactively prompts the user to define the fields of the document.
+	 * Each field has a name, a type and a required flag.
+	 * Loop ends when the user submits an empty field name.
+	 */
 	private function initFields(): void {
 		$this->warning('Configuration des champs de '.$this->documentName.' :');
 		$this->text('');
@@ -126,6 +106,10 @@ class CrudMaker extends MasterCommand
 		}
 	}
 
+	/**
+	 * Builds the template variable map from the document name:
+	 * singular/plural forms, camelCase, dash-case and collection name.
+	 */
 	private function initVariables(): void {
 		$this->variable = [
 			'name'          => $this->documentName,
@@ -138,6 +122,9 @@ class CrudMaker extends MasterCommand
 		];
 	}
 
+	/**
+	 * Builds the destination folder map for each generated file type.
+	 */
 	private function initFolders(): void{
 			$this->folders = [
 				'Document'   => SRC_FOLDER.DS.'App'.DS.'Model'.DS.'Document',
@@ -151,6 +138,9 @@ class CrudMaker extends MasterCommand
 			];
 	}
 
+	/**
+	 * Builds the destination filename map for each generated file type.
+	 */
 	private function initFiles(): void {
 		$this->files = [
 			'Document'    => $this->variable['name'].'.php',
@@ -164,6 +154,9 @@ class CrudMaker extends MasterCommand
 		];
 	}
 
+	/**
+	 * Iterates over all file types and triggers generation for each one.
+	 */
 	private function generateFiles(): void {
 		$this->warning('Génération des fichiers...');
 		$this->text('');
@@ -190,6 +183,13 @@ class CrudMaker extends MasterCommand
 		$this->success('✓ CRUD généré avec succès !');
 	}
 
+	/**
+	 * Renders a template and writes the result to its destination file.
+	 * Replaces `%?php`/`?%`/`%?=` pseudo-tags with real PHP tags after rendering,
+	 * to prevent PHP from executing template code during generation.
+	 * Prompts for confirmation before overwriting an existing file.
+	 * @param string $template key identifying the file type (e.g. `Document`, `view/index`)
+	 */
 	private function generateFromTemplate(string $template): void {
 		$templatePath = TEMPLATE_FOLDER . DS . $template . '.php';
 

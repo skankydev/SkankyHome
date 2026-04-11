@@ -9,7 +9,7 @@
 			if (!empty($titre)) {
 				echo ucwords($titre.' - ');
 			}
-		?>SkankyDev 
+		?>SkankyHome
 	</title>
 	<?php 
 		$this->addKeyWords('php, apache, mongodb, javascript');

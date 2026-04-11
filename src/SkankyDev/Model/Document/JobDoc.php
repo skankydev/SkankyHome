@@ -17,13 +17,28 @@ namespace SkankyDev\Model\Document;
 use SkankyDev\Model\Document\MasterDocument;
 use DateTime;
 
+/**
+ * Represents a queued job stored in MongoDB.
+ * Both JobDoc and its payload implement Persistable, so MongoDB reconstructs
+ * the full object graph (including the nested job) without calling constructors.
+ */
 class JobDoc extends MasterDocument {
-	
+
+	/** The job instance to execute — also a Persistable, hydrated recursively. */
 	public object $payload;
+
+	/** Current state: pending | processing | completed | failed */
 	public string $status = 'pending';
+
+	/** Error message from the last failed attempt, if any. */
 	public string $error;
+
+	/** Number of execution attempts so far. */
 	public int $attempts = 0;
+
+	/** Maximum number of attempts before the job is marked failed. */
 	public int $max_attempts = 3;
+
 	public ?DateTime $started_at = null;
 	public ?DateTime $completed_at = null;
 

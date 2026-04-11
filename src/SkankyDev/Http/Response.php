@@ -23,29 +23,38 @@ class Response {
 	protected int $statusCode = 200;
 	protected bool $built = false;
 	
+	/**
+	 * @param string $viewName dot-notation view name e.g. `module.show`
+	 * @param array  $data     variables passed to the view
+	 */
 	public function __construct(
 		protected string $viewName = '',
 		protected array $data = []
-		) {
-	}
-	
+	) {}
+
+	/** Adds or overrides a response header. */
 	public function header(string $name, string $value): self {
 		$this->headers[$name] = $value;
 		return $this;
 	}
 
+	/** Sets the HTTP status code. */
 	public function status(int $code): self {
 		$this->statusCode = $code;
 		return $this;
 	}
 	
-	public function viewName($viewName): self {
+	/** Sets the view name to render. */
+	public function viewName(string $viewName): self {
 		$this->viewName = $viewName;
 		return $this;
 	}
 
-	public function build(): self{
-		//si requeter veux json 
+	/**
+	 * Renders the response body.
+	 * Outputs JSON if the client accepts it, otherwise renders the HTML view.
+	 */
+	public function build(): self {
 		if(Request::_wantsJson()){
 			$this->header('content-type', 'application/json');
 			$this->body = json_encode($this->data);
@@ -58,6 +67,11 @@ class Response {
 		return $this;
 	}
 
+	/**
+	 * Sends the response to the client: status code, headers and body.
+	 * Calls build() automatically for 2xx responses if not already built.
+	 * Falls back to a JS redirect if headers are already sent and status is 3xx.
+	 */
 	public function send(): void {
 		if (!$this->built && $this->statusCode >= 200 && $this->statusCode < 300) {
 			$this->build();
@@ -85,26 +99,24 @@ class Response {
 		echo $this->body;
 	}
 
-	/**
-	* Ajouter les erreurs en session pour le prochain affichage
-	*/
+	/** Flashes validation errors to the session for the next request. */
 	public function withErrors(array $errors): self {
 		Session::set('errors', $errors);
 		return $this;
 	}
 
-	/**
-	* Ajouter les anciennes données (old input) en session
-	*/
+	/** Flashes old input data to the session so forms can be re-populated on validation failure. */
 	public function withInput(array $input): self {
 		Session::set('old', $input);
 		return $this;
 	}
 
 	/**
-	* Ajouter un flash messsage données (old input) en session
-	*/
-	public function withFlash(string $type , string $message): self {
+	 * Adds a flash message to the session (e.g. `success`, `error`).
+	 * @param string $type    flash type key (success, error, warning, info)
+	 * @param string $message message to display on the next request
+	 */
+	public function withFlash(string $type, string $message): self {
 		flash($type,$message);
 		return $this;
 	}

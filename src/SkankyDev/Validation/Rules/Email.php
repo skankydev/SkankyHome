@@ -15,19 +15,17 @@ namespace SkankyDev\Validation\Rules;
 
 use SkankyDev\Validation\Rules\Rule;
 
+/** Validates that the value is a well-formed e-mail address. Passes on empty values. */
 class Email extends Rule {
-	
-	public function check(string $field, mixed $value, array $data = []): bool {
 
+	public function check(string $field, mixed $value, array $data = []): bool {
 		if ($this->isEmpty($value)) {
 			return true;
 		}
-		
 		return filter_var($value, FILTER_VALIDATE_EMAIL) !== false;
 	}
-	
+
 	public function message(string $field): string {
 		return "Le champ {$field} doit être un email valide";
 	}
-
 }

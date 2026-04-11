@@ -6,7 +6,7 @@ $this->setLayout('layout.default');
 	<div class="page-title">
 		<h2 class="rainbow-icon">
 			<i class="icon-zap"></i>
-			%?= e($<?= $singularCamel ?>-><?= $this->fields[0]['name'] ?>) ?> 
+			%?= e($<?= $singularCamel ?>-><?= $this->fields[0]['name'] ?>) ?>  
 		</h2>
 	</div>
 	<div class="page-action">

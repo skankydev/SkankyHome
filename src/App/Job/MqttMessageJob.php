@@ -6,6 +6,7 @@ use App\Model\Document\Module;
 use App\Model\ModuleCollection;
 use App\Utilities\MqttSender;
 use SkankyDev\Queue\Job\MasterJob;
+use SkankyDev\Queue\Queue;
 use SkankyDev\Utilities\Log;
 use SkankyDev\Utilities\Traits\CliMessage;
 use SkankyDev\Utilities\Traits\StringFacility;
@@ -51,8 +52,20 @@ class MqttMessageJob extends MasterJob {
 		} catch (Exception $e) {
 			Log::mqtt('error : '.$e->getMessage());
 			$this->error('error : '.$e->getMessage());
-			
 		}
+	}
+
+	public function forwardCmd(Module $module, array $data): void {
+		if(!isset($data['target']) || !isset($data['cmd'])){
+			$this->error('forward: target ou cmd manquant');
+			return;
+		}
+		$target = ModuleCollection::_findOne(['slug' => $data['target']]);
+		if(!$target){
+			$this->error('forward: module cible introuvable : '.$data['target']);
+			return;
+		}
+		Queue::push(new SendCommandJob($target, $data['cmd'], $data['data'] ?? []));
 	}
 
 	public function helloCmd(Module $module, array $data){

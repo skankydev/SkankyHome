@@ -15,6 +15,7 @@ namespace SkankyDev\Validation\Rules;
 
 use SkankyDev\Validation\Rules\Rule;
 
+/** Validates that the numeric value is greater than or equal to a minimum. Passes on empty values. */
 class Min extends Rule {
 
 	public function __construct(protected float $min) {}
