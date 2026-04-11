@@ -23,7 +23,7 @@ return [
 		'range' => 5,
 	],
 	'skankydev'  => [
-		'version'=>'0.0.5'
+		'version'=>'0.0.6'
 	],
 	'debug' => true,
 	'middlewares'=>[
