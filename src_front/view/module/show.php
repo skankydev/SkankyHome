@@ -12,6 +12,10 @@ $this->addCrumb($module->name,['action'=>'show','params'=>['module'=>$module->_i
 		</h1>
 	</div>
 	<div class="page-action">
+		<a href="<?= $this->url(['action'=>'reboot','params'=>[$module->_id]]) ?>" class="btn btn-success">
+			<i class="icon-refresh-cw"></i>
+			Reboot
+		</a>
 		<a href="<?= $this->url(['action'=>'edit','params'=>[$module->_id]]) ?>" class="btn btn-primary">
 			<i class="icon icon-edit"></i>
 			Edit

@@ -14,11 +14,13 @@
 namespace App\Controller;
 
 use App\Form\ModuleForm;
+use App\Job\SendCommandJob;
 use App\Model\Document\Module;
 use App\Model\FirmwareCollection;
 use App\Model\ModuleCollection;
 use SkankyDev\Controller\MasterController;
 use SkankyDev\Http\Request;
+use SkankyDev\Queue\Queue;
 
 class ModuleController extends MasterController {
 
@@ -72,5 +74,10 @@ class ModuleController extends MasterController {
 	public function delete(Module $module){
 		ModuleCollection::_deleteOne($module);
 		return redirect(['action' => 'index'])->withFlash('success', 'Suppression réussie');
+	}
+
+	public function reboot(Module $module){
+		Queue::push(new SendCommandJob($module, 'reboot'));
+		return redirect(['action' => 'show', 'params' => [$module->_id]])->withFlash('success', 'Commande reboot envoyée');
 	}
 }
