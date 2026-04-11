@@ -40,36 +40,14 @@ class Config {
 		return self::arrayGet('default.action',self::$conf);
 	}
 
-	static function getAccessDenied(){
-		return self::arrayGet('Auth.accessDenied',self::$conf);
-	}
 	static function getVersion(){
 		return self::arrayGet('skankydev.version',self::$conf);
 	}
 
-	static function getHelper(){
-		return self::arrayGet('class.helper',self::$conf);
-	}
 	static function getBehavior(){
 		return self::arrayGet('class.behavior',self::$conf);
 	}
-	static function getTools($name = ''){
-		if(!empty($name)){
-			return self::arrayGet('class.tools.'.$name,self::$conf);
-		}
-		return self::arrayGet('class.tools',self::$conf);
-	}
-	static function getListener(){
-		return self::arrayGet('class.listener',self::$conf);
-	}
-	static function getListenerList(){
-		return self::arrayGet('listener',self::$conf);
-	}
-
-	static function get($path){
-		return self::arrayGet($path,self::$conf);
-	}
-
+	
 	static function getCurentNamespace(){
 		$name = self::get('skankydev.curentNamespace');
 		if(!$name){
@@ -80,6 +58,10 @@ class Config {
 
 	static function setCurentNamespace($name){
 		return self::set('skankydev.curentNamespace',$name);
+	}
+
+	static function get($path){
+		return self::arrayGet($path,self::$conf);
 	}
 
 	static function set($path,$value){
@@ -113,7 +95,6 @@ class Config {
 			$dConf = require $basePath.DS.'src'.DS.'SkankyDev'.DS.'Config'.DS.'default.config.php';
 			self::$conf = array_replace_recursive($dConf,$conf);
 		}
-		
 		return self::$conf;
 	}
 

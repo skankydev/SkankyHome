@@ -14,16 +14,19 @@
 namespace SkankyDev\Utilities\Traits;
 
 
+/**
+ * String manipulation helpers: case conversion, pluralisation, sanitisation.
+ */
 trait StringFacility {
 
-
-
 	/**
-	 * convert infoActionName to info-action-name
-	 * @param  string $string the string need to be convert
-	 * @return string         the result
+	 * Converts camelCase or PascalCase to dash-case (kebab-case).
+	 * Example: `infoActionName` → `info-action-name`
+	 * @param  string $string     the string to convert
+	 * @param  string $delimiters separator character (default `-`)
+	 * @return string
 	 */
-	public function toDash($string,$delimiters = '-'){
+	public function toDash(string $string, string $delimiters = '-'): string {
 		$string = lcfirst($string);
 		$string = preg_replace('/[A-Z]/',$delimiters."$0",$string);
 		$string = strtolower($string);
@@ -31,11 +34,13 @@ trait StringFacility {
 	}
 
 	/**
-	 * convert info-action-name to InfoActionName
-	 * @param  string $string the string need to be convert
-	 * @return string         the result
+	 * Converts dash-case to PascalCase.
+	 * Example: `info-action-name` → `InfoActionName`
+	 * @param  string $string     the string to convert
+	 * @param  string $delimiters word separator (default `-`)
+	 * @return string
 	 */
-	public function toCap($string, $delimiters = '-'){
+	public function toCap(string $string, string $delimiters = '-'): string {
 		$string = str_replace($delimiters, ' ', $string);
 		$string = ucwords($string);
 		$string = str_replace(' ', '', $string);
@@ -43,24 +48,25 @@ trait StringFacility {
 	}
 
 	/**
-	 * convert info-action-name to infoActionName
-	 * @param  string $string the string need to be convert
-	 * @return string         the result
+	 * Converts dash-case to camelCase.
+	 * Example: `info-action-name` → `infoActionName`
+	 * @param  string $string     the string to convert
+	 * @param  string $delimiters word separator (default `-`)
+	 * @return string
 	 */
-	public function toCamel($string, $delimiters = '-'){
-		//$string = str_replace('-', ' ', $string);
+	public function toCamel(string $string, string $delimiters = '-'): string {
 		$string = lcfirst(ucwords($string, $delimiters));
 		$string = str_replace($delimiters, '', $string);
 		return trim($string);
 	}
 
 	/**
-	 * remove all weird characters
-	 * @param  string $string  the string need to be clean
-	 * @param  string $charset the charset
-	 * @return string          the result
+	 * Strips accented and non-ASCII characters from a string.
+	 * @param  string $string  the string to sanitise
+	 * @param  string $charset source encoding (default `utf-8`)
+	 * @return string
 	 */
-	public function cleanString($string, $charset='utf-8'){
+	public function cleanString(string $string, string $charset = 'utf-8'): string {
 		$string = htmlentities($string, ENT_NOQUOTES, $charset);
 		
 		$string = preg_replace('/&([A-za-z])(?:acute|cedil|caron|circ|grave|orn|ring|slash|th|tilde|uml);/', '\1', $string);
@@ -72,19 +78,18 @@ trait StringFacility {
 	}
 
 	/**
-	 * convert info-action-name to infoActionName
-	 * @param  string $string the string need to be convert
-	 * @return string         the result
+	 * Converts a dot-notation string to a filesystem path using the DS constant.
+	 * Example: `module.part.scenario` → `module/part/scenario`
 	 */
-	 function dotToFolder($string, $charset='utf-8'){
-		$list = explode('.', $string);
-		$string = implode(DS,$list);
-		return $string;
+	public function dotToFolder(string $string): string {
+		return implode(DS, explode('.', $string));
 	}
 
-
+	/**
+	 * Returns the English plural form of a word.
+	 * Handles common suffixes (y → ies, s/x → es, default → s).
+	 */
 	public function pluralize(string $word): string {
-		// Règles simples de pluriel
 		if (str_ends_with($word, 'y')) {
 			return substr($word, 0, -1) . 'ies';
 		}
@@ -94,8 +99,11 @@ trait StringFacility {
 		return $word . 's';
 	}
 
+	/**
+	 * Returns the English singular form of a word.
+	 * Handles a set of irregular forms and common suffix rules.
+	 */
 	public function singularize(string $word): string {
-		// Cas spéciaux (irréguliers)
 		$irregulars = [
 			'children' => 'child',
 			'people' => 'person',
@@ -133,18 +141,23 @@ trait StringFacility {
 		return $word;
 	}
 
+	/**
+	 * Applies the casing of the original word to the replacement.
+	 * If $original starts with an uppercase letter, $replacement is ucfirst'd.
+	 */
 	public function preserveCase(string $original, string $replacement): string {
-		// Si le mot original commence par une majuscule
 		if (ctype_upper($original[0])) {
 			return ucfirst($replacement);
 		}
 		return $replacement;
 	}
 
-	public function toHuman(string $string){
-		$string = str_replace('-', ' ', $string);
-		$string = str_replace('_', ' ', $string);
-		$string = ucwords($string);
-		return $string;
+	/**
+	 * Converts a slug or snake_case string to a human-readable title.
+	 * Example: `my_field-name` → `My Field Name`
+	 */
+	public function toHuman(string $string): string {
+		$string = str_replace(['-', '_'], ' ', $string);
+		return ucwords($string);
 	}
 }

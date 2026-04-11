@@ -22,71 +22,66 @@ class Session
 	use ArrayPathable;
 	
 	/**
-	 * get value in session path
-	 * @param  string $path the path to the data separated by dot
-	 * @return mixed        the value
+	 * Returns a value from the session using a dot-notation path.
+	 * Returns the full session if path is empty.
+	 * @param  string $path dot-notation key e.g. `user.name`
 	 */
-	static function get($path = ''){
+	static function get(string $path = ''): mixed {
 		return self::arrayGet($path,$_SESSION);
 	}
 
 	/**
-	 * set value in session path
-	 * @param string  $path     the path to the data separated by dot
-	 * @param mixed   $value    the value
-	 * @return  void
+	 * Sets a value in the session at a dot-notation path.
+	 * Intermediate arrays are created automatically.
 	 */
-	static function set($path,$value){
+	static function set(string $path, mixed $value): mixed {
 		return self::arraySet($path,$value,$_SESSION);
 	}
 
 	/**
-	 * delete value in session path
-	 * @param  string  $path     the path to the data separated by dot
-	 * @return void
+	 * Deletes a value from the session at a dot-notation path.
+	 * @param  string $path dot-notation key e.g. `user.name`
 	 */
-	static function delete($path = ''){
-		return self::arrayDelete($path,$_SESSION);
+	static function delete(string $path = ''): void {
+		self::arrayDelete($path, $_SESSION);
 	}
 
 	/**
-	 * insert value in array path
-	 * @param  string  $path     the path to the data separated by dot
-	 * @return void
+	 * Appends a value to an array stored at the given session path.
+	 * If the path does not exist yet, an empty array is created first.
+	 * Returns false if the existing value at the path is not an array.
 	 */
-	static function insert($path,$value){
+	static function insert(string $path, mixed $value): mixed {
 		$tmp = self::get($path) ?? [];
-		
-		if(is_array($tmp)){
+
+		if (is_array($tmp)) {
 			$tmp[] = $value;
-			return self::set($path,$tmp);
+			return self::set($path, $tmp);
 		}
 		return false;
 	}
 
 	/**
-	 * delete value in session path
-	 * @param  string  $path  the path to the data separated by dot
-	 * @return mixed          the value
+	 * Returns a session value and immediately deletes it (flash pattern).
+	 * @param  string $path dot-notation key e.g. `flash.error`
 	 */
-	static function getAndClean($path = ''){
+	static function getAndClean(string $path = ''): mixed {
 		$tmp = self::get($path);
 		self::delete($path);
 		return $tmp;
 	}
 
-	
 	/**
-	 * stat session
+	 * Starts the PHP session.
 	 */
-	static function start(){
+	static function start(): void {
 		session_start();
 	}
 
 	/**
-	 * destroy session
+	 * Destroys the PHP session and all its data.
 	 */
-	static function destroy(){
+	static function destroy(): void {
 		session_destroy();
 	}
 

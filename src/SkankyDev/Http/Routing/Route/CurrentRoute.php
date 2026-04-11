@@ -37,7 +37,11 @@ class CurrentRoute
 	 * @param string     $uri   the uri
 	 * @param Route|null $route the route have matche in the router or null
 	 */	
-	function __construct(string $uri ,Route $route = null){
+	/**
+	 * @param string     $uri   the request URI
+	 * @param Route|null $route matched declared route, or null to fall back to convention parsing
+	 */
+	function __construct(string $uri, Route $route = null){
 		$this->uri = $uri;
 		if($route){
 			$this->initFromRoute($uri,$route);
@@ -52,7 +56,11 @@ class CurrentRoute
 	 * @param  string $uri   the uri
 	 * @param  Route  $route the route 
 	 */
-	public function initFromRoute(string $uri, Route $route){
+	/**
+	 * Resolves controller, action and params from a declared route.
+	 * Extracts named segment values from the URI by comparing with the route schema.
+	 */
+	public function initFromRoute(string $uri, Route $route): void {
 		$this->link = $route->getLink();
 		$rules = $route->getRules();
 		if(!empty($rules)){
@@ -80,7 +88,11 @@ class CurrentRoute
 	 * @param  string $uri the uri
 	 * @return void        
 	 */
-	public function initFromUri(string $uri){
+	/**
+	 * Resolves controller, action and params by parsing the URI directly.
+	 * Convention: `/controller/action/param1/param2` or `/namespace/controller/...`
+	 */
+	public function initFromUri(string $uri): void {
 
 		$uri = trim($uri,'/');
 		$tmp = explode('/', $uri);
@@ -91,10 +103,10 @@ class CurrentRoute
 			$this->link['namespace'] = $namespace;
 			array_shift($tmp);
 		}else{
-			$this->link['namespace']  = 'App';
+			$this->link['namespace']  = Config::getDefaultNamespace();
 		}
 		$this->link['controller'] = $this->toCap($tmp[0]);
-		$this->link['action']     = isset($tmp[1]) ? lcfirst($this->toCap(trim($tmp[1],'_'))) : 'index';
+		$this->link['action']     = isset($tmp[1]) ? lcfirst($this->toCap(trim($tmp[1],'_'))) : Config::getDefaultAction();
 
 		if(isset($tmp[2])&&!empty($tmp[2])){
 			$this->link['params'] = array_slice($tmp,2);
@@ -107,7 +119,8 @@ class CurrentRoute
 	/**
 	 * define the controller name and the action for the dispatcher
 	 */
-	private function setControllerAction(){
+	/** Builds the fully qualified controller class name and stores the action name. */
+	private function setControllerAction(): void {
 		$this->controller = $this->link['namespace'].'\\Controller\\'.$this->link['controller'].'Controller';
 		$this->action = $this->link['action'];
 	}

@@ -24,6 +24,12 @@ abstract class MasterCommand {
 	static protected string $signature = 'master';
 	static protected string $help = 'La description';
 
+	/**
+	 * Returns the command metadata using Reflection on the called class.
+	 * Reads the static `$signature` and `$help` properties of the concrete command.
+	 * @return array{class: string, signature: string, help: string}
+	 * @throws CommandException if `$signature` or `$help` are missing
+	 */
 	public static function getInfo(): array {
 		$class = get_called_class();
 		$mirror = new ReflectionClass($class);
@@ -43,6 +49,10 @@ abstract class MasterCommand {
         ];
     }
 
+	/**
+	 * Executes the command logic.
+	 * @param array $arg parsed arguments from argv (without the command key)
+	 */
 	abstract public function run(array $arg = []): void;
 
 

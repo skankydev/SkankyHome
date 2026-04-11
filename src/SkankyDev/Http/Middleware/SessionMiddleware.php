@@ -11,24 +11,20 @@
  *
  */
 
-namespace App\Middlewares;
+namespace SkankyDev\Http\Middleware;
 
 use SkankyDev\Http\Middleware\MiddlewareInterface;
 use SkankyDev\Http\Request;
+use SkankyDev\Utilities\Session;
 
+class SessionMiddleware  implements MiddlewareInterface{
 
-
-class BiduleMiddleware implements MiddlewareInterface{
-
-	public function handle(Request $request,callable $next){
-		//echo "AVANT Bidule\n";
-        
-        // Continuer vers le prochain middleware
-        $response = $next($request);
-        
-        //echo "APRÈS Bidule\n";
-        
-        return $response;
+	/**
+	 * Starts the session then passes the request to the next middleware.
+	 */
+	public function handle(Request $request, callable $next): mixed {
+		Session::start();
+		return $next($request);
 	}
 
 }

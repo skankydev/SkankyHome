@@ -26,11 +26,16 @@ return [
 		'version'=>'0.0.5'
 	],
 	'debug' => true,
+	'middlewares'=>[
+		'Session'=>'Session'
+	],
 	'class' => [
 		'behavior' => [
 			'Timed' => \SkankyDev\Model\Behavior\TimedBehavior::class,
 		],
-		'middleware' => [],
+		'middlewares' => [
+			'Session'  => \SkankyDev\Http\Middleware\SessionMiddleware::class,
+		],
 		'fields' => [
 			'text'     => \SkankyDev\Form\Fields\TextField::class,
 			'textarea' => \SkankyDev\Form\Fields\TextareaField::class,
@@ -60,6 +65,9 @@ return [
 			'same'       => \SkankyDev\Validation\Rules\Same::class,
 			'hex_color'  => \SkankyDev\Validation\Rules\HexColor::class,
 		],
+	],
+	'view' => [
+		'folder' => VIEW_FOLDER,
 	],
 	'timehelper'=> [
 		'format'=>'Y-m-d H:i:s',

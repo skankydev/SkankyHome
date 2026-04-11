@@ -16,6 +16,7 @@ namespace SkankyDev\Validation\Rules;
 use SkankyDev\Validation\Rules\Rule;
 
 
+/** Validates that the numeric value is less than or equal to a maximum. Passes on empty values. */
 class Max extends Rule {
     public function __construct(protected float $max) {}
     

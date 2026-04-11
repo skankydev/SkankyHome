@@ -31,14 +31,18 @@ abstract class MasterCollection {
 	protected array $behaviorsName = ['Timed'];
 	protected array $behaviors = [];
 	
+	/**
+	 * Connects to the MongoDB collection and loads the declared behaviors.
+	 */
 	public function __construct() {
-		
 		$this->collection = MongoClient::getInstance()->getCollection($this->collectionName);
 		$this->loadBehaviors();
 	}
-	
+
 	/**
-	 * Charger les behaviors définis dans la classe enfant
+	 * Instantiates all behaviors listed in $behaviorsName via MasterFactory.
+	 * Behavior classes are resolved from the `class.behavior` config map.
+	 * @throws BehaviorNotFoundException if a behavior key is not registered in config
 	 */
 	protected function loadBehaviors(): void {
 		$loadedBehaviors = [];
@@ -54,7 +58,9 @@ abstract class MasterCollection {
 	}
 	
 	/**
-	 * Appeler une méthode sur tous les behaviors
+	 * Calls a hook method on every loaded behavior that implements it.
+	 * @param string $method   hook name e.g. `beforeInsert`, `afterUpdate`
+	 * @param object $document the document being processed
 	 */
 	protected function callBehaviors(string $method, object $document): void {
 		foreach ($this->behaviors as $behavior) {
@@ -65,8 +71,10 @@ abstract class MasterCollection {
 	}
 	
 	/**
-	 * Find - récupérer plusieurs documents
-	 * MongoDB retourne automatiquement des instances du bon Document grâce à Persistable
+	 * Returns all documents matching the filter.
+	 * MongoDB auto-hydrates them into the correct Document class via Persistable.
+	 * @param array $filter  MongoDB filter
+	 * @param array $options MongoDB options (limit, skip, sort, projection, etc.)
 	 */
 	public function find(array $filter = [], array $options = []): array {
 	
@@ -76,7 +84,7 @@ abstract class MasterCollection {
 	}
 	
 	/**
-	 * FindOne - récupérer un seul document
+	 * Returns the first document matching the filter, or null if none found.
 	 */
 	public function findOne(array $filter = [], array $options = []): ?object {
 		
@@ -86,7 +94,7 @@ abstract class MasterCollection {
 	}
 	
 	/**
-	 * FindById - récupérer par ID
+	 * Returns a document by its string ID, or null if not found or ID is invalid.
 	 */
 	public function findById(string $id, array $options = []): ?object {
 		try {
@@ -98,7 +106,9 @@ abstract class MasterCollection {
 	}
 	
 	/**
-	 * Insert - insérer un nouveau document
+	 * Inserts a new document into the collection.
+	 * Fires beforeInsert and afterInsert behavior hooks.
+	 * Populates $document->_id with the inserted ObjectId.
 	 */
 	public function insert(object $document): bool {
 		try {
@@ -117,7 +127,9 @@ abstract class MasterCollection {
 	}
 	
 	/**
-	 * Update - mettre à jour un document
+	 * Updates an existing document matched by its _id.
+	 * Fires beforeUpdate and afterUpdate behavior hooks.
+	 * @throws \Exception if the document has no _id
 	 */
 	public function update(object $document): bool {
 		try {
@@ -141,7 +153,7 @@ abstract class MasterCollection {
 	}
 	
 	/**
-	 * Save - insert ou update automatique
+	 * Inserts or updates the document depending on whether _id is set.
 	 */
 	public function save(object $document): bool {
 		if (!empty($document->_id)) {
@@ -152,7 +164,7 @@ abstract class MasterCollection {
 	}
 	
 	/**
-	 * Delete - supprimer un document par ID
+	 * Deletes a document by its string ID.
 	 */
 	public function deleteById(string $id): bool {
 		try {
@@ -167,7 +179,7 @@ abstract class MasterCollection {
 	}
 
 	/**
-	 * Delete - supprimer un document
+	 * Deletes a document matched by its _id property.
 	 */
 	public function deleteOne(object $document): bool {
 		try {
@@ -182,11 +194,11 @@ abstract class MasterCollection {
 	}
 	
 	/**
-	 * DeleteOne - supprimer un document par filtre
+	 * Deletes documents matching a filter.
 	 */
 	public function delete(array $filter): bool {
 		try {
-			$result = $this->collection->delete($filter);
+			$result = $this->collection->deleteMany($filter);
 			return $result->getDeletedCount();
 		} catch (\Exception $e) {
 			throw $e;
@@ -194,14 +206,14 @@ abstract class MasterCollection {
 	}
 	
 	/**
-	 * Count - compter les documents
+	 * Returns the number of documents matching the filter.
 	 */
 	public function count(array $filter = []): int {
 		return $this->collection->countDocuments($filter);
 	}
 	
 	/**
-	 * Aggregate - pipeline d'agrégation MongoDB
+	 * Runs a MongoDB aggregation pipeline and returns the results as an array.
 	 */
 	public function aggregate(array $pipeline): array {
 		$cursor = $this->collection->aggregate($pipeline);
@@ -209,14 +221,17 @@ abstract class MasterCollection {
 	}
 	
 	/**
-	 * Paginate - pagination simple
+	 * Returns a paginated result set wrapped in a Paginator.
+	 * Merges default paginator config with the provided info (page, limit, sort).
+	 * @param array $filter       MongoDB filter
+	 * @param array $paginateInfo page, limit and sort — typically from Request::paginateInfo()
 	 */
-	public function paginate(array $filter = [], array $paginateInfo = []): Paginator  {
+	public function paginate(array $filter = [], array $paginateInfo = []): Paginator {
 		$paginateInfo = array_merge(Config::get('paginator'),$paginateInfo);
 
 		$page = $paginateInfo['page'] ?? 1;
-    	$limit = $paginateInfo['limit'] ?? 10;
-    	$sort = $paginateInfo['sort'] ?? [];
+		$limit = $paginateInfo['limit'] ?? 10;
+		$sort = $paginateInfo['sort'] ?? [];
 
 		$skip = ($page - 1) * $limit;
 		
@@ -236,7 +251,7 @@ abstract class MasterCollection {
 	}
 	
 	/**
-	 * Créer un ObjectId MongoDB
+	 * Creates a MongoDB ObjectId from a string, or a new one if no string is provided.
 	 */
 	public function createId(?string $id = null): ObjectId {
 		return $id ? new ObjectId($id) : new ObjectId();

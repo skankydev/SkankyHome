@@ -14,8 +14,9 @@
         ]
     },
     "autoload-dev": {
-        "psr-4":{
-            "SkankyTest\\":"tests/SkankyTest"
+        "psr-4": {
+            "SkankyTest\\": "tests/SkankyTest",
+            "TestApp\\":    "tests/App"
         }
     },
     "authors": [
@@ -30,5 +31,10 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^12.4"
+    },
+    "scripts": {
+        "test": "phpunit",
+        "coverage": "phpunit --coverage-text",
+        "coverage-pretty": "phpunit --coverage-html build/coverage"
     }
 }

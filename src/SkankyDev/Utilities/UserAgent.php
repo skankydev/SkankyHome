@@ -17,31 +17,31 @@ use SkankyDev\Utilities\Traits\Singleton;
 
 
 /**
-* UserAgent
-*
-* aide à déterminer quel est le client 
-* 
-* http://www.useragentstring.com
-*/
-
+ * Parses the HTTP User-Agent string to detect the client OS, browser, and device type.
+ * Singleton — use UserAgent::getInstance() or the _method() static proxy.
+ */
 class UserAgent {
-	
+
 	use Singleton;
 
-	public $os      = 'unknow';
-	public $browser = 'unknow';
-	public $mobile  = false;
-	public $agent   = '';
+	public string $os      = 'unknown';
+	public string $browser = 'unknown';
+	public bool   $mobile  = false;
+	public string $agent   = '';
 
-	function __construct(){
-		if(isset($_SERVER['HTTP_USER_AGENT'])){
+	public function __construct() {
+		if (isset($_SERVER['HTTP_USER_AGENT'])) {
 			$this->agent = $_SERVER['HTTP_USER_AGENT'];
-			//debug($this->agent);
 		}
 		$this->parse();
 	}
 
-	public function parse($agent = ''){
+	/**
+	 * Parses a User-Agent string and populates os, browser, and mobile properties.
+	 * If $agent is empty the already-stored agent string is used.
+	 * @return array{os: string, browser: string, mobile: bool}
+	 */
+	public function parse(string $agent = ''): array {
 		if(!empty($agent)){
 			$this->agent = $agent;
 		}
@@ -83,13 +83,8 @@ class UserAgent {
 		];
 	}
 
-	public function getDevice(){
-		/*if($this->info->ismobiledevice){
-			return 'Mobile';
-		}
-		if($this->info->istablet){
-			return 'Tablet';
-		}*/
-		return $this->mobile?'Mobile':'Desktop';
+	/** Returns `'Mobile'` or `'Desktop'` based on the parsed agent. */
+	public function getDevice(): string {
+		return $this->mobile ? 'Mobile' : 'Desktop';
 	}
 }

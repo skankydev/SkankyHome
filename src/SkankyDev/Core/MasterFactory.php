@@ -27,12 +27,20 @@ class MasterFactory {
 
 	use Singleton;
 
-	public function call(object $object,string $method, array $parameters = [] ){
+	/**
+	 * Calls a method on an existing object, resolving its dependencies automatically.
+	 * @param object $object     the target object
+	 * @param string $method     the method name to call
+	 * @param array  $parameters optional raw parameters to resolve from
+	 * @return mixed             the return value of the called method
+	 * @throws UnknownMethodException if the method does not exist
+	 */
+	public function call(object $object, string $method, array $parameters = []): mixed {
 
 		if (!method_exists($object, $method)) {
 			throw new UnknownMethodException(
 				'Unknown method : ' . $method . ' in Class : ' . get_class($object),
-				101
+				404
 			);
 		}
 
@@ -47,9 +55,21 @@ class MasterFactory {
 	}
 
 
-	public function make(string $className, array $parameters = []){
+	/**
+	 * Instantiates a class by resolving its constructor dependencies automatically.
+	 * Handles Singleton classes, classes without constructors, and full DI resolution.
+	 * @param string $className  fully qualified class name
+	 * @param array  $parameters optional raw parameters to resolve from
+	 * @return object            the instantiated object
+	 * @throws ClassNotFoundException if the class does not exist or is not instantiable
+	 */
+	public function make(string $className, array $parameters = []): object {
 
-		$reflector = new ReflectionClass($className);
+		try {
+			$reflector = new ReflectionClass($className);
+		} catch (\ReflectionException $e) {
+			throw new ClassNotFoundException("La classe {$className} n'existe pas", 404);
+		}
 
 		if (!$reflector->isInstantiable()) {
 			throw new ClassNotFoundException("La classe {$className} n'est pas instanciable",404);
@@ -73,6 +93,18 @@ class MasterFactory {
 		return $reflector->newInstanceArgs($dependencies);
 	}
 
+	/**
+	 * Resolves an array of ReflectionParameters into concrete values.
+	 * Resolution order for each parameter:
+	 * - MasterDocument subclass → fetched from DB using route param ID
+	 * - Named key match in $value → used directly
+	 * - Builtin/no type → uses default value or positional value from $value
+	 * - Class type → recursively resolved via make()
+	 * @param  \ReflectionParameter[] $parameters constructor or method parameters
+	 * @param  array                  $value      raw values to resolve from (route params, etc.)
+	 * @return array                  resolved dependency instances
+	 * @throws ClassNotFoundException if a required dependency cannot be resolved
+	 */
 	protected function resolveDependencies(array $parameters, array $value = []): array {
 		$dependencies = [];
 		$paramKey = 0;
@@ -112,6 +144,9 @@ class MasterFactory {
 				// Utiliser la valeur par défaut si disponible
 				if ($parameter->isDefaultValueAvailable()) {
 					$dependencies[] = $parameter->getDefaultValue();
+				} else if(isset($value[$paramKey])){
+					$dependencies[] = $value[$paramKey];
+					$paramKey++;
 				} else {
 					throw new ClassNotFoundException("Impossible de résoudre le paramètre {$name}",500);
 				}

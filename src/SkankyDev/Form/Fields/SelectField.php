@@ -23,10 +23,12 @@ class SelectField extends FormField {
 	protected array $options = [];
 	protected $empty = false;
 
+	/**
+	 * @param string $name    field name
+	 * @param array  $options supports `options` (key=>label pairs) and `empty` (adds a blank first option)
+	 */
 	public function __construct(string $name, array $options = []) {
-		// Appeler le constructeur parent
 		parent::__construct($name, $options);
-		
 		$this->options = $options['options'] ?? [];
 		$this->empty = $options['empty'] ?? false;
 	}

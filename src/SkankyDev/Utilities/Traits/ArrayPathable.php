@@ -16,27 +16,32 @@
 namespace SkankyDev\Utilities\Traits;
 
 /**
- * this trait is a simple way to use a path like this 'foo.bar' for travel a array like this $array['foo']['bar']
+ * Provides dot-notation read/write/delete access to nested arrays.
+ * Example: `'foo.bar'` maps to `$array['foo']['bar']`.
  */
 trait ArrayPathable {
 
-	static $myArrayPathable; //juste in case pointer is not set
+	/** Fallback pointer used when none is provided externally. */
+	static array $myArrayPathable = [];
 
 	/**
-	 * get value in array 
-	 * @param  string $path the path to the data separated by dot
-	 * @return mixed        the value
+	 * Reads a value from a nested array using a dot-notation path.
+	 * Returns the entire array when $path is empty.
+	 * Returns null if any key along the path is missing.
+	 * @param  string $path    dot-separated key e.g. `user.name`
+	 * @param  array  &$pointer the array to read from
+	 * @return mixed
 	 */
-	static function arrayGet($path,&$pointer){
-		if(strlen($path)==0){
+	static function arrayGet(string $path, array &$pointer): mixed {
+		if (strlen($path) === 0) {
 			return $pointer;
 		}
-		$path = explode('.',$path);
+		$keys   = explode('.', $path);
 		$retour = $pointer;
-		foreach ($path as $key) {
-			if(isset($retour[$key])){
+		foreach ($keys as $key) {
+			if (isset($retour[$key])) {
 				$retour = $retour[$key];
-			}else{
+			} else {
 				return null;
 			}
 		}
@@ -44,48 +49,47 @@ trait ArrayPathable {
 	}
 
 	/**
-	 * set value in a array path
-	 * @param string  $path     the path to the data separated by dot
-	 * @param mixed   $value    the value
-	 * @param pointer &$pointer the array we need to read
-	 * @return  void
+	 * Sets a value in a nested array at the given dot-notation path.
+	 * Intermediate arrays are created automatically.
+	 * @param  string $path     dot-separated key e.g. `user.name`
+	 * @param  mixed  $value    the value to set
+	 * @param  array  &$pointer the array to write to
+	 * @return bool             always true
 	 */
-	static function arraySet($path,$value,&$pointer){
-		$aPath = explode('.',$path);
-		
-		if(count($aPath)>1){
-			$path = strstr($path,'.');
-			$path = substr($path,-strlen($path)+1);
-			if( !isset($pointer[$aPath[0]]) || !is_array($pointer[$aPath[0]])){
+	static function arraySet(string $path, mixed $value, array &$pointer): bool {
+		$aPath = explode('.', $path);
+
+		if (count($aPath) > 1) {
+			$path = substr(strstr($path, '.'), 1);
+			if (!isset($pointer[$aPath[0]]) || !is_array($pointer[$aPath[0]])) {
 				$pointer[$aPath[0]] = [];
 			}
-			return self::arraySet($path,$value,$pointer[$aPath[0]]);
-		}else{
-			$pointer[$aPath[0]] = $value;
+			return self::arraySet($path, $value, $pointer[$aPath[0]]);
 		}
+
+		$pointer[$aPath[0]] = $value;
 		return true;
 	}
 
 	/**
-	 * delete value in array path
-	 * @param  string  $path     the path to the data separated by dot
-	 * @param  pointer &$pointer the array where we need to delete a data
-	 * @return void
+	 * Deletes a value from a nested array at the given dot-notation path.
+	 * Returns null if an intermediate key does not exist.
+	 * @param  string $path     dot-separated key e.g. `user.name`
+	 * @param  array  &$pointer the array to modify
+	 * @return bool|null        true on success, null if path not found
 	 */
-	static function arrayDelete($path,&$pointer){
-		$aPath = explode('.',$path);
-	
-		if(count($aPath)>1){
-			$path = strstr($path,'.');
-			$path = substr($path,-strlen($path)+1);
-			if( !isset($pointer[$aPath[0]])){
+	static function arrayDelete(string $path, array &$pointer): bool|null {
+		$aPath = explode('.', $path);
+
+		if (count($aPath) > 1) {
+			$path = substr(strstr($path, '.'), 1);
+			if (!isset($pointer[$aPath[0]])) {
 				return null;
 			}
-			return self::arrayDelete($path,$pointer[$aPath[0]]);
-		}else{
-			unset($pointer[$aPath[0]]);
+			return self::arrayDelete($path, $pointer[$aPath[0]]);
 		}
+
+		unset($pointer[$aPath[0]]);
 		return true;
 	}
-
 }

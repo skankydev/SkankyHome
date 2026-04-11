@@ -4,28 +4,40 @@ namespace SkankyDev\Queue\Job;
 
 use DateTime;
 use stdClass;
-use MongoDB\BSON\ObjectID;
+use MongoDB\BSON\ObjectId;
 use MongoDB\BSON\Persistable;
 use MongoDB\BSON\UTCDateTime;
 use MongoDB\BSON\Document;
 use MongoDB\Model\BSONArray;
 use MongoDB\Model\BSONDocument;
 
+/**
+ * Base class for all queue jobs.
+ * Implements Persistable so the job and its properties are stored in MongoDB
+ * and reconstructed without going through the constructor on retrieval.
+ * Concrete jobs set their payload as typed properties in their constructor,
+ * then implement run() with the actual business logic.
+ */
 abstract class MasterJob implements Persistable {
 
-
+	/** Executes the job. Called by QueueWork when the job is processed. */
 	abstract public function run(): void;
 
+	/**
+	 * Returns all job properties as an array.
+	 * Useful for debugging or logging the job payload.
+	 */
 	public function getPayload(): array {
 		$data = get_object_vars($this);
 		return $data;
 	}
 
 	/**
-	 * convert the document to be saved in database
-	 * @return array the document
+	 * Serializes the job for MongoDB storage.
+	 * Converts DateTime properties to UTCDateTime.
+	 * Called automatically by the MongoDB driver.
 	 */
-	public function bsonSerialize(): stdClass|Document|array{
+	public function bsonSerialize(): stdClass|Document|array {
 		$prop = get_object_vars($this);
 		foreach ($prop as $key=>$value) {
 			$prop[$key] = $this->{$key};
@@ -37,18 +49,21 @@ abstract class MasterJob implements Persistable {
 	}
 
 	/**
-	 * convert the result to the database in document
-	 * @param  array  $data the data form database
-	 * @return void
+	 * Reconstructs the job from MongoDB data without calling the constructor.
+	 * Called automatically by the MongoDB driver when the JobDoc is read.
 	 */
-	public function bsonUnserialize(array $data) : void{
+	public function bsonUnserialize(array $data): void {
 		unset($data['__pclass']); 
 		foreach ($data as $key => $value) {
 			$this->{$key} = $this->convertBsonValue($value);
 		}
 	}
 
-	private function convertBsonValue($value) {
+	/**
+	 * Recursively converts BSON types to native PHP types.
+	 * UTCDateTime → DateTime, BSONArray/BSONDocument → array.
+	 */
+	private function convertBsonValue(mixed $value): mixed {
 		if ($value instanceof UTCDateTime) {
 			return $value->toDateTime();
 		}

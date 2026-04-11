@@ -21,6 +21,7 @@ class Module extends MasterDocument {
 	
 	public string $icon = '';
 	public string $name = '';
+	public string $type = 'scenario';
 	public string $slug = '';
 	public string $topic_message = '';
 	public string $topic_cmd = '';

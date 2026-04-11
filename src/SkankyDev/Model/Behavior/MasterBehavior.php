@@ -14,34 +14,32 @@
 namespace SkankyDev\Model\Behavior;
 
 
+/**
+ * Base class for collection behaviors.
+ * Behaviors are hooks called automatically by MasterCollection at key points
+ * in the document lifecycle (insert, update, entity creation).
+ * Override only the hooks you need in concrete behavior classes.
+ */
 class MasterBehavior {
 
-	function __construct(){
-		
-	}
-	
-	public function beforeInsert($data,$entity=null){
+	function __construct() {}
 
-	}
+	/** Called before a document is inserted. Receives the document to mutate. */
+	public function beforeInsert(object $data, mixed $entity = null): void {}
 
-	public function afterInsert($data,$entity=null){
+	/** Called after a document is inserted. */
+	public function afterInsert(object $data, mixed $entity = null): void {}
 
-	}
+	/** Called before a document is updated. Receives the document to mutate. */
+	public function beforeUpdate(object $data, mixed $entity = null): void {}
 
-	public function beforeUpdate($data,$entity=null){
+	/** Called after a document is updated. */
+	public function afterUpdate(object $data, mixed $entity = null): void {}
 
-	}
+	/** Called before an entity is created from raw data. */
+	public function beforeCreateEntity(mixed $data, mixed $entity = null): void {}
 
-	public function afterUpdate($data,$entity=null){
-
-	}
-
-	public function beforeCreateEntity($data,$entity=null){
-
-	}
-
-	public function afterCreateEntity($data,$entity=null){
-
-	}
+	/** Called after an entity is created from raw data. */
+	public function afterCreateEntity(mixed $data, mixed $entity = null): void {}
 
 }

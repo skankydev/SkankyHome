@@ -16,7 +16,6 @@ namespace SkankyDev\Exception;
 
 use Exception;
 
-class FactoryException extends Exception
-{
+class FactoryException extends Exception {
 	
 }

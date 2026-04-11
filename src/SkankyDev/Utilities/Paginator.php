@@ -18,50 +18,56 @@ use SkankyDev\Config\Config;
 use Iterator;
 
 /**
-* Paginator
-*/
+ * Wraps a MongoDB cursor result set with pagination metadata.
+ * Implements Iterator so it can be used directly in foreach loops.
+ */
 class Paginator implements Iterator {
-	
+
 	use IterableData;
 
-	var $data = [];
-	var $option = ['sort' => ['_id'=> -1],];
-	
+	public array $data   = [];
+	public array $option = ['sort' => ['_id' => -1]];
+
 	/**
-	 * construct
-	 * @param array $data the iterable data 
+	 * @param iterable $data   the result set (MongoDB cursor or array)
+	 * @param array    $option pagination options: page, limit, total, range, sort
 	 */
-	function __construct(iterable $data,array $option){
-		$this->data = $data;
-		$this->option = array_merge($this->option,$option);
-		$this->initInfo();
+	public function __construct(iterable $data, array $option) {
+		$this->data   = $data;
+		$this->option = array_merge($this->option, $option);
 	}
 
 	/**
-	 * get option for pagination
-	 * @return array the option
+	 * Finalises pagination info and attaches the link/get arrays used by the view helper.
+	 * @param array $link  route array passed to UrlBuilder (controller, action, params…)
+	 * @param array $get   extra GET parameters to append to pagination links
+	 * @return array       the complete option array ready for the view
 	 */
-	function getOption(){
+	public function getOption(array $link = [], array $get = []): array {
+		$this->initInfo();
+		$this->option['link'] = $link;
+		$this->option['get']  = $get;
 		return $this->option;
 	}
 
 	/**
-	 * set option for pagination
-	 * @param array $option new option
+	 * Computes derived pagination values (pages, first, last, next, prev, start, stop).
+	 * @param array $option optional overrides merged before computing
 	 */
-	function initInfo($option = []){
-		$this->option = array_merge($this->option,$option);
-		$this->option['pages'] = (int)floor($this->option['total']/$this->option['limit'])+(($this->option['total']%$this->option['limit'])?1:0);
+	public function initInfo(array $option = []): void {
+		$this->option = array_merge($this->option, $option);
+		$this->option['pages'] = (int) floor($this->option['total'] / $this->option['limit'])
+			+ (($this->option['total'] % $this->option['limit']) ? 1 : 0);
 		$this->option['first'] = 1;
-		$this->option['last'] = $this->option['pages'];
-		$next = $this->option['page']+1;
-		$this->option['next'] = ($next>$this->option['last'])? $this->option['last'] : $next;
-		$prev = $this->option['page']-1;
-		$this->option['prev'] = ($prev<$this->option['first'])? $this->option['first'] : $prev;
-		$start = $this->option['page'] - (int)floor($this->option['range']/2);
-		$this->option['start'] = ($start<$this->option['first'])?$this->option['first'] : $start;
-		$stop = (int)floor($this->option['range']/2) + $this->option['page'] + ($this->option['range']%2);
-		$this->option['stop'] = ($stop>$this->option['last'])?($this->option['last']+1):$stop;
+		$this->option['last']  = $this->option['pages'];
+		$next = $this->option['page'] + 1;
+		$this->option['next'] = ($next > $this->option['last']) ? $this->option['last'] : $next;
+		$prev = $this->option['page'] - 1;
+		$this->option['prev'] = ($prev < $this->option['first']) ? $this->option['first'] : $prev;
+		$start = $this->option['page'] - (int) floor($this->option['range'] / 2);
+		$this->option['start'] = ($start < $this->option['first']) ? $this->option['first'] : $start;
+		$stop = (int) floor($this->option['range'] / 2) + $this->option['page'] + ($this->option['range'] % 2);
+		$this->option['stop'] = ($stop > $this->option['last']) ? ($this->option['last'] + 1) : $stop;
 	}
 
 	/**
