@@ -16,6 +16,12 @@
 			<div class="burger-link">
 				<a href="<?= $this->url(['controller'=>'module','action'=>'index']) ?>"><i class="icon-zap"></i>Module</a>
 			</div>
+			<div class="burger-link">
+				<a href="<?= $this->url(['controller'=>'mqtt-monitor','action'=>'index']) ?>"><i class="icon-play"></i>Mqtt Monitor</a>
+			</div>
+			<div class="burger-link">
+				<a href="<?= $this->url(['controller'=>'effect-preview','action'=>'index']) ?>"><i class="icon-tv"></i>Effect Preview</a>
+			</div>
 		</div>
 	</div>
 </div>

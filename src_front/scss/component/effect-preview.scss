@@ -1,0 +1,129 @@
+@use '../settings/variables' as *;
+
+// ===== EFFECT PREVIEW =====
+
+.effect-preview-layout {
+	display: grid;
+	grid-template-columns: 260px 1fr;
+	gap: $p-m;
+	height: calc(100vh - $header - 120px);
+}
+
+.effect-preview-sidebar {
+	display: flex;
+	flex-direction: column;
+	gap: $p-s;
+	overflow: hidden;
+}
+
+.effect-preview-search {
+	.form-input { width: 100%; }
+}
+
+.effect-preview-list {
+	flex: 1;
+	overflow-y: auto;
+	display: flex;
+	flex-direction: column;
+	gap: $p-xs;
+}
+
+.effect-preview-cat {
+	display: flex;
+	flex-direction: column;
+}
+
+.effect-preview-cat-label {
+	font-size: $fs-xs;
+	color: $text-muted;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	padding: $p-s $p-s $p-xs;
+	border-bottom: 1px solid $border-color;
+	margin-bottom: $p-xs;
+}
+
+.effect-preview-item {
+	display: flex;
+	align-items: center;
+	gap: $p-s;
+	padding: $p-xs $p-s;
+	border-radius: $p-xs;
+	cursor: pointer;
+	transition: background 0.1s;
+
+	&:hover {
+		background: $bg-tertiary;
+	}
+
+	&.active {
+		background: $bg-tertiary;
+		border-left: 3px solid $neon-cyan;
+		padding-left: $p-s - 3px;
+
+		.effect-name { color: $neon-cyan; }
+	}
+
+	.effect-id {
+		font-size: $fs-xs;
+		color: $text-muted;
+		min-width: 24px;
+		text-align: right;
+	}
+
+	.effect-name {
+		font-size: $fs-s;
+		color: $text-primary;
+	}
+}
+
+.effect-preview-main {
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+
+	.card-header {
+		display: flex;
+		align-items: center;
+		gap: $p-m;
+	}
+}
+
+.effect-id-badge {
+	font-size: $fs-xs;
+	color: $text-muted;
+	background: $bg-primary;
+	padding: $p-xxs $p-xs;
+	border-radius: $p-xs;
+	border: 1px solid $border-color;
+}
+
+.effect-preview-canvas {
+	display: block;
+	width: 100%;
+	height: auto;
+	border-radius: $p-xs;
+	background: $bg-primary;
+}
+
+.effect-preview-controls {
+	display: flex;
+	align-items: flex-end;
+	gap: $p-l;
+	flex-wrap: wrap;
+}
+
+.color-input {
+	width: 48px;
+	height: 32px;
+	padding: 2px;
+	border: 1px solid $border-color;
+	border-radius: $p-xs;
+	background: $bg-primary;
+	cursor: pointer;
+}
+
+.effect-preview-range {
+	width: 200px;
+	accent-color: $neon-cyan;
+}

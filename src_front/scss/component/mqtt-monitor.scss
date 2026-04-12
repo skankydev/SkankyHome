@@ -1,0 +1,94 @@
+@use '../settings/variables' as *;
+@use '../settings/functions' as *;
+
+// ===== MQTT MONITOR =====
+
+.mqtt-monitor {
+	display: flex;
+	flex-direction: column;
+	gap: $p-s;
+	height: calc(100vh - $header - 120px);
+}
+
+.mqtt-monitor-toolbar {
+	display: flex;
+	align-items: center;
+	gap: $p-m;
+	padding: $p-s $p-m;
+	background: $bg-secondary;
+	border: 1px solid $border-color;
+	border-radius: $p-xs;
+
+	.form-input {
+		flex: 1;
+	}
+}
+
+.mqtt-monitor-status {
+	display: flex;
+	align-items: center;
+	gap: $p-s;
+	white-space: nowrap;
+	font-size: $fs-s;
+	color: $text-secondary;
+}
+
+.mqtt-monitor-actions {
+	display: flex;
+	gap: $p-s;
+}
+
+.mqtt-monitor-list {
+	flex: 1;
+	overflow-y: auto;
+	display: flex;
+	flex-direction: column;
+	gap: $p-xs;
+}
+
+.mqtt-monitor-empty {
+	text-align: center;
+	color: $text-muted;
+	padding: $p-xl;
+	font-size: $fs-s;
+}
+
+.mqtt-monitor-item {
+	display: grid;
+	grid-template-columns: 80px 1fr;
+	grid-template-rows: auto auto;
+	gap: $p-xs $p-m;
+	padding: $p-s $p-m;
+	background: $bg-secondary;
+	border: 1px solid $border-color;
+	border-left: 3px solid $neon-cyan;
+	border-radius: $p-xs;
+	font-size: $fs-s;
+
+	&:hover {
+		border-left-color: $neon-purple;
+		background: $bg-tertiary;
+	}
+}
+
+.mqtt-monitor-time {
+	color: $text-muted;
+	font-size: $fs-xs;
+	align-self: center;
+}
+
+.mqtt-monitor-topic {
+	color: $neon-cyan;
+	font-weight: $weight-medium;
+	align-self: center;
+}
+
+.mqtt-monitor-payload {
+	grid-column: 2;
+	margin: 0;
+	color: $text-primary;
+	font-family: $font;
+	font-size: $fs-xs;
+	white-space: pre-wrap;
+	word-break: break-all;
+}
