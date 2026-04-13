@@ -5198,6 +5198,16 @@ a.link-button:hover {
   flex-grow: 1;
 }
 
+.effect-category-label {
+  font-size: 0.75rem;
+  color: #949AAD;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 8px 4px 2px;
+  border-bottom: 1px solid #2A2A4A;
+  margin-top: 8px;
+}
+
 .effect {
   border-bottom: 1px solid #7C3AED;
   padding: 4px 0;
@@ -5412,7 +5422,17 @@ a.link-button:hover {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-/* Inline | http://dev.skankyhome.com/scenario/create/694047ab7812915bd70b0033 */
+.mini-effect-preview {
+  padding: 8px 0 4px;
+}
+
+.mini-effect-canvas {
+  display: block;
+  width: 100%;
+  height: 46px;
+  border-radius: 4px;
+}
+
 .pref-effect {
   display: flex;
   border-radius: 8px 0 8px 8px;
@@ -5721,7 +5741,7 @@ a.link-button:hover {
 .effect-preview-canvas {
   display: block;
   width: 100%;
-  height: auto;
+  height: 60px;
   border-radius: 4px;
   background: #050510;
 }

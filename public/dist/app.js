@@ -16176,7 +16176,7 @@ const _export_sfc = (sfc, props) => {
   }
   return target;
 };
-const _sfc_main$7 = {
+const _sfc_main$8 = {
   __name: "LedEditor",
   props: {
     value: String
@@ -16191,9 +16191,9 @@ const _sfc_main$7 = {
     return __returned__;
   }
 };
-const _hoisted_1$7 = { class: "led-editor" };
-function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createElementBlock("div", _hoisted_1$7, [
+const _hoisted_1$8 = { class: "led-editor" };
+function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", _hoisted_1$8, [
     createBaseVNode("h2", null, toDisplayString($props.value), 1),
     createBaseVNode("p", null, "Compteur: " + toDisplayString($setup.count), 1),
     createBaseVNode("button", {
@@ -16201,8 +16201,8 @@ function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
     }, "+1")
   ]);
 }
-const LedEditor = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$7], ["__file", "LedEditor.vue"]]);
-const _sfc_main$6 = {
+const LedEditor = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$8], ["__file", "LedEditor.vue"]]);
+const _sfc_main$7 = {
   __name: "ColorPicker",
   props: {
     modelValue: {
@@ -16352,16 +16352,16 @@ const _sfc_main$6 = {
     return __returned__;
   }
 };
-const _hoisted_1$6 = { class: "color-picker" };
-const _hoisted_2$6 = { class: "canva-wrapper" };
+const _hoisted_1$7 = { class: "color-picker" };
+const _hoisted_2$7 = { class: "canva-wrapper" };
 const _hoisted_3$6 = { class: "color-brightness-slider" };
 const _hoisted_4$6 = { class: "color-value form-inline" };
 const _hoisted_5$6 = { class: "form-group" };
 const _hoisted_6$5 = { class: "form-group" };
 const _hoisted_7$5 = { class: "form-group" };
-function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createElementBlock("div", _hoisted_1$6, [
-    createBaseVNode("div", _hoisted_2$6, [
+function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", _hoisted_1$7, [
+    createBaseVNode("div", _hoisted_2$7, [
       createBaseVNode("canvas", {
         ref: "canvas",
         class: "color-picker-canva",
@@ -16441,8 +16441,8 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
     ])
   ]);
 }
-const ColorPicker = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$6], ["__file", "ColorPicker.vue"]]);
-const _sfc_main$5 = {
+const ColorPicker = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$7], ["__file", "ColorPicker.vue"]]);
+const _sfc_main$6 = {
   __name: "IconPicker",
   props: {
     modelValue: {
@@ -16523,8 +16523,8 @@ const _sfc_main$5 = {
     return __returned__;
   }
 };
-const _hoisted_1$5 = { class: "picker-icon" };
-const _hoisted_2$5 = { class: "picker-preview-icon" };
+const _hoisted_1$6 = { class: "picker-icon" };
+const _hoisted_2$6 = { class: "picker-preview-icon" };
 const _hoisted_3$5 = {
   key: 0,
   class: "picker-icon-dropdown"
@@ -16533,10 +16533,10 @@ const _hoisted_4$5 = { class: "picker-icon-grid" };
 const _hoisted_5$5 = ["onClick"];
 const _hoisted_6$4 = { class: "picker-icon-input" };
 const _hoisted_7$4 = ["name", "value", "required"];
-function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createElementBlock("div", _hoisted_1$5, [
+function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", _hoisted_1$6, [
     createBaseVNode("div", null, [
-      createBaseVNode("div", _hoisted_2$5, [
+      createBaseVNode("div", _hoisted_2$6, [
         createBaseVNode("div", {
           class: "picker-icon-item",
           onClick: $setup.openDropdown
@@ -16583,7 +16583,7 @@ function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
     }, null, 8, _hoisted_7$4)
   ]);
 }
-const IconPicker = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$5], ["__file", "IconPicker.vue"]]);
+const IconPicker = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$6], ["__file", "IconPicker.vue"]]);
 var as = Object.defineProperty;
 var Yb = Object.getOwnPropertyDescriptor;
 var Jb = Object.getOwnPropertyNames;
@@ -27809,7 +27809,7 @@ var XT = D((ot) => {
   YT(Ql(), ot);
 });
 const mqtt = XT();
-const _sfc_main$4 = {
+const _sfc_main$5 = {
   __name: "LiveMode",
   props: {
     effects: Array
@@ -27893,8 +27893,8 @@ const _sfc_main$4 = {
     return __returned__;
   }
 };
-const _hoisted_1$4 = { class: "grid-layout" };
-const _hoisted_2$4 = { class: "grid-half card" };
+const _hoisted_1$5 = { class: "grid-layout" };
+const _hoisted_2$5 = { class: "grid-half card" };
 const _hoisted_3$4 = { class: "card-body" };
 const _hoisted_4$4 = { class: "form-group" };
 const _hoisted_5$4 = { class: "grid-half card" };
@@ -27904,9 +27904,9 @@ const _hoisted_8$3 = { class: "scrollable" };
 const _hoisted_9$3 = ["onClick"];
 const _hoisted_10$3 = { class: "effect-key" };
 const _hoisted_11$2 = { class: "effect-name" };
-function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createElementBlock("div", _hoisted_1$4, [
-    createBaseVNode("div", _hoisted_2$4, [
+function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", _hoisted_1$5, [
+    createBaseVNode("div", _hoisted_2$5, [
       _cache[3] || (_cache[3] = createBaseVNode("div", { class: "card-header" }, [
         createBaseVNode("h2", { class: "corner-accent-primary" }, "Color")
       ], -1)),
@@ -27965,8 +27965,8 @@ function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
     ])
   ]);
 }
-const LiveMode = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$4], ["__file", "LiveMode.vue"]]);
-const _sfc_main$3 = {
+const LiveMode = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$5], ["__file", "LiveMode.vue"]]);
+const _sfc_main$4 = {
   __name: "QuickSelectColor",
   props: {
     modelValue: {
@@ -28018,17 +28018,17 @@ const _sfc_main$3 = {
     return __returned__;
   }
 };
-const _hoisted_1$3 = { class: "quick-select-color" };
-const _hoisted_2$3 = { class: "picker-preview-icon" };
+const _hoisted_1$4 = { class: "quick-select-color" };
+const _hoisted_2$4 = { class: "picker-preview-icon" };
 const _hoisted_3$3 = {
   key: 0,
   class: "picker-icon-dropdown"
 };
 const _hoisted_4$3 = { class: "picker-icon-grid" };
 const _hoisted_5$3 = ["onClick"];
-function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createElementBlock("div", _hoisted_1$3, [
-    createBaseVNode("div", _hoisted_2$3, [
+function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", _hoisted_1$4, [
+    createBaseVNode("div", _hoisted_2$4, [
       createBaseVNode("div", {
         class: "picker-icon-item",
         onClick: $setup.openDropdown
@@ -28052,994 +28052,7 @@ function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
     ])
   ]);
 }
-const QuickSelectColor = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$3], ["__file", "QuickSelectColor.vue"]]);
-class ModuleBridge extends EventTarget {
-  constructor(module) {
-    super();
-    this.module = module;
-    this.client = null;
-    this.connected = false;
-    this.brokerUrl = "ws://skankyhome.local:8083/mqtt";
-    this.clientId = `web_${module.name}_${this._randomId()}`;
-    this.connect();
-  }
-  /**
-   * Connexion au broker MQTT
-   */
-  connect() {
-    this.client = mqtt.connect(this.brokerUrl, {
-      clientId: this.clientId,
-      clean: true,
-      reconnectPeriod: 1e3
-    });
-    this.client.on("connect", () => {
-      console.log(`✅ ModuleBridge connected: ${this.module.name}`);
-      this.connected = true;
-      this.client.subscribe(this.module.topic_message);
-      this.dispatchEvent(new CustomEvent("connected", {
-        detail: { module: this.module }
-      }));
-    });
-    this.client.on("error", (err) => {
-      console.error(`❌ ModuleBridge error: ${err.message}`);
-      this.connected = false;
-      this.dispatchEvent(new CustomEvent("error", {
-        detail: { error: err.message }
-      }));
-    });
-    this.client.on("message", (topic2, message) => {
-      if (topic2 === this.module.topic_message) {
-        try {
-          const data = JSON.parse(message.toString());
-          this.dispatchEvent(new CustomEvent("module-message", {
-            detail: data
-          }));
-        } catch (err) {
-          console.error("Failed to parse MQTT message:", err);
-        }
-      }
-    });
-    this.client.on("close", () => {
-      console.log(`🔌 ModuleBridge disconnected: ${this.module.name}`);
-      this.connected = false;
-      this.dispatchEvent(new CustomEvent("disconnected"));
-    });
-  }
-  /**
-   * Envoyer une commande à l'ESP32
-   * @param {Object} payload - Commande à envoyer
-   */
-  send(payload) {
-    if (!this.isConnected()) {
-      console.warn("ModuleBridge: Not connected, cannot send");
-      return false;
-    }
-    this.client.publish(
-      this.module.topic_cmd,
-      JSON.stringify(payload),
-      { qos: 1 }
-    );
-    console.log(`📤 Sent to ${this.module.name}:`, payload);
-    return true;
-  }
-  /**
-   * Vérifier si connecté
-   * @returns {boolean}
-   */
-  isConnected() {
-    return this.connected;
-  }
-  /**
-   * Déconnexion propre
-   */
-  disconnect() {
-    if (this.client) {
-      this.client.end();
-      this.connected = false;
-    }
-  }
-  /**
-   * Générer un ID aléatoire
-   * @private
-   */
-  _randomId() {
-    return Math.random().toString(16).substr(2, 8);
-  }
-  /**
-   * Raccourci pour addEventListener
-   */
-  on(event, callback) {
-    this.addEventListener(event, (e) => callback(e.detail));
-  }
-  /**
-   * Raccourci pour removeEventListener
-   */
-  off(event, callback) {
-    this.removeEventListener(event, callback);
-  }
-}
-const _sfc_main$2 = {
-  __name: "ScenarioMaker",
-  props: {
-    module: Object,
-    scenarioOrigin: Object,
-    icons: Array,
-    effects: Array,
-    links: Object
-  },
-  setup(__props, { expose: __expose }) {
-    __expose();
-    const props = __props;
-    let bridge = null;
-    const currentColor = ref("#0000FF");
-    const searchEffect = ref("");
-    const scenario = ref(props.scenarioOrigin);
-    const isConnected = ref("error");
-    const result = ref({
-      status: "",
-      message: "",
-      url: "",
-      isNew: false,
-      display: false
-    });
-    const dragState = ref({
-      isDragging: false,
-      cursorIndex: null,
-      lineIndex: null,
-      stepIndex: null
-    });
-    const colorAddPref = () => {
-      if (!scenario.value.preference.colors.includes(currentColor.value)) {
-        scenario.value.preference.colors.push(currentColor.value);
-      }
-    };
-    const effectAddPref = (key) => {
-      if (!scenario.value.preference.effects.includes(key)) {
-        scenario.value.preference.effects.push(key);
-      }
-    };
-    const removePrefColor = (key, event) => {
-      event.stopPropagation();
-      scenario.value.preference.colors.splice(key, 1);
-    };
-    const removePrefEffect = (key, event) => {
-      event.stopPropagation();
-      scenario.value.preference.effects.splice(key, 1);
-    };
-    const matchSearch = (name2) => {
-      if (searchEffect.value.length == 0) {
-        return true;
-      }
-      const escapedSearch = searchEffect.value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-      const regex = new RegExp(escapedSearch, "i");
-      return regex.test(name2);
-    };
-    const setColor = (color) => {
-      console.log("setColor", color);
-    };
-    const setEffect = (effect2) => {
-      console.log("setEffect", effect2);
-    };
-    const save = async () => {
-      let body = await fetch(props.links.save, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json"
-        },
-        body: JSON.stringify(scenario.value)
-      }).then((response) => {
-        return response.json();
-      });
-      scenario.value = structuredClone(body.scenario);
-      result.value = structuredClone(body.result);
-      if (result.value.isNew) {
-        window.history.pushState({}, null, result.value.url);
-      }
-      setTimeout(() => {
-        result.value.display = false;
-      }, 2e3);
-    };
-    const addStep = (lineIndex) => {
-      scenario.value.lines[lineIndex].steps.push({
-        duration: 5,
-        cursors: [0, props.module.nb_led - 1],
-        segments: [{
-          first: 0,
-          last: props.module.nb_led - 1,
-          effect: 0,
-          colors: ["", "", ""],
-          speed: 1e3,
-          reverse: false
-        }]
-      });
-    };
-    const duplicateStep = (lineIndex, stepIndex) => {
-      const step = scenario.value.lines[lineIndex].steps[stepIndex];
-      const newStep = {
-        duration: step.duration,
-        cursors: [...step.cursors],
-        segments: step.segments.map((seg) => ({
-          first: seg.first,
-          last: seg.last,
-          effect: seg.effect,
-          colors: [...seg.colors],
-          speed: seg.speed,
-          reverse: seg.reverse
-        }))
-      };
-      scenario.value.lines[lineIndex].steps.splice(stepIndex + 1, 0, newStep);
-    };
-    const removeStep = (lineIndex, stepIndex) => {
-      scenario.value.lines[lineIndex].steps.splice(stepIndex, 1);
-    };
-    const addCursor = (lineIndex, stepIndex, position) => {
-      let cursors = scenario.value.lines[lineIndex].steps[stepIndex].cursors;
-      if (cursors.length >= 5) {
-        return;
-      }
-      if (!cursors.includes(position)) {
-        cursors.push(position);
-        cursors.sort((a, b) => a - b);
-      }
-      scenario.value.lines[lineIndex].steps[stepIndex].cursors = cursors;
-      splitSegment(lineIndex, stepIndex);
-    };
-    const removeCursor = (lineIndex, stepIndex, cursorIndex) => {
-      let cursors = scenario.value.lines[lineIndex].steps[stepIndex].cursors;
-      cursors = JSON.parse(JSON.stringify(cursors));
-      if (cursorIndex === 0 || cursorIndex === cursors.length - 1) {
-        return;
-      }
-      cursors.splice(cursorIndex, 1);
-      scenario.value.lines[lineIndex].steps[stepIndex].cursors = cursors;
-      splitSegment(lineIndex, stepIndex);
-    };
-    const splitSegment = (lineIndex, stepIndex) => {
-      let cursors = scenario.value.lines[lineIndex].steps[stepIndex].cursors;
-      let segments = scenario.value.lines[lineIndex].steps[stepIndex].segments;
-      let newSegments = [];
-      for (let i = 0; i < cursors.length - 1; i++) {
-        let template = segments[i] || segments[i - 1] || {};
-        newSegments.push({
-          first: cursors[i],
-          last: cursors[i + 1] - 1,
-          effect: template?.effect ?? 0,
-          colors: [...template?.colors ?? ["", "", ""]],
-          speed: template?.speed ?? 1e3,
-          reverse: template?.reverse ?? false
-        });
-      }
-      newSegments[newSegments.length - 1].last = props.module.nb_led - 1;
-      scenario.value.lines[lineIndex].steps[stepIndex].segments = newSegments;
-    };
-    const startDrag = (lineIndex, stepIndex, cursorIndex, event) => {
-      const cursors = scenario.value.lines[lineIndex].steps[stepIndex].cursors;
-      if (cursorIndex === 0 || cursorIndex === cursors.length - 1) {
-        return;
-      }
-      dragState.value = {
-        isDragging: true,
-        cursorIndex,
-        lineIndex,
-        stepIndex
-      };
-      event.preventDefault();
-    };
-    const onDrag = (lineIndex, stepIndex, ledPosition, event) => {
-      if (!dragState.value.isDragging) return;
-      if (dragState.value.lineIndex !== lineIndex) return;
-      if (dragState.value.stepIndex !== stepIndex) return;
-      const cursors = scenario.value.lines[lineIndex].steps[stepIndex].cursors;
-      const cursorIndex = dragState.value.cursorIndex;
-      const prevCursor = cursors[cursorIndex - 1];
-      const nextCursor = cursors[cursorIndex + 1];
-      if (ledPosition <= prevCursor || ledPosition >= nextCursor) {
-        return;
-      }
-      cursors[cursorIndex] = ledPosition;
-      splitSegment(lineIndex, stepIndex);
-    };
-    const stopDrag = () => {
-      dragState.value.isDragging = false;
-    };
-    const divideLeds = (lineIndex, stepIndex, parts) => {
-      const nbLeds = props.module.nb_led;
-      const step = Math.floor(nbLeds / parts);
-      let newCursors = [0];
-      for (let i = 1; i < parts; i++) {
-        newCursors.push(i * step);
-      }
-      newCursors.push(nbLeds - 1);
-      scenario.value.lines[lineIndex].steps[stepIndex].cursors = newCursors;
-      splitSegment(lineIndex, stepIndex);
-    };
-    const resetCursors = (lineIndex, stepIndex) => {
-      scenario.value.lines[lineIndex].steps[stepIndex].cursors = [0, props.module.nb_led - 1];
-      splitSegment(lineIndex, stepIndex);
-    };
-    const previewSegments = (segments) => {
-      let message = { segments };
-      bridge.send(message);
-    };
-    onMounted(() => {
-      bridge = new ModuleBridge(props.module);
-      bridge.on("module-message", (data) => {
-        console.log("📨 Message reçu:", data);
-      });
-      bridge.on("connected", () => {
-        isConnected.value = "success";
-      });
-      bridge.on("disconnected", () => {
-        isConnected.value = "warning";
-      });
-      bridge.on("error", () => {
-        isConnected.value = "error";
-      });
-      if (!scenario.value.lines || scenario.value.lines.length === 0) {
-        scenario.value.lines = [];
-        for (let i = 0; i < props.module.nb_line; i++) {
-          scenario.value.lines.push({
-            steps: []
-          });
-          addStep(i);
-        }
-      }
-      window.addEventListener("mouseup", stopDrag);
-      window.addEventListener("mouseleave", stopDrag);
-    });
-    onBeforeUnmount(() => {
-      if (bridge) {
-        bridge.disconnect();
-      }
-      window.removeEventListener("mouseup", stopDrag);
-      window.removeEventListener("mouseleave", stopDrag);
-    });
-    const __returned__ = { props, get bridge() {
-      return bridge;
-    }, set bridge(v) {
-      bridge = v;
-    }, currentColor, searchEffect, scenario, isConnected, result, dragState, colorAddPref, effectAddPref, removePrefColor, removePrefEffect, matchSearch, setColor, setEffect, save, addStep, duplicateStep, removeStep, addCursor, removeCursor, splitSegment, startDrag, onDrag, stopDrag, divideLeds, resetCursors, previewSegments, ref, onMounted, onBeforeUnmount, ColorPicker, IconPicker, QuickSelectColor, get ModuleBridge() {
-      return ModuleBridge;
-    } };
-    Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
-    return __returned__;
-  }
-};
-const _hoisted_1$2 = { class: "scenario-layout" };
-const _hoisted_2$2 = { class: "scenario-side-bar accordion" };
-const _hoisted_3$2 = { class: "accordion-item card card-primary mb-s" };
-const _hoisted_4$2 = { class: "accordion-content card-body" };
-const _hoisted_5$2 = { class: "text-right" };
-const _hoisted_6$2 = { class: "color-result" };
-const _hoisted_7$2 = { class: "color-text" };
-const _hoisted_8$2 = { class: "card mb-s" };
-const _hoisted_9$2 = { class: "pref-color-wrapper card-body" };
-const _hoisted_10$2 = ["onClick"];
-const _hoisted_11$1 = ["onClick"];
-const _hoisted_12$1 = { class: "accordion-item card card-primary mb-s" };
-const _hoisted_13$1 = { class: "accordion-content" };
-const _hoisted_14$1 = { class: "form-group ph-m" };
-const _hoisted_15$1 = { class: "effects-list pb-l" };
-const _hoisted_16$1 = { class: "scrollable" };
-const _hoisted_17$1 = {
-  key: 0,
-  class: "effect"
-};
-const _hoisted_18$1 = { class: "effect-key" };
-const _hoisted_19$1 = { class: "effect-name" };
-const _hoisted_20$1 = { class: "effect-favorie" };
-const _hoisted_21$1 = ["onClick"];
-const _hoisted_22$1 = { class: "card mb-l" };
-const _hoisted_23$1 = { class: "pref-effect-wrapper card-body" };
-const _hoisted_24$1 = ["onClick"];
-const _hoisted_25 = { class: "effect-key" };
-const _hoisted_26 = { class: "effect-name" };
-const _hoisted_27 = ["onClick"];
-const _hoisted_28 = { class: "scenario-content" };
-const _hoisted_29 = { class: "scenario-title card mb-s" };
-const _hoisted_30 = { class: "scenario-info card-body form-inline" };
-const _hoisted_31 = { class: "form-group" };
-const _hoisted_32 = { class: "form-group" };
-const _hoisted_33 = {
-  class: "accordion-item card card-primary mb-s",
-  open: ""
-};
-const _hoisted_34 = { class: "accordion-header" };
-const _hoisted_35 = { class: "rainbow-underline" };
-const _hoisted_36 = { class: "accordion-content card-body" };
-const _hoisted_37 = { class: "accordion-header" };
-const _hoisted_38 = { class: "card-header-action" };
-const _hoisted_39 = { class: "form-group" };
-const _hoisted_40 = ["onUpdate:modelValue"];
-const _hoisted_41 = { class: "pb-m" };
-const _hoisted_42 = ["onClick"];
-const _hoisted_43 = ["onClick"];
-const _hoisted_44 = ["onClick"];
-const _hoisted_45 = ["onClick"];
-const _hoisted_46 = { class: "flex" };
-const _hoisted_47 = ["onClick"];
-const _hoisted_48 = ["onClick"];
-const _hoisted_49 = ["onClick"];
-const _hoisted_50 = ["onClick"];
-const _hoisted_51 = { class: "led-visualizer" };
-const _hoisted_52 = { class: "led-bar-container" };
-const _hoisted_53 = ["onClick", "onMouseenter", "data-tooltip"];
-const _hoisted_54 = ["onMousedown", "onClick"];
-const _hoisted_55 = { class: "cursor-label" };
-const _hoisted_56 = { class: "segment-form" };
-const _hoisted_57 = { class: "form-group" };
-const _hoisted_58 = { class: "segment-form-leds" };
-const _hoisted_59 = ["onUpdate:modelValue"];
-const _hoisted_60 = ["onUpdate:modelValue"];
-const _hoisted_61 = { class: "form-group" };
-const _hoisted_62 = ["onUpdate:modelValue"];
-const _hoisted_63 = ["value"];
-const _hoisted_64 = { class: "form-group" };
-const _hoisted_65 = { class: "segment-form-color" };
-const _hoisted_66 = { class: "form-group" };
-const _hoisted_67 = ["onUpdate:modelValue"];
-const _hoisted_68 = { class: "form-group" };
-const _hoisted_69 = ["id", "onUpdate:modelValue"];
-const _hoisted_70 = ["for"];
-const _hoisted_71 = {
-  key: 0,
-  class: "scenario-flash"
-};
-const _hoisted_72 = {
-  class: /* @__PURE__ */ normalizeClass("scenario-is-conneced ")
-};
-function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createElementBlock("section", _hoisted_1$2, [
-    createBaseVNode("div", _hoisted_2$2, [
-      createBaseVNode("details", _hoisted_3$2, [
-        _cache[6] || (_cache[6] = createBaseVNode("summary", { class: "accordion-header" }, [
-          createBaseVNode("h3", {
-            class: "glitch",
-            "data-text": "Palette"
-          }, "Palette")
-        ], -1)),
-        createBaseVNode("div", _hoisted_4$2, [
-          createVNode($setup["ColorPicker"], {
-            modelValue: $setup.currentColor,
-            "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $setup.currentColor = $event)
-          }, null, 8, ["modelValue"]),
-          createBaseVNode("div", _hoisted_5$2, [
-            createBaseVNode("div", _hoisted_6$2, [
-              createBaseVNode("span", {
-                class: "color-preview",
-                style: normalizeStyle({ "background-color": $setup.currentColor })
-              }, null, 4),
-              createBaseVNode("span", _hoisted_7$2, toDisplayString($setup.currentColor), 1),
-              createBaseVNode("span", {
-                class: "btn-mini btn-favorie",
-                onClick: $setup.colorAddPref
-              }, [..._cache[5] || (_cache[5] = [
-                createBaseVNode("i", { class: "icon-heart" }, null, -1)
-              ])])
-            ])
-          ])
-        ])
-      ]),
-      createBaseVNode("div", _hoisted_8$2, [
-        _cache[8] || (_cache[8] = createBaseVNode("div", { class: "card-header" }, [
-          createBaseVNode("h6", null, "Couleur")
-        ], -1)),
-        createBaseVNode("div", _hoisted_9$2, [
-          (openBlock(true), createElementBlock(Fragment, null, renderList($setup.scenario.preference.colors, (prefColor, key) => {
-            return openBlock(), createElementBlock("div", {
-              class: "pref-color",
-              style: normalizeStyle({ "background-color": prefColor }),
-              onClick: ($event) => $setup.setColor(prefColor)
-            }, [
-              createBaseVNode("div", {
-                class: "pref-color-trash",
-                onClick: ($event) => $setup.removePrefColor(key, $event)
-              }, [..._cache[7] || (_cache[7] = [
-                createBaseVNode("i", { class: "icon-trash" }, null, -1)
-              ])], 8, _hoisted_11$1)
-            ], 12, _hoisted_10$2);
-          }), 256))
-        ])
-      ]),
-      createBaseVNode("details", _hoisted_12$1, [
-        _cache[12] || (_cache[12] = createBaseVNode("summary", { class: "accordion-header" }, [
-          createBaseVNode("h3", {
-            class: "glitch",
-            "data-text": "Effect"
-          }, "Effect")
-        ], -1)),
-        createBaseVNode("div", _hoisted_13$1, [
-          createBaseVNode("div", _hoisted_14$1, [
-            _cache[9] || (_cache[9] = createBaseVNode("label", {
-              for: "",
-              class: "form-label"
-            }, null, -1)),
-            withDirectives(createBaseVNode("input", {
-              type: "text",
-              class: "form-input",
-              "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => $setup.searchEffect = $event)
-            }, null, 512), [
-              [vModelText, $setup.searchEffect]
-            ])
-          ]),
-          createBaseVNode("div", _hoisted_15$1, [
-            createBaseVNode("div", _hoisted_16$1, [
-              (openBlock(true), createElementBlock(Fragment, null, renderList($setup.props.effects, (name2, key) => {
-                return openBlock(), createElementBlock(Fragment, null, [
-                  $setup.matchSearch(name2) ? (openBlock(), createElementBlock("div", _hoisted_17$1, [
-                    createBaseVNode("div", _hoisted_18$1, toDisplayString(key), 1),
-                    _cache[11] || (_cache[11] = createBaseVNode("div", { class: "color-cyan" }, " => ", -1)),
-                    createBaseVNode("div", _hoisted_19$1, toDisplayString(name2), 1),
-                    createBaseVNode("div", _hoisted_20$1, [
-                      createBaseVNode("span", {
-                        class: "btn-mini btn-favorie",
-                        onClick: ($event) => $setup.effectAddPref(key)
-                      }, [..._cache[10] || (_cache[10] = [
-                        createBaseVNode("i", { class: "icon-heart" }, null, -1)
-                      ])], 8, _hoisted_21$1)
-                    ])
-                  ])) : createCommentVNode("", true)
-                ], 64);
-              }), 256))
-            ])
-          ])
-        ])
-      ]),
-      createBaseVNode("div", _hoisted_22$1, [
-        _cache[15] || (_cache[15] = createBaseVNode("div", { class: "card-header" }, [
-          createBaseVNode("h6", null, "Effet")
-        ], -1)),
-        createBaseVNode("div", _hoisted_23$1, [
-          (openBlock(true), createElementBlock(Fragment, null, renderList($setup.scenario.preference.effects, (prefEffect, key) => {
-            return openBlock(), createElementBlock("div", {
-              class: "pref-effect",
-              onClick: ($event) => $setup.setEffect(prefEffect)
-            }, [
-              createBaseVNode("div", _hoisted_25, toDisplayString(prefEffect), 1),
-              _cache[14] || (_cache[14] = createBaseVNode("div", { class: "color-cyan" }, " => ", -1)),
-              createBaseVNode("div", _hoisted_26, toDisplayString($setup.props.effects[prefEffect]), 1),
-              createBaseVNode("div", {
-                class: "effect-trash",
-                onClick: ($event) => $setup.removePrefEffect(key, $event)
-              }, [..._cache[13] || (_cache[13] = [
-                createBaseVNode("i", { class: "icon-trash" }, null, -1)
-              ])], 8, _hoisted_27)
-            ], 8, _hoisted_24$1);
-          }), 256))
-        ])
-      ])
-    ]),
-    createBaseVNode("div", _hoisted_28, [
-      createBaseVNode("div", _hoisted_29, [
-        _cache[19] || (_cache[19] = createBaseVNode("header", { class: "card-header" }, [
-          createBaseVNode("h3", {
-            class: "glitch",
-            "data-text": "Info"
-          }, "Info")
-        ], -1)),
-        createBaseVNode("div", _hoisted_30, [
-          createBaseVNode("div", _hoisted_31, [
-            _cache[16] || (_cache[16] = createBaseVNode("label", {
-              for: "Name",
-              class: "form-label required"
-            }, "Icon", -1)),
-            createVNode($setup["IconPicker"], {
-              modelValue: $setup.scenario.icon,
-              "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => $setup.scenario.icon = $event),
-              icons: $setup.props.icons
-            }, null, 8, ["modelValue", "icons"])
-          ]),
-          createBaseVNode("div", _hoisted_32, [
-            _cache[17] || (_cache[17] = createBaseVNode("label", {
-              for: "Name",
-              class: "form-label required"
-            }, "Name", -1)),
-            withDirectives(createBaseVNode("input", {
-              type: "text",
-              id: "Name",
-              name: "name",
-              required: "",
-              class: "form-input",
-              "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => $setup.scenario.name = $event)
-            }, null, 512), [
-              [vModelText, $setup.scenario.name]
-            ])
-          ]),
-          createBaseVNode("div", { class: "form-group" }, [
-            createBaseVNode("button", {
-              type: "button",
-              class: "btn-success",
-              onClick: $setup.save
-            }, [..._cache[18] || (_cache[18] = [
-              createBaseVNode("i", { class: "icon-save" }, null, -1),
-              createTextVNode(" SAVE", -1)
-            ])])
-          ])
-        ])
-      ]),
-      (openBlock(true), createElementBlock(Fragment, null, renderList($setup.scenario.lines, (line, keyLine) => {
-        return openBlock(), createElementBlock("details", _hoisted_33, [
-          createBaseVNode("summary", _hoisted_34, [
-            createBaseVNode("div", null, [
-              createBaseVNode("h2", _hoisted_35, "Ligne " + toDisplayString(keyLine + 1), 1)
-            ])
-          ]),
-          createBaseVNode("div", _hoisted_36, [
-            (openBlock(true), createElementBlock(Fragment, null, renderList(line.steps, (step, keySteps) => {
-              return openBlock(), createElementBlock("details", null, [
-                createBaseVNode("summary", _hoisted_37, [
-                  createBaseVNode("div", null, [
-                    createBaseVNode("h3", null, "Step " + toDisplayString(keySteps + 1), 1)
-                  ])
-                ]),
-                createBaseVNode("div", _hoisted_38, [
-                  createBaseVNode("div", _hoisted_39, [
-                    _cache[20] || (_cache[20] = createBaseVNode("label", {
-                      for: "Speed",
-                      class: "form-label"
-                    }, "Durée (sec)", -1)),
-                    withDirectives(createBaseVNode("input", {
-                      type: "number",
-                      name: "first",
-                      class: "form-input",
-                      "onUpdate:modelValue": ($event) => step.duration = $event
-                    }, null, 8, _hoisted_40), [
-                      [vModelText, step.duration]
-                    ])
-                  ]),
-                  createBaseVNode("div", null, [
-                    createBaseVNode("div", _hoisted_41, [
-                      createBaseVNode("div", {
-                        class: "btn-mini btn-info mh-s",
-                        onClick: ($event) => $setup.addStep(keyLine),
-                        "data-tooltip": "Ajouter un step"
-                      }, [..._cache[21] || (_cache[21] = [
-                        createBaseVNode("i", { class: "icon-add" }, null, -1)
-                      ])], 8, _hoisted_42),
-                      createBaseVNode("div", {
-                        class: "btn-mini btn-warning mh-s",
-                        onClick: ($event) => $setup.duplicateStep(keyLine, keySteps),
-                        "data-tooltip": "Dupliquer le step"
-                      }, [..._cache[22] || (_cache[22] = [
-                        createBaseVNode("i", { class: "icon-copy" }, null, -1)
-                      ])], 8, _hoisted_43),
-                      line.steps.length > 1 ? (openBlock(), createElementBlock("div", {
-                        key: 0,
-                        class: "btn-mini btn-error mh-s",
-                        onClick: ($event) => $setup.removeStep(keyLine, keySteps),
-                        "data-position": "left",
-                        "data-tooltip": "Supprimer le step"
-                      }, [..._cache[23] || (_cache[23] = [
-                        createBaseVNode("i", { class: "icon-trash" }, null, -1)
-                      ])], 8, _hoisted_44)) : createCommentVNode("", true),
-                      createBaseVNode("div", {
-                        class: "btn-mini btn-success mh-s",
-                        onClick: ($event) => $setup.previewSegments(step.segments),
-                        "data-tooltip": "Prévisualiser"
-                      }, [..._cache[24] || (_cache[24] = [
-                        createBaseVNode("i", { class: "icon-upload" }, null, -1)
-                      ])], 8, _hoisted_45)
-                    ]),
-                    createBaseVNode("div", _hoisted_46, [
-                      createBaseVNode("div", {
-                        class: "btn-mini mh-s",
-                        onClick: ($event) => $setup.divideLeds(keyLine, keySteps, 2),
-                        "data-tooltip": "Diviser en 2"
-                      }, "2", 8, _hoisted_47),
-                      createBaseVNode("div", {
-                        class: "btn-mini mh-s",
-                        onClick: ($event) => $setup.divideLeds(keyLine, keySteps, 3),
-                        "data-tooltip": "Diviser en 3"
-                      }, "3", 8, _hoisted_48),
-                      createBaseVNode("div", {
-                        class: "btn-mini mh-s",
-                        onClick: ($event) => $setup.divideLeds(keyLine, keySteps, 4),
-                        "data-tooltip": "Diviser en 4"
-                      }, "4", 8, _hoisted_49),
-                      createBaseVNode("div", {
-                        class: "btn-mini btn-error mh-s",
-                        onClick: ($event) => $setup.resetCursors(keyLine, keySteps),
-                        "data-tooltip": "Reset curseurs"
-                      }, [..._cache[25] || (_cache[25] = [
-                        createBaseVNode("i", { class: "icon-refresh-cw" }, null, -1)
-                      ])], 8, _hoisted_50)
-                    ])
-                  ])
-                ]),
-                createBaseVNode("div", _hoisted_51, [
-                  _cache[26] || (_cache[26] = createBaseVNode("label", null, "line", -1)),
-                  createBaseVNode("div", _hoisted_52, [
-                    createBaseVNode("div", {
-                      class: "led-bar",
-                      style: normalizeStyle({ gridTemplateColumns: `repeat(${$setup.props.module.nb_led}, 1fr)` })
-                    }, [
-                      (openBlock(true), createElementBlock(Fragment, null, renderList($setup.props.module.nb_led, (i) => {
-                        return openBlock(), createElementBlock("div", {
-                          key: i,
-                          class: normalizeClass(["led-point", { "led-cursor-here": step.cursors.includes(i - 1) }]),
-                          onClick: ($event) => $setup.addCursor(keyLine, keySteps, i - 1),
-                          onMouseenter: ($event) => $setup.onDrag(keyLine, keySteps, i - 1, $event),
-                          "data-tooltip": "LED " + (i - 1),
-                          "data-variant": "warning"
-                        }, null, 42, _hoisted_53);
-                      }), 128))
-                    ], 4),
-                    createBaseVNode("div", {
-                      class: "cursors-layer",
-                      style: normalizeStyle({ gridTemplateColumns: `repeat(${$setup.props.module.nb_led}, 1fr)` })
-                    }, [
-                      (openBlock(true), createElementBlock(Fragment, null, renderList(step.cursors, (pos, index) => {
-                        return openBlock(), createElementBlock("div", {
-                          key: "cursor-" + index,
-                          class: normalizeClass(["led-cursor", {
-                            "cursor-locked": index === 0 || index === step.cursors.length - 1,
-                            "cursor-dragging": $setup.dragState.isDragging && $setup.dragState.cursorIndex === index && $setup.dragState.lineIndex === keyLine && $setup.dragState.stepIndex === keySteps
-                          }]),
-                          style: normalizeStyle({ gridColumn: pos + 1 }),
-                          onMousedown: ($event) => $setup.startDrag(keyLine, keySteps, index, $event),
-                          onClick: withModifiers(($event) => $setup.removeCursor(keyLine, keySteps, index), ["stop"])
-                        }, [
-                          createBaseVNode("span", _hoisted_55, toDisplayString(pos), 1)
-                        ], 46, _hoisted_54);
-                      }), 128))
-                    ], 4)
-                  ])
-                ]),
-                (openBlock(true), createElementBlock(Fragment, null, renderList(step.segments, (segment, keySegment) => {
-                  return openBlock(), createElementBlock("div", _hoisted_56, [
-                    createBaseVNode("div", _hoisted_57, [
-                      _cache[27] || (_cache[27] = createBaseVNode("label", {
-                        for: "Speed",
-                        class: "form-label"
-                      }, "Led", -1)),
-                      createBaseVNode("div", _hoisted_58, [
-                        withDirectives(createBaseVNode("input", {
-                          type: "number",
-                          name: "first",
-                          class: "form-input",
-                          disabled: "",
-                          "onUpdate:modelValue": ($event) => segment.first = $event
-                        }, null, 8, _hoisted_59), [
-                          [vModelText, segment.first]
-                        ]),
-                        withDirectives(createBaseVNode("input", {
-                          type: "number",
-                          name: "last",
-                          class: "form-input",
-                          disabled: "",
-                          "onUpdate:modelValue": ($event) => segment.last = $event
-                        }, null, 8, _hoisted_60), [
-                          [vModelText, segment.last]
-                        ])
-                      ])
-                    ]),
-                    createBaseVNode("div", _hoisted_61, [
-                      _cache[29] || (_cache[29] = createBaseVNode("label", {
-                        for: "Effect",
-                        class: "form-label"
-                      }, "Effect", -1)),
-                      withDirectives(createBaseVNode("select", {
-                        name: "effect",
-                        id: "",
-                        "onUpdate:modelValue": ($event) => segment.effect = $event
-                      }, [
-                        _cache[28] || (_cache[28] = createBaseVNode("option", { value: "" }, null, -1)),
-                        (openBlock(true), createElementBlock(Fragment, null, renderList($setup.scenario.preference.effects, (prefEffect, keyEffect) => {
-                          return openBlock(), createElementBlock("option", { value: prefEffect }, toDisplayString(prefEffect) + " => " + toDisplayString($setup.props.effects[prefEffect]), 9, _hoisted_63);
-                        }), 256))
-                      ], 8, _hoisted_62), [
-                        [vModelSelect, segment.effect]
-                      ])
-                    ]),
-                    createBaseVNode("div", _hoisted_64, [
-                      _cache[30] || (_cache[30] = createBaseVNode("label", {
-                        for: "Effect",
-                        class: "form-label"
-                      }, "Color", -1)),
-                      createBaseVNode("div", _hoisted_65, [
-                        (openBlock(true), createElementBlock(Fragment, null, renderList(segment.colors, (color, keyColor) => {
-                          return openBlock(), createBlock($setup["QuickSelectColor"], {
-                            modelValue: segment.colors[keyColor],
-                            "onUpdate:modelValue": ($event) => segment.colors[keyColor] = $event,
-                            list: $setup.scenario.preference.colors
-                          }, null, 8, ["modelValue", "onUpdate:modelValue", "list"]);
-                        }), 256))
-                      ])
-                    ]),
-                    createBaseVNode("div", _hoisted_66, [
-                      _cache[31] || (_cache[31] = createBaseVNode("label", {
-                        for: "Speed",
-                        class: "form-label"
-                      }, "Speed", -1)),
-                      withDirectives(createBaseVNode("input", {
-                        type: "number",
-                        id: "Speed",
-                        name: "speed",
-                        class: "form-input",
-                        "onUpdate:modelValue": ($event) => segment.speed = $event
-                      }, null, 8, _hoisted_67), [
-                        [vModelText, segment.speed]
-                      ])
-                    ]),
-                    createBaseVNode("div", _hoisted_68, [
-                      withDirectives(createBaseVNode("input", {
-                        type: "checkbox",
-                        id: "reverse" + keyLine + "_" + keySteps + "_" + keySegment,
-                        name: "reverse",
-                        class: "form-input",
-                        "onUpdate:modelValue": ($event) => segment.reverse = $event
-                      }, null, 8, _hoisted_69), [
-                        [vModelCheckbox, segment.reverse]
-                      ]),
-                      createBaseVNode("label", {
-                        for: "reverse" + keyLine + "_" + keySteps + "_" + keySegment,
-                        class: "form-label"
-                      }, "reverse", 8, _hoisted_70)
-                    ])
-                  ]);
-                }), 256))
-              ]);
-            }), 256))
-          ])
-        ]);
-      }), 256))
-    ]),
-    $setup.result.display ? (openBlock(), createElementBlock("div", _hoisted_71, [
-      createBaseVNode("div", {
-        class: normalizeClass("flash-message flash-" + $setup.result.status),
-        onClick: _cache[4] || (_cache[4] = ($event) => $setup.result.display = false)
-      }, [
-        createBaseVNode("i", {
-          class: normalizeClass("icon-" + $setup.result.status)
-        }, null, 2),
-        createTextVNode(toDisplayString($setup.result.message), 1)
-      ], 2)
-    ])) : createCommentVNode("", true),
-    createBaseVNode("div", _hoisted_72, [
-      createBaseVNode("i", {
-        class: normalizeClass("icon-" + $setup.isConnected + " neon-" + $setup.isConnected + "-light")
-      }, null, 2)
-    ])
-  ]);
-}
-const ScenarioMaker = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$2], ["__file", "ScenarioMaker.vue"]]);
-const brokerUrl = "ws://skankyhome.local:8083/mqtt";
-const topic = "skankyhome/#";
-const _sfc_main$1 = {
-  __name: "MqttMonitor",
-  setup(__props, { expose: __expose }) {
-    __expose();
-    const messages = ref([]);
-    const isConnected = ref(false);
-    const isPaused = ref(false);
-    const filter = ref("");
-    let client = null;
-    const connect = () => {
-      client = mqtt.connect(brokerUrl, {
-        clientId: `web_monitor_${Math.random().toString(16).substr(2, 8)}`,
-        clean: true,
-        reconnectPeriod: 3e3
-      });
-      client.on("connect", () => {
-        isConnected.value = true;
-        client.subscribe(topic);
-      });
-      client.on("error", () => {
-        isConnected.value = false;
-      });
-      client.on("close", () => {
-        isConnected.value = false;
-      });
-      client.on("message", (topic2, payload) => {
-        if (isPaused.value) return;
-        let data = null;
-        try {
-          data = JSON.parse(payload.toString());
-        } catch {
-          data = payload.toString();
-        }
-        messages.value.unshift({
-          id: Date.now() + Math.random(),
-          time: (/* @__PURE__ */ new Date()).toLocaleTimeString("fr-FR"),
-          topic: topic2,
-          data
-        });
-        if (messages.value.length > 200) {
-          messages.value.pop();
-        }
-      });
-    };
-    const clear = () => {
-      messages.value = [];
-    };
-    const filteredMessages = () => {
-      if (!filter.value) return messages.value;
-      const q = filter.value.toLowerCase();
-      return messages.value.filter(
-        (m) => m.topic.toLowerCase().includes(q) || JSON.stringify(m.data).toLowerCase().includes(q)
-      );
-    };
-    onMounted(connect);
-    onBeforeUnmount(() => {
-      if (client) client.end();
-    });
-    const __returned__ = { brokerUrl, topic, messages, isConnected, isPaused, filter, get client() {
-      return client;
-    }, set client(v) {
-      client = v;
-    }, connect, clear, filteredMessages, ref, onMounted, onBeforeUnmount, get mqtt() {
-      return mqtt;
-    } };
-    Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
-    return __returned__;
-  }
-};
-const _hoisted_1$1 = { class: "mqtt-monitor" };
-const _hoisted_2$1 = { class: "mqtt-monitor-toolbar" };
-const _hoisted_3$1 = { class: "mqtt-monitor-status" };
-const _hoisted_4$1 = { class: "mqtt-monitor-actions" };
-const _hoisted_5$1 = ["data-tooltip"];
-const _hoisted_6$1 = { class: "mqtt-monitor-list" };
-const _hoisted_7$1 = {
-  key: 0,
-  class: "mqtt-monitor-empty"
-};
-const _hoisted_8$1 = { class: "mqtt-monitor-time" };
-const _hoisted_9$1 = { class: "mqtt-monitor-topic" };
-const _hoisted_10$1 = { class: "mqtt-monitor-payload" };
-function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createElementBlock("div", _hoisted_1$1, [
-    createBaseVNode("div", _hoisted_2$1, [
-      createBaseVNode("div", _hoisted_3$1, [
-        createBaseVNode("i", {
-          class: normalizeClass("icon-" + ($setup.isConnected ? "success" : "error") + " neon-" + ($setup.isConnected ? "success" : "error") + "-light")
-        }, null, 2),
-        createBaseVNode("span", null, toDisplayString($setup.isConnected ? "Connecté" : "Déconnecté"), 1)
-      ]),
-      withDirectives(createBaseVNode("input", {
-        type: "text",
-        class: "form-input",
-        "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $setup.filter = $event),
-        placeholder: "Filtrer topic / payload…"
-      }, null, 512), [
-        [vModelText, $setup.filter]
-      ]),
-      createBaseVNode("div", _hoisted_4$1, [
-        createBaseVNode("button", {
-          class: "btn-mini btn-warning",
-          onClick: _cache[1] || (_cache[1] = ($event) => $setup.isPaused = !$setup.isPaused),
-          "data-tooltip": $setup.isPaused ? "Reprendre" : "Pause"
-        }, [
-          createBaseVNode("i", {
-            class: normalizeClass("icon-" + ($setup.isPaused ? "play" : "pause"))
-          }, null, 2)
-        ], 8, _hoisted_5$1),
-        createBaseVNode("button", {
-          class: "btn-mini btn-error",
-          onClick: $setup.clear,
-          "data-tooltip": "Vider"
-        }, [..._cache[2] || (_cache[2] = [
-          createBaseVNode("i", { class: "icon-trash" }, null, -1)
-        ])])
-      ])
-    ]),
-    createBaseVNode("div", _hoisted_6$1, [
-      $setup.filteredMessages().length === 0 ? (openBlock(), createElementBlock("div", _hoisted_7$1, " Aucun message… ")) : createCommentVNode("", true),
-      (openBlock(true), createElementBlock(Fragment, null, renderList($setup.filteredMessages(), (msg) => {
-        return openBlock(), createElementBlock("div", {
-          key: msg.id,
-          class: "mqtt-monitor-item"
-        }, [
-          createBaseVNode("span", _hoisted_8$1, toDisplayString(msg.time), 1),
-          createBaseVNode("span", _hoisted_9$1, toDisplayString(msg.topic), 1),
-          createBaseVNode("pre", _hoisted_10$1, toDisplayString(typeof msg.data === "string" ? msg.data : JSON.stringify(msg.data, null, 2)), 1)
-        ]);
-      }), 128))
-    ])
-  ]);
-}
-const MqttMonitor = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["__file", "MqttMonitor.vue"]]);
+const QuickSelectColor = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$4], ["__file", "QuickSelectColor.vue"]]);
 function hexToRgb(hex) {
   if (!hex || hex === "") return { r: 0, g: 0, b: 0 };
   const h2 = hex.replace("#", "");
@@ -29852,89 +28865,1139 @@ const effects = [
     }
   }
 ];
-const EFFECT_CATEGORIES = {
-  0: "Simple",
-  1: "Simple",
-  2: "Special",
-  3: "Wipe",
-  4: "Wipe",
-  5: "Sweep",
-  6: "Sweep",
-  7: "Wipe",
-  8: "Simple",
-  9: "Simple",
-  10: "Simple",
-  11: "Simple",
-  12: "Wipe",
-  13: "Sweep",
-  14: "Sweep",
-  15: "Sweep",
-  16: "Wipe",
-  17: "Wipe",
-  18: "Wipe",
-  19: "Simple",
-  20: "Simple",
-  21: "Simple",
-  22: "Simple",
-  23: "Simple",
-  24: "Simple",
-  25: "Simple",
-  26: "Simple",
-  27: "Simple",
-  28: "Simple",
-  29: "Simple",
-  30: "Wipe",
-  31: "Wipe",
-  32: "Wipe",
-  33: "Wipe",
-  34: "Wipe",
-  35: "Wipe",
-  36: "Wipe",
-  37: "Wipe",
-  38: "Wipe",
-  39: "Sweep",
-  40: "Wipe",
-  41: "Wipe",
-  42: "Wipe",
-  43: "Sweep",
-  44: "Wipe",
-  45: "Simple",
-  46: "Simple",
-  47: "Wipe",
-  48: "Simple",
-  49: "Simple",
-  50: "Simple",
-  51: "Wipe",
-  52: "Wipe",
-  53: "Wipe",
-  54: "Wipe",
-  55: "Special",
-  56: "Special",
-  57: "Simple",
-  58: "Special",
-  59: "Sweep",
-  60: "Wipe",
-  61: "Special",
-  62: "Sweep",
-  63: "Simple",
-  64: "Simple",
-  65: "Special",
-  66: "Special",
-  67: "Special",
-  68: "Wipe",
-  69: "Special",
-  70: "Special",
-  71: "Special"
-};
-const NB_LEDS = 30;
-const LED_SIZE = 14;
+const NB_LEDS$1 = 20;
+const LED_R = 9;
 const LED_GAP = 4;
+const SPEED = 200;
+const _sfc_main$3 = {
+  __name: "MiniEffectPreview",
+  props: {
+    effectId: { type: Number, default: null }
+  },
+  setup(__props, { expose: __expose }) {
+    __expose();
+    const props = __props;
+    const GLOW2 = LED_R;
+    const C1 = hexToRgb("#ff0000");
+    const C2 = hexToRgb("#0000ff");
+    const C3 = hexToRgb("#00ff00");
+    const canvas = ref(null);
+    let rafId = null;
+    let state = {};
+    let startT = null;
+    const drawLeds = (ledColors) => {
+      const ctx = canvas.value?.getContext("2d");
+      if (!ctx) return;
+      const dpr = window.devicePixelRatio || 1;
+      const cssW = canvas.value.clientWidth;
+      const cssH = canvas.value.clientHeight;
+      canvas.value.width = cssW * dpr;
+      canvas.value.height = cssH * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, cssW, cssH);
+      const totalW = NB_LEDS$1 * (LED_R * 2 + LED_GAP) - LED_GAP;
+      const offsetX = (cssW - totalW) / 2;
+      const centerY = cssH / 2;
+      for (let i = 0; i < NB_LEDS$1; i++) {
+        const c = ledColors[i] || { r: 0, g: 0, b: 0 };
+        const cx2 = offsetX + i * (LED_R * 2 + LED_GAP) + LED_R;
+        const brightness = (c.r + c.g + c.b) / 765;
+        if (brightness > 0.01) {
+          const grd = ctx.createRadialGradient(cx2, centerY, 0, cx2, centerY, LED_R * 2.5);
+          grd.addColorStop(0, `rgba(${c.r},${c.g},${c.b},${Math.min(1, brightness * 0.7)})`);
+          grd.addColorStop(1, "rgba(0,0,0,0)");
+          ctx.fillStyle = grd;
+          ctx.beginPath();
+          ctx.arc(cx2, centerY, LED_R * 2.5, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.beginPath();
+        ctx.arc(cx2, centerY, LED_R, 0, Math.PI * 2);
+        ctx.fillStyle = rgbToHex(c.r, c.g, c.b);
+        ctx.fill();
+      }
+    };
+    const frame = (ts) => {
+      if (!startT) startT = ts;
+      const t = ts - startT;
+      const leds = Array(NB_LEDS$1).fill(null).map(() => ({ r: 0, g: 0, b: 0 }));
+      const fn = effects[props.effectId];
+      if (fn) fn(leds, t, C1, C2, C3, SPEED, state);
+      drawLeds(leds);
+      rafId = requestAnimationFrame(frame);
+    };
+    const start = () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      state = {};
+      startT = null;
+      rafId = requestAnimationFrame(frame);
+    };
+    const stop2 = () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = null;
+    };
+    watch(() => props.effectId, (val) => {
+      if (val !== null) start();
+      else stop2();
+    });
+    onMounted(() => {
+      if (props.effectId !== null) start();
+    });
+    onBeforeUnmount(stop2);
+    const __returned__ = { props, NB_LEDS: NB_LEDS$1, LED_R, LED_GAP, GLOW: GLOW2, C1, C2, C3, SPEED, canvas, get rafId() {
+      return rafId;
+    }, set rafId(v) {
+      rafId = v;
+    }, get state() {
+      return state;
+    }, set state(v) {
+      state = v;
+    }, get startT() {
+      return startT;
+    }, set startT(v) {
+      startT = v;
+    }, drawLeds, frame, start, stop: stop2, ref, watch, onMounted, onBeforeUnmount, get effects() {
+      return effects;
+    }, get hexToRgb() {
+      return hexToRgb;
+    }, get rgbToHex() {
+      return rgbToHex;
+    } };
+    Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
+    return __returned__;
+  }
+};
+const _hoisted_1$3 = { class: "mini-effect-preview" };
+const _hoisted_2$3 = {
+  ref: "canvas",
+  class: "mini-effect-canvas"
+};
+function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", _hoisted_1$3, [
+    createBaseVNode("canvas", _hoisted_2$3, null, 512)
+  ]);
+}
+const MiniEffectPreview = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$3], ["__file", "MiniEffectPreview.vue"]]);
+class ModuleBridge extends EventTarget {
+  constructor(module) {
+    super();
+    this.module = module;
+    this.client = null;
+    this.connected = false;
+    this.brokerUrl = "ws://skankyhome.local:8083/mqtt";
+    this.clientId = `web_${module.name}_${this._randomId()}`;
+    this.connect();
+  }
+  /**
+   * Connexion au broker MQTT
+   */
+  connect() {
+    this.client = mqtt.connect(this.brokerUrl, {
+      clientId: this.clientId,
+      clean: true,
+      reconnectPeriod: 1e3
+    });
+    this.client.on("connect", () => {
+      console.log(`✅ ModuleBridge connected: ${this.module.name}`);
+      this.connected = true;
+      this.client.subscribe(this.module.topic_message);
+      this.dispatchEvent(new CustomEvent("connected", {
+        detail: { module: this.module }
+      }));
+    });
+    this.client.on("error", (err) => {
+      console.error(`❌ ModuleBridge error: ${err.message}`);
+      this.connected = false;
+      this.dispatchEvent(new CustomEvent("error", {
+        detail: { error: err.message }
+      }));
+    });
+    this.client.on("message", (topic2, message) => {
+      if (topic2 === this.module.topic_message) {
+        try {
+          const data = JSON.parse(message.toString());
+          this.dispatchEvent(new CustomEvent("module-message", {
+            detail: data
+          }));
+        } catch (err) {
+          console.error("Failed to parse MQTT message:", err);
+        }
+      }
+    });
+    this.client.on("close", () => {
+      console.log(`🔌 ModuleBridge disconnected: ${this.module.name}`);
+      this.connected = false;
+      this.dispatchEvent(new CustomEvent("disconnected"));
+    });
+  }
+  /**
+   * Envoyer une commande à l'ESP32
+   * @param {Object} payload - Commande à envoyer
+   */
+  send(payload) {
+    if (!this.isConnected()) {
+      console.warn("ModuleBridge: Not connected, cannot send");
+      return false;
+    }
+    this.client.publish(
+      this.module.topic_cmd,
+      JSON.stringify(payload),
+      { qos: 1 }
+    );
+    console.log(`📤 Sent to ${this.module.name}:`, payload);
+    return true;
+  }
+  /**
+   * Vérifier si connecté
+   * @returns {boolean}
+   */
+  isConnected() {
+    return this.connected;
+  }
+  /**
+   * Déconnexion propre
+   */
+  disconnect() {
+    if (this.client) {
+      this.client.end();
+      this.connected = false;
+    }
+  }
+  /**
+   * Générer un ID aléatoire
+   * @private
+   */
+  _randomId() {
+    return Math.random().toString(16).substr(2, 8);
+  }
+  /**
+   * Raccourci pour addEventListener
+   */
+  on(event, callback) {
+    this.addEventListener(event, (e) => callback(e.detail));
+  }
+  /**
+   * Raccourci pour removeEventListener
+   */
+  off(event, callback) {
+    this.removeEventListener(event, callback);
+  }
+}
+const _sfc_main$2 = {
+  __name: "ScenarioMaker",
+  props: {
+    module: Object,
+    scenarioOrigin: Object,
+    icons: Array,
+    effects: Array,
+    links: Object
+  },
+  setup(__props, { expose: __expose }) {
+    __expose();
+    const props = __props;
+    let bridge = null;
+    const currentColor = ref("#0000FF");
+    const searchEffect = ref("");
+    const scenario = ref(props.scenarioOrigin);
+    const isConnected = ref("error");
+    const result = ref({
+      status: "",
+      message: "",
+      url: "",
+      isNew: false,
+      display: false
+    });
+    const dragState = ref({
+      isDragging: false,
+      cursorIndex: null,
+      lineIndex: null,
+      stepIndex: null
+    });
+    const colorAddPref = () => {
+      if (!scenario.value.preference.colors.includes(currentColor.value)) {
+        scenario.value.preference.colors.push(currentColor.value);
+      }
+    };
+    const effectAddPref = (key) => {
+      if (!scenario.value.preference.effects.includes(key)) {
+        scenario.value.preference.effects.push(key);
+      }
+    };
+    const removePrefColor = (key, event) => {
+      event.stopPropagation();
+      scenario.value.preference.colors.splice(key, 1);
+    };
+    const removePrefEffect = (key, event) => {
+      event.stopPropagation();
+      scenario.value.preference.effects.splice(key, 1);
+    };
+    const categories = ["Simple", "Wipe", "Sweep", "Special"];
+    const previewEffectId = ref(null);
+    const effectById = Object.fromEntries(
+      Object.values(props.effects).flat().map((e) => [e.id, e.name])
+    );
+    const effectsByCategory = (cat) => {
+      return (props.effects[cat] || []).filter((e) => matchSearch(e.name));
+    };
+    const matchSearch = (name2) => {
+      if (searchEffect.value.length == 0) {
+        return true;
+      }
+      const escapedSearch = searchEffect.value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const regex = new RegExp(escapedSearch, "i");
+      return regex.test(name2);
+    };
+    const setColor = (color) => {
+      console.log("setColor", color);
+    };
+    const setEffect = (effect2) => {
+      console.log("setEffect", effect2);
+    };
+    const save = async () => {
+      let body = await fetch(props.links.save, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify(scenario.value)
+      }).then((response) => {
+        return response.json();
+      });
+      scenario.value = structuredClone(body.scenario);
+      result.value = structuredClone(body.result);
+      if (result.value.isNew) {
+        window.history.pushState({}, null, result.value.url);
+      }
+      setTimeout(() => {
+        result.value.display = false;
+      }, 2e3);
+    };
+    const addStep = (lineIndex) => {
+      scenario.value.lines[lineIndex].steps.push({
+        duration: 5,
+        cursors: [0, props.module.nb_led - 1],
+        segments: [{
+          first: 0,
+          last: props.module.nb_led - 1,
+          effect: 0,
+          colors: ["", "", ""],
+          speed: 1e3,
+          reverse: false
+        }]
+      });
+    };
+    const duplicateStep = (lineIndex, stepIndex) => {
+      const step = scenario.value.lines[lineIndex].steps[stepIndex];
+      const newStep = {
+        duration: step.duration,
+        cursors: [...step.cursors],
+        segments: step.segments.map((seg) => ({
+          first: seg.first,
+          last: seg.last,
+          effect: seg.effect,
+          colors: [...seg.colors],
+          speed: seg.speed,
+          reverse: seg.reverse
+        }))
+      };
+      scenario.value.lines[lineIndex].steps.splice(stepIndex + 1, 0, newStep);
+    };
+    const removeStep = (lineIndex, stepIndex) => {
+      scenario.value.lines[lineIndex].steps.splice(stepIndex, 1);
+    };
+    const addCursor = (lineIndex, stepIndex, position) => {
+      let cursors = scenario.value.lines[lineIndex].steps[stepIndex].cursors;
+      if (cursors.length >= 5) {
+        return;
+      }
+      if (!cursors.includes(position)) {
+        cursors.push(position);
+        cursors.sort((a, b) => a - b);
+      }
+      scenario.value.lines[lineIndex].steps[stepIndex].cursors = cursors;
+      splitSegment(lineIndex, stepIndex);
+    };
+    const removeCursor = (lineIndex, stepIndex, cursorIndex) => {
+      let cursors = scenario.value.lines[lineIndex].steps[stepIndex].cursors;
+      cursors = JSON.parse(JSON.stringify(cursors));
+      if (cursorIndex === 0 || cursorIndex === cursors.length - 1) {
+        return;
+      }
+      cursors.splice(cursorIndex, 1);
+      scenario.value.lines[lineIndex].steps[stepIndex].cursors = cursors;
+      splitSegment(lineIndex, stepIndex);
+    };
+    const splitSegment = (lineIndex, stepIndex) => {
+      let cursors = scenario.value.lines[lineIndex].steps[stepIndex].cursors;
+      let segments = scenario.value.lines[lineIndex].steps[stepIndex].segments;
+      let newSegments = [];
+      for (let i = 0; i < cursors.length - 1; i++) {
+        let template = segments[i] || segments[i - 1] || {};
+        newSegments.push({
+          first: cursors[i],
+          last: cursors[i + 1] - 1,
+          effect: template?.effect ?? 0,
+          colors: [...template?.colors ?? ["", "", ""]],
+          speed: template?.speed ?? 1e3,
+          reverse: template?.reverse ?? false
+        });
+      }
+      newSegments[newSegments.length - 1].last = props.module.nb_led - 1;
+      scenario.value.lines[lineIndex].steps[stepIndex].segments = newSegments;
+    };
+    const startDrag = (lineIndex, stepIndex, cursorIndex, event) => {
+      const cursors = scenario.value.lines[lineIndex].steps[stepIndex].cursors;
+      if (cursorIndex === 0 || cursorIndex === cursors.length - 1) {
+        return;
+      }
+      dragState.value = {
+        isDragging: true,
+        cursorIndex,
+        lineIndex,
+        stepIndex
+      };
+      event.preventDefault();
+    };
+    const onDrag = (lineIndex, stepIndex, ledPosition, event) => {
+      if (!dragState.value.isDragging) return;
+      if (dragState.value.lineIndex !== lineIndex) return;
+      if (dragState.value.stepIndex !== stepIndex) return;
+      const cursors = scenario.value.lines[lineIndex].steps[stepIndex].cursors;
+      const cursorIndex = dragState.value.cursorIndex;
+      const prevCursor = cursors[cursorIndex - 1];
+      const nextCursor = cursors[cursorIndex + 1];
+      if (ledPosition <= prevCursor || ledPosition >= nextCursor) {
+        return;
+      }
+      cursors[cursorIndex] = ledPosition;
+      splitSegment(lineIndex, stepIndex);
+    };
+    const stopDrag = () => {
+      dragState.value.isDragging = false;
+    };
+    const divideLeds = (lineIndex, stepIndex, parts) => {
+      const nbLeds = props.module.nb_led;
+      const step = Math.floor(nbLeds / parts);
+      let newCursors = [0];
+      for (let i = 1; i < parts; i++) {
+        newCursors.push(i * step);
+      }
+      newCursors.push(nbLeds - 1);
+      scenario.value.lines[lineIndex].steps[stepIndex].cursors = newCursors;
+      splitSegment(lineIndex, stepIndex);
+    };
+    const resetCursors = (lineIndex, stepIndex) => {
+      scenario.value.lines[lineIndex].steps[stepIndex].cursors = [0, props.module.nb_led - 1];
+      splitSegment(lineIndex, stepIndex);
+    };
+    const previewSegments = (segments) => {
+      let message = { segments };
+      bridge.send(message);
+    };
+    onMounted(() => {
+      bridge = new ModuleBridge(props.module);
+      bridge.on("module-message", (data) => {
+        console.log("📨 Message reçu:", data);
+      });
+      bridge.on("connected", () => {
+        isConnected.value = "success";
+      });
+      bridge.on("disconnected", () => {
+        isConnected.value = "warning";
+      });
+      bridge.on("error", () => {
+        isConnected.value = "error";
+      });
+      if (!scenario.value.lines || scenario.value.lines.length === 0) {
+        scenario.value.lines = [];
+        for (let i = 0; i < props.module.nb_line; i++) {
+          scenario.value.lines.push({
+            steps: []
+          });
+          addStep(i);
+        }
+      }
+      window.addEventListener("mouseup", stopDrag);
+      window.addEventListener("mouseleave", stopDrag);
+    });
+    onBeforeUnmount(() => {
+      if (bridge) {
+        bridge.disconnect();
+      }
+      window.removeEventListener("mouseup", stopDrag);
+      window.removeEventListener("mouseleave", stopDrag);
+    });
+    const __returned__ = { props, get bridge() {
+      return bridge;
+    }, set bridge(v) {
+      bridge = v;
+    }, currentColor, searchEffect, scenario, isConnected, result, dragState, colorAddPref, effectAddPref, removePrefColor, removePrefEffect, categories, previewEffectId, effectById, effectsByCategory, matchSearch, setColor, setEffect, save, addStep, duplicateStep, removeStep, addCursor, removeCursor, splitSegment, startDrag, onDrag, stopDrag, divideLeds, resetCursors, previewSegments, ref, onMounted, onBeforeUnmount, ColorPicker, IconPicker, QuickSelectColor, MiniEffectPreview, get ModuleBridge() {
+      return ModuleBridge;
+    } };
+    Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
+    return __returned__;
+  }
+};
+const _hoisted_1$2 = { class: "scenario-layout" };
+const _hoisted_2$2 = { class: "scenario-side-bar accordion ph-s" };
+const _hoisted_3$2 = { class: "accordion-item card card-primary mb-s" };
+const _hoisted_4$2 = { class: "accordion-content card-body" };
+const _hoisted_5$2 = { class: "text-right" };
+const _hoisted_6$2 = { class: "color-result" };
+const _hoisted_7$2 = { class: "color-text" };
+const _hoisted_8$2 = { class: "card mb-s" };
+const _hoisted_9$2 = { class: "pref-color-wrapper card-body" };
+const _hoisted_10$2 = ["onClick"];
+const _hoisted_11$1 = ["onClick"];
+const _hoisted_12$1 = { class: "accordion-item card card-primary mb-s" };
+const _hoisted_13$1 = { class: "accordion-content" };
+const _hoisted_14$1 = { class: "form-group ph-m" };
+const _hoisted_15$1 = { class: "effects-list" };
+const _hoisted_16$1 = { class: "scrollable" };
+const _hoisted_17$1 = { class: "effect-category-label" };
+const _hoisted_18$1 = { class: "text-center" };
+const _hoisted_19$1 = { class: "effect-key" };
+const _hoisted_20$1 = ["onClick"];
+const _hoisted_21$1 = { class: "effect-favorie" };
+const _hoisted_22$1 = ["onClick"];
+const _hoisted_23$1 = { class: "p-xs" };
+const _hoisted_24$1 = { class: "card mb-l" };
+const _hoisted_25 = { class: "pref-effect-wrapper card-body" };
+const _hoisted_26 = ["onClick"];
+const _hoisted_27 = { class: "effect-key" };
+const _hoisted_28 = { class: "effect-name" };
+const _hoisted_29 = ["onClick"];
+const _hoisted_30 = { class: "scenario-content" };
+const _hoisted_31 = { class: "scenario-title card mb-s" };
+const _hoisted_32 = { class: "scenario-info card-body form-inline" };
+const _hoisted_33 = { class: "form-group" };
+const _hoisted_34 = { class: "form-group" };
+const _hoisted_35 = {
+  class: "accordion-item card card-primary mb-s",
+  open: ""
+};
+const _hoisted_36 = { class: "accordion-header" };
+const _hoisted_37 = { class: "rainbow-underline" };
+const _hoisted_38 = { class: "accordion-content card-body" };
+const _hoisted_39 = { class: "accordion-header" };
+const _hoisted_40 = { class: "card-header-action" };
+const _hoisted_41 = { class: "form-group" };
+const _hoisted_42 = ["onUpdate:modelValue"];
+const _hoisted_43 = { class: "pb-m" };
+const _hoisted_44 = ["onClick"];
+const _hoisted_45 = ["onClick"];
+const _hoisted_46 = ["onClick"];
+const _hoisted_47 = ["onClick"];
+const _hoisted_48 = { class: "flex" };
+const _hoisted_49 = ["onClick"];
+const _hoisted_50 = ["onClick"];
+const _hoisted_51 = ["onClick"];
+const _hoisted_52 = ["onClick"];
+const _hoisted_53 = { class: "led-visualizer" };
+const _hoisted_54 = { class: "led-bar-container" };
+const _hoisted_55 = ["onClick", "onMouseenter", "data-tooltip"];
+const _hoisted_56 = ["onMousedown", "onClick"];
+const _hoisted_57 = { class: "cursor-label" };
+const _hoisted_58 = { class: "segment-form" };
+const _hoisted_59 = { class: "form-group" };
+const _hoisted_60 = { class: "segment-form-leds" };
+const _hoisted_61 = ["onUpdate:modelValue"];
+const _hoisted_62 = ["onUpdate:modelValue"];
+const _hoisted_63 = { class: "form-group" };
+const _hoisted_64 = ["onUpdate:modelValue"];
+const _hoisted_65 = ["value"];
+const _hoisted_66 = { class: "form-group" };
+const _hoisted_67 = { class: "segment-form-color" };
+const _hoisted_68 = { class: "form-group" };
+const _hoisted_69 = ["onUpdate:modelValue"];
+const _hoisted_70 = { class: "form-group" };
+const _hoisted_71 = ["id", "onUpdate:modelValue"];
+const _hoisted_72 = ["for"];
+const _hoisted_73 = {
+  key: 0,
+  class: "scenario-flash"
+};
+const _hoisted_74 = {
+  class: /* @__PURE__ */ normalizeClass("scenario-is-conneced ")
+};
+function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("section", _hoisted_1$2, [
+    createBaseVNode("div", _hoisted_2$2, [
+      createBaseVNode("details", _hoisted_3$2, [
+        _cache[6] || (_cache[6] = createBaseVNode("summary", { class: "accordion-header" }, [
+          createBaseVNode("h3", {
+            class: "glitch",
+            "data-text": "Palette"
+          }, "Palette")
+        ], -1)),
+        createBaseVNode("div", _hoisted_4$2, [
+          createVNode($setup["ColorPicker"], {
+            modelValue: $setup.currentColor,
+            "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $setup.currentColor = $event)
+          }, null, 8, ["modelValue"]),
+          createBaseVNode("div", _hoisted_5$2, [
+            createBaseVNode("div", _hoisted_6$2, [
+              createBaseVNode("span", {
+                class: "color-preview",
+                style: normalizeStyle({ "background-color": $setup.currentColor })
+              }, null, 4),
+              createBaseVNode("span", _hoisted_7$2, toDisplayString($setup.currentColor), 1),
+              createBaseVNode("span", {
+                class: "btn-mini btn-favorie",
+                onClick: $setup.colorAddPref
+              }, [..._cache[5] || (_cache[5] = [
+                createBaseVNode("i", { class: "icon-heart" }, null, -1)
+              ])])
+            ])
+          ])
+        ])
+      ]),
+      createBaseVNode("div", _hoisted_8$2, [
+        _cache[8] || (_cache[8] = createBaseVNode("div", { class: "card-header" }, [
+          createBaseVNode("h6", null, "Couleur")
+        ], -1)),
+        createBaseVNode("div", _hoisted_9$2, [
+          (openBlock(true), createElementBlock(Fragment, null, renderList($setup.scenario.preference.colors, (prefColor, key) => {
+            return openBlock(), createElementBlock("div", {
+              class: "pref-color",
+              style: normalizeStyle({ "background-color": prefColor }),
+              onClick: ($event) => $setup.setColor(prefColor)
+            }, [
+              createBaseVNode("div", {
+                class: "pref-color-trash",
+                onClick: ($event) => $setup.removePrefColor(key, $event)
+              }, [..._cache[7] || (_cache[7] = [
+                createBaseVNode("i", { class: "icon-trash" }, null, -1)
+              ])], 8, _hoisted_11$1)
+            ], 12, _hoisted_10$2);
+          }), 256))
+        ])
+      ]),
+      createBaseVNode("details", _hoisted_12$1, [
+        _cache[12] || (_cache[12] = createBaseVNode("summary", { class: "accordion-header" }, [
+          createBaseVNode("h3", {
+            class: "glitch",
+            "data-text": "Effect"
+          }, "Effect")
+        ], -1)),
+        createBaseVNode("div", _hoisted_13$1, [
+          createBaseVNode("div", _hoisted_14$1, [
+            _cache[9] || (_cache[9] = createBaseVNode("label", {
+              for: "",
+              class: "form-label"
+            }, null, -1)),
+            withDirectives(createBaseVNode("input", {
+              type: "text",
+              class: "form-input",
+              "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => $setup.searchEffect = $event)
+            }, null, 512), [
+              [vModelText, $setup.searchEffect]
+            ])
+          ]),
+          createBaseVNode("div", _hoisted_15$1, [
+            createBaseVNode("div", _hoisted_16$1, [
+              (openBlock(), createElementBlock(Fragment, null, renderList($setup.categories, (cat) => {
+                return openBlock(), createElementBlock(Fragment, { key: cat }, [
+                  $setup.effectsByCategory(cat).length ? (openBlock(), createElementBlock(Fragment, { key: 0 }, [
+                    createBaseVNode("div", _hoisted_17$1, [
+                      createBaseVNode("h4", _hoisted_18$1, toDisplayString(cat), 1)
+                    ]),
+                    (openBlock(true), createElementBlock(Fragment, null, renderList($setup.effectsByCategory(cat), (e) => {
+                      return openBlock(), createElementBlock("div", {
+                        key: e.id,
+                        class: "effect"
+                      }, [
+                        createBaseVNode("div", _hoisted_19$1, toDisplayString(e.id), 1),
+                        _cache[11] || (_cache[11] = createBaseVNode("div", { class: "color-cyan" }, " => ", -1)),
+                        createBaseVNode("div", {
+                          class: "effect-name",
+                          onClick: ($event) => $setup.previewEffectId = e.id
+                        }, toDisplayString(e.name), 9, _hoisted_20$1),
+                        createBaseVNode("div", _hoisted_21$1, [
+                          createBaseVNode("span", {
+                            class: "btn-mini btn-favorie",
+                            onClick: ($event) => $setup.effectAddPref(e.id)
+                          }, [..._cache[10] || (_cache[10] = [
+                            createBaseVNode("i", { class: "icon-heart" }, null, -1)
+                          ])], 8, _hoisted_22$1)
+                        ])
+                      ]);
+                    }), 128))
+                  ], 64)) : createCommentVNode("", true)
+                ], 64);
+              }), 64))
+            ])
+          ]),
+          createBaseVNode("div", _hoisted_23$1, [
+            $setup.previewEffectId !== null ? (openBlock(), createBlock($setup["MiniEffectPreview"], {
+              key: 0,
+              "effect-id": $setup.previewEffectId
+            }, null, 8, ["effect-id"])) : createCommentVNode("", true)
+          ])
+        ])
+      ]),
+      createBaseVNode("div", _hoisted_24$1, [
+        _cache[15] || (_cache[15] = createBaseVNode("div", { class: "card-header" }, [
+          createBaseVNode("h6", null, "Effet")
+        ], -1)),
+        createBaseVNode("div", _hoisted_25, [
+          (openBlock(true), createElementBlock(Fragment, null, renderList($setup.scenario.preference.effects, (prefEffect, key) => {
+            return openBlock(), createElementBlock("div", {
+              class: "pref-effect",
+              onClick: ($event) => $setup.setEffect(prefEffect)
+            }, [
+              createBaseVNode("div", _hoisted_27, toDisplayString(prefEffect), 1),
+              _cache[14] || (_cache[14] = createBaseVNode("div", { class: "color-cyan" }, " => ", -1)),
+              createBaseVNode("div", _hoisted_28, toDisplayString($setup.effectById[prefEffect]), 1),
+              createBaseVNode("div", {
+                class: "effect-trash",
+                onClick: ($event) => $setup.removePrefEffect(key, $event)
+              }, [..._cache[13] || (_cache[13] = [
+                createBaseVNode("i", { class: "icon-trash" }, null, -1)
+              ])], 8, _hoisted_29)
+            ], 8, _hoisted_26);
+          }), 256))
+        ])
+      ])
+    ]),
+    createBaseVNode("div", _hoisted_30, [
+      createBaseVNode("div", _hoisted_31, [
+        _cache[19] || (_cache[19] = createBaseVNode("header", { class: "card-header" }, [
+          createBaseVNode("h3", {
+            class: "glitch",
+            "data-text": "Info"
+          }, "Info")
+        ], -1)),
+        createBaseVNode("div", _hoisted_32, [
+          createBaseVNode("div", _hoisted_33, [
+            _cache[16] || (_cache[16] = createBaseVNode("label", {
+              for: "Name",
+              class: "form-label required"
+            }, "Icon", -1)),
+            createVNode($setup["IconPicker"], {
+              modelValue: $setup.scenario.icon,
+              "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => $setup.scenario.icon = $event),
+              icons: $setup.props.icons
+            }, null, 8, ["modelValue", "icons"])
+          ]),
+          createBaseVNode("div", _hoisted_34, [
+            _cache[17] || (_cache[17] = createBaseVNode("label", {
+              for: "Name",
+              class: "form-label required"
+            }, "Name", -1)),
+            withDirectives(createBaseVNode("input", {
+              type: "text",
+              id: "Name",
+              name: "name",
+              required: "",
+              class: "form-input",
+              "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => $setup.scenario.name = $event)
+            }, null, 512), [
+              [vModelText, $setup.scenario.name]
+            ])
+          ]),
+          createBaseVNode("div", { class: "form-group" }, [
+            createBaseVNode("button", {
+              type: "button",
+              class: "btn-success",
+              onClick: $setup.save
+            }, [..._cache[18] || (_cache[18] = [
+              createBaseVNode("i", { class: "icon-save" }, null, -1),
+              createTextVNode(" SAVE", -1)
+            ])])
+          ])
+        ])
+      ]),
+      (openBlock(true), createElementBlock(Fragment, null, renderList($setup.scenario.lines, (line, keyLine) => {
+        return openBlock(), createElementBlock("details", _hoisted_35, [
+          createBaseVNode("summary", _hoisted_36, [
+            createBaseVNode("div", null, [
+              createBaseVNode("h2", _hoisted_37, "Ligne " + toDisplayString(keyLine + 1), 1)
+            ])
+          ]),
+          createBaseVNode("div", _hoisted_38, [
+            (openBlock(true), createElementBlock(Fragment, null, renderList(line.steps, (step, keySteps) => {
+              return openBlock(), createElementBlock("details", null, [
+                createBaseVNode("summary", _hoisted_39, [
+                  createBaseVNode("div", null, [
+                    createBaseVNode("h3", null, "Step " + toDisplayString(keySteps + 1), 1)
+                  ])
+                ]),
+                createBaseVNode("div", _hoisted_40, [
+                  createBaseVNode("div", _hoisted_41, [
+                    _cache[20] || (_cache[20] = createBaseVNode("label", {
+                      for: "Speed",
+                      class: "form-label"
+                    }, "Durée (sec)", -1)),
+                    withDirectives(createBaseVNode("input", {
+                      type: "number",
+                      name: "first",
+                      class: "form-input",
+                      "onUpdate:modelValue": ($event) => step.duration = $event
+                    }, null, 8, _hoisted_42), [
+                      [vModelText, step.duration]
+                    ])
+                  ]),
+                  createBaseVNode("div", null, [
+                    createBaseVNode("div", _hoisted_43, [
+                      createBaseVNode("div", {
+                        class: "btn-mini btn-info mh-s",
+                        onClick: ($event) => $setup.addStep(keyLine),
+                        "data-tooltip": "Ajouter un step"
+                      }, [..._cache[21] || (_cache[21] = [
+                        createBaseVNode("i", { class: "icon-add" }, null, -1)
+                      ])], 8, _hoisted_44),
+                      createBaseVNode("div", {
+                        class: "btn-mini btn-warning mh-s",
+                        onClick: ($event) => $setup.duplicateStep(keyLine, keySteps),
+                        "data-tooltip": "Dupliquer le step"
+                      }, [..._cache[22] || (_cache[22] = [
+                        createBaseVNode("i", { class: "icon-copy" }, null, -1)
+                      ])], 8, _hoisted_45),
+                      line.steps.length > 1 ? (openBlock(), createElementBlock("div", {
+                        key: 0,
+                        class: "btn-mini btn-error mh-s",
+                        onClick: ($event) => $setup.removeStep(keyLine, keySteps),
+                        "data-position": "left",
+                        "data-tooltip": "Supprimer le step"
+                      }, [..._cache[23] || (_cache[23] = [
+                        createBaseVNode("i", { class: "icon-trash" }, null, -1)
+                      ])], 8, _hoisted_46)) : createCommentVNode("", true),
+                      createBaseVNode("div", {
+                        class: "btn-mini btn-success mh-s",
+                        onClick: ($event) => $setup.previewSegments(step.segments),
+                        "data-tooltip": "Prévisualiser"
+                      }, [..._cache[24] || (_cache[24] = [
+                        createBaseVNode("i", { class: "icon-upload" }, null, -1)
+                      ])], 8, _hoisted_47)
+                    ]),
+                    createBaseVNode("div", _hoisted_48, [
+                      createBaseVNode("div", {
+                        class: "btn-mini mh-s",
+                        onClick: ($event) => $setup.divideLeds(keyLine, keySteps, 2),
+                        "data-tooltip": "Diviser en 2"
+                      }, "2", 8, _hoisted_49),
+                      createBaseVNode("div", {
+                        class: "btn-mini mh-s",
+                        onClick: ($event) => $setup.divideLeds(keyLine, keySteps, 3),
+                        "data-tooltip": "Diviser en 3"
+                      }, "3", 8, _hoisted_50),
+                      createBaseVNode("div", {
+                        class: "btn-mini mh-s",
+                        onClick: ($event) => $setup.divideLeds(keyLine, keySteps, 4),
+                        "data-tooltip": "Diviser en 4"
+                      }, "4", 8, _hoisted_51),
+                      createBaseVNode("div", {
+                        class: "btn-mini btn-error mh-s",
+                        onClick: ($event) => $setup.resetCursors(keyLine, keySteps),
+                        "data-tooltip": "Reset curseurs"
+                      }, [..._cache[25] || (_cache[25] = [
+                        createBaseVNode("i", { class: "icon-refresh-cw" }, null, -1)
+                      ])], 8, _hoisted_52)
+                    ])
+                  ])
+                ]),
+                createBaseVNode("div", _hoisted_53, [
+                  _cache[26] || (_cache[26] = createBaseVNode("label", null, "line", -1)),
+                  createBaseVNode("div", _hoisted_54, [
+                    createBaseVNode("div", {
+                      class: "led-bar",
+                      style: normalizeStyle({ gridTemplateColumns: `repeat(${$setup.props.module.nb_led}, 1fr)` })
+                    }, [
+                      (openBlock(true), createElementBlock(Fragment, null, renderList($setup.props.module.nb_led, (i) => {
+                        return openBlock(), createElementBlock("div", {
+                          key: i,
+                          class: normalizeClass(["led-point", { "led-cursor-here": step.cursors.includes(i - 1) }]),
+                          onClick: ($event) => $setup.addCursor(keyLine, keySteps, i - 1),
+                          onMouseenter: ($event) => $setup.onDrag(keyLine, keySteps, i - 1, $event),
+                          "data-tooltip": "LED " + (i - 1),
+                          "data-variant": "warning"
+                        }, null, 42, _hoisted_55);
+                      }), 128))
+                    ], 4),
+                    createBaseVNode("div", {
+                      class: "cursors-layer",
+                      style: normalizeStyle({ gridTemplateColumns: `repeat(${$setup.props.module.nb_led}, 1fr)` })
+                    }, [
+                      (openBlock(true), createElementBlock(Fragment, null, renderList(step.cursors, (pos, index) => {
+                        return openBlock(), createElementBlock("div", {
+                          key: "cursor-" + index,
+                          class: normalizeClass(["led-cursor", {
+                            "cursor-locked": index === 0 || index === step.cursors.length - 1,
+                            "cursor-dragging": $setup.dragState.isDragging && $setup.dragState.cursorIndex === index && $setup.dragState.lineIndex === keyLine && $setup.dragState.stepIndex === keySteps
+                          }]),
+                          style: normalizeStyle({ gridColumn: pos + 1 }),
+                          onMousedown: ($event) => $setup.startDrag(keyLine, keySteps, index, $event),
+                          onClick: withModifiers(($event) => $setup.removeCursor(keyLine, keySteps, index), ["stop"])
+                        }, [
+                          createBaseVNode("span", _hoisted_57, toDisplayString(pos), 1)
+                        ], 46, _hoisted_56);
+                      }), 128))
+                    ], 4)
+                  ])
+                ]),
+                (openBlock(true), createElementBlock(Fragment, null, renderList(step.segments, (segment, keySegment) => {
+                  return openBlock(), createElementBlock("div", _hoisted_58, [
+                    createBaseVNode("div", _hoisted_59, [
+                      _cache[27] || (_cache[27] = createBaseVNode("label", {
+                        for: "Speed",
+                        class: "form-label"
+                      }, "Led", -1)),
+                      createBaseVNode("div", _hoisted_60, [
+                        withDirectives(createBaseVNode("input", {
+                          type: "number",
+                          name: "first",
+                          class: "form-input",
+                          disabled: "",
+                          "onUpdate:modelValue": ($event) => segment.first = $event
+                        }, null, 8, _hoisted_61), [
+                          [vModelText, segment.first]
+                        ]),
+                        withDirectives(createBaseVNode("input", {
+                          type: "number",
+                          name: "last",
+                          class: "form-input",
+                          disabled: "",
+                          "onUpdate:modelValue": ($event) => segment.last = $event
+                        }, null, 8, _hoisted_62), [
+                          [vModelText, segment.last]
+                        ])
+                      ])
+                    ]),
+                    createBaseVNode("div", _hoisted_63, [
+                      _cache[29] || (_cache[29] = createBaseVNode("label", {
+                        for: "Effect",
+                        class: "form-label"
+                      }, "Effect", -1)),
+                      withDirectives(createBaseVNode("select", {
+                        name: "effect",
+                        id: "",
+                        "onUpdate:modelValue": ($event) => segment.effect = $event
+                      }, [
+                        _cache[28] || (_cache[28] = createBaseVNode("option", { value: "" }, null, -1)),
+                        (openBlock(true), createElementBlock(Fragment, null, renderList($setup.scenario.preference.effects, (prefEffect, keyEffect) => {
+                          return openBlock(), createElementBlock("option", { value: prefEffect }, toDisplayString(prefEffect) + " => " + toDisplayString($setup.props.effects[prefEffect]?.name), 9, _hoisted_65);
+                        }), 256))
+                      ], 8, _hoisted_64), [
+                        [vModelSelect, segment.effect]
+                      ])
+                    ]),
+                    createBaseVNode("div", _hoisted_66, [
+                      _cache[30] || (_cache[30] = createBaseVNode("label", {
+                        for: "Effect",
+                        class: "form-label"
+                      }, "Color", -1)),
+                      createBaseVNode("div", _hoisted_67, [
+                        (openBlock(true), createElementBlock(Fragment, null, renderList(segment.colors, (color, keyColor) => {
+                          return openBlock(), createBlock($setup["QuickSelectColor"], {
+                            modelValue: segment.colors[keyColor],
+                            "onUpdate:modelValue": ($event) => segment.colors[keyColor] = $event,
+                            list: $setup.scenario.preference.colors
+                          }, null, 8, ["modelValue", "onUpdate:modelValue", "list"]);
+                        }), 256))
+                      ])
+                    ]),
+                    createBaseVNode("div", _hoisted_68, [
+                      _cache[31] || (_cache[31] = createBaseVNode("label", {
+                        for: "Speed",
+                        class: "form-label"
+                      }, "Speed", -1)),
+                      withDirectives(createBaseVNode("input", {
+                        type: "number",
+                        id: "Speed",
+                        name: "speed",
+                        class: "form-input",
+                        "onUpdate:modelValue": ($event) => segment.speed = $event
+                      }, null, 8, _hoisted_69), [
+                        [vModelText, segment.speed]
+                      ])
+                    ]),
+                    createBaseVNode("div", _hoisted_70, [
+                      withDirectives(createBaseVNode("input", {
+                        type: "checkbox",
+                        id: "reverse" + keyLine + "_" + keySteps + "_" + keySegment,
+                        name: "reverse",
+                        class: "form-input",
+                        "onUpdate:modelValue": ($event) => segment.reverse = $event
+                      }, null, 8, _hoisted_71), [
+                        [vModelCheckbox, segment.reverse]
+                      ]),
+                      createBaseVNode("label", {
+                        for: "reverse" + keyLine + "_" + keySteps + "_" + keySegment,
+                        class: "form-label"
+                      }, "reverse", 8, _hoisted_72)
+                    ])
+                  ]);
+                }), 256))
+              ]);
+            }), 256))
+          ])
+        ]);
+      }), 256))
+    ]),
+    $setup.result.display ? (openBlock(), createElementBlock("div", _hoisted_73, [
+      createBaseVNode("div", {
+        class: normalizeClass("flash-message flash-" + $setup.result.status),
+        onClick: _cache[4] || (_cache[4] = ($event) => $setup.result.display = false)
+      }, [
+        createBaseVNode("i", {
+          class: normalizeClass("icon-" + $setup.result.status)
+        }, null, 2),
+        createTextVNode(toDisplayString($setup.result.message), 1)
+      ], 2)
+    ])) : createCommentVNode("", true),
+    createBaseVNode("div", _hoisted_74, [
+      createBaseVNode("i", {
+        class: normalizeClass("icon-" + $setup.isConnected + " neon-" + $setup.isConnected + "-light")
+      }, null, 2)
+    ])
+  ]);
+}
+const ScenarioMaker = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$2], ["__file", "ScenarioMaker.vue"]]);
+const brokerUrl = "ws://skankyhome.local:8083/mqtt";
+const topic = "skankyhome/#";
+const _sfc_main$1 = {
+  __name: "MqttMonitor",
+  setup(__props, { expose: __expose }) {
+    __expose();
+    const messages = ref([]);
+    const isConnected = ref(false);
+    const isPaused = ref(false);
+    const filter = ref("");
+    let client = null;
+    const connect = () => {
+      client = mqtt.connect(brokerUrl, {
+        clientId: `web_monitor_${Math.random().toString(16).substr(2, 8)}`,
+        clean: true,
+        reconnectPeriod: 3e3
+      });
+      client.on("connect", () => {
+        isConnected.value = true;
+        client.subscribe(topic);
+      });
+      client.on("error", () => {
+        isConnected.value = false;
+      });
+      client.on("close", () => {
+        isConnected.value = false;
+      });
+      client.on("message", (topic2, payload) => {
+        if (isPaused.value) return;
+        let data = null;
+        try {
+          data = JSON.parse(payload.toString());
+        } catch {
+          data = payload.toString();
+        }
+        messages.value.unshift({
+          id: Date.now() + Math.random(),
+          time: (/* @__PURE__ */ new Date()).toLocaleTimeString("fr-FR"),
+          topic: topic2,
+          data
+        });
+        if (messages.value.length > 200) {
+          messages.value.pop();
+        }
+      });
+    };
+    const clear = () => {
+      messages.value = [];
+    };
+    const filteredMessages = () => {
+      if (!filter.value) return messages.value;
+      const q = filter.value.toLowerCase();
+      return messages.value.filter(
+        (m) => m.topic.toLowerCase().includes(q) || JSON.stringify(m.data).toLowerCase().includes(q)
+      );
+    };
+    onMounted(connect);
+    onBeforeUnmount(() => {
+      if (client) client.end();
+    });
+    const __returned__ = { brokerUrl, topic, messages, isConnected, isPaused, filter, get client() {
+      return client;
+    }, set client(v) {
+      client = v;
+    }, connect, clear, filteredMessages, ref, onMounted, onBeforeUnmount, get mqtt() {
+      return mqtt;
+    } };
+    Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
+    return __returned__;
+  }
+};
+const _hoisted_1$1 = { class: "mqtt-monitor" };
+const _hoisted_2$1 = { class: "mqtt-monitor-toolbar" };
+const _hoisted_3$1 = { class: "mqtt-monitor-status" };
+const _hoisted_4$1 = { class: "mqtt-monitor-actions" };
+const _hoisted_5$1 = ["data-tooltip"];
+const _hoisted_6$1 = { class: "mqtt-monitor-list" };
+const _hoisted_7$1 = {
+  key: 0,
+  class: "mqtt-monitor-empty"
+};
+const _hoisted_8$1 = { class: "mqtt-monitor-time" };
+const _hoisted_9$1 = { class: "mqtt-monitor-topic" };
+const _hoisted_10$1 = { class: "mqtt-monitor-payload" };
+function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", _hoisted_1$1, [
+    createBaseVNode("div", _hoisted_2$1, [
+      createBaseVNode("div", _hoisted_3$1, [
+        createBaseVNode("i", {
+          class: normalizeClass("icon-" + ($setup.isConnected ? "success" : "error") + " neon-" + ($setup.isConnected ? "success" : "error") + "-light")
+        }, null, 2),
+        createBaseVNode("span", null, toDisplayString($setup.isConnected ? "Connecté" : "Déconnecté"), 1)
+      ]),
+      withDirectives(createBaseVNode("input", {
+        type: "text",
+        class: "form-input",
+        "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $setup.filter = $event),
+        placeholder: "Filtrer topic / payload…"
+      }, null, 512), [
+        [vModelText, $setup.filter]
+      ]),
+      createBaseVNode("div", _hoisted_4$1, [
+        createBaseVNode("button", {
+          class: "btn-mini btn-warning",
+          onClick: _cache[1] || (_cache[1] = ($event) => $setup.isPaused = !$setup.isPaused),
+          "data-tooltip": $setup.isPaused ? "Reprendre" : "Pause"
+        }, [
+          createBaseVNode("i", {
+            class: normalizeClass("icon-" + ($setup.isPaused ? "play" : "pause"))
+          }, null, 2)
+        ], 8, _hoisted_5$1),
+        createBaseVNode("button", {
+          class: "btn-mini btn-error",
+          onClick: $setup.clear,
+          "data-tooltip": "Vider"
+        }, [..._cache[2] || (_cache[2] = [
+          createBaseVNode("i", { class: "icon-trash" }, null, -1)
+        ])])
+      ])
+    ]),
+    createBaseVNode("div", _hoisted_6$1, [
+      $setup.filteredMessages().length === 0 ? (openBlock(), createElementBlock("div", _hoisted_7$1, " Aucun message… ")) : createCommentVNode("", true),
+      (openBlock(true), createElementBlock(Fragment, null, renderList($setup.filteredMessages(), (msg) => {
+        return openBlock(), createElementBlock("div", {
+          key: msg.id,
+          class: "mqtt-monitor-item"
+        }, [
+          createBaseVNode("span", _hoisted_8$1, toDisplayString(msg.time), 1),
+          createBaseVNode("span", _hoisted_9$1, toDisplayString(msg.topic), 1),
+          createBaseVNode("pre", _hoisted_10$1, toDisplayString(typeof msg.data === "string" ? msg.data : JSON.stringify(msg.data, null, 2)), 1)
+        ]);
+      }), 128))
+    ])
+  ]);
+}
+const MqttMonitor = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["__file", "MqttMonitor.vue"]]);
+const NB_LEDS = 30;
 const GLOW = 8;
 const _sfc_main = {
   __name: "EffectPreview",
   props: {
-    effectNames: Object
-    // { 0: 'Static', 1: 'Blink', ... }
+    effects: Object
+    // { 0: { name: 'Static', category: 'Simple' }, ... }
   },
   setup(__props, { expose: __expose }) {
     __expose();
@@ -29950,15 +30013,13 @@ const _sfc_main = {
     let state = {};
     let startT = null;
     const categories = ["Simple", "Sweep", "Wipe", "Special"];
-    const effectList = Object.entries(props.effectNames).filter(([id]) => id < 72).map(([id, name2]) => ({
-      id: parseInt(id),
-      name: name2,
-      category: EFFECT_CATEGORIES[parseInt(id)] || "Simple"
-    }));
+    const effectById = Object.fromEntries(
+      Object.values(props.effects).flat().map((e) => [e.id, e.name])
+    );
     const filtered = (cat) => {
       const q = search.value.toLowerCase();
-      return effectList.filter(
-        (e) => e.category === cat && (e.name.toLowerCase().includes(q) || String(e.id).includes(q))
+      return (props.effects[cat] || []).filter(
+        (e) => e.name.toLowerCase().includes(q) || String(e.id).includes(q)
       );
     };
     const selectEffect = (id) => {
@@ -29968,16 +30029,20 @@ const _sfc_main = {
     const drawLeds = (ledColors) => {
       const ctx = canvas.value?.getContext("2d");
       if (!ctx) return;
-      const totalW = NB_LEDS * (LED_SIZE + LED_GAP) - LED_GAP + GLOW * 2;
-      const totalH = LED_SIZE + GLOW * 2;
-      canvas.value.width = totalW;
-      canvas.value.height = totalH;
-      ctx.clearRect(0, 0, totalW, totalH);
+      const dpr = window.devicePixelRatio || 1;
+      const cssW = canvas.value.clientWidth;
+      const cssH = canvas.value.clientHeight;
+      const LED_GAP2 = Math.max(2, Math.floor(cssW / NB_LEDS * 0.2));
+      const LED_SIZE = Math.floor((cssW - LED_GAP2 * (NB_LEDS - 1) - GLOW * 2) / NB_LEDS);
+      canvas.value.width = cssW * dpr;
+      canvas.value.height = cssH * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, cssW, cssH);
       ctx.fillStyle = "#050510";
-      ctx.fillRect(0, 0, totalW, totalH);
+      ctx.fillRect(0, 0, cssW, cssH);
       for (let i = 0; i < NB_LEDS; i++) {
         const c = ledColors[i] || { r: 0, g: 0, b: 0 };
-        const x2 = GLOW + i * (LED_SIZE + LED_GAP);
+        const x2 = GLOW + i * (LED_SIZE + LED_GAP2);
         const y = GLOW;
         const hex = rgbToHex(c.r, c.g, c.b);
         const brightness = (c.r + c.g + c.b) / 765;
@@ -30024,7 +30089,7 @@ const _sfc_main = {
     onBeforeUnmount(() => {
       if (rafId) cancelAnimationFrame(rafId);
     });
-    const __returned__ = { props, NB_LEDS, LED_SIZE, LED_GAP, GLOW, canvas, search, activeId, color1, color2, color3, speed, get rafId() {
+    const __returned__ = { props, NB_LEDS, GLOW, canvas, search, activeId, color1, color2, color3, speed, get rafId() {
       return rafId;
     }, set rafId(v) {
       rafId = v;
@@ -30036,21 +30101,19 @@ const _sfc_main = {
       return startT;
     }, set startT(v) {
       startT = v;
-    }, categories, effectList, filtered, selectEffect, drawLeds, frame, ref, onMounted, onBeforeUnmount, watch, get effects() {
+    }, categories, effectById, filtered, selectEffect, drawLeds, frame, ref, onMounted, onBeforeUnmount, watch, get effects() {
       return effects;
     }, get hexToRgb() {
       return hexToRgb;
     }, get rgbToHex() {
       return rgbToHex;
-    }, get EFFECT_CATEGORIES() {
-      return EFFECT_CATEGORIES;
     } };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
 };
 const _hoisted_1 = { class: "effect-preview-layout" };
-const _hoisted_2 = { class: "effect-preview-sidebar" };
+const _hoisted_2 = { class: "effect-preview-sidebar card" };
 const _hoisted_3 = { class: "effect-preview-search" };
 const _hoisted_4 = { class: "effect-preview-list scrollable" };
 const _hoisted_5 = {
@@ -30117,8 +30180,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         createBaseVNode("div", _hoisted_12, [
           createBaseVNode("h3", {
             class: "glitch",
-            "data-text": $props.effectNames[$setup.activeId]
-          }, toDisplayString($props.effectNames[$setup.activeId]), 9, _hoisted_13),
+            "data-text": $setup.effectById[$setup.activeId]
+          }, toDisplayString($setup.effectById[$setup.activeId]), 9, _hoisted_13),
           createBaseVNode("span", _hoisted_14, toDisplayString($setup.activeId), 1)
         ]),
         createBaseVNode("div", _hoisted_15, [

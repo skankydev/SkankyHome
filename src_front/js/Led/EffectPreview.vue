@@ -1,14 +1,12 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount, watch } from 'vue'
-import effects, { hexToRgb, rgbToHex, EFFECT_CATEGORIES } from '../Utilities/LedEffects.js'
+import effects, { hexToRgb, rgbToHex } from '../Utilities/LedEffects.js'
 
 const props = defineProps({
-	effectNames: Object, // { 0: 'Static', 1: 'Blink', ... }
+	effects: Object, // { 0: { name: 'Static', category: 'Simple' }, ... }
 })
 
 const NB_LEDS   = 30
-const LED_SIZE  = 14
-const LED_GAP   = 4
 const GLOW      = 8
 
 const canvas      = ref(null)
@@ -25,19 +23,15 @@ let startT  = null
 
 const categories = ['Simple', 'Sweep', 'Wipe', 'Special']
 
-const effectList = Object.entries(props.effectNames)
-	.filter(([id]) => id < 72)
-	.map(([id, name]) => ({
-		id: parseInt(id),
-		name,
-		category: EFFECT_CATEGORIES[parseInt(id)] || 'Simple',
-	}))
+// Lookup plat { id: name } pour le header
+const effectById = Object.fromEntries(
+	Object.values(props.effects).flat().map(e => [e.id, e.name])
+)
 
 const filtered = (cat) => {
 	const q = search.value.toLowerCase()
-	return effectList.filter(e =>
-		e.category === cat &&
-		(e.name.toLowerCase().includes(q) || String(e.id).includes(q))
+	return (props.effects[cat] || []).filter(e =>
+		e.name.toLowerCase().includes(q) || String(e.id).includes(q)
 	)
 }
 
@@ -50,14 +44,19 @@ const drawLeds = (ledColors) => {
 	const ctx = canvas.value?.getContext('2d')
 	if (!ctx) return
 
-	const totalW = NB_LEDS * (LED_SIZE + LED_GAP) - LED_GAP + GLOW * 2
-	const totalH = LED_SIZE + GLOW * 2
-	canvas.value.width  = totalW
-	canvas.value.height = totalH
+	const dpr      = window.devicePixelRatio || 1
+	const cssW     = canvas.value.clientWidth
+	const cssH     = canvas.value.clientHeight
+	const LED_GAP  = Math.max(2, Math.floor(cssW / NB_LEDS * 0.2))
+	const LED_SIZE = Math.floor((cssW - LED_GAP * (NB_LEDS - 1) - GLOW * 2) / NB_LEDS)
 
-	ctx.clearRect(0, 0, totalW, totalH)
+	canvas.value.width  = cssW * dpr
+	canvas.value.height = cssH * dpr
+	ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+
+	ctx.clearRect(0, 0, cssW, cssH)
 	ctx.fillStyle = '#050510'
-	ctx.fillRect(0, 0, totalW, totalH)
+	ctx.fillRect(0, 0, cssW, cssH)
 
 	for (let i = 0; i < NB_LEDS; i++) {
 		const c = ledColors[i] || { r: 0, g: 0, b: 0 }
@@ -119,7 +118,7 @@ onBeforeUnmount(() => {
 <div class="effect-preview-layout">
 
 	<!-- Sidebar liste -->
-	<div class="effect-preview-sidebar">
+	<div class="effect-preview-sidebar card">
 		<div class="effect-preview-search">
 			<input type="text" class="form-input" v-model="search" placeholder="Rechercher…">
 		</div>
@@ -146,7 +145,7 @@ onBeforeUnmount(() => {
 	<div class="effect-preview-main">
 		<div class="card">
 			<div class="card-header">
-				<h3 class="glitch" :data-text="effectNames[activeId]">{{ effectNames[activeId] }}</h3>
+				<h3 class="glitch" :data-text="effectById[activeId]">{{ effectById[activeId] }}</h3>
 				<span class="effect-id-badge">{{ activeId }}</span>
 			</div>
 			<div class="card-body">

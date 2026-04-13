@@ -897,22 +897,4 @@ const effects = [
 	},
 ]
 
-export const EFFECT_CATEGORIES = {
-	0: 'Simple', 1: 'Simple', 2: 'Special', 3: 'Wipe', 4: 'Wipe',
-	5: 'Sweep', 6: 'Sweep', 7: 'Wipe', 8: 'Simple', 9: 'Simple',
-	10: 'Simple', 11: 'Simple', 12: 'Wipe', 13: 'Sweep', 14: 'Sweep',
-	15: 'Sweep', 16: 'Wipe', 17: 'Wipe', 18: 'Wipe', 19: 'Simple',
-	20: 'Simple', 21: 'Simple', 22: 'Simple', 23: 'Simple', 24: 'Simple',
-	25: 'Simple', 26: 'Simple', 27: 'Simple', 28: 'Simple', 29: 'Simple',
-	30: 'Wipe', 31: 'Wipe', 32: 'Wipe', 33: 'Wipe', 34: 'Wipe',
-	35: 'Wipe', 36: 'Wipe', 37: 'Wipe', 38: 'Wipe', 39: 'Sweep',
-	40: 'Wipe', 41: 'Wipe', 42: 'Wipe', 43: 'Sweep', 44: 'Wipe',
-	45: 'Simple', 46: 'Simple', 47: 'Wipe', 48: 'Simple', 49: 'Simple',
-	50: 'Simple', 51: 'Wipe', 52: 'Wipe', 53: 'Wipe', 54: 'Wipe',
-	55: 'Special', 56: 'Special', 57: 'Simple', 58: 'Special', 59: 'Sweep',
-	60: 'Wipe', 61: 'Special', 62: 'Sweep', 63: 'Simple', 64: 'Simple',
-	65: 'Special', 66: 'Special', 67: 'Special', 68: 'Wipe', 69: 'Special',
-	70: 'Special', 71: 'Special',
-}
-
 export default effects

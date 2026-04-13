@@ -75,6 +75,7 @@
 		font-size: $fs-s;
 		color: $text-primary;
 	}
+
 }
 
 .effect-preview-main {
@@ -101,7 +102,7 @@
 .effect-preview-canvas {
 	display: block;
 	width: 100%;
-	height: auto;
+	height: 60px;
 	border-radius: $p-xs;
 	background: $bg-primary;
 }

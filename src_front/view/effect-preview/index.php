@@ -14,6 +14,6 @@ $this->addCrumb('Effect Preview', ['action' => 'index'], 'icon-zap');
 
 <section id="EffectPreview">
 	<effect-preview
-		:effect-names='<?= json($effects) ?>'
+		:effects='<?= json($effects) ?>'
 	></effect-preview>
 </section>
