@@ -5,6 +5,8 @@ import ColorPicker from './Component/ColorPicker.vue'
 import IconPicker from './Component/IconPicker.vue'
 import LiveMode from './Led/LiveMode.vue'
 import ScenarioMaker from './Led/ScenarioMaker.vue'
+import MqttMonitor from './Led/MqttMonitor.vue'
+import EffectPreview from './Led/EffectPreview.vue'
 
 window.remove = function(element) {
 	if (element && element.parentNode) {
@@ -49,6 +51,20 @@ document.addEventListener('DOMContentLoaded', () => {
 		var scenario = createApp({});
 		scenario.component('scenario-maker', ScenarioMaker);
 		scenario.mount('#ScenarioMaker');
+	}
+
+	target = document.getElementById('MqttMonitor');
+	if (target) {
+		var monitor = createApp({});
+		monitor.component('mqtt-monitor', MqttMonitor);
+		monitor.mount('#MqttMonitor');
+	}
+
+	target = document.getElementById('EffectPreview');
+	if (target) {
+		var preview = createApp({});
+		preview.component('effect-preview', EffectPreview);
+		preview.mount('#EffectPreview');
 	}
 
 	initBurger();

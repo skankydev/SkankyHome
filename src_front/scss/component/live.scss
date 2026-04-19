@@ -10,6 +10,16 @@
 	}
 }
 
+.effect-category-label {
+	font-size: $fs-xs;
+	color: $text-muted;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	padding: $p-s $p-xs $p-xxs;
+	border-bottom: 1px solid $border-color;
+	margin-top: $p-s;
+}
+
 .effect{
 	border-bottom: 1px solid $neon-purple;
 	padding: $p-xs 0;

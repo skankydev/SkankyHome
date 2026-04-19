@@ -86,7 +86,16 @@
 	}
 }
 
-/* Inline | http://dev.skankyhome.com/scenario/create/694047ab7812915bd70b0033 */
+.mini-effect-preview {
+	padding: $p-s 0 $p-xs;
+}
+
+.mini-effect-canvas {
+	display: block;
+	width: 100%;
+	height: 46px;
+	border-radius: $p-xs;
+}
 
 .pref-effect {
 	display: flex;

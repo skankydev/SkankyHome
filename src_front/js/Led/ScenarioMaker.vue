@@ -3,6 +3,7 @@ import { ref, onMounted, onBeforeUnmount } from 'vue';
 import ColorPicker from '../Component/ColorPicker.vue';
 import IconPicker from '../Component/IconPicker.vue';
 import QuickSelectColor from '../Component/QuickSelectColor.vue';
+import MiniEffectPreview from '../Component/MiniEffectPreview.vue';
 import ModuleBridge from '../Utilities/ModuleBridge.js';
 
 
@@ -55,6 +56,18 @@ const removePrefColor = (key,event) => {
 const removePrefEffect = (key, event) => {
 	event.stopPropagation()
 	scenario.value.preference.effects.splice(key, 1)
+}
+
+const categories = ['Simple', 'Wipe', 'Sweep', 'Special']
+const previewEffectId = ref(null)
+
+// Lookup plat { id: name } pour les préférences et selects
+const effectById = Object.fromEntries(
+	Object.values(props.effects).flat().map(e => [e.id, e.name])
+)
+
+const effectsByCategory = (cat) => {
+	return (props.effects[cat] || []).filter(e => matchSearch(e.name))
 }
 
 const matchSearch = (name) => {
@@ -303,7 +316,7 @@ onBeforeUnmount(() => {
 
 <template>
 <section class="scenario-layout">
-	<div class="scenario-side-bar accordion">
+	<div class="scenario-side-bar accordion ph-s">
 		<details class="accordion-item card card-primary mb-s">
 			<summary class="accordion-header">
 				<h3 class="glitch" data-text="Palette">Palette</h3>
@@ -339,17 +352,23 @@ onBeforeUnmount(() => {
 					<label for="" class="form-label"></label>
 					<input type="text" class="form-input" v-model="searchEffect">
 				</div>
-				<div class="effects-list pb-l">
+				<div class="effects-list">
 					<div class="scrollable">
-						<template v-for="(name,key) in props.effects">
-							<div v-if="matchSearch(name)" class="effect">
-								<div class="effect-key">{{key}} </div>
-								<div class="color-cyan"> => </div>
-								<div class="effect-name"> {{name}} </div>
-								<div class="effect-favorie"><span class="btn-mini btn-favorie" @click="effectAddPref(key)"> <i class="icon-heart"></i> </span></div>
-							</div>
+						<template v-for="cat in categories" :key="cat">
+							<template v-if="effectsByCategory(cat).length">
+								<div class="effect-category-label"><h4 class="text-center">{{ cat }}</h4></div>
+								<div v-for="e in effectsByCategory(cat)" :key="e.id" class="effect">
+									<div class="effect-key">{{ e.id }}</div>
+									<div class="color-cyan"> => </div>
+									<div class="effect-name" @click="previewEffectId = e.id">{{ e.name }}</div>
+									<div class="effect-favorie"><span class="btn-mini btn-favorie" @click="effectAddPref(e.id)"><i class="icon-heart"></i></span></div>
+								</div>
+							</template>
 						</template>
 					</div>
+				</div>
+				<div class="p-xs">
+					<MiniEffectPreview v-if="previewEffectId !== null" :effect-id="previewEffectId" />
 				</div>
 			</div>
 		</details>
@@ -361,7 +380,7 @@ onBeforeUnmount(() => {
 				<div v-for="(prefEffect,key) in scenario.preference.effects" class="pref-effect" @click="setEffect(prefEffect)">
 					<div class="effect-key">{{prefEffect}} </div>
 					<div class="color-cyan"> => </div>
-					<div class="effect-name"> {{ props.effects[prefEffect] }} </div>
+					<div class="effect-name"> {{ effectById[prefEffect] }} </div>
 					<div class="effect-trash" @click="removePrefEffect(key,$event)">
 						<i class="icon-trash"></i>
 					</div>
@@ -469,7 +488,7 @@ onBeforeUnmount(() => {
 							<select name="effect" id=""  v-model="segment.effect">
 								<option value=""></option>
 								<option v-for="(prefEffect,keyEffect) in scenario.preference.effects" :value="prefEffect">
-									{{prefEffect}} => {{ props.effects[prefEffect] }} 
+									{{prefEffect}} => {{ props.effects[prefEffect]?.name }}
 								</option>
 							</select>
 						</div>
