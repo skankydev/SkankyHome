@@ -23,6 +23,10 @@ $conf =  [
 		'username'=>getenv('MQTT_USERNAME') ?: '',
 		'password'=>getenv('MQTT_PASSWORD') ?: '',
 	],
+	'llama' => [
+		'host' => getenv('LLAMA_HOST') ?: 'localhost',
+		'port' => getenv('LLAMA_PORT') ?: 8080,
+	],
 	'location'=>[
 		'fr'=>[
 			'domaine'=>'App',
