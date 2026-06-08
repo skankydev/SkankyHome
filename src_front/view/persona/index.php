@@ -22,7 +22,6 @@ $this->setLayout('layout.default');
 		<thead>
 			<tr>
 				<th><?= $this->link('Name',['get'=> $personas->sortParams('name')]) ?></th>
-				<th><?= $this->link('Content',['get'=> $personas->sortParams('content')]) ?></th>
 				<th><?= $this->link('Updated',['get'=> $personas->sortParams('updated_at')]) ?></th>
 				<th><?= $this->link('Created',['get'=> $personas->sortParams('created_at')]) ?></th>
 				<th class="action"></th>
@@ -32,7 +31,6 @@ $this->setLayout('layout.default');
 		<?php foreach ($personas as $persona): ?>
 		<tr class="clickable-row" data-url="<?= $this->url(['action' => 'show','params'=>['persona'=>$persona->_id]]) ?>">
 			<td><?= $persona->name ?></td>
-			<td><?= $persona->content ?></td>
 			<td><?= $persona->updated_at?->format('d/m/Y H:i') ?></td>
 			<td><?= $persona->created_at?->format('d/m/Y H:i') ?></td>
 			<td class="action">

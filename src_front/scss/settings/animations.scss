@@ -34,6 +34,12 @@
 }
 
 
+@keyframes spin {
+	from { transform: rotate(0deg); }
+	to   { transform: rotate(360deg); }
+}
+
+
 @keyframes glitch-anim-1 {
 	0% {
 		clip: rect(42px, 9999px, 44px, 0);
