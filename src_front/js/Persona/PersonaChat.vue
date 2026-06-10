@@ -143,17 +143,16 @@ const reset = () => {
 	stopSpeech()
 }
 
-// ===== Synthèse vocale (TTS) via Kokoro (kokoro-js, tourne dans le navigateur) =====
-const KOKORO_MODEL = 'onnx-community/Kokoro-82M-v1.0-ONNX'
-const KOKORO_VOICE = 'ff_siwis' // voix française
+// ===== Synthèse vocale (TTS) via Piper (vits-web, tourne dans le navigateur) =====
+const PIPER_VOICE = 'fr_FR-siwis-medium' // voix française
 
 const ttsSupported = typeof window !== 'undefined' && typeof WebAssembly === 'object'
 const speakingKey = ref(null)  // clé du message en cours de lecture
-const ttsLoading = ref(false)  // chargement du modèle ou génération en cours
+const ttsLoading = ref(false)  // téléchargement du modèle ou génération en cours
+const ttsProgress = ref(0)     // % de téléchargement du modèle (1er usage seulement)
 
-// Instance Kokoro chargée paresseusement (au 1er clic) puis mise en cache
-let ttsInstance = null
-let ttsLoadingPromise = null
+// Module vits-web chargé paresseusement (import dynamique => pas dans le bundle de la page)
+let ttsModule = null
 let currentAudio = null
 
 // Retire les emojis du texte à lire (l'affichage garde les emojis, c'est juste pour la voix)
@@ -164,21 +163,11 @@ const stripEmoji = (text) => text
 	.replace(/\s{2,}/g, ' ')                        // espaces multiples laissés par les emojis
 	.trim()
 
-// Charge le modèle Kokoro une seule fois (import dynamique => pas dans le bundle de la page)
 const getTts = async () => {
-	if (ttsInstance) {
-		return ttsInstance
+	if (!ttsModule) {
+		ttsModule = await import('@diffusionstudio/vits-web')
 	}
-	if (!ttsLoadingPromise) {
-		ttsLoadingPromise = (async () => {
-			const { KokoroTTS } = await import('kokoro-js')
-			const device = (typeof navigator !== 'undefined' && navigator.gpu) ? 'webgpu' : 'wasm'
-			console.log('🦜 Chargement de Kokoro sur', device, '…')
-			ttsInstance = await KokoroTTS.from_pretrained(KOKORO_MODEL, { dtype: 'q8', device })
-			return ttsInstance
-		})()
-	}
-	return ttsLoadingPromise
+	return ttsModule
 }
 
 const stopSpeech = () => {
@@ -204,20 +193,24 @@ const speak = async (message, key) => {
 	stopSpeech()          // coupe une éventuelle lecture précédente
 	speakingKey.value = key
 	ttsLoading.value = true
+	ttsProgress.value = 0
 
 	try {
 		const tts = await getTts()
-		// L'utilisateur a pu cliquer ailleurs / stopper pendant le chargement
 		if (speakingKey.value !== key) {
 			return
 		}
 
-		const audio = await tts.generate(stripEmoji(message.content), { voice: KOKORO_VOICE })
+		// predict() télécharge la voix au 1er usage (puis cache OPFS), génère le WAV, rend un Blob
+		const wav = await tts.predict(
+			{ text: stripEmoji(message.content), voiceId: PIPER_VOICE },
+			(p) => { ttsProgress.value = p.total ? Math.round(p.loaded * 100 / p.total) : 0 }
+		)
 		if (speakingKey.value !== key) {
 			return
 		}
 
-		const url = URL.createObjectURL(audio.toBlob())
+		const url = URL.createObjectURL(wav)
 		const el = new Audio(url)
 		currentAudio = el
 		el.onended = () => {
@@ -231,8 +224,8 @@ const speak = async (message, key) => {
 		}
 		await el.play()
 	} catch (e) {
-		console.error('Kokoro TTS:', e)
-		error.value = 'Synthèse vocale (Kokoro) impossible : ' + e.message
+		console.error('Piper TTS:', e)
+		error.value = 'Synthèse vocale (Piper) impossible : ' + e.message
 		speakingKey.value = null
 	} finally {
 		ttsLoading.value = false
@@ -247,7 +240,7 @@ onBeforeUnmount(() => {
 <template>
 <div class="persona-chat card">
 	<header class="card-header persona-chat-header">
-		<h3 class="glitch" :data-text="props.persona.name">{{ props.persona.name }}</h3>
+		<h3 class="rainbow-underline" :data-text="props.persona.name">{{ props.persona.name }}</h3>
 		<button type="button" class="btn-mini btn-error" @click="reset" data-tooltip="Réinitialiser la conversation">
 			<i class="icon-trash"></i>
 		</button>
@@ -285,7 +278,7 @@ onBeforeUnmount(() => {
 					class="persona-chat-speak"
 					:class="{ 'is-speaking': speakingKey === key }"
 					@click="speak(message, key)"
-					:data-tooltip="speakingKey === key ? (ttsLoading ? 'Chargement…' : 'Arrêter') : 'Écouter'"
+					:data-tooltip="speakingKey !== key ? 'Écouter' : (ttsLoading ? (ttsProgress > 0 ? 'Téléchargement ' + ttsProgress + '%' : 'Génération…') : 'Arrêter')"
 				>
 					<i v-if="speakingKey === key && ttsLoading" class="icon-loader persona-chat-spin"></i>
 					<i v-else-if="speakingKey === key" class="icon-stop-circle"></i>

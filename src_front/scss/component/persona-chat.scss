@@ -7,6 +7,7 @@
 	display: flex;
 	flex-direction: column;
 	height: calc(100vh - #{$header} - #{$p-xxl});
+	overflow: hidden; // carte auto-contenue : absorbe le bleed du glitch (scroll vertical géré par le thread)
 
 	.persona-chat-header{
 		display: flex;
@@ -16,6 +17,7 @@
 
 	.persona-chat-thread{
 		flex: 1;
+		min-width: 0; // autorise les enfants flex à rétrécir au lieu de déborder
 		overflow-y: auto;
 		padding: $p-m;
 		display: flex;
@@ -32,6 +34,7 @@
 	.persona-chat-message{
 		display: flex;
 		flex-direction: column;
+		min-width: 0;
 
 		&.is-user{
 			align-items: flex-end;
@@ -93,7 +96,7 @@
 		padding: $p-s $p-m;
 		border-radius: $p-m;
 		white-space: pre-wrap;
-		word-break: break-word;
+		overflow-wrap: anywhere;
 		line-height: $line-height-normal;
 		color: $text-primary;
 	}
@@ -136,6 +139,7 @@
 
 		textarea{
 			flex: 1;
+			min-width: 0; // sinon la largeur intrinsèque de la textarea déborde du flex
 			resize: none;
 		}
 	}

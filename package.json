@@ -16,7 +16,7 @@
 		"vite": "^7.2.4"
 	},
 	"dependencies": {
-		"kokoro-js": "^1.2.1",
+		"@diffusionstudio/vits-web": "^1.0.3",
 		"mqtt": "^5.14.1",
 		"vue": "^3.5.25"
 	}
