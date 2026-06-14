@@ -25,10 +25,16 @@ class BiduleMiddleware implements MiddlewareInterface {
 	/** @var string[] shared trace of the pipeline execution (POC observability) */
 	public static array $trace = [];
 
+	/**
+	 * @param string $label valeur reçue depuis l'attribut #[Middleware(self::class, 'xxx')]
+	 *                       — injectée par MasterFactory dans le constructeur.
+	 */
+	public function __construct(private string $label = 'youpi') {}
+
 	public function handle(Request $request, callable $next): mixed {
-		self::$trace[] = 'Bidule:before';
+		self::$trace[] = "Bidule:before({$this->label})";
 		$response = $next($request);
-		self::$trace[] = 'Bidule:after';
+		self::$trace[] = "Bidule:after({$this->label})";
 		return $response;
 	}
 

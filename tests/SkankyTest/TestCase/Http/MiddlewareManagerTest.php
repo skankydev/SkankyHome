@@ -5,6 +5,7 @@ namespace SkankyTest\TestCase\Http;
 use App\Middlewares\BiduleMiddleware;
 use App\Middlewares\TrucMiddleware;
 use PHPUnit\Framework\TestCase;
+use SkankyDev\Exception\MiddlewareNotFoundException;
 use SkankyDev\Http\Middleware\Attribute\Middleware;
 use SkankyDev\Http\Middleware\MiddlewareInterface;
 use SkankyDev\Http\Middleware\MiddlewareManager;
@@ -65,6 +66,23 @@ class OnionController {
     #[Middleware(BetaMiddleware::class)]
     public function edit(): string {
         return 'edit-ok';
+    }
+}
+
+// Fixture : middleware qui reçoit un argument de constructeur (param sans défaut,
+// pour que la valeur positionnelle passe bien via MasterFactory).
+class ArgMiddleware implements MiddlewareInterface {
+    public function __construct(private string $label) {}
+    public function handle(Request $request, callable $next): mixed {
+        OnionTrace::$steps[] = "Arg:{$this->label}";
+        return $next($request);
+    }
+}
+
+#[Middleware(ArgMiddleware::class, 'edit-posts')]
+class ArgController {
+    public function go(): string {
+        return 'go-ok';
     }
 }
 
@@ -161,9 +179,12 @@ class MiddlewareManagerTest extends TestCase
     public function testAttributeCollectsClassThenMethodMiddlewares(): void {
         $manager = new MiddlewareManager();
 
-        // Classe d'abord (garde tout le controller), puis l'action
+        // Classe d'abord (garde tout le controller), puis l'action — sous forme de specs
         $this->assertSame(
-            [TrucMiddleware::class, BiduleMiddleware::class],
+            [
+                ['class' => TrucMiddleware::class,   'args' => []],
+                ['class' => BiduleMiddleware::class, 'args' => []],
+            ],
             $manager->attributeMiddlewares(AnnotatedController::class, 'edit')
         );
     }
@@ -172,15 +193,49 @@ class MiddlewareManagerTest extends TestCase
         $manager = new MiddlewareManager();
 
         $this->assertSame(
-            [TrucMiddleware::class],
+            [['class' => TrucMiddleware::class, 'args' => []]],
             $manager->attributeMiddlewares(AnnotatedController::class, 'index')
         );
+    }
+
+    public function testAttributeCarriesConstructorArgs(): void {
+        $manager = new MiddlewareManager();
+
+        // L'argument déclaré dans l'attribut est transporté dans la spec
+        $this->assertSame(
+            [['class' => ArgMiddleware::class, 'args' => ['edit-posts']]],
+            $manager->attributeMiddlewares(ArgController::class, 'go')
+        );
+    }
+
+    public function testAttributeArgReachesMiddlewareConstructor(): void {
+        OnionTrace::$steps = [];
+
+        $route = new class('/arg/go') extends CurrentRoute {
+            public function getController(): string { return ArgController::class; }
+            public function getAction(): string     { return 'go'; }
+            public function getMiddlewares(): array  { return []; }
+        };
+
+        $manager = new MiddlewareManager();
+        $manager->run($this->makeRequest(), $route, fn ($req) => 'ok');
+
+        // ArgMiddleware a bien reçu 'edit-posts' dans son constructeur via MasterFactory
+        $this->assertSame(['Arg:edit-posts'], OnionTrace::$steps);
     }
 
     public function testAttributeReturnsEmptyForUnknownController(): void {
         $manager = new MiddlewareManager();
 
         $this->assertSame([], $manager->attributeMiddlewares('App\\Controller\\Nope', 'index'));
+    }
+
+    public function testRunThrowsMiddlewareNotFoundForUnknownMiddleware(): void {
+        $manager = new MiddlewareManager();
+        $route   = $this->makeRoute(['App\\Middlewares\\GhostMiddleware']);
+
+        $this->expectException(MiddlewareNotFoundException::class);
+        $manager->run($this->makeRequest(), $route, fn ($req) => 'never-reached');
     }
 
     public function testAttributeMiddlewaresRunInOnionOrder(): void {

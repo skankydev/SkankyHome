@@ -46,8 +46,14 @@ $bidule = BiduleMiddleware::$trace;
 		<?php if (empty($declared)): ?>
 			<span class="muted">aucun</span>
 		<?php else: ?>
-			<?php foreach ($declared as $i => $class): ?>
-				<div class="step"><?= $i + 1 ?>. <code><?= e($class) ?></code></div>
+			<?php foreach ($declared as $i => $spec): ?>
+				<div class="step">
+					<?= $i + 1 ?>. <code><?= e($spec['class']) ?></code><?php
+						if (!empty($spec['args'])):
+							echo ' <span class="muted">args:</span> <code>' . e(implode(', ', $spec['args'])) . '</code>';
+						endif;
+					?>
+				</div>
 			<?php endforeach; ?>
 		<?php endif; ?>
 	</div>

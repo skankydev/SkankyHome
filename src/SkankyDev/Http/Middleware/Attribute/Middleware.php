@@ -16,7 +16,7 @@ namespace SkankyDev\Http\Middleware\Attribute;
 use Attribute;
 
 /**
- * Declares the middlewares attached to a controller or one of its actions.
+ * Declares a middleware attached to a controller or one of its actions.
  *
  * Because routing is convention-based (no explicit route to hang middlewares on),
  * the controller/action is the stable target — so the attribute is read there at
@@ -25,21 +25,31 @@ use Attribute;
  * - On a class  → applies to every action of the controller.
  * - On a method → applies to that action only (in addition to class-level ones).
  *
- * Repeatable, and accepts several middlewares at once:
- *   #[Middleware(AuthMiddleware::class)]
- *   #[Middleware(TrucMiddleware::class, BiduleMiddleware::class)]
+ * One attribute = one middleware. The arguments after the class name are passed
+ * to the middleware constructor (resolved through MasterFactory):
  *
- * Each value is either a fully qualified middleware class name or an alias
+ *   #[Middleware(AuthMiddleware::class)]                 // no argument
+ *   #[Middleware(PermissionMiddleware::class, 'edit')]   // 'edit' → constructor
+ *
+ * Repeatable, so stack it to attach several middlewares:
+ *   #[Middleware(AuthMiddleware::class)]
+ *   #[Middleware(PermissionMiddleware::class, 'edit')]
+ *
+ * The class is either a fully qualified middleware class name or an alias
  * registered in the `class.middlewares` config map.
  */
 #[Attribute(Attribute::TARGET_CLASS | Attribute::TARGET_METHOD | Attribute::IS_REPEATABLE)]
 class Middleware {
 
-	/** @var string[] middleware class names (or config aliases) */
-	public array $middlewares;
+	/** Middleware class name (or config alias) to run. */
+	public string $middleware;
 
-	public function __construct(string ...$middlewares) {
-		$this->middlewares = $middlewares;
+	/** Positional arguments forwarded to the middleware constructor. */
+	public array $args;
+
+	public function __construct(string $middleware, mixed ...$args) {
+		$this->middleware = $middleware;
+		$this->args = $args;
 	}
 
 }

@@ -13,6 +13,7 @@
 
 namespace App\Controller;
 
+use SkankyDev\Config\Config;
 use SkankyDev\Controller\MasterController;
 use SkankyDev\Http\Middleware\Attribute\Middleware;
 use SkankyDev\Http\Middleware\MiddlewareManager;
