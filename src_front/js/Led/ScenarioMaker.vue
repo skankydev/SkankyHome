@@ -488,7 +488,7 @@ onBeforeUnmount(() => {
 							<select name="effect" id=""  v-model="segment.effect">
 								<option value=""></option>
 								<option v-for="(prefEffect,keyEffect) in scenario.preference.effects" :value="prefEffect">
-									{{prefEffect}} => {{ props.effects[prefEffect]?.name }}
+									{{prefEffect}} => {{ effectById[prefEffect] }}
 								</option>
 							</select>
 						</div>

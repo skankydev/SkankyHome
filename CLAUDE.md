@@ -197,9 +197,6 @@ Structure d'un scénario en base / MQTT :
 
 ---
 
----
-
 ## Ce qui est en cours / incomplet
 
-Voir `le_pas_drole.md` à la racine pour le suivi des TODOs.
 Principalement : ScenarioMaker (boutons step, preview LED) et LiveMode (UI).

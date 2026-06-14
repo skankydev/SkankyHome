@@ -19,6 +19,6 @@ class SendCommandJob extends MasterJob {
 	}
 
 	public function run(): void {
-		MqttSender::publish($this->topic, ['cmd' => $this->cmd, 'data' => $this->data]);
+		MqttSender::publish($this->topic, [$this->cmd => $this->data]);
 	}
 }
