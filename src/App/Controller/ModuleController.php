@@ -22,6 +22,7 @@ use SkankyDev\Controller\MasterController;
 use SkankyDev\Http\Request;
 use SkankyDev\Queue\Queue;
 
+
 class ModuleController extends MasterController {
 
 	public function index(ModuleCollection $collection){

@@ -13,8 +13,11 @@
 
 namespace SkankyDev\Http\Middleware;
 
+use ReflectionClass;
+use ReflectionMethod;
 use SkankyDev\Config\Config;
 use SkankyDev\Core\MasterFactory;
+use SkankyDev\Http\Middleware\Attribute\Middleware;
 use SkankyDev\Http\Request;
 use SkankyDev\Http\Routing\Route\CurrentRoute;
 
@@ -39,10 +42,43 @@ class MiddlewareManager {
 	 * @return mixed the response returned by the pipeline
 	 */
 	public function run(Request $request, CurrentRoute $route, callable $callback): mixed {
-		$all =[...$this->default, ...$route->getMiddlewares()];
+		$all = [
+			...$this->default,
+			...$this->attributeMiddlewares($route->getController(), $route->getAction()),
+			...$route->getMiddlewares(),
+		];
 		$all = array_unique($all);
 		$pipeline = $this->getPipeline($all, $callback);
 		return $pipeline($request);
+	}
+
+	/**
+	 * Collects the middlewares declared via #[Middleware] attributes on the
+	 * controller class and, more specifically, on the action method.
+	 * Class-level middlewares come first (they guard the whole controller),
+	 * then the action-specific ones.
+	 * @return string[] middleware class names or config aliases
+	 */
+	public function attributeMiddlewares(string $controller, string $action): array {
+		if (!class_exists($controller)) {
+			return [];
+		}
+
+		$reflection = new ReflectionClass($controller);
+		$targets = [$reflection];
+		if ($reflection->hasMethod($action)) {
+			$targets[] = $reflection->getMethod($action);
+		}
+
+		$middlewares = [];
+		foreach ($targets as $target) {
+			/** @var ReflectionClass|ReflectionMethod $target */
+			foreach ($target->getAttributes(Middleware::class) as $attribute) {
+				array_push($middlewares, ...$attribute->newInstance()->middlewares);
+			}
+		}
+
+		return $middlewares;
 	}
 
 	/**
