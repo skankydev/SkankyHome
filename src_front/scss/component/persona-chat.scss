@@ -67,30 +67,6 @@
 		}
 	}
 
-	.persona-chat-speak{
-		background: none;
-		border: none;
-		cursor: pointer;
-		padding: 0 $p-xxs;
-		margin-left: $p-xs;
-		color: $text-muted;
-		vertical-align: middle;
-		transition: color 0.15s ease;
-
-		&:hover{
-			color: $neon-cyan;
-		}
-
-		&.is-speaking{
-			color: $neon-cyan;
-		}
-
-		.persona-chat-spin{
-			display: inline-block;
-			animation: spin 0.8s linear infinite;
-		}
-	}
-
 	.persona-chat-bubble{
 		max-width: 75%;
 		padding: $p-s $p-m;
