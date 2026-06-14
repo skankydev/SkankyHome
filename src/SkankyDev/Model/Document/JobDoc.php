@@ -15,6 +15,7 @@
 namespace SkankyDev\Model\Document;
 
 use SkankyDev\Model\Document\MasterDocument;
+use SkankyDev\Model\Document\Traits\TimedTrait;
 use DateTime;
 
 /**
@@ -23,6 +24,8 @@ use DateTime;
  * the full object graph (including the nested job) without calling constructors.
  */
 class JobDoc extends MasterDocument {
+
+	use TimedTrait;
 
 	/** The job instance to execute — also a Persistable, hydrated recursively. */
 	public object $payload;

@@ -26,9 +26,12 @@ $defaultValue =[
 namespace App\Model\Document;
 
 use SkankyDev\Model\Document\MasterDocument;
+use SkankyDev\Model\Document\Traits\TimedTrait;
 use DateTime;
 
 class <?= $name ?> extends MasterDocument {
+
+	use TimedTrait;
 	
 <?php foreach($this->fields as $field): ?>
 	public <?= $field['type']=='date' || $field['type']=='datetime' ? 'DateTime': $field['type'] ?> $<?= $field['name'] ?><?= $field['required'] ? ' = ' . $defaultValue[$field['type']] : '' ?>;

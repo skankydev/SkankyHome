@@ -85,9 +85,17 @@ src/App/Model/
 ```
 
 **Documents** : classes avec propriétés publiques typées PHP, étendent `MasterDocument`.
-`created_at` et `updated_at` sont gérés automatiquement par `TimedBehavior`.
+Pour bénéficier de `created_at` / `updated_at` automatiques, le document fait `use TimedTrait` (opt-in).
 
 **Collections** : déclarent `$collectionName` (nom MongoDB) et `$documentClass`.
+
+### Behaviors
+
+Un behavior se compose de **deux éléments liés par convention** :
+- un **trait** dans `Model/Document/Traits/` (`FooTrait`) qui déclare les propriétés gérées par le behavior — typées, donc pas de `#[\AllowDynamicProperties]` ;
+- une **classe** dans `Model/Behavior/` (`FooBehavior` étend `MasterBehavior`) qui implémente les hooks (`beforeInsert`, `afterUpdate`, etc.).
+
+Le **document est la source de vérité** : il active un behavior simplement en utilisant son trait (`use TimedTrait`). `MasterCollection::loadBehaviors()` inspecte les traits du `$documentClass` et résout la classe par convention : `...\Model\Document\Traits\FooTrait` → `...\Model\Behavior\FooBehavior` (même namespace racine, donc marche aussi dans `App\`). Plusieurs behaviors = plusieurs traits, ils se composent ; un conflit de propriété entre deux traits = erreur fatale explicite (garde-fou).
 
 > **Convention à respecter** : les clés étrangères (`module_id`, `scenario_id`, etc.) doivent être stockées en `ObjectId`, pas en string. MongoDB ne force pas les relations mais les aggregations `$lookup` sont plus propres avec des ObjectId des deux côtés.
 
