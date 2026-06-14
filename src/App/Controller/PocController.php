@@ -13,8 +13,6 @@
 
 namespace App\Controller;
 
-use App\Middlewares\BiduleMiddleware;
-use App\Middlewares\TrucMiddleware;
 use SkankyDev\Controller\MasterController;
 use SkankyDev\Http\Middleware\Attribute\Middleware;
 use SkankyDev\Http\Middleware\MiddlewareManager;
@@ -28,16 +26,15 @@ use SkankyDev\Http\Middleware\MiddlewareManager;
  *   /poc         → TrucMiddleware seul (hérité de la classe)
  *   /poc/secure  → TrucMiddleware (classe) + BiduleMiddleware (action)
  */
-#[Middleware(TrucMiddleware::class)]
+#[Middleware('Truc')]
 class PocController extends MasterController {
 
 	public function index() {
 		return $this->renderTrace('index');
 	}
 
-	#[Middleware(BiduleMiddleware::class)]
+	#[Middleware('Bidule')]
 	public function secure() {
-		debug('Coucou');
 		return $this->renderTrace('secure');
 	}
 
