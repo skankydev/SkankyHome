@@ -18,6 +18,10 @@ return [
 	'class' => [
 		'fields' => [
 			'icon' => \App\Form\Fields\IconField::class,
-		]
+		],
+		'middlewares' => [
+			'Bidule'  => BiduleMiddleware::class,
+			'Truc'  => TrucMiddleware::class,
+		],
 	],
 ];

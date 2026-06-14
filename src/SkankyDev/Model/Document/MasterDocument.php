@@ -26,7 +26,6 @@ use SkankyDev\Utilities\Traits\StringFacility;
 
 
 
-#[\AllowDynamicProperties]
 class MasterDocument implements JsonSerializable, Persistable {
 
 	use StringFacility;

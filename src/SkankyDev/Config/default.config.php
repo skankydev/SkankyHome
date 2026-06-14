@@ -30,9 +30,6 @@ return [
 		'Session'=>'Session'
 	],
 	'class' => [
-		'behavior' => [
-			'Timed' => \SkankyDev\Model\Behavior\TimedBehavior::class,
-		],
 		'middlewares' => [
 			'Session'  => \SkankyDev\Http\Middleware\SessionMiddleware::class,
 		],

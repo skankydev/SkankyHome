@@ -44,10 +44,6 @@ class Config {
 		return self::arrayGet('skankydev.version',self::$conf);
 	}
 
-	static function getBehavior(){
-		return self::arrayGet('class.behavior',self::$conf);
-	}
-	
 	static function getCurentNamespace(){
 		$name = self::get('skankydev.curentNamespace');
 		if(!$name){

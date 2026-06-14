@@ -21,9 +21,9 @@ $this->setLayout('layout.default');
 	<table>
 		<thead>
 			<tr>
-				<th><?= $this->link('Name',['get'=> $personas->sortParams('name')]) ?></th>
-				<th><?= $this->link('Updated',['get'=> $personas->sortParams('updated_at')]) ?></th>
-				<th><?= $this->link('Created',['get'=> $personas->sortParams('created_at')]) ?></th>
+				<th><?= $personas->sortLink('name', 'Name') ?></th>
+				<th><?= $personas->sortLink('updated_at', 'Updated') ?></th>
+				<th><?= $personas->sortLink('created_at', 'Created') ?></th>
 				<th class="action"></th>
 			</tr>
 		</thead>

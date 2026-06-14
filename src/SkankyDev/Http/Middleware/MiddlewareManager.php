@@ -13,8 +13,12 @@
 
 namespace SkankyDev\Http\Middleware;
 
+use ReflectionClass;
+use ReflectionMethod;
 use SkankyDev\Config\Config;
 use SkankyDev\Core\MasterFactory;
+use SkankyDev\Exception\MiddlewareNotFoundException;
+use SkankyDev\Http\Middleware\Attribute\Middleware;
 use SkankyDev\Http\Request;
 use SkankyDev\Http\Routing\Route\CurrentRoute;
 
@@ -39,23 +43,97 @@ class MiddlewareManager {
 	 * @return mixed the response returned by the pipeline
 	 */
 	public function run(Request $request, CurrentRoute $route, callable $callback): mixed {
-		$all =[...$this->default, ...$route->getMiddlewares()];
-		$all = array_unique($all);
-		$pipeline = $this->getPipeline($all, $callback);
+		$specs = array_merge(
+			$this->normalize($this->default),
+			$this->attributeMiddlewares($route->getController(), $route->getAction()),
+			$this->normalize($route->getMiddlewares()),
+		);
+		$specs = $this->dedupe($specs);
+		$pipeline = $this->getPipeline($specs, $callback);
 		return $pipeline($request);
 	}
 
 	/**
-	 * Wraps middlewares around the destination callable in reverse order,
-	 * producing a single callable that represents the full pipeline.
-	 * Resolves middleware class names via the alias map if needed.
+	 * Turns a list of middleware names (globals, route) into specs with no args.
+	 * @param string[] $names
+	 * @return array<int, array{class: string, args: array}>
 	 */
-	protected function getPipeline(array $middlewares, callable $destination): callable {
+	private function normalize(array $names): array {
+		return array_map(fn($name) => ['class' => $name, 'args' => []], $names);
+	}
+
+	/**
+	 * Removes duplicate specs (same class AND same args).
+	 * @param array<int, array{class: string, args: array}> $specs
+	 */
+	private function dedupe(array $specs): array {
+		$seen = [];
+		$unique = [];
+		foreach ($specs as $spec) {
+			$key = $spec['class'] . '|' . serialize($spec['args']);
+			if (!isset($seen[$key])) {
+				$seen[$key] = true;
+				$unique[] = $spec;
+			}
+		}
+		return $unique;
+	}
+
+	/**
+	 * Collects the middlewares declared via #[Middleware] attributes on the
+	 * controller class and, more specifically, on the action method.
+	 * Class-level middlewares come first (they guard the whole controller),
+	 * then the action-specific ones. Each attribute yields a spec carrying the
+	 * middleware class and the arguments to pass to its constructor.
+	 * @return array<int, array{class: string, args: array}>
+	 */
+	public function attributeMiddlewares(string $controller, string $action): array {
+		if (!class_exists($controller)) {
+			return [];
+		}
+
+		$reflection = new ReflectionClass($controller);
+		$targets = [$reflection];
+		if ($reflection->hasMethod($action)) {
+			$targets[] = $reflection->getMethod($action);
+		}
+
+		$specs = [];
+		foreach ($targets as $target) {
+			/** @var ReflectionClass|ReflectionMethod $target */
+			foreach ($target->getAttributes(Middleware::class) as $attribute) {
+				$middleware = $attribute->newInstance();
+				$specs[] = ['class' => $middleware->middleware, 'args' => $middleware->args];
+			}
+		}
+
+		return $specs;
+	}
+
+	/**
+	 * Wraps middleware specs around the destination callable in reverse order,
+	 * producing a single callable that represents the full pipeline.
+	 * Resolves the class via the alias map, then instantiates it with its args.
+	 * Existence is checked eagerly (fail-fast) so an unknown middleware fails
+	 * with a clear message before any part of the pipeline runs.
+	 * @param array<int, array{class: string, args: array}> $specs
+	 * @throws MiddlewareNotFoundException if a middleware cannot be resolved to a class
+	 */
+	protected function getPipeline(array $specs, callable $destination): callable {
 		$pipeline = $destination;
-		foreach (array_reverse($middlewares) as $name) {
+		foreach (array_reverse($specs) as $spec) {
+			$name      = $spec['class'];
 			$className = $this->asso[$name] ?? $name;
-			$pipeline = function($request) use ($className, $pipeline) {
-				$middleware = MasterFactory::_make($className);
+			if (!class_exists($className)) {
+				throw new MiddlewareNotFoundException(
+					"Middleware introuvable : « {$name} »"
+					. ($className !== $name ? " (résolu en {$className})" : '')
+					. ". Vérifie le nom de classe, son import, ou son alias dans class.middlewares."
+				);
+			}
+			$args = $spec['args'];
+			$pipeline = function($request) use ($className, $args, $pipeline) {
+				$middleware = MasterFactory::_make($className, $args);
 				return $middleware->handle($request, $pipeline);
 			};
 		}

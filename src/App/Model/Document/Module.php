@@ -15,10 +15,14 @@
 namespace App\Model\Document;
 
 use SkankyDev\Model\Document\MasterDocument;
+use SkankyDev\Model\Document\Traits\TimedTrait;
 use DateTime;
 
 class Module extends MasterDocument {
-	
+
+	use TimedTrait;
+
+
 	public string $icon = '';
 	public string $name = '';
 	public string $type = 'scenario';

@@ -91,17 +91,6 @@ class ConfigTest extends TestCase
         $this->assertEquals(['App', 'Admin'], Config::getModuleList());
     }
 
-    public function testGetBehaviorReturnsNullWhenNotSet(): void {
-        Config::set('class.behavior', null);
-        $this->assertNull(Config::getBehavior());
-    }
-
-    public function testGetBehaviorReturnsValue(): void {
-        Config::set('class.behavior', ['Timed' => 'SkankyDev\\Model\\Behavior\\TimedBehavior']);
-        $result = Config::getBehavior();
-        $this->assertArrayHasKey('Timed', $result);
-    }
-
     public function testGetVersionReturnsNullWhenNotSet(): void {
         $this->assertNull(Config::getVersion());
     }

@@ -14,6 +14,7 @@
 namespace SkankyDev\Utilities;
 
 use SkankyDev\Utilities\Traits\IterableData;
+use SkankyDev\Utilities\Traits\HtmlHelper;
 use SkankyDev\Config\Config;
 use Iterator;
 
@@ -23,10 +24,13 @@ use Iterator;
  */
 class Paginator implements Iterator {
 
-	use IterableData;
+	use IterableData, HtmlHelper;
 
 	public array $data   = [];
 	public array $option = ['sort' => ['_id' => -1]];
+
+	/** Base route link reused by all the links this paginator generates (sort + pages). */
+	protected array $baseLink = [];
 
 	/**
 	 * @param iterable $data   the result set (MongoDB cursor or array)
@@ -45,9 +49,21 @@ class Paginator implements Iterator {
 	 */
 	public function getOption(array $link = [], array $get = []): array {
 		$this->initInfo();
-		$this->option['link'] = $link;
-		$this->option['get']  = $get;
+		$this->option['link']    = !empty($link) ? $link : $this->baseLink;
+		$this->option['get']     = $get;
+		$this->option['sortGet'] = $this->sortGet();
 		return $this->option;
+	}
+
+	/**
+	 * Sets the base route link reused by every link this paginator builds
+	 * (sort headers and page links). Defaults to the current route when left unset.
+	 * Call it early in the view for nested lists (e.g. a part inside a `show`).
+	 * @param array $link route array (action, params…) passed to UrlBuilder
+	 */
+	public function setLink(array $link): static {
+		$this->baseLink = $link;
+		return $this;
 	}
 
 	/**
@@ -86,6 +102,45 @@ class Paginator implements Iterator {
 			$params['order'] = 1;
 		}
 		return $params;
+	}
+
+	/**
+	 * Returns the active sort as GET params (`field`/`order`) so page links can
+	 * carry it. Returns [] when the sort is the default stable `_id` — no need to
+	 * expose it in the URL.
+	 * @return array{field?: string, order?: int}
+	 */
+	public function sortGet(): array {
+		$sort = $this->option['sort'] ?? [];
+		if (empty($sort)) {
+			return [];
+		}
+		$field = array_key_first($sort);
+		if ($field === '_id') {
+			return [];
+		}
+		return ['field' => $field, 'order' => $sort[$field]];
+	}
+
+	/**
+	 * Builds a ready-to-print sort link for a column header: toggles the order,
+	 * carries the current sort, resets to page 1, and shows a ▲/▼ arrow plus a
+	 * `sorted` class on the active column.
+	 * @param string $field the document field to sort on
+	 * @param string $label the column label shown to the user
+	 * @param array  $attr  extra HTML attributes for the <a> tag
+	 */
+	public function sortLink(string $field, string $label, array $attr = []): string {
+		$link = [...$this->baseLink, 'get' => $this->sortParams($field)];
+
+		$content = e($label);
+		$sort = $this->option['sort'] ?? [];
+		if (array_key_exists($field, $sort)) {
+			$attr['class'] = trim(($attr['class'] ?? '') . ' sorted');
+			$content .= $sort[$field] == 1 ? ' &#9650;' : ' &#9660;';
+		}
+
+		return $this->link($content, $link, $attr);
 	}
 
 }

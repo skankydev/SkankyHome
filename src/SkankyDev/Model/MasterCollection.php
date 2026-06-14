@@ -28,7 +28,6 @@ abstract class MasterCollection {
 	protected MongoCollection $collection;
 	protected string $collectionName;
 	protected string $documentClass;
-	protected array $behaviorsName = ['Timed'];
 	protected array $behaviors = [];
 	
 	/**
@@ -40,21 +39,49 @@ abstract class MasterCollection {
 	}
 
 	/**
-	 * Instantiates all behaviors listed in $behaviorsName via MasterFactory.
-	 * Behavior classes are resolved from the `class.behavior` config map.
-	 * @throws BehaviorNotFoundException if a behavior key is not registered in config
+	 * Instantiates the behaviors attached to the document class.
+	 * Behaviors are declared on the document by using their companion trait
+	 * (e.g. `use TimedTrait`), and resolved here by convention:
+	 * a trait `...\Model\Document\Traits\FooTrait` maps to the behavior class
+	 * `...\Model\Behavior\FooBehavior` (same top namespace, so it works in `App\` too).
+	 * This keeps the document as the single source of truth — the trait both declares
+	 * the managed properties and signals which behavior should run.
 	 */
 	protected function loadBehaviors(): void {
 		$loadedBehaviors = [];
-		$class = Config::get('class.behavior');
-		foreach ($this->behaviorsName as $name) {
-			if(!isset($class[$name])){
-				throw new BehaviorNotFoundException("La classe {$name} n'est pas defini");
+		foreach ($this->documentTraits($this->documentClass) as $trait) {
+			$behaviorClass = str_replace('\\Document\\Traits\\', '\\Behavior\\', $trait);
+			$behaviorClass = preg_replace('/Trait$/', 'Behavior', $behaviorClass);
+			if ($behaviorClass !== $trait && class_exists($behaviorClass)) {
+				$loadedBehaviors[] = MasterFactory::_make($behaviorClass);
 			}
-			$loadedBehaviors[] = MasterFactory::_make($class[$name]);
 		}
-		
+
 		$this->behaviors = $loadedBehaviors;
+	}
+
+	/**
+	 * Collects every trait used by the document class, including those used by
+	 * its parent classes and traits nested inside other traits.
+	 * @return string[] fully qualified trait names, keyed by themselves
+	 */
+	private function documentTraits(string $class): array {
+		$traits = [];
+		foreach (array_merge([$class], class_parents($class) ?: []) as $current) {
+			$traits += class_uses($current) ?: [];
+		}
+
+		$stack = $traits;
+		while ($stack) {
+			foreach (class_uses(array_shift($stack)) ?: [] as $nested) {
+				if (!isset($traits[$nested])) {
+					$traits[$nested] = $nested;
+					$stack[$nested]  = $nested;
+				}
+			}
+		}
+
+		return $traits;
 	}
 	
 	/**
@@ -233,18 +260,22 @@ abstract class MasterCollection {
 		$limit = $paginateInfo['limit'] ?? 10;
 		$sort = $paginateInfo['sort'] ?? [];
 
+		// Un tri stable est toujours nécessaire : sans lui, skip/limit peut renvoyer
+		// des résultats incohérents entre deux pages (doublons / oublis). `_id` est le
+		// seul champ présent sur tout document, donc le défaut universel.
+		if (empty($sort)) {
+			$sort = ['_id' => -1];
+		}
+		$paginateInfo['sort'] = $sort;
+
 		$skip = ($page - 1) * $limit;
-		
+
 		$options = [
 			'limit' => $limit,
-			'skip' => $skip,
-
+			'skip'  => $skip,
+			'sort'  => $sort,
 		];
-		
-		if (!empty($sort)) {
-			$options['sort'] = $sort;
-		}
-		
+
 		$items = $this->find($filter, $options);
 		$paginateInfo['total'] = $this->count($filter);
 		return new Paginator($items,$paginateInfo);

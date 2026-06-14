@@ -22,10 +22,10 @@ $this->setLayout('layout.default');
 		<thead>
 			<tr>
 <?php foreach($this->fields as $field): ?>
-				<th>%?= $this->link('<?= $this->toHuman($field['name']) ?>',['get'=> $<?= $pluralCamel ?>->sortParams('<?= $field['name'] ?>')]) ?></th>
+				<th>%?= $<?= $pluralCamel ?>->sortLink('<?= $field['name'] ?>', '<?= $this->toHuman($field['name']) ?>') ?></th>
 <?php endforeach; ?>
-				<th>%?= $this->link('Updated',['get'=> $<?= $pluralCamel ?>->sortParams('updated_at')]) ?></th>
-				<th>%?= $this->link('Created',['get'=> $<?= $pluralCamel ?>->sortParams('created_at')]) ?></th>
+				<th>%?= $<?= $pluralCamel ?>->sortLink('updated_at', 'Updated') ?></th>
+				<th>%?= $<?= $pluralCamel ?>->sortLink('created_at', 'Created') ?></th>
 				<th class="action"></th>
 			</tr>
 		</thead>

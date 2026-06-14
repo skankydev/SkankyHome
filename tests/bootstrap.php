@@ -33,10 +33,6 @@ Config::set('db.MongoDB', [
 
 Config::set('paginator', ['limit' => 10, 'page' => 1, 'count' => 1, 'range' => 5]);
 
-Config::set('class.behavior', [
-    'Timed' => \SkankyDev\Model\Behavior\TimedBehavior::class,
-]);
-
 Config::set('class.fields', [
     'text'     => \SkankyDev\Form\Fields\TextField::class,
     'textarea' => \SkankyDev\Form\Fields\TextareaField::class,

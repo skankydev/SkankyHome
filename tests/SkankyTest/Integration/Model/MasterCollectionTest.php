@@ -7,6 +7,7 @@ use MongoDB\BSON\ObjectId;
 use SkankyDev\Database\MongoClient;
 use SkankyDev\Model\MasterCollection;
 use SkankyDev\Model\Document\MasterDocument;
+use SkankyDev\Model\Document\Traits\TimedTrait;
 use SkankyDev\Utilities\Paginator;
 use SkankyTest\IntegrationTestCase;
 
@@ -22,24 +23,23 @@ class TestItemCollection extends MasterCollection
 {
     protected string $collectionName = 'test_items';
     protected string $documentClass  = TestItem::class;
-    protected array  $behaviorsName  = []; // pas de behaviors pour l'isolation
+    // TestItem n'utilise aucun trait de behavior → aucun behavior, isolation garantie
 }
 
 // ── Fixtures avec Behaviors ───────────────────────────────────────────────────
 
-#[\AllowDynamicProperties]
 class TimedItem extends MasterDocument
 {
-    public string    $name       = '';
-    public ?DateTime $created_at = null;
-    public ?DateTime $updated_at = null;
+    use TimedTrait; // déclare created_at / updated_at et active TimedBehavior par convention
+
+    public string $name = '';
 }
 
 class TimedItemCollection extends MasterCollection
 {
     protected string $collectionName = 'timed_items';
     protected string $documentClass  = TimedItem::class;
-    // behaviorsName defaults to ['Timed'] from MasterCollection
+    // TimedBehavior est résolu depuis le TimedTrait de TimedItem
 }
 
 // ── Tests ─────────────────────────────────────────────────────────────────────
