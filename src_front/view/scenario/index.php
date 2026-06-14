@@ -21,11 +21,11 @@ $this->setLayout('layout.default');
 	<table>
 		<thead>
 			<tr>
-				<th><?= $this->link('Name',['get'=> $scenarios->sortParams('name')]) ?></th>
-				<th><?= $this->link('Icon',['get'=> $scenarios->sortParams('icon')]) ?></th>
-				<th><?= $this->link('Module Id',['get'=> $scenarios->sortParams('module_id')]) ?></th>
-				<th><?= $this->link('Updated',['get'=> $scenarios->sortParams('updated_at')]) ?></th>
-				<th><?= $this->link('Created',['get'=> $scenarios->sortParams('created_at')]) ?></th>
+				<th><?= $scenarios->sortLink('name', 'Name') ?></th>
+				<th><?= $scenarios->sortLink('icon', 'Icon') ?></th>
+				<th><?= $scenarios->sortLink('module_id', 'Module Id') ?></th>
+				<th><?= $scenarios->sortLink('updated_at', 'Updated') ?></th>
+				<th><?= $scenarios->sortLink('created_at', 'Created') ?></th>
 				<th class="action"></th>
 			</tr>
 		</thead>

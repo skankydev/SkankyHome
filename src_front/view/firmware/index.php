@@ -21,10 +21,10 @@ $this->setLayout('layout.default');
 	<table>
 		<thead>
 			<tr>
-				<th><?= $this->link('Name',['get'=> $firmwares->sortParams('name')]) ?></th>
-				<th><?= $this->link('Version',['get'=> $firmwares->sortParams('version')]) ?></th>
-				<th><?= $this->link('Updated',['get'=> $firmwares->sortParams('updated_at')]) ?></th>
-				<th><?= $this->link('Created',['get'=> $firmwares->sortParams('created_at')]) ?></th>
+				<th><?= $firmwares->sortLink('name', 'Name') ?></th>
+				<th><?= $firmwares->sortLink('version', 'Version') ?></th>
+				<th><?= $firmwares->sortLink('updated_at', 'Updated') ?></th>
+				<th><?= $firmwares->sortLink('created_at', 'Created') ?></th>
 				<th class="action"></th>
 			</tr>
 		</thead>

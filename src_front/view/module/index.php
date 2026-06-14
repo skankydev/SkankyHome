@@ -22,13 +22,13 @@ $this->addCrumb('Module',['action'=>'index'],'icon-zap');
 	<table>
 		<thead>
 			<tr>
-				<th><?= $this->link('Name',['get'=>$modules->sortParams('name')]) ?></th>
-				<th><?= $this->link('Topic message',['get'=>$modules->sortParams('topic_message')]) ?></th>
-				<th><?= $this->link('Topic cmd',['get'=>$modules->sortParams('topic_cmd')]) ?></th>
-				<th><?= $this->link('Nb line',['get'=>$modules->sortParams('nb_line')]) ?></th>
-				<th><?= $this->link('Nb led',['get'=>$modules->sortParams('nb_led')]) ?></th>
-				<th><?= $this->link('created',['get'=>$modules->sortParams('created_at')]) ?></th>
-				<th><?= $this->link('updated',['get'=>$modules->sortParams('updated_at')]) ?></th>
+				<th><?= $modules->sortLink('name', 'Name') ?></th>
+				<th><?= $modules->sortLink('topic_message', 'Topic message') ?></th>
+				<th><?= $modules->sortLink('topic_cmd', 'Topic cmd') ?></th>
+				<th><?= $modules->sortLink('nb_line', 'Nb line') ?></th>
+				<th><?= $modules->sortLink('nb_led', 'Nb led') ?></th>
+				<th><?= $modules->sortLink('created_at', 'created') ?></th>
+				<th><?= $modules->sortLink('updated_at', 'updated') ?></th>
 				<th class="action"></th>
 			</tr>
 		</thead>

@@ -1,3 +1,4 @@
+<?php $scenarios->setLink(['action' => 'show', 'params' => ['module' => $module->_id]]); ?>
 <div class="grid-full card">
 	<header class="card-header card-header-action">
 		<div><h2 class="corner-accent-warning"><i class="icon-film color-warning"></i> Scenario</h2></div>
@@ -11,9 +12,9 @@
 		<table>
 			<thead>
 				<tr>
-					<th><?= $this->link('Name',['action'=>'show','params'=>['module'=>$module->_id],'get'=> $scenarios->sortParams('name')]) ?></th>
-					<th><?= $this->link('Updated',['action'=>'show','params'=>['module'=>$module->_id],'get'=> $scenarios->sortParams('updated_at')]) ?></th>
-					<th><?= $this->link('Created',['action'=>'show','params'=>['module'=>$module->_id],'get'=> $scenarios->sortParams('created_at')]) ?></th>
+					<th><?= $scenarios->sortLink('name', 'Name') ?></th>
+					<th><?= $scenarios->sortLink('updated_at', 'Updated') ?></th>
+					<th><?= $scenarios->sortLink('created_at', 'Created') ?></th>
 					<th class="action"></th>
 				</tr>
 			</thead>

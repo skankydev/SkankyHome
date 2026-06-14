@@ -26,7 +26,7 @@ use SkankyDev\Queue\Queue;
 class ModuleController extends MasterController {
 
 	public function index(ModuleCollection $collection){
-		$modules = $collection->paginate([], Request::_paginateInfo());
+		$modules = $collection->paginate([],Request::_paginateInfo());
 		return view('module.index', ['modules' => $modules]);
 	}
 
@@ -47,7 +47,10 @@ class ModuleController extends MasterController {
 	}
 
 	public function show(Module $module){
-		$firmwares = FirmwareCollection::_find(['module_id'=>$module->_id],['limit' =>10]);
+		$firmwares = FirmwareCollection::_find(['module_id'=>$module->_id],[
+			'limit' =>10,
+			'sort' => ['created_at' => 1]
+		]);
 
 		return view('module.show', [
 			'module'    => $module,

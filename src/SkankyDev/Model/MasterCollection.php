@@ -260,18 +260,22 @@ abstract class MasterCollection {
 		$limit = $paginateInfo['limit'] ?? 10;
 		$sort = $paginateInfo['sort'] ?? [];
 
+		// Un tri stable est toujours nécessaire : sans lui, skip/limit peut renvoyer
+		// des résultats incohérents entre deux pages (doublons / oublis). `_id` est le
+		// seul champ présent sur tout document, donc le défaut universel.
+		if (empty($sort)) {
+			$sort = ['_id' => -1];
+		}
+		$paginateInfo['sort'] = $sort;
+
 		$skip = ($page - 1) * $limit;
-		
+
 		$options = [
 			'limit' => $limit,
-			'skip' => $skip,
-
+			'skip'  => $skip,
+			'sort'  => $sort,
 		];
-		
-		if (!empty($sort)) {
-			$options['sort'] = $sort;
-		}
-		
+
 		$items = $this->find($filter, $options);
 		$paginateInfo['total'] = $this->count($filter);
 		return new Paginator($items,$paginateInfo);
