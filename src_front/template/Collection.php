@@ -23,5 +23,15 @@ class <?= $name ?>Collection extends MasterCollection {
 
 	protected string $collectionName = '<?= $collection ?>';
 	protected string $documentClass = <?= $name ?>::class;
-	
+
+	public function getDisplayField(): array {
+		return [
+<?php foreach($this->fields as $field): ?>
+			'<?= $field['name'] ?>' => ['label' => '<?= $this->toHuman($field['name']) ?>', 'sort' => true],
+<?php endforeach; ?>
+			'created_at' => ['label' => 'Created', 'sort' => true],
+			'updated_at' => ['label' => 'Updated', 'sort' => true],
+		];
+	}
+
 }

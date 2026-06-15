@@ -278,7 +278,36 @@ abstract class MasterCollection {
 
 		$items = $this->find($filter, $options);
 		$paginateInfo['total'] = $this->count($filter);
-		return new Paginator($items,$paginateInfo);
+
+		$paginator = new Paginator($items, $paginateInfo);
+		$paginator->setDisplayField($this->getDisplayField());
+		$paginator->setDocumentClass($this->documentClass);
+		return $paginator;
+	}
+
+	/**
+	 * Describes the columns to render in a generic table (the `part.table` view).
+	 * Default: every public field of the document (except `_id`), all sortable.
+	 * Override in a concrete Collection to customise labels, sort, fake fields
+	 * (resolved via the Document `__get`), or per-cell `render`/`after` callbacks.
+	 *
+	 * Shape: `['field' => ['label' => string, 'sort' => bool, 'render'? => callable, 'after'? => callable]]`
+	 * @return array<string, array>
+	 */
+	public function getDisplayField(): array {
+		$fields = [];
+		$reflection = new \ReflectionClass($this->documentClass);
+		foreach ($reflection->getProperties(\ReflectionProperty::IS_PUBLIC) as $prop) {
+			$name = $prop->getName();
+			if ($name === '_id') {
+				continue;
+			}
+			$fields[$name] = [
+				'label' => ucfirst(str_replace('_', ' ', $name)),
+				'sort'  => true,
+			];
+		}
+		return $fields;
 	}
 	
 	/**

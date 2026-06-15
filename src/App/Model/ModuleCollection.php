@@ -23,5 +23,17 @@ class ModuleCollection extends MasterCollection {
 
 	protected string $collectionName = 'modules';
 	protected string $documentClass = Module::class;
-	
+
+	public function getDisplayField(): array {
+		return [
+			'name'          => ['label' => 'Name',          'sort' => true],
+			'topic_message' => ['label' => 'Topic message', 'sort' => true],
+			'topic_cmd'     => ['label' => 'Topic cmd',     'sort' => true],
+			'nb_line'       => ['label' => 'Nb line',       'sort' => true],
+			'nb_led'        => ['label' => 'Nb led',        'sort' => true],
+			'created_at'    => ['label' => 'created',       'sort' => true],
+			'updated_at'    => ['label' => 'updated',       'sort' => true],
+		];
+	}
+
 }

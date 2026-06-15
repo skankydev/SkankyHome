@@ -290,6 +290,21 @@ class MasterCollectionTest extends IntegrationTestCase
 
     // ── callBehaviors via TimedBehavior ───────────────────────────────────────
 
+    // ── getDisplayField (défaut par réflexion) ─────────────────────────────────
+
+    public function testGetDisplayFieldListsPublicFieldsExceptId(): void
+    {
+        $fields = $this->col->getDisplayField();
+
+        // TestItem a deux champs publics : name, value (mais pas _id)
+        $this->assertArrayHasKey('name', $fields);
+        $this->assertArrayHasKey('value', $fields);
+        $this->assertArrayNotHasKey('_id', $fields);
+
+        $this->assertSame(['label' => 'Name', 'sort' => true], $fields['name']);
+        $this->assertSame(['label' => 'Value', 'sort' => true], $fields['value']);
+    }
+
     public function testBehaviorSetsTimestampsOnInsert(): void
     {
         $this->dropCollection('timed_items');

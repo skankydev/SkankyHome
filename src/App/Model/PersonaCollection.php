@@ -23,5 +23,13 @@ class PersonaCollection extends MasterCollection {
 
 	protected string $collectionName = 'personas';
 	protected string $documentClass = Persona::class;
-	
+
+	public function getDisplayField(): array {
+		return [
+			'name'       => ['label' => 'Name',    'sort' => true],
+			'created_at' => ['label' => 'created', 'sort' => true],
+			'updated_at' => ['label' => 'updated', 'sort' => true],
+		];
+	}
+
 }

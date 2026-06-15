@@ -4563,9 +4563,7 @@ button:hover,
 .card-footer {
   border-top: 1px solid rgba(42, 42, 74, 0.4);
   padding: 10px;
-  display: flex;
   gap: 8px;
-  align-items: center;
 }
 
 .card-image {

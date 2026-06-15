@@ -75,6 +75,7 @@ $this->addCrumb($module->name,['action'=>'show','params'=>['module'=>$module->_i
 			</div>
 		</header>
 		<div class="card-body">
+			
 			<table>
 				<thead>
 					<tr>
