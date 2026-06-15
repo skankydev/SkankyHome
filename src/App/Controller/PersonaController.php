@@ -16,8 +16,9 @@ namespace App\Controller;
 use App\Form\PersonaForm;
 use App\Model\Document\Persona;
 use App\Model\PersonaCollection;
-use SkankyDev\Controller\MasterController;
+use App\Utilities\Upload;
 use SkankyDev\Config\Config;
+use SkankyDev\Controller\MasterController;
 use SkankyDev\Http\Request;
 
 class PersonaController extends MasterController {
@@ -28,7 +29,7 @@ class PersonaController extends MasterController {
 	}
 
 	public function create(){
-		$form = new PersonaForm(['action' => 'store']);
+		$form = new PersonaForm(['action' => 'store'],'POST',['enctype'=>'multipart/form-data']);
 		return view('persona.create', ['form' => $form]);
 	}
 
@@ -39,6 +40,16 @@ class PersonaController extends MasterController {
 			return redirect(['action' => 'create'])->withErrors($form->getErrors())->withInput($input);
 		}
 		$persona = new Persona($input);
+		$file = $request->file();
+
+		if (isset($file['img'])) {
+			$upload = new Upload($file['img'], UPLOAD_FOLDER .DS. 'img'.DS);
+			if (!$upload->upload()) {
+				return redirect(['action' => 'create'])->withFlash('error', implode(', ', $upload->getErrors()));
+			}
+			$persona->img_info = $upload->getFileInfo();
+		}
+
 		PersonaCollection::_save($persona);
 		return redirect(['action' => 'show', 'params' => [$persona->_id]])->withFlash('success', 'Enregistrement réussi');
 	}
@@ -54,7 +65,9 @@ class PersonaController extends MasterController {
 	}
 
 	public function edit(Persona $persona){
-		$form = new PersonaForm(['action' => 'update', 'params' => [$persona->_id]]);
+		$form = new PersonaForm(['action' => 'update', 'params' => [$persona->_id]],'POST',['enctype'=>'multipart/form-data']);
+
+
 		$form->setData($persona);
 		return view('persona.edit', ['form' => $form, 'persona' => $persona]);
 	}
@@ -66,6 +79,17 @@ class PersonaController extends MasterController {
 			return redirect(['action' => 'update', 'params' => [$persona->_id]])->withErrors($form->getErrors())->withInput($input);
 		}
 		$persona->fill($input);
+
+		$file = $request->file();
+		//dd($file);
+		if (isset($file['img'])) {
+			$upload = new Upload($file['img'], UPLOAD_FOLDER .DS. 'img'.DS);
+			if (!$upload->upload()) {
+				return redirect(['action' => 'edit', 'params' => ['persona', $module->_id]])->withFlash('error', implode(', ', $upload->getErrors()));
+			}
+			$persona->img_info = $upload->getFileInfo();
+		}
+
 		PersonaCollection::_save($persona);
 		return redirect(['action' => 'show', 'params' => [$persona->_id]])->withFlash('success', 'Modification réussie');
 	}

@@ -15,21 +15,21 @@ namespace App\Form;
 
 use SkankyDev\Form\FormBuilder;
 
-class PersonaForm extends FormBuilder {
+class WidgetForm extends FormBuilder {
 	
 	public function build() : void {
 		
-		$this->add('name','text',[
-			'label' => 'Name',
+		$this->add('target_collection','text',[
+			'label' => 'Target Collection',
 			'rules' => ['required']
 		]);
-		$this->add('content','textarea',[
-			'label' => 'Content',
+		$this->add('target_id','text',[
+			'label' => 'Target Id',
 			'rules' => ['required']
 		]);
-		$this->add('img','file',[
-			'label' => 'Image',
-			'attributes' => ['accept'=>'.jpg,.jpeg,.png']
+		$this->add('position','number',[
+			'label' => 'Position',
+			'rules' => ['required']
 		]);
 
 		$this->submit('<i class="icon-save"></i> SAVE');

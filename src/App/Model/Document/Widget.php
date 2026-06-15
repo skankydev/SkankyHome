@@ -18,17 +18,12 @@ use SkankyDev\Model\Document\MasterDocument;
 use SkankyDev\Model\Document\Traits\TimedTrait;
 use DateTime;
 
-class Persona extends MasterDocument {
+class Widget extends MasterDocument {
 
 	use TimedTrait;
-
-
-	public string $name = '';
-	public string $content = '';
-	public array $img_info = [];
-
-	public function getImgUrl(){
-		return $this->img_info['url'] ?? '';
-	}
+	
+	public string $target_collection = '';
+	public string $target_id = '';
+	public int $position = 0;
 
 }

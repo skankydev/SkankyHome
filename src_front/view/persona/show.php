@@ -36,6 +36,9 @@ $this->setLayout('layout.default');
 			<dd><?= $persona->updated_at?->format('d/m/Y H:i') ?></dd>
 		</dl>
 	</div>
+	<div class="grid-half card p-s">
+		<img src="<?= $persona->img_url ?>" alt="">
+	</div>
 	<div class="grid-full card p-m">
 <pre>
 <?= $persona->content ?>

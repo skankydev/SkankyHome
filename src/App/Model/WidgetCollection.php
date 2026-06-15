@@ -15,28 +15,22 @@ namespace App\Model;
 
 use SkankyDev\Utilities\Traits\Singleton;
 use SkankyDev\Model\MasterCollection;
-use App\Model\Document\Persona;
+use App\Model\Document\Widget;
 
-class PersonaCollection extends MasterCollection {
+class WidgetCollection extends MasterCollection {
 
 	use Singleton;
 
-	protected string $collectionName = 'personas';
-	protected string $documentClass = Persona::class;
+	protected string $collectionName = 'widgets';
+	protected string $documentClass = Widget::class;
 
 	public function getDisplayField(): array {
 		return [
-			'name'       => ['label' => 'Name',    'sort' => true],
-			'created_at' => ['label' => 'created', 'sort' => true],
-			'updated_at' => ['label' => 'updated', 'sort' => true],
-		];
-	}
-
-	public function widgetLink(object $document): array {
-		return [
-			'controller' => 'persona',
-			'action'     => 'chat',
-			'params'     => ['persona' => $document->_id],
+			'target_collection' => ['label' => 'Target Collection', 'sort' => true],
+			'target_id' => ['label' => 'Target Id', 'sort' => true],
+			'position' => ['label' => 'Position', 'sort' => true],
+			'created_at' => ['label' => 'Created', 'sort' => true],
+			'updated_at' => ['label' => 'Updated', 'sort' => true],
 		];
 	}
 

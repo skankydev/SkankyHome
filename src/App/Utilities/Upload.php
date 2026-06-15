@@ -12,8 +12,8 @@ class Upload {
 	public function __construct(array $file, string $uploadDir = UPLOAD_FOLDER.DS) {
 		$this->file = $file;
 		$this->uploadDir = rtrim($uploadDir, DS).DS ;
-		debug($this->uploadDir);
-		debug($this->file);
+		/*debug($this->uploadDir);
+		debug($this->file);*/
 	}
 	
 	/**

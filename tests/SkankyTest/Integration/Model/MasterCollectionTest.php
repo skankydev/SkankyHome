@@ -327,6 +327,18 @@ class MasterCollectionTest extends IntegrationTestCase
         $this->assertSame(['name' => 1], $p->getOption()['sort']);
     }
 
+    // ── widgetLink (lien par défaut d'un widget = show de la ressource) ─────────
+
+    public function testWidgetLinkDefaultsToResourceShow(): void
+    {
+        $doc = (object) ['_id' => 'abc123'];
+        $link = $this->col->widgetLink($doc);
+
+        $this->assertSame('TestItem', $link['controller']);
+        $this->assertSame('show', $link['action']);
+        $this->assertSame(['testItem' => 'abc123'], $link['params']);
+    }
+
     public function testBehaviorSetsTimestampsOnInsert(): void
     {
         $this->dropCollection('timed_items');

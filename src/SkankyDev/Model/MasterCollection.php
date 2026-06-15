@@ -322,6 +322,23 @@ abstract class MasterCollection {
 		}
 		return $fields;
 	}
+
+	/**
+	 * Route link used when this document is shown as a home widget.
+	 * Default: the resource `show` page. Override in a concrete Collection to
+	 * point elsewhere (e.g. PersonaCollection → the chat action).
+	 * @param object $document the target document
+	 * @return array route array for UrlBuilder
+	 */
+	public function widgetLink(object $document): array {
+		$parts = explode('\\', $this->documentClass);
+		$controller = end($parts);
+		return [
+			'controller' => $controller,
+			'action'     => 'show',
+			'params'     => [lcfirst($controller) => $document->_id],
+		];
+	}
 	
 	/**
 	 * Creates a MongoDB ObjectId from a string, or a new one if no string is provided.

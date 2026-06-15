@@ -15,6 +15,7 @@ namespace App\Controller;
 
 use App\Form\BaseForm;
 use App\Job\HelloJob;
+use App\Model\WidgetCollection;
 use SkankyDev\Controller\MasterController;
 use SkankyDev\Http\Request;
 use SkankyDev\Http\Routing\Router;
@@ -22,7 +23,8 @@ use SkankyDev\Http\Routing\Router;
 class HomeController extends MasterController {
 
 	public function index(){
-		return view('home.index');
+		$widgets = WidgetCollection::_find([], ['sort' => ['position' => 1]]);
+		return view('home.index', ['widgets' => $widgets]);
 	}
 
 	public function base(){
