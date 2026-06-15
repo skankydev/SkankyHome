@@ -305,6 +305,28 @@ class MasterCollectionTest extends IntegrationTestCase
         $this->assertSame(['label' => 'Value', 'sort' => true], $fields['value']);
     }
 
+    // ── Tri whitelisté via getDisplayField ──────────────────────────────────────
+
+    public function testPaginateKeepsSortOnDeclaredSortableField(): void
+    {
+        $p = $this->col->paginate([], ['page' => 1, 'sort' => ['name' => 1]]);
+        $this->assertSame(['name' => 1], $p->getOption()['sort']);
+    }
+
+    public function testPaginateRejectsSortOnUnknownField(): void
+    {
+        // 'hacky' n'est pas dans getDisplayField → ignoré → tri stable par défaut
+        $p = $this->col->paginate([], ['page' => 1, 'sort' => ['hacky' => 1]]);
+        $this->assertSame(['_id' => -1], $p->getOption()['sort']);
+    }
+
+    public function testPaginateNormalizesSortOrder(): void
+    {
+        // un order farfelu venant de l'URL est ramené à 1 / -1
+        $p = $this->col->paginate([], ['page' => 1, 'sort' => ['name' => 5]]);
+        $this->assertSame(['name' => 1], $p->getOption()['sort']);
+    }
+
     public function testBehaviorSetsTimestampsOnInsert(): void
     {
         $this->dropCollection('timed_items');

@@ -33,7 +33,7 @@ $this->setLayout('layout.default');
 <?php elseif($field['type'] === 'datetime'): ?>
 			<dd>%?= $<?= $singularCamel ?>-><?= $field['name'] ?> ? $<?= $singularCamel ?>-><?= $field['name'] ?>->format('d/m/Y H:i') : '-' ?></dd>
 <?php elseif($field['type'] === 'array'): ?>
-			<dd>%?= !empty($<?= $singularCamel ?>-><?= $field['name'] ?>) ? implode(', ', $<?= $singularCamel ?>-><?= $field['name'] ?>) : '-' ?></dd>
+			<dd>%?= !empty($<?= $singularCamel ?>-><?= $field['name'] ?>) ? implode(', ', array_map('e', $<?= $singularCamel ?>-><?= $field['name'] ?>)) : '-' ?></dd>
 <?php else: ?>
 			<dd>%?= e($<?= $singularCamel ?>-><?= $field['name'] ?>) ?></dd>
 <?php endif; ?>

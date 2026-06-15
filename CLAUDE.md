@@ -199,12 +199,6 @@ Structure d'un scénario en base / MQTT :
 
 ---
 
-## À améliorer (pas urgent)
-
-- **`ExceptionHandler`** : le flag `debug` est passé en constructeur depuis `Application` — à terme le lire depuis `.env` ou la config plutôt que de le hardcoder
-
----
-
 ## Ce qui est en cours / incomplet
 
-Principalement : ScenarioMaker (boutons step, preview LED) et LiveMode (UI).
+ScenarioMaker est fonctionnel (quelques évolutions possibles, rien de marquant). LiveMode est abandonné.

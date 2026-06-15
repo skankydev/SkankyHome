@@ -259,6 +259,19 @@ abstract class MasterCollection {
 		$page = $paginateInfo['page'] ?? 1;
 		$limit = $paginateInfo['limit'] ?? 10;
 		$sort = $paginateInfo['sort'] ?? [];
+		$display = $this->getDisplayField();
+
+		// Le tri n'est accepté que sur un champ déclaré triable dans getDisplayField :
+		// la définition d'affichage fait office de whitelist (champ venant de l'URL).
+		// L'ordre est normalisé à 1/-1 pour éviter un sort MongoDB invalide.
+		if (!empty($sort)) {
+			$field = array_key_first($sort);
+			if (empty($display[$field]['sort'])) {
+				$sort = [];
+			} else {
+				$sort = [$field => ($sort[$field] < 0 ? -1 : 1)];
+			}
+		}
 
 		// Un tri stable est toujours nécessaire : sans lui, skip/limit peut renvoyer
 		// des résultats incohérents entre deux pages (doublons / oublis). `_id` est le
@@ -280,7 +293,7 @@ abstract class MasterCollection {
 		$paginateInfo['total'] = $this->count($filter);
 
 		$paginator = new Paginator($items, $paginateInfo);
-		$paginator->setDisplayField($this->getDisplayField());
+		$paginator->setDisplayField($display);
 		$paginator->setDocumentClass($this->documentClass);
 		return $paginator;
 	}
