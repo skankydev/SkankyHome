@@ -2,8 +2,6 @@
 
 namespace SkankyTest\TestCase\Http;
 
-use App\Middlewares\BiduleMiddleware;
-use App\Middlewares\TrucMiddleware;
 use PHPUnit\Framework\TestCase;
 use SkankyDev\Exception\MiddlewareNotFoundException;
 use SkankyDev\Http\Middleware\Attribute\Middleware;
@@ -24,10 +22,10 @@ class PassMiddleware implements MiddlewareInterface {
 
 // Fixture : un controller dont les middlewares sont déclarés par attributs.
 // #[Middleware] sur la classe → tout le controller ; sur la méthode → cette action.
-#[Middleware(TrucMiddleware::class)]
+#[Middleware(AlphaMiddleware::class)]
 class AnnotatedController {
 
-    #[Middleware(BiduleMiddleware::class)]
+    #[Middleware(BetaMiddleware::class)]
     public function edit(): string {
         return 'edit-ok';
     }
@@ -182,8 +180,8 @@ class MiddlewareManagerTest extends TestCase
         // Classe d'abord (garde tout le controller), puis l'action — sous forme de specs
         $this->assertSame(
             [
-                ['class' => TrucMiddleware::class,   'args' => []],
-                ['class' => BiduleMiddleware::class, 'args' => []],
+                ['class' => AlphaMiddleware::class, 'args' => []],
+                ['class' => BetaMiddleware::class,  'args' => []],
             ],
             $manager->attributeMiddlewares(AnnotatedController::class, 'edit')
         );
@@ -193,7 +191,7 @@ class MiddlewareManagerTest extends TestCase
         $manager = new MiddlewareManager();
 
         $this->assertSame(
-            [['class' => TrucMiddleware::class, 'args' => []]],
+            [['class' => AlphaMiddleware::class, 'args' => []]],
             $manager->attributeMiddlewares(AnnotatedController::class, 'index')
         );
     }
