@@ -37,7 +37,7 @@ $this->setLayout('layout.default');
 		</dl>
 	</div>
 	<div class="grid-half card p-s">
-		<img src="<?= $persona->img_url ?>" alt="">
+		<img class="persona-avatar" src="<?= $persona->img_url ?>" alt="">
 	</div>
 	<div class="grid-full card p-m">
 <pre>

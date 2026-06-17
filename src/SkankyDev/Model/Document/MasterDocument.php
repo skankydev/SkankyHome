@@ -71,7 +71,7 @@ class MasterDocument implements JsonSerializable, Persistable {
 		if(in_array($name,$methods) !== false){
 			return $this->$name();
 		}
-		return false;
+		return null;
 	}
 
 	/**

@@ -3529,6 +3529,42 @@ span[class*=trace-] {
   display: block;
 }
 
+.widget-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+}
+
+.widget-link {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.widget-body {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  flex-direction: column;
+}
+
+.widget-image {
+  width: 100%;
+  height: auto;
+}
+
+.widget-icon {
+  font-size: 128px;
+}
+
+.widget-name {
+  font-size: 2.25rem;
+  font-weight: 300;
+  text-transform: capitalize;
+}
+
 .rainbow-diviser {
   position: relative;
   width: 100%;
@@ -4493,6 +4529,7 @@ button:hover,
 }
 .card.card-primary {
   border-color: rgba(124, 58, 237, 0.3);
+  transition: all 0.2s;
   box-shadow: 0 0 10px rgba(124, 58, 237, 0.15), inset -1px -1px 2px rgba(124, 58, 237, 0.6), inset 1px 1px 2px rgba(124, 58, 237, 0.6);
 }
 .card.card-primary:hover {
@@ -4501,6 +4538,7 @@ button:hover,
 }
 .card.card-success {
   border-color: rgba(0, 255, 65, 0.3);
+  transition: all 0.2s;
   box-shadow: 0 0 10px rgba(0, 255, 65, 0.15), inset -1px -1px 2px rgba(0, 255, 65, 0.6), inset 1px 1px 2px rgba(0, 255, 65, 0.6);
 }
 .card.card-success:hover {
@@ -4509,6 +4547,7 @@ button:hover,
 }
 .card.card-error {
   border-color: rgba(255, 7, 58, 0.3);
+  transition: all 0.2s;
   box-shadow: 0 0 10px rgba(255, 7, 58, 0.15), inset -1px -1px 2px rgba(255, 7, 58, 0.6), inset 1px 1px 2px rgba(255, 7, 58, 0.6);
 }
 .card.card-error:hover {
@@ -4517,6 +4556,7 @@ button:hover,
 }
 .card.card-warning {
   border-color: rgba(255, 107, 0, 0.3);
+  transition: all 0.2s;
   box-shadow: 0 0 10px rgba(255, 107, 0, 0.15), inset -1px -1px 2px rgba(255, 107, 0, 0.6), inset 1px 1px 2px rgba(255, 107, 0, 0.6);
 }
 .card.card-warning:hover {
@@ -4525,6 +4565,7 @@ button:hover,
 }
 .card.card-favorie {
   border-color: rgba(255, 0, 255, 0.3);
+  transition: all 0.2s;
   box-shadow: 0 0 10px rgba(255, 0, 255, 0.15), inset -1px -1px 2px rgba(255, 0, 255, 0.6), inset 1px 1px 2px rgba(255, 0, 255, 0.6);
 }
 .card.card-favorie:hover {
@@ -4533,6 +4574,7 @@ button:hover,
 }
 .card.card-info {
   border-color: rgba(0, 217, 255, 0.3);
+  transition: all 0.2s;
   box-shadow: 0 0 10px rgba(0, 217, 255, 0.15), inset -1px -1px 2px rgba(0, 217, 255, 0.6), inset 1px 1px 2px rgba(0, 217, 255, 0.6);
 }
 .card.card-info:hover {
@@ -4939,14 +4981,23 @@ dd {
 a:not([class^=btn]):not([class*=" btn"]):not(.title-skankyhome) {
   color: #7C3AED;
   text-decoration: none;
+  transition: color 0.2s ease;
+}
+a:not([class^=btn]):not([class*=" btn"]):not(.title-skankyhome):hover {
+  color: #00F7F7;
+}
+
+.pretty-link {
+  color: #7C3AED;
+  text-decoration: none;
   transition: all 0.3s ease;
   position: relative;
 }
-a:not([class^=btn]):not([class*=" btn"]):not(.title-skankyhome) i {
+.pretty-link i {
   font-size: 1rem;
   transition: all 0.3s ease;
 }
-a:not([class^=btn]):not([class*=" btn"]):not(.title-skankyhome)::after {
+.pretty-link::after {
   content: "";
   position: absolute;
   bottom: -2px;
@@ -4956,142 +5007,142 @@ a:not([class^=btn]):not([class*=" btn"]):not(.title-skankyhome)::after {
   background: #7C3AED;
   transition: all 0.3s ease;
 }
-a:not([class^=btn]):not([class*=" btn"]):not(.title-skankyhome):hover, a:not([class^=btn]):not([class*=" btn"]):not(.title-skankyhome):visited:hover {
+.pretty-link:hover, .pretty-link:visited:hover {
   color: #00F7F7;
   text-shadow: 0 0 5px rgba(0, 247, 247, 0.5);
 }
-a:not([class^=btn]):not([class*=" btn"]):not(.title-skankyhome):hover::after, a:not([class^=btn]):not([class*=" btn"]):not(.title-skankyhome):visited:hover::after {
+.pretty-link:hover::after, .pretty-link:visited:hover::after {
   width: 100%;
   background: #00F7F7;
   box-shadow: 0 0 10px rgba(0, 247, 247, 0.5);
 }
-a:not([class^=btn]):not([class*=" btn"]):not(.title-skankyhome):hover i, a:not([class^=btn]):not([class*=" btn"]):not(.title-skankyhome):visited:hover i {
+.pretty-link:hover i, .pretty-link:visited:hover i {
   color: #00F7F7;
   text-shadow: 0 0 2.4px #00F7F7, 0 0 4.8px #00F7F7, 0 0 9.6px rgba(0, 247, 247, 0.8);
 }
-a:not([class^=btn]):not([class*=" btn"]):not(.title-skankyhome):active {
+.pretty-link:active {
   color: #FF006E;
 }
-a:not([class^=btn]):not([class*=" btn"]):not(.title-skankyhome):visited {
+.pretty-link:visited {
   color: #7C3AED;
 }
 
-a.no-underline::after {
+.pretty-link.no-underline::after {
   display: none;
 }
 
-a.neon {
+.pretty-link.neon {
   color: #7C3AED;
   text-shadow: 0 0 1.5px #7C3AED, 0 0 3px #7C3AED, 0 0 6px rgba(124, 58, 237, 0.8);
 }
-a.neon:hover {
+.pretty-link.neon:hover {
   color: #00F7F7;
   text-shadow: 0 0 3px #00F7F7, 0 0 6px #00F7F7, 0 0 12px rgba(0, 247, 247, 0.8);
 }
 
-a[target=_blank]::before,
-a.external::before {
+.pretty-link[target=_blank]::before,
+.pretty-link.external::before {
   content: "\e95e";
   font-family: "icomoon" !important;
   margin-right: 4px;
   font-size: 0.8em;
 }
 
-a.link-primary {
+.pretty-link.link-primary {
   color: #7C3AED;
 }
-a.link-primary::after {
+.pretty-link.link-primary::after {
   background: #7C3AED;
 }
-a.link-primary:hover {
+.pretty-link.link-primary:hover {
   color: #7C3AED;
   text-shadow: 0 0 2.4px #7C3AED, 0 0 4.8px #7C3AED, 0 0 9.6px rgba(124, 58, 237, 0.8);
 }
-a.link-primary:hover::after {
+.pretty-link.link-primary:hover::after {
   box-shadow: 0 0 10px rgba(124, 58, 237, 0.5);
 }
 
-a.link-success {
+.pretty-link.link-success {
   color: #00FF41;
 }
-a.link-success::after {
+.pretty-link.link-success::after {
   background: #00FF41;
 }
-a.link-success:hover {
+.pretty-link.link-success:hover {
   color: #00FF41;
   text-shadow: 0 0 2.4px #00FF41, 0 0 4.8px #00FF41, 0 0 9.6px rgba(0, 255, 65, 0.8);
 }
-a.link-success:hover::after {
+.pretty-link.link-success:hover::after {
   box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
 }
 
-a.link-error {
+.pretty-link.link-error {
   color: #FF073A;
 }
-a.link-error::after {
+.pretty-link.link-error::after {
   background: #FF073A;
 }
-a.link-error:hover {
+.pretty-link.link-error:hover {
   color: #FF073A;
   text-shadow: 0 0 2.4px #FF073A, 0 0 4.8px #FF073A, 0 0 9.6px rgba(255, 7, 58, 0.8);
 }
-a.link-error:hover::after {
+.pretty-link.link-error:hover::after {
   box-shadow: 0 0 10px rgba(255, 7, 58, 0.5);
 }
 
-a.link-warning {
+.pretty-link.link-warning {
   color: #FF6B00;
 }
-a.link-warning::after {
+.pretty-link.link-warning::after {
   background: #FF6B00;
 }
-a.link-warning:hover {
+.pretty-link.link-warning:hover {
   color: #FF6B00;
   text-shadow: 0 0 2.4px #FF6B00, 0 0 4.8px #FF6B00, 0 0 9.6px rgba(255, 107, 0, 0.8);
 }
-a.link-warning:hover::after {
+.pretty-link.link-warning:hover::after {
   box-shadow: 0 0 10px rgba(255, 107, 0, 0.5);
 }
 
-a.link-favorie {
+.pretty-link.link-favorie {
   color: #FF00FF;
 }
-a.link-favorie::after {
+.pretty-link.link-favorie::after {
   background: #FF00FF;
 }
-a.link-favorie:hover {
+.pretty-link.link-favorie:hover {
   color: #FF00FF;
   text-shadow: 0 0 2.4px #FF00FF, 0 0 4.8px #FF00FF, 0 0 9.6px rgba(255, 0, 255, 0.8);
 }
-a.link-favorie:hover::after {
+.pretty-link.link-favorie:hover::after {
   box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
 }
 
-a.link-info {
+.pretty-link.link-info {
   color: #00D9FF;
 }
-a.link-info::after {
+.pretty-link.link-info::after {
   background: #00D9FF;
 }
-a.link-info:hover {
+.pretty-link.link-info:hover {
   color: #00D9FF;
   text-shadow: 0 0 2.4px #00D9FF, 0 0 4.8px #00D9FF, 0 0 9.6px rgba(0, 217, 255, 0.8);
 }
-a.link-info:hover::after {
+.pretty-link.link-info:hover::after {
   box-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
 }
 
-a.link-muted {
+.pretty-link.link-muted {
   color: #B5BBCE;
 }
-a.link-muted:hover {
+.pretty-link.link-muted:hover {
   color: #E0E5FF;
 }
-a.link-muted::after {
+.pretty-link.link-muted::after {
   display: none;
 }
 
-a.link-button {
+.pretty-link.link-button {
   display: inline-flex;
   align-items: center;
   gap: 4px;
@@ -5100,10 +5151,10 @@ a.link-button {
   border: 1px solid #7C3AED;
   border-radius: 4px;
 }
-a.link-button::after {
+.pretty-link.link-button::after {
   display: none;
 }
-a.link-button:hover {
+.pretty-link.link-button:hover {
   background: rgba(0, 247, 247, 0.2);
   border-color: #00F7F7;
   box-shadow: 0 0 15px rgba(0, 247, 247, 0.3);
@@ -5202,6 +5253,10 @@ a.link-button:hover {
     margin: 0;
   }
 }
+.persona-avatar {
+  width: 350px;
+}
+
 .effects-list .effect-name {
   flex-grow: 1;
 }

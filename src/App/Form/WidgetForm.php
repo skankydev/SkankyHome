@@ -13,15 +13,22 @@
 
 namespace App\Form;
 
+use App\Model\ModuleCollection;
+use App\Model\PersonaCollection;
 use SkankyDev\Form\FormBuilder;
 
 class WidgetForm extends FormBuilder {
 	
 	public function build() : void {
 		
-		$this->add('target_collection','text',[
+		$this->add('target_collection','select',[
 			'label' => 'Target Collection',
-			'rules' => ['required']
+			'rules' => ['required'],
+			'options' => [
+				'' => '--- Empty ---',
+				ModuleCollection::class => 'Module',
+				PersonaCollection::class => 'Persona',
+			],
 		]);
 		$this->add('target_id','text',[
 			'label' => 'Target Id',

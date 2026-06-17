@@ -24,7 +24,22 @@ class HomeController extends MasterController {
 
 	public function index(){
 		$widgets = WidgetCollection::_find([], ['sort' => ['position' => 1]]);
-		return view('home.index', ['widgets' => $widgets]);
+		$targets = [];
+		foreach ($widgets as $key => $widget) {
+			$collectionClass = $widget->target_collection;
+			if (!class_exists($collectionClass)) {
+				continue;
+			}
+			$target = $collectionClass::_findById((string) $widget->target_id);
+			if (!$target) {
+				continue;
+			}
+			$targets[] = [
+				'target' => $target,
+				'link' => $collectionClass::_widgetLink($target)
+			];
+		}
+		return view('home.index', ['targets' => $targets]);
 	}
 
 	public function base(){

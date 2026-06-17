@@ -5,7 +5,6 @@ $this->setLayout('layout.default');
 
 <header class="page-header">
 	<div class="page-title">
-		<h2 class="rainbow-icon"><i class="icon-home"></i> Accueil</h2>
 	</div>
 	<div class="page-action">
 		<a href="<?= $this->url(['controller' => 'widget', 'action' => 'index']) ?>" class="btn btn-primary">
@@ -16,9 +15,9 @@ $this->setLayout('layout.default');
 </header>
 
 <section class="page-content">
-	<div class="widget-grid grid-layout">
-		<?php foreach ($widgets as $widget): ?>
-			<?= $this->part('part.widget', ['widget' => $widget]) ?>
+	<div class="widget-grid">
+		<?php foreach ($targets as $target): ?>
+			<?= $this->part('part.widget', $target) ?>
 		<?php endforeach; ?>
 	</div>
 </section>
