@@ -1,12 +1,14 @@
-%?php 
+%?php
 $this->setLayout('layout.default');
+$this->addCrumb('<?= $name ?>', ['action' => 'index'], '');
+$this->addCrumb('Ajouter', ['action' => 'create'], '');
 ?>
 
 <header class="page-header">
 	<div class="page-title">
 		<h2 class="rainbow-icon">
 			<i class=""></i>
-			Ajouter <?= $name ?> 
+			Ajouter <?= $name ?>
 		</h2>
 	</div>
 	<div class="page-action">

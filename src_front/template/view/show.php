@@ -1,12 +1,14 @@
-%?php 
+%?php
 $this->setLayout('layout.default');
+$this->addCrumb('<?= $name ?>', ['action' => 'index'], '');
+$this->addCrumb($<?= $singularCamel ?>-><?= $this->labelField() ?>, ['action' => 'show', 'params' => [$<?= $singularCamel ?>->_id]], '');
 ?>
 
 <header class="page-header">
 	<div class="page-title">
 		<h2 class="rainbow-icon">
 			<i class=""></i>
-			%?= e($<?= $singularCamel ?>-><?= $this->fields[0]['name'] ?>) ?>  
+			%?= e($<?= $singularCamel ?>-><?= $this->labelField() ?>) ?>
 		</h2>
 	</div>
 	<div class="page-action">
@@ -25,16 +27,23 @@ $this->setLayout('layout.default');
 	<div class="grid-half card p-s">
 		<dl>
 <?php foreach($this->fields as $field): ?>
+<?php if($field['type'] === 'ObjectId'): ?>
+			<dt><?= $this->fkRelated($field['name']) ?></dt>
+			<dd>%?= e($<?= $singularCamel ?>-><?= lcfirst($this->fkRelated($field['name'])) ?>?->name ?? '—') ?></dd>
+<?php elseif($field['type'] === 'bool'): ?>
 			<dt><?= $this->toHuman($field['name']) ?></dt>
-<?php if($field['type'] === 'bool'): ?>
 			<dd><span class="text-%?= $<?= $singularCamel ?>-><?= $field['name'] ?> ? 'success' : 'error' ?>">%?= $<?= $singularCamel ?>-><?= $field['name'] ?> ? 'oui' : 'non' ?></span></dd>
 <?php elseif($field['type'] === 'date'): ?>
+			<dt><?= $this->toHuman($field['name']) ?></dt>
 			<dd>%?= $<?= $singularCamel ?>-><?= $field['name'] ?> ? $<?= $singularCamel ?>-><?= $field['name'] ?>->format('d/m/Y') : '-' ?></dd>
 <?php elseif($field['type'] === 'datetime'): ?>
+			<dt><?= $this->toHuman($field['name']) ?></dt>
 			<dd>%?= $<?= $singularCamel ?>-><?= $field['name'] ?> ? $<?= $singularCamel ?>-><?= $field['name'] ?>->format('d/m/Y H:i') : '-' ?></dd>
 <?php elseif($field['type'] === 'array'): ?>
+			<dt><?= $this->toHuman($field['name']) ?></dt>
 			<dd>%?= !empty($<?= $singularCamel ?>-><?= $field['name'] ?>) ? implode(', ', array_map('e', $<?= $singularCamel ?>-><?= $field['name'] ?>)) : '-' ?></dd>
 <?php else: ?>
+			<dt><?= $this->toHuman($field['name']) ?></dt>
 			<dd>%?= e($<?= $singularCamel ?>-><?= $field['name'] ?>) ?></dd>
 <?php endif; ?>
 <?php endforeach; ?>

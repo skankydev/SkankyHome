@@ -1,5 +1,6 @@
 %?php
 $this->setLayout('layout.default');
+$this->addCrumb('<?= $name ?>', ['action' => 'index'], '');
 ?>
 
 <header class="page-header">
