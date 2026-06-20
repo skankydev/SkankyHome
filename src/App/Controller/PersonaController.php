@@ -19,6 +19,7 @@ use App\Model\PersonaCollection;
 use App\Utilities\Upload;
 use SkankyDev\Config\Config;
 use SkankyDev\Controller\MasterController;
+use League\CommonMark\CommonMarkConverter;
 use SkankyDev\Http\Request;
 
 class PersonaController extends MasterController {
@@ -41,7 +42,7 @@ class PersonaController extends MasterController {
 		}
 		$persona = new Persona($input);
 		$file = $request->file();
-		if (isset($file['img'])) {
+		if (isset($file['img']) && $file['img']['error'] == 0) {
 			$upload = new Upload($file['img'], UPLOAD_FOLDER .DS. 'img'.DS);
 			if (!$upload->upload()) {
 				return redirect(['action' => 'create'])->withFlash('error', implode(', ', $upload->getErrors()));
@@ -54,7 +55,17 @@ class PersonaController extends MasterController {
 	}
 
 	public function show(Request $request, Persona $persona){
-		return view('persona.show', ['persona' => $persona]);
+
+		$converter = new CommonMarkConverter([
+		    'html_input' => 'strip',
+		    'allow_unsafe_links' => false,
+		]);
+		$content =  $converter->convert($persona->content);
+
+		return view('persona.show', [
+			'persona' => $persona,
+			'content' => $content
+		]);
 	}
 
 	public function chat(Persona $persona){

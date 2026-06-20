@@ -1,5 +1,7 @@
 <?php 
 $this->setLayout('layout.default');
+$this->addCrumb('Persona',['action'=>'index'],'icon-message-circle');
+$this->addCrumb($persona->name,['action'=>'show','params'=>['persona'=>$persona->_id]],'');
 ?>
 
 <header class="page-header">
@@ -40,8 +42,6 @@ $this->setLayout('layout.default');
 		<img class="persona-avatar" src="<?= $persona->img_url ?>" alt="">
 	</div>
 	<div class="grid-full card p-m">
-<pre>
-<?= $persona->content ?>
-</pre>
+		<?= $content ?>
 	</div>
 </section>

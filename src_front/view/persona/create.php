@@ -1,5 +1,7 @@
 <?php 
 $this->setLayout('layout.default');
+$this->addCrumb('Persona',['controller'=> 'persona', 'action'=>'index'],'icon-message-circle');
+$this->addCrumb('Creat',['action'=>'create'],'');
 ?>
 
 <header class="page-header">

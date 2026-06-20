@@ -29,7 +29,7 @@ class PersonaForm extends FormBuilder {
 		]);
 		$this->add('img','file',[
 			'label' => 'Image',
-			'attributes' => ['accept'=>'.jpg,.jpeg,.png']
+			'attributes' => ['accept'=>'.jpg,.jpeg,.png,.webp']
 		]);
 
 		$this->submit('<i class="icon-save"></i> SAVE');

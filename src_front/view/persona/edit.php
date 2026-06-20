@@ -1,5 +1,8 @@
 <?php 
 $this->setLayout('layout.default');
+$this->addCrumb('Persona',['action'=>'index'],'icon-message-circle');
+$this->addCrumb($persona->name,['action'=>'show','params'=>['persona'=>$persona->_id]],'');
+$this->addCrumb('Edit',['action'=>'edit','params'=>['persona'=>$persona->_id]]);
 ?>
 
 <header class="page-header">
