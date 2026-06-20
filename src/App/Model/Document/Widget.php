@@ -16,14 +16,14 @@ namespace App\Model\Document;
 
 use SkankyDev\Model\Document\MasterDocument;
 use SkankyDev\Model\Document\Traits\TimedTrait;
-use DateTime;
+use MongoDB\BSON\ObjectId;
 
 class Widget extends MasterDocument {
 
 	use TimedTrait;
-	
+
 	public string $target_collection = '';
-	public string $target_id = '';
+	public ObjectId $target_id;
 	public int $position = 0;
 
 }

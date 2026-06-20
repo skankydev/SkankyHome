@@ -5,8 +5,8 @@ $this->setLayout('layout.default');
 <header class="page-header">
 	<div class="page-title">
 		<h2 class="rainbow-icon">
-			<i class="icon-message-circle"></i>
-			Ajouter Persona 
+			<i class="icon-zap"></i>
+			Ajouter Task 
 		</h2>
 	</div>
 	<div class="page-action">

@@ -14,19 +14,30 @@
 
 namespace App\Model\Document;
 
+use App\Model\Enum\TaskStatus;
+use App\Model\ProjectCollection;
+use MongoDB\BSON\ObjectId;
 use SkankyDev\Model\Document\MasterDocument;
 use SkankyDev\Model\Document\Traits\TimedTrait;
-use MongoDB\BSON\ObjectId;
 
-class Scenario extends MasterDocument {
+class Task extends MasterDocument {
 
 	use TimedTrait;
 
-
+	public ObjectId $project_id;
 	public string $name = '';
 	public string $icon = '';
-	public ObjectId $module_id;
-	public array $preference = ['colors'=>['#FF0000','#00FF00','#0000FF','#FFFF00','#00FFFF','#FF00FF'],'effects'=>[]];
-	public array $lines = [];
+	public string $description = '';
+	public TaskStatus $status = TaskStatus::TODO;
+
+	/**
+	 * Projet parent, résolu à la volée via le magic __get ($task->project).
+	 */
+	public function getProject(): ?Project {
+		if (!isset($this->project_id)) {
+			return null;
+		}
+		return ProjectCollection::_findById((string) $this->project_id);
+	}
 
 }

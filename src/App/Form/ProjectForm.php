@@ -13,32 +13,32 @@
 
 namespace App\Form;
 
-use App\Model\ModuleCollection;
-use App\Model\PersonaCollection;
-use App\Model\ProjectCollection;
+use App\Model\Enum\ProjectStatus;
 use SkankyDev\Form\FormBuilder;
 
-class WidgetForm extends FormBuilder {
-	
+class ProjectForm extends FormBuilder {
+
 	public function build() : void {
-		
-		$this->add('target_collection','select',[
-			'label' => 'Target Collection',
+
+		$this->add('icon','icon',[
+			'label' => 'Icon',
+			'rules' => ['required']
+		]);
+
+		$this->add('name','text',[
+			'label' => 'Name',
+			'rules' => ['required']
+		]);
+
+		$this->add('description','textarea',[
+			'label' => 'Description',
+			'rules' => []
+		]);
+
+		$this->add('status','select',[
+			'label' => 'Status',
 			'rules' => ['required'],
-			'options' => [
-				'' => '--- Empty ---',
-				ModuleCollection::class => 'Module',
-				PersonaCollection::class => 'Persona',
-				ProjectCollection::class => 'Project',
-			],
-		]);
-		$this->add('target_id','text',[
-			'label' => 'Target Id',
-			'rules' => ['required']
-		]);
-		$this->add('position','number',[
-			'label' => 'Position',
-			'rules' => ['required']
+			'options' => ProjectStatus::options(),
 		]);
 
 		$this->submit('<i class="icon-save"></i> SAVE');

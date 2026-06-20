@@ -1,12 +1,12 @@
-<?php 
+<?php
 $this->setLayout('layout.default');
 ?>
 
 <header class="page-header">
 	<div class="page-title">
 		<h2 class="rainbow-icon">
-			<i class="icon-message-circle"></i>
-			Persona 
+			<i class="icon-sunrise"></i>
+			Project
 		</h2>
 	</div>
 	<div class="page-action">
@@ -18,5 +18,5 @@ $this->setLayout('layout.default');
 </header>
 
 <section class="page-content">
-	<?= $this->part('part.table', ['paginator' => $personas]); ?>
+	<?= $this->part('part.table', ['paginator' => $projects]); ?>
 </section>

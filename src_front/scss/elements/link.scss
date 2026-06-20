@@ -6,19 +6,7 @@
 
 
 
-// Lien générique : sobre, dans le style de l'app
 a:not([class^="btn"]):not([class*=" btn"]):not(.title-skankyhome){
-	color: $neon-purple;
-	text-decoration: none;
-	transition: color 0.2s ease;
-
-	&:hover {
-		color: $neon-cyan;
-	}
-}
-
-// Lien stylé "à la SkankyHome" — opt-in via .pretty-link
-.pretty-link{
 	color: $neon-purple;
 	text-decoration: none;
 	transition: all 0.3s ease;
@@ -67,14 +55,14 @@ a:not([class^="btn"]):not([class*=" btn"]):not(.title-skankyhome){
 }
 
 // Lien sans underline
-.pretty-link.no-underline {
+a.no-underline {
 	&::after {
 		display: none;
 	}
 }
 
 // Lien avec effet neon permanent
-.pretty-link.neon {
+a.neon {
 	@include neon-text($neon-purple, 0.5);
 	
 	&:hover {
@@ -83,8 +71,8 @@ a:not([class^="btn"]):not([class*=" btn"]):not(.title-skankyhome){
 }
 
 // Lien externe avec icône
-.pretty-link[target="_blank"],
-.pretty-link.external {
+a[target="_blank"],
+a.external {
 	&::before {
 		content: '\e95e'; // icon-external-link
 		font-family: 'icomoon' !important;
@@ -95,7 +83,7 @@ a:not([class^="btn"]):not([class*=" btn"]):not(.title-skankyhome){
 
 // Variantes de couleur
 @each $name, $color in $tool-colors {
-	.pretty-link.link-#{$name} {
+	a.link-#{$name} {
 		color: $color;
 		
 		&::after {
@@ -113,7 +101,7 @@ a:not([class^="btn"]):not([class*=" btn"]):not(.title-skankyhome){
 }
 
 // Lien discret (style texte)
-.pretty-link.link-muted {
+a.link-muted {
 	color: $text-secondary;
 	
 	&:hover {
@@ -126,7 +114,7 @@ a:not([class^="btn"]):not([class*=" btn"]):not(.title-skankyhome){
 }
 
 // Lien en mode "bouton"
-.pretty-link.link-button {
+a.link-button {
 	display: inline-flex;
 	align-items: center;
 	gap: $p-xs;

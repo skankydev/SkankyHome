@@ -1,13 +1,12 @@
-<?php 
+<?php
 $this->setLayout('layout.default');
 ?>
 
 <header class="page-header">
 	<div class="page-title">
 		<h2 class="rainbow-icon">
-			<i class="icon-message-circle"></i>
-			Persona 
-		</h2>
+			<i class="icon-zap"></i>
+			Task		</h2>
 	</div>
 	<div class="page-action">
 		<a href="<?= $this->url(['action'=>'create']) ?>" class="btn btn-primary">
@@ -18,5 +17,5 @@ $this->setLayout('layout.default');
 </header>
 
 <section class="page-content">
-	<?= $this->part('part.table', ['paginator' => $personas]); ?>
+	<?= $this->part('part.table', ['paginator' => $tasks]); ?>
 </section>

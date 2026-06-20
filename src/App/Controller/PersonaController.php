@@ -41,7 +41,6 @@ class PersonaController extends MasterController {
 		}
 		$persona = new Persona($input);
 		$file = $request->file();
-
 		if (isset($file['img'])) {
 			$upload = new Upload($file['img'], UPLOAD_FOLDER .DS. 'img'.DS);
 			if (!$upload->upload()) {
@@ -82,10 +81,10 @@ class PersonaController extends MasterController {
 
 		$file = $request->file();
 		//dd($file);
-		if (isset($file['img'])) {
+		if (isset($file['img']) && $file['img']['error'] == 0) {
 			$upload = new Upload($file['img'], UPLOAD_FOLDER .DS. 'img'.DS);
 			if (!$upload->upload()) {
-				return redirect(['action' => 'edit', 'params' => ['persona', $module->_id]])->withFlash('error', implode(', ', $upload->getErrors()));
+				return redirect(['action' => 'edit', 'params' => ['persona'=> $module->_id]])->withFlash('error', implode(', ', $upload->getErrors()));
 			}
 			$persona->img_info = $upload->getFileInfo();
 		}

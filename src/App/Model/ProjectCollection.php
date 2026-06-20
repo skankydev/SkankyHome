@@ -13,16 +13,16 @@
 
 namespace App\Model;
 
-use App\Model\Document\Module;
-use SkankyDev\Model\MasterCollection;
 use SkankyDev\Utilities\Traits\Singleton;
+use SkankyDev\Model\MasterCollection;
+use App\Model\Document\Project;
 
-class ModuleCollection extends MasterCollection {
+class ProjectCollection extends MasterCollection {
 
 	use Singleton;
 
-	protected string $collectionName = 'modules';
-	protected string $documentClass = Module::class;
+	protected string $collectionName = 'projects';
+	protected string $documentClass = Project::class;
 
 	public function getDisplayField(): array {
 		return [
@@ -33,12 +33,10 @@ class ModuleCollection extends MasterCollection {
 					return '<i class="'.$doc->icon.'"></i> ';
 				}
 			],
-			'topic_message' => ['label' => 'Topic message', 'sort' => true],
-			'topic_cmd'     => ['label' => 'Topic cmd',     'sort' => true],
-			'nb_line'       => ['label' => 'Nb line',       'sort' => true],
-			'nb_led'        => ['label' => 'Nb led',        'sort' => true],
-			'created_at'    => ['label' => 'created',       'sort' => true],
-			'updated_at'    => ['label' => 'updated',       'sort' => true],
+			'description' => ['label' => 'Description', 'sort' => true],
+			'status' => ['label' => 'Status', 'sort' => true],
+			'created_at' => ['label' => 'Created', 'sort' => true],
+			'updated_at' => ['label' => 'Updated', 'sort' => true],
 		];
 	}
 

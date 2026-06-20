@@ -190,6 +190,9 @@ class Paginator implements Iterator {
 		if ($value instanceof \DateTime) {
 			return $value->format('d/m/Y H:i');
 		}
+		if ($value instanceof \BackedEnum) {
+			return e(method_exists($value, 'label') ? $value->label() : $value->value);
+		}
 		if (is_bool($value)) {
 			return $value
 				? '<i class="icon-check text-success"></i>'

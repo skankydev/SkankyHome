@@ -5,7 +5,7 @@ $this->setLayout('layout.default');
 <header class="page-header">
 	<div class="page-title">
 		<h2 class="rainbow-icon">
-			<i class="icon-zap"></i>
+			<i class="icon-message-circle"></i>
 			Modifier Persona 
 		</h2>
 	</div>

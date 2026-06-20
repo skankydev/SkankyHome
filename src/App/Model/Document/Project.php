@@ -14,19 +14,17 @@
 
 namespace App\Model\Document;
 
+use App\Model\Enum\ProjectStatus;
 use SkankyDev\Model\Document\MasterDocument;
 use SkankyDev\Model\Document\Traits\TimedTrait;
-use MongoDB\BSON\ObjectId;
 
-class Scenario extends MasterDocument {
+class Project extends MasterDocument {
 
 	use TimedTrait;
 
-
-	public string $name = '';
 	public string $icon = '';
-	public ObjectId $module_id;
-	public array $preference = ['colors'=>['#FF0000','#00FF00','#0000FF','#FFFF00','#00FFFF','#FF00FF'],'effects'=>[]];
-	public array $lines = [];
+	public string $name = '';
+	public string $description = '';
+	public ProjectStatus $status = ProjectStatus::ACTIVE;
 
 }
