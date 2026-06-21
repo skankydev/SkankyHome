@@ -102,7 +102,9 @@ Pipeline exécuté par `MiddlewareManager` (dans `Application::run`) : middlewar
 - **Globaux** : déclarés dans la config `middlewares` (clé => alias), résolus via la map `class.middlewares`. Ordre = ordre d'exécution (ex. `Session` avant `Csrf`).
 - **Ciblés** : attribut `#[Middleware(Alias::class, ...args)]` sur le controller (toutes les actions) ou sur une action (celle-là seulement). Les args vont au constructeur du middleware (via `MasterFactory`).
 - **Sur une route explicite** : `Router::_add('/x', [...])->setMiddlewares(['Alias', ...])` (peu utilisé ici, le routing est surtout par convention).
-- Exemples livrés : `SessionMiddleware` (démarre la session), `CsrfMiddleware` (validation CSRF).
+- Exemples livrés : `SessionMiddleware` (session), `CsrfMiddleware` (CSRF, global), `PostOnly` (n'autorise que POST — opt-in via `#[Middleware('PostOnly')]` sur les actions de mutation : store/update/delete/setStatus).
+
+Côté front, un lien qui doit déclencher un POST (ex. delete) utilise `data-method="post"` (+ `data-confirm="…"`) : un handler global dans `app.js` construit et soumet un `<form method=post>` avec le token CSRF. → un `delete` se sécurise avec **`#[Middleware('PostOnly')]` côté action + `data-method="post"` côté lien**.
 
 ```php
 #[Middleware(AuthMiddleware::class)]                 // tout le controller
@@ -141,7 +143,7 @@ Règles dispo (config `class.rules`) : `required`, `email`, `numeric`, `min`, `m
 `CsrfMiddleware` (global, après `Session`) valide les requêtes **POST/PUT/PATCH/DELETE** : token `_token` (forms) ou header `X-CSRF-Token` (AJAX), comparé au token de session (1 par session, via `csrf_token()`). Échec → 419 JSON (AJAX) ou redirect + flash.
 - **Forms** : `FormBuilder` injecte `_token` automatiquement (rien à faire).
 - **AJAX** : `app.js` wrappe `fetch` pour ajouter `X-CSRF-Token` (lu du `<meta name="csrf-token">`) → automatique pour tout `fetch` same-origin.
-- ⚠️ Les `delete` CRUD sont des **liens GET** → non protégés (limite connue, à passer en POST un jour).
+- Les mutations sensibles doivent être en POST + `#[Middleware('PostOnly')]` (cf. section Middleware). Le CrudMaker génère déjà `PostOnly` sur `store`/`update`/`delete` et le lien delete en `data-method="post"`.
 
 ### Réponses
 
@@ -187,6 +189,18 @@ src/App/Model/
 Pour bénéficier de `created_at` / `updated_at` automatiques, le document fait `use TimedTrait` (opt-in).
 
 **Collections** : déclarent `$collectionName` (nom MongoDB) et `$documentClass`.
+
+### Types & enums (conversion par Reflection)
+
+`MasterDocument` convertit les propriétés **selon leur type déclaré** (plus de regex sur le nom) :
+- `ObjectId` ← string (fill) ; stocké tel quel ; → string en JSON. FK = toujours typées `ObjectId` (cf. convention plus bas).
+- `BackedEnum` ← string via `tryFrom()` (fill / relecture Mongo) ; → `->value` en base et en JSON.
+- `DateTime` ← string ISO (fill, parse l'input navigateur) ; → `UTCDateTime` en base.
+- Une chaîne vide / valeur invalide laisse le **défaut** de la propriété (pas de crash) — donc une prop enum/ObjectId doit avoir un défaut si requise (ex. `public TaskStatus $status = TaskStatus::TODO;`).
+
+**Convention status (enum)** : un backed enum string dans `App\Model\Enum\` avec `label()` (libellé FR) et `options()` (`value => label`, pour un `select`). Les enums de statut exposent en plus `class()` (→ `status-xxx`, cf. SCSS) et `pretty()` (badge HTML).
+- Form : `$this->add('status','select',['options' => TaskStatus::options(), ...])`.
+- Vue : `$x->status->pretty()` (badge) ou `e($x->status->label())`.
 
 ### Behaviors
 

@@ -17,6 +17,7 @@ use App\Form\<?= $name ?>Form;
 use App\Model\Document\<?= $name ?>;
 use App\Model\<?= $name ?>Collection;
 use SkankyDev\Controller\MasterController;
+use SkankyDev\Http\Middleware\Attribute\Middleware;
 use SkankyDev\Http\Request;
 
 class <?= $name ?>Controller extends MasterController {
@@ -41,6 +42,7 @@ class <?= $name ?>Controller extends MasterController {
 	 * Valide et enregistre un nouveau <?= $singularCamel ?>, puis redirige vers son show.
 	 * En cas d'échec de validation, retourne au formulaire avec erreurs et anciennes valeurs.
 	 */
+	#[Middleware('PostOnly')]
 	public function store(Request $request){
 		$input = $request->input();
 		$form = new <?= $name ?>Form(['action' => 'store']);
@@ -72,6 +74,7 @@ class <?= $name ?>Controller extends MasterController {
 	 * Valide et met à jour un <?= $singularCamel ?> existant, puis redirige vers son show.
 	 * En cas d'échec de validation, retourne au formulaire avec erreurs et anciennes valeurs.
 	 */
+	#[Middleware('PostOnly')]
 	public function update(Request $request, <?= $name ?> $<?= $singularCamel ?>){
 		$input = $request->input();
 		$form = new <?= $name ?>Form(['action' => 'update', 'params' => [$<?= $singularCamel ?>->_id]]);
@@ -86,6 +89,7 @@ class <?= $name ?>Controller extends MasterController {
 	/**
 	 * Supprime un <?= $singularCamel ?> puis redirige vers la liste.
 	 */
+	#[Middleware('PostOnly')]
 	public function delete(<?= $name ?> $<?= $singularCamel ?>){
 		<?= $name ?>Collection::_deleteOne($<?= $singularCamel ?>);
 		return redirect(['action' => 'index'])->withFlash('success', 'Suppression réussie');

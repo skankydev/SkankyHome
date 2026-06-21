@@ -16,7 +16,8 @@ $this->addCrumb($<?= $singularCamel ?>-><?= $this->labelField() ?>, ['action' =>
 			<i class="icon icon-edit"></i>
 			Edit
 		</a>
-		<a href="%?= $this->url(['action'=>'delete','params'=>[$<?= $singularCamel ?>->_id]]) ?>" class="btn btn-error">
+		<a href="%?= $this->url(['action'=>'delete','params'=>[$<?= $singularCamel ?>->_id]]) ?>" class="btn btn-error"
+			data-method="post" data-confirm="Supprimer ?">
 			<i class="icon-delete"></i>
 			Delete
 		</a>

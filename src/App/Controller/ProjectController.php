@@ -20,6 +20,7 @@ use App\Model\Document\Task;
 use App\Model\ProjectCollection;
 use App\Model\TaskCollection;
 use SkankyDev\Controller\MasterController;
+use SkankyDev\Http\Middleware\Attribute\Middleware;
 use SkankyDev\Http\Request;
 
 class ProjectController extends MasterController {
@@ -34,6 +35,7 @@ class ProjectController extends MasterController {
 		return view('project.create', ['form' => $form]);
 	}
 
+	#[Middleware('PostOnly')]
 	public function store(Request $request){
 		$input = $request->input();
 		$form = new ProjectForm(['action' => 'store']);
@@ -58,31 +60,13 @@ class ProjectController extends MasterController {
 		]);
 	}
 
-	/**
-	 * Ajout rapide d'une tâche au projet (le project_id vient de l'URL, pas du form).
-	 */
-	public function addTask(Request $request, Project $project){
-		$input = $request->input();
-		$input['project_id'] = (string) $project->_id;
-
-		$form = new TaskQuickForm(['action' => 'addTask', 'params' => [$project->_id]]);
-		if(!$form->validate($input)){
-			return redirect(['action' => 'show', 'params' => [$project->_id]])
-				->withErrors($form->getErrors())->withInput($input);
-		}
-
-		$task = new Task($input);
-		TaskCollection::_save($task);
-		return redirect(['action' => 'show', 'params' => [$project->_id]])
-			->withFlash('success', 'Tâche ajoutée');
-	}
-
 	public function edit(Project $project){
 		$form = new ProjectForm(['action' => 'update', 'params' => [$project->_id]]);
 		$form->setData($project);
 		return view('project.edit', ['form' => $form, 'project' => $project]);
 	}
 
+	#[Middleware('PostOnly')]
 	public function update(Request $request, Project $project){
 		$input = $request->input();
 		$form = new ProjectForm(['action' => 'update', 'params' => [$project->_id]]);
@@ -94,6 +78,7 @@ class ProjectController extends MasterController {
 		return redirect(['action' => 'show', 'params' => [$project->_id]])->withFlash('success', 'Modification réussie');
 	}
 
+	#[Middleware('PostOnly')]
 	public function delete(Project $project){
 		ProjectCollection::_deleteOne($project);
 		return redirect(['action' => 'index'])->withFlash('success', 'Suppression réussie');

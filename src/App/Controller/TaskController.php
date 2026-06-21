@@ -19,6 +19,7 @@ use App\Model\Document\Task;
 use App\Model\Enum\TaskStatus;
 use App\Model\TaskCollection;
 use SkankyDev\Controller\MasterController;
+use SkankyDev\Http\Middleware\Attribute\Middleware;
 use SkankyDev\Http\Request;
 
 class TaskController extends MasterController {
@@ -29,6 +30,7 @@ class TaskController extends MasterController {
 	}
 
 
+	#[Middleware('PostOnly')]
 	public function store(Request $request, Project $project){
 		$input = $request->input();
 		$input['project_id'] = (string) $project->_id;
@@ -53,6 +55,7 @@ class TaskController extends MasterController {
 	}
 
 
+	#[Middleware('PostOnly')]
 	public function update(Request $request, Task $task){
 		$input = $request->input();
 		$form = new TaskForm(['action' => 'update', 'params' => [$task->_id]]);
@@ -65,6 +68,7 @@ class TaskController extends MasterController {
 	}
 
 
+	#[Middleware('PostOnly')]
 	public function setStatus(Request $request, Task $task){
 		$status = TaskStatus::tryFrom((string) $request->input('status'));
 		if($status === null){
@@ -80,6 +84,7 @@ class TaskController extends MasterController {
 		]);
 	}
 
+	#[Middleware('PostOnly')]
 	public function delete(Request $request, Task $task){
 		TaskCollection::_deleteOne($task);
 		return response(['ok' => true]);

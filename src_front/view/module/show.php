@@ -20,7 +20,7 @@ $this->addCrumb($module->name,['action'=>'show','params'=>['module'=>$module->_i
 			<i class="icon icon-edit"></i>
 			Edit
 		</a>
-		<a href="<?= $this->url(['action'=>'delete','params'=>[$module->_id]]) ?>" class="btn btn-error">
+		<a href="<?= $this->url(['action'=>'delete','params'=>[$module->_id]]) ?>" class="btn btn-error" data-method="post">
 			<i class="icon-delete"></i>
 			Delete
 		</a>
@@ -97,7 +97,9 @@ $this->addCrumb($module->name,['action'=>'show','params'=>['module'=>$module->_i
 							</a>
 							<a href="<?= $this->url(['controller'=>'firmware','action' => 'delete','params'=>['firmware'=>$firmware->_id]]) ?>" 
 								class="btn-mini btn-error"
-								data-tooltip="Delete">
+								data-tooltip="Delete"
+								data-method="post"
+								>
 								<i class="icon-trash"></i>
 							</a>
 						</td>

@@ -20,7 +20,7 @@ $this->addCrumb($persona->name,['action'=>'show','params'=>['persona'=>$persona-
 			<i class="icon icon-edit"></i>
 			Edit
 		</a>
-		<a href="<?= $this->url(['action'=>'delete','params'=>[$persona->_id]]) ?>" class="btn btn-error">
+		<a href="<?= $this->url(['action'=>'delete','params'=>[$persona->_id]]) ?>" class="btn btn-error" data-method="post">
 			<i class="icon-delete"></i>
 			Delete
 		</a>

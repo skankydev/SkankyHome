@@ -17,6 +17,7 @@ use App\Form\WidgetForm;
 use App\Model\Document\Widget;
 use App\Model\WidgetCollection;
 use SkankyDev\Controller\MasterController;
+use SkankyDev\Http\Middleware\Attribute\Middleware;
 use SkankyDev\Http\Request;
 
 class WidgetController extends MasterController {
@@ -63,6 +64,7 @@ class WidgetController extends MasterController {
 		return redirect(['action' => 'show', 'params' => [$widget->_id]])->withFlash('success', 'Modification réussie');
 	}
 
+	#[Middleware('PostOnly')]
 	public function delete(Widget $widget){
 		WidgetCollection::_deleteOne($widget);
 		return redirect(['action' => 'index'])->withFlash('success', 'Suppression réussie');

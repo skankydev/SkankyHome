@@ -21,6 +21,7 @@ use App\Model\ModuleCollection;
 use App\Model\ScenarioCollection;
 use SkankyDev\Config\Config;
 use SkankyDev\Controller\MasterController;
+use SkankyDev\Http\Middleware\Attribute\Middleware;
 use SkankyDev\Http\Request;
 use SkankyDev\Http\UrlBuilder;
 use SkankyDev\Queue\Queue;
@@ -86,6 +87,7 @@ class ScenarioController extends MasterController {
 		]);
 	}
 
+	#[Middleware('PostOnly')]
 	public function delete(Scenario $scenario){
 		$moduleId = $scenario->module_id;
 		ScenarioCollection::_deleteOne($scenario);

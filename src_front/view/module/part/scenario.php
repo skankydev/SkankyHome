@@ -18,7 +18,7 @@
 			'actions'   => function($scenario) {
 				$html = '<a href="'.$this->url(['controller'=>'scenario','action' => 'send','params'=>['module'=>$scenario->module_id,'scenario'=>$scenario->_id]]).'" class="btn-mini btn-success" data-tooltip="Send"><i class="icon-upload"></i></a>';
 				$html .= ' <a href="'.$this->url(['controller'=>'scenario','action' => 'edit','params'=>['scenario'=>$scenario->_id]]).'" class="btn-mini btn-warning" data-tooltip="Edit"><i class="icon-edit"></i></a>';
-				$html .= ' <a href="'.$this->url(['controller'=>'scenario','action' => 'delete','params'=>['scenario'=>$scenario->_id]]).'" class="btn-mini btn-error" data-tooltip="Delete"><i class="icon-trash"></i></a>';
+				$html .= ' <a href="'.$this->url(['controller'=>'scenario','action' => 'delete','params'=>['scenario'=>$scenario->_id]]).'" class="btn-mini btn-error" data-tooltip="Delete" data-method="post"><i class="icon-trash"></i></a>';
 				return $html;
 			},
 		]); ?>

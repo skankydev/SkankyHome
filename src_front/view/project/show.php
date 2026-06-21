@@ -19,7 +19,8 @@ $this->addCrumb($project->name,['action'=>'show','params'=>['project'=>$project-
 			<i class="icon icon-edit"></i>
 			Edit
 		</a>
-		<a href="<?= $this->url(['action'=>'delete','params'=>[$project->_id]]) ?>" class="btn btn-error">
+		<a href="<?= $this->url(['action'=>'delete','params'=>[$project->_id]]) ?>" class="btn btn-error"
+			data-method="post" data-confirm="Supprimer ce projet ?">
 			<i class="icon-delete"></i>
 			Delete
 		</a>

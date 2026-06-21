@@ -19,7 +19,7 @@ use App\Model\PersonaCollection;
 use App\Utilities\Upload;
 use SkankyDev\Config\Config;
 use SkankyDev\Controller\MasterController;
-
+use SkankyDev\Http\Middleware\Attribute\Middleware;
 use SkankyDev\Http\Request;
 
 class PersonaController extends MasterController {
@@ -94,6 +94,8 @@ class PersonaController extends MasterController {
 		return redirect(['action' => 'show', 'params' => [$persona->_id]])->withFlash('success', 'Modification réussie');
 	}
 
+
+	#[Middleware('PostOnly')]
 	public function delete(Persona $persona){
 		PersonaCollection::_deleteOne($persona);
 		return redirect(['action' => 'index'])->withFlash('success', 'Suppression réussie');

@@ -35,6 +35,36 @@ window.remove = function(element) {
 	};
 })();
 
+// Liens qui déclenchent un POST (ex. delete) : <a data-method="post" data-confirm="…">.
+// Au clic, on construit et soumet un <form method=post> avec le token CSRF.
+// Capture = true pour passer AVANT le handler de ligne (.clickable-row).
+document.addEventListener('click', (e) => {
+	const link = e.target.closest('a[data-method]');
+	if (!link) return;
+	if ((link.dataset.method || '').toUpperCase() !== 'POST') return;
+
+	e.preventDefault();
+	e.stopPropagation();
+
+	if (link.dataset.confirm && !confirm(link.dataset.confirm)) return;
+
+	const form = document.createElement('form');
+	form.method = 'POST';
+	form.action = link.href;
+
+	const meta = document.querySelector('meta[name="csrf-token"]');
+	if (meta) {
+		const input = document.createElement('input');
+		input.type = 'hidden';
+		input.name = '_token';
+		input.value = meta.getAttribute('content');
+		form.appendChild(input);
+	}
+
+	document.body.appendChild(form);
+	form.submit();
+}, true);
+
 
 document.addEventListener('DOMContentLoaded', () => {
 	
