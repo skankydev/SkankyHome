@@ -8,6 +8,17 @@ enum ProjectStatus: string {
 	case ARCHIVED = 'archived';
 
 	/**
+	 * value => label, prêt pour l'option `options` d'un SelectField.
+	 */
+	public static function options(): array {
+		$out = [];
+		foreach (self::cases() as $case) {
+			$out[$case->value] = $case->label();
+		}
+		return $out;
+	}
+
+	/**
 	 * Libellé lisible pour l'affichage.
 	 * Le match est exhaustif : oublier un case = erreur fatale (garde-fou).
 	 */
@@ -19,14 +30,26 @@ enum ProjectStatus: string {
 		};
 	}
 
-	/**
-	 * value => label, prêt pour l'option `options` d'un SelectField.
-	 */
-	public static function options(): array {
-		$out = [];
-		foreach (self::cases() as $case) {
-			$out[$case->value] = $case->label();
-		}
-		return $out;
+
+	public function class() : string {
+		return match($this) {
+			self::ACTIVE   => 'status-warning',
+			self::PAUSED   => 'status-info',
+			self::ARCHIVED => 'status-disabled',
+		};
 	}
+
+	public function pretty() : string {
+		return '<div class="'.$this->class().'">'.$this->label().'</div>';
+	}
+
+	/*
+	status-primary
+	status-success
+	status-error
+	status-warning
+	status-favorie
+	status-info
+	status-disabled
+	*/
 }

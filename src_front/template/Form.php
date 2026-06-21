@@ -17,7 +17,7 @@ $defaultValue = [
 	'int'      => 'number',
 	'float'    => 'number',
 	'bool'     => 'checkbox',
-	'date'     => 'datetime',
+	'date'     => 'date',
 	'datetime' => 'datetime',
 	'array'    => 'textarea',
 ];

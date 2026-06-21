@@ -1,5 +1,9 @@
 <?php 
 $this->setLayout('layout.default');
+
+$this->addCrumb('Project',['action'=>'index'],'icon-sunrise');
+$this->addCrumb($project->name,['action'=>'show','params'=>['project'=>$project->_id]],$project->icon);
+$this->addCrumb('Edit',['action'=>'edit','params'=>['project'=>$project->_id]]);
 ?>
 
 <header class="page-header">

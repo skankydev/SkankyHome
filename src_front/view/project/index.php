@@ -1,5 +1,6 @@
-<?php
+<?php 
 $this->setLayout('layout.default');
+$this->addCrumb('Project',['action'=>'index'],'icon-sunrise');
 ?>
 
 <header class="page-header">

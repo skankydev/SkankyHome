@@ -15,6 +15,31 @@ Basée sur le framework PHP MVC maison **SkankyDev**.
 
 ---
 
+## Tests
+
+Suite **PHPUnit** dans `tests/`. Elle couvre **surtout le framework `SkankyDev`** (le cœur réutilisable) — la partie applicative `App` est très peu testée.
+- `tests/SkankyTest/TestCase/` — tests unitaires (pas de dépendance externe)
+- `tests/SkankyTest/Integration/` — tests d'intégration (nécessitent MongoDB)
+
+Scripts Composer (à privilégier) :
+
+```bash
+composer test              # phpunit — toute la suite
+composer coverage          # phpunit --coverage-text
+composer coverage-pretty   # phpunit --coverage-html build/coverage
+```
+
+Ciblage fin si besoin :
+
+```bash
+php vendor/bin/phpunit tests/SkankyTest/TestCase/Model/...      # un fichier
+php vendor/bin/phpunit --filter testMagicGetExistingProperty    # un test
+```
+
+> Validation : pour un changement dans `SkankyDev`, lancer `composer test` (PHPUnit attrape syntaxe **et** régressions). **Ne pas faire de `php -l`** — inutile : les tests couvrent la syntaxe du code testé, et pour le reste (templates, vues, `App`) les erreurs de syntaxe se voient tout de suite à l'exécution.
+
+---
+
 ## Architecture SkankyDev
 
 ### Routing
@@ -171,6 +196,40 @@ createApp(IconPicker).mount('#AppForm')
 **ScenarioMaker.vue** : éditeur d'animations LED (curseurs draggables, steps, segments, couleurs, effets). Sauvegarde via AJAX.
 
 **ColorPicker.vue** : canvas interactif, fait maison — pas de lib externe.
+
+---
+
+## Styles (SCSS)
+
+Source dans `src_front/scss/`, compilé par **Vite** vers `public/dist/styles.css` (avec `app.js`).
+Toute modif SCSS nécessite un build pour être visible :
+
+```bash
+npm run dev      # ou: npm run watch — build watch (dev)
+npm run build    # ou: npm run prod  — build production
+```
+
+Point d'entrée : `main.scss` qui `@use` tous les partials. Organisation :
+- `settings/` — `variables` (tokens), `mixins`, `functions`, `animations`
+- `tools/` — utilitaires : `space` (classes `.p-s`, `.p-m`…), `layout` (`.grid-layout`, `.grid-half`), `neon`, `scrollable`, `accordion`, `tooltips`
+- `scaffold/` — `page`, `burger`, `home`
+- `elements/` — briques UI : `card`, `button`, `form`, `table`, `liste`, `title`, `breadcrumb`, `flash`, `link`, `diviser`, `image`
+- `component/` — un fichier par feature/composant (`scenario-maker`, `color-picker`, `persona-chat`…)
+
+**Ajouter un style de feature** : créer un partial dans `component/` (ou `elements/`), l'ajouter dans `main.scss` (`@use 'component/...'`), puis rebuild.
+
+### Design tokens (`settings/variables.scss`)
+
+- **Fonds** : `$bg-primary`, `$bg-secondary`, `$bg-tertiary`
+- **Néon** : `$neon-red/orange/yellow/lime/green/cyan/blue/purple/magenta/pink` + map `$neon-colors` + `$neon-gradient` / `$neo-gradient`
+- **Statuts** : `$success`, `$error`, `$warning`, `$favorie`, `$info`, `$disabled` + map `$tool-colors` (`primary/success/error/warning/favorie/info/disabled`)
+- **Texte** : `$text-primary`, `$text-secondary`, `$text-muted` — **Bordure** : `$border-color`
+- **Espacements** : `$p-xs` (4) `$p-s` (8) `$p-ms` (10) `$p-m` (16) … `$p-massive` (128) + map `$spaces`
+
+### Conventions utiles
+
+- **Badges de statut** : classe `.status-{nom}` (générée depuis `$tool-colors` dans `tools/neon.scss`) → texte coloré + neon glow. Les enums exposent `class()` (`status-warning`…) et `pretty()` pour les rendre.
+- **Cards** : `.card` + variante colorée `.card-{tool-color}` (ex. `.card-success`).
 
 ---
 

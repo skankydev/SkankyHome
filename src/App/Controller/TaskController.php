@@ -14,7 +14,9 @@
 namespace App\Controller;
 
 use App\Form\TaskForm;
+use App\Model\Document\Project;
 use App\Model\Document\Task;
+use App\Model\Enum\TaskStatus;
 use App\Model\TaskCollection;
 use SkankyDev\Controller\MasterController;
 use SkankyDev\Http\Request;
@@ -26,25 +28,23 @@ class TaskController extends MasterController {
 		return view('task.index', ['tasks' => $tasks]);
 	}
 
-	public function create(){
-		$form = new TaskForm(['action' => 'store']);
-		return view('task.create', ['form' => $form]);
-	}
 
-	public function store(Request $request){
+	public function store(Request $request, Project $project){
 		$input = $request->input();
-		$form = new TaskForm(['action' => 'store']);
+		$input['project_id'] = (string) $project->_id;
+
+		$form = new TaskForm(['controller'=>'project','action' => 'store', 'params' => [$project->_id]]);
 		if(!$form->validate($input)){
-			return redirect(['action' => 'create'])->withErrors($form->getErrors())->withInput($input);
+			return redirect(['controller'=>'project','action' => 'show', 'params' => [$project->_id]])
+				->withErrors($form->getErrors())->withInput($input);
 		}
+
 		$task = new Task($input);
 		TaskCollection::_save($task);
-		return redirect(['action' => 'show', 'params' => [$task->_id]])->withFlash('success', 'Enregistrement réussi');
+		return redirect(['controller'=>'project','action' => 'show', 'params' => [$project->_id]])
+			->withFlash('success', 'Tâche ajoutée');
 	}
 
-	public function show(Request $request, Task $task){
-		return view('task.show', ['task' => $task]);
-	}
 
 	public function edit(Task $task){
 		$form = new TaskForm(['action' => 'update', 'params' => [$task->_id]]);
@@ -52,19 +52,36 @@ class TaskController extends MasterController {
 		return view('task.edit', ['form' => $form, 'task' => $task]);
 	}
 
+
 	public function update(Request $request, Task $task){
 		$input = $request->input();
 		$form = new TaskForm(['action' => 'update', 'params' => [$task->_id]]);
 		if(!$form->validate($input)){
-			return redirect(['action' => 'update', 'params' => [$task->_id]])->withErrors($form->getErrors())->withInput($input);
+			return redirect(['action' => 'edit', 'params' => [$task->_id]])->withErrors($form->getErrors())->withInput($input);
 		}
 		$task->fill($input);
 		TaskCollection::_save($task);
-		return redirect(['action' => 'show', 'params' => [$task->_id]])->withFlash('success', 'Modification réussie');
+		return redirect(['controller'=>'project','action' => 'show', 'params' => [$task->project_id]])->withFlash('success', 'Modification réussie');
 	}
 
-	public function delete(Task $task){
+
+	public function setStatus(Request $request, Task $task){
+		$status = TaskStatus::tryFrom((string) $request->input('status'));
+		if($status === null){
+			return response(['ok' => false, 'message' => 'Statut invalide']);
+		}
+		$task->status = $status;
+		TaskCollection::_save($task);
+		return response([
+			'ok'    => true,
+			'value' => $status->value,
+			'label' => $status->label(),
+			'class' => $status->class(),
+		]);
+	}
+
+	public function remove(Request $request, Task $task){
 		TaskCollection::_deleteOne($task);
-		return redirect(['action' => 'index'])->withFlash('success', 'Suppression réussie');
+		return response(['ok' => true]);
 	}
 }

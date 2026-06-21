@@ -28,6 +28,11 @@ function view(string $name,array $data = []){
 	return $response;
 }
 
+function response(array $data = []){
+    $response = new Response('',$data);
+    return $response;
+}
+
 
 /**
  * Échapper du HTML

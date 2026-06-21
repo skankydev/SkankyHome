@@ -42,6 +42,6 @@ $this->addCrumb($persona->name,['action'=>'show','params'=>['persona'=>$persona-
 		<img class="persona-avatar" src="<?= $persona->img_url ?>" alt="">
 	</div>
 	<div class="grid-full card p-m">
-		<?= $content ?>
+		<?= $this->part('part.markdown', ['content' => $persona->content]) ?>
 	</div>
 </section>

@@ -14,8 +14,11 @@
 namespace App\Controller;
 
 use App\Form\ProjectForm;
+use App\Form\TaskForm;
 use App\Model\Document\Project;
+use App\Model\Document\Task;
 use App\Model\ProjectCollection;
+use App\Model\TaskCollection;
 use SkankyDev\Controller\MasterController;
 use SkankyDev\Http\Request;
 
@@ -43,7 +46,35 @@ class ProjectController extends MasterController {
 	}
 
 	public function show(Request $request, Project $project){
-		return view('project.show', ['project' => $project]);
+		$tasks = TaskCollection::_find(
+			['project_id' => $project->_id],
+			['sort' => ['created_at' => 1]]
+		);
+		$taskForm = new TaskForm(['controller'=>'task','action' => 'store', 'params' => [$project->_id]]);
+		return view('project.show', [
+			'project'  => $project,
+			'tasks'    => $tasks,
+			'taskForm' => $taskForm,
+		]);
+	}
+
+	/**
+	 * Ajout rapide d'une tâche au projet (le project_id vient de l'URL, pas du form).
+	 */
+	public function addTask(Request $request, Project $project){
+		$input = $request->input();
+		$input['project_id'] = (string) $project->_id;
+
+		$form = new TaskQuickForm(['action' => 'addTask', 'params' => [$project->_id]]);
+		if(!$form->validate($input)){
+			return redirect(['action' => 'show', 'params' => [$project->_id]])
+				->withErrors($form->getErrors())->withInput($input);
+		}
+
+		$task = new Task($input);
+		TaskCollection::_save($task);
+		return redirect(['action' => 'show', 'params' => [$project->_id]])
+			->withFlash('success', 'Tâche ajoutée');
 	}
 
 	public function edit(Project $project){

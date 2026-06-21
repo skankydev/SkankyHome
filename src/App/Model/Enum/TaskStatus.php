@@ -3,11 +3,24 @@
 namespace App\Model\Enum;
 
 enum TaskStatus: string {
+	
 	case TODO    = 'todo';
 	case DOING   = 'doing';
 	case DONE    = 'done';
 	case BLOCKED = 'blocked';
 
+
+	/**
+	 * value => label, prêt pour l'option `options` d'un SelectField.
+	 */
+	public static function options(): array {
+		$out = [];
+		foreach (self::cases() as $case) {
+			$out[$case->value] = $case->label();
+		}
+		return $out;
+	}
+	
 	/**
 	 * Libellé lisible pour l'affichage.
 	 * Le match est exhaustif : oublier un case = erreur fatale (garde-fou).
@@ -21,14 +34,18 @@ enum TaskStatus: string {
 		};
 	}
 
-	/**
-	 * value => label, prêt pour l'option `options` d'un SelectField.
-	 */
-	public static function options(): array {
-		$out = [];
-		foreach (self::cases() as $case) {
-			$out[$case->value] = $case->label();
-		}
-		return $out;
+
+	public function class() : string {
+		return match($this) {
+			self::TODO    => 'status-error',
+			self::DOING   => 'status-warning',
+			self::DONE    => 'status-success',
+			self::BLOCKED => 'status-disabled',
+		};
 	}
+
+	public function pretty() : string {
+		return '<div class="'.$this->class().'">'.$this->label().'</div>';
+	}
+
 }

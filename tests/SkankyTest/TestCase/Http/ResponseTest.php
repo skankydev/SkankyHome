@@ -119,6 +119,23 @@ class ResponseTest extends TestCase
         $this->assertStringContainsString('Test Build', $body);
     }
 
+    public function testBuildJsonWhenNoViewNameEvenIfClientWantsHtml(): void {
+        $ref = new \ReflectionProperty(Request::class, '_instance');
+        $ref->setValue(null, null);
+        $_SERVER['HTTP_ACCEPT'] = 'text/html';
+
+        // response() crée un Response sans vue → réponse de données → toujours du JSON,
+        // même si le client n'a pas demandé application/json.
+        $response = new Response('', ['ok' => true, 'label' => 'Terminé']);
+        $response->build();
+
+        $ref2 = new \ReflectionProperty($response, 'body');
+        $body = $ref2->getValue($response);
+
+        $this->assertJson($body);
+        $this->assertStringContainsString('ok', $body);
+    }
+
     public function testBuildReturnsSelf(): void {
         $ref = new \ReflectionProperty(Request::class, '_instance');
         $ref->setValue(null, null);

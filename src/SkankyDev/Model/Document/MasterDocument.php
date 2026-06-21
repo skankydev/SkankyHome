@@ -124,6 +124,18 @@ class MasterDocument implements JsonSerializable, Persistable {
 				if ($enum !== null) {
 					$this->{$key} = $enum;
 				}
+			} elseif ($type === DateTime::class) {
+				if ($value instanceof DateTime) {
+					$this->{$key} = $value;
+				} elseif (!empty($value)) {
+					try {
+						// new DateTime parse l'ISO du navigateur (date "2026-06-20"
+						// comme datetime-local "2026-06-20T14:30") et la plupart des formats.
+						$this->{$key} = new DateTime($value);
+					} catch (\Exception $e) {
+						// chaîne de date non parsable → on laisse le défaut
+					}
+				}
 			} else {
 				$this->{$key} = $value;
 			}

@@ -14,32 +14,30 @@
 namespace App\Form;
 
 use App\Model\Enum\TaskStatus;
-use App\Model\ProjectCollection;
 use SkankyDev\Form\FormBuilder;
 
-class TaskForm extends FormBuilder {
+/**
+ * Formulaire d'ajout rapide d'une tâche depuis la page d'un projet.
+ * Pas de champ project_id : le projet vient de l'URL (ProjectController::addTask).
+ */
+class TaskQuickForm extends FormBuilder {
 
 	public function build() : void {
 
 		$this->add('name','text',[
-			'label' => 'Name',
-			'rules' => ['required']
-		]);
-		$this->add('icon','icon',[
-			'label' => 'Icon',
-			'rules' => []
-		]);
-		$this->add('description','textarea',[
-			'label' => 'Description',
-			'rules' => []
+			'label' => 'Nom de la tâche',
+			'rules' => ['required'],
 		]);
 		$this->add('status','select',[
-			'label' => 'Status',
+			'label' => 'Statut',
 			'rules' => ['required'],
 			'options' => TaskStatus::options(),
 		]);
+		$this->add('description','textarea',[
+			'label' => 'Description',
+			'rules' => [],
+		]);
 
-		$this->submit('<i class="icon-save"></i> SAVE');
+		$this->submit('<i class="icon-add"></i> Ajouter la tâche');
 	}
-
 }
