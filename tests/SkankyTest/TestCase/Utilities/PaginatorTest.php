@@ -101,6 +101,53 @@ class PaginatorTest extends TestCase
         $this->assertStringNotContainsString('sorted', $html);
     }
 
+    // ── Table data-driven : valeurs de cellule auto-formatées ───────────────────
+
+    public function testCellValueFormatsByRuntimeType(): void {
+        $paginator = new Paginator($this->data, $this->option);
+
+        $doc = (object) [
+            'name'    => 'Salon',
+            'count'   => ['a', 'b', 'c'],
+            'when'    => new \DateTime('2026-06-15 14:30'),
+            'flagOn'  => true,
+            'flagOff' => false,
+            'empty'   => null,
+        ];
+
+        $this->assertSame('Salon', $paginator->cellValue($doc, 'name'));
+        $this->assertSame('3', $paginator->cellValue($doc, 'count'));
+        $this->assertSame('15/06/2026 14:30', $paginator->cellValue($doc, 'when'));
+        $this->assertStringContainsString('icon-check', $paginator->cellValue($doc, 'flagOn'));
+        $this->assertStringContainsString('icon-x', $paginator->cellValue($doc, 'flagOff'));
+        $this->assertSame('', $paginator->cellValue($doc, 'empty'));
+    }
+
+    public function testCellValueEscapesStrings(): void {
+        $paginator = new Paginator($this->data, $this->option);
+        $doc = (object) ['name' => '<script>alert(1)</script>'];
+
+        $value = $paginator->cellValue($doc, 'name');
+        $this->assertStringNotContainsString('<script>', $value);
+        $this->assertStringContainsString('&lt;script&gt;', $value);
+    }
+
+    public function testResourceControllerAndSingularFromDocumentClass(): void {
+        $paginator = new Paginator($this->data, $this->option);
+        $paginator->setDocumentClass('App\\Model\\Document\\Module');
+
+        $this->assertSame('Module', $paginator->controller());
+        $this->assertSame('module', $paginator->singular());
+    }
+
+    public function testDisplayFieldRoundTrip(): void {
+        $paginator = new Paginator($this->data, $this->option);
+        $fields = ['name' => ['label' => 'Name', 'sort' => true]];
+        $paginator->setDisplayField($fields);
+
+        $this->assertSame($fields, $paginator->getDisplayField());
+    }
+
     /** Met en place une route courante pour que UrlBuilder puisse construire les liens. */
     private function setUpRoute(): void {
         (new \ReflectionProperty(Router::class,     '_instance'))->setValue(null, null);

@@ -2,6 +2,7 @@
 <html lang="FR_fr">
 <head>
 	<meta charset="UTF-8" />
+	<meta name="csrf-token" content="<?= csrf_token() ?>" />
 	<link rel="icon" type="image/png" href="/favicon.png" />
 	<title>
 		<?php

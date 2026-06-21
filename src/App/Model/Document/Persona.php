@@ -25,5 +25,10 @@ class Persona extends MasterDocument {
 
 	public string $name = '';
 	public string $content = '';
+	public array $img_info = [];
+
+	public function getImgUrl(){
+		return $this->img_info['url'] ?? '';
+	}
 
 }

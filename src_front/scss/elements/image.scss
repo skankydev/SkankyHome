@@ -1,0 +1,8 @@
+@use '../settings/functions' as *;
+@use '../settings/mixins' as *;
+@use '../settings/variables' as *;
+@use '../settings/animations' as *;
+
+.persona-avatar{
+	width: 350px;
+}

@@ -1,0 +1,40 @@
+@use '../settings/functions' as *;
+@use '../settings/mixins' as *;
+@use '../settings/variables' as *;
+@use '../settings/animations' as *;
+
+.widget-grid{
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	gap: $p-m;
+}
+
+.widget-link{
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+.widget-body{
+	flex-grow: 1;
+	display: flex;
+	justify-content: center;
+	height: 100%;
+	flex-direction: column;
+}
+.widget-image{
+	width: 100%;
+	height: auto;
+}
+
+.widget-icon{
+	i::before{
+		font-size: 128px;
+	}
+}
+
+.widget-name{
+	font-size: $fs-4xl;
+	font-weight: $weight-light;
+	text-transform: capitalize;
+}

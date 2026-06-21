@@ -27,7 +27,8 @@
     ],
     "require": {
         "mongodb/mongodb": "^2.1",
-        "php-mqtt/client": "^2.3"
+        "php-mqtt/client": "^2.3",
+        "league/commonmark": "^2.8"
     },
     "require-dev": {
         "phpunit/phpunit": "^12.4"

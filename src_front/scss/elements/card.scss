@@ -29,7 +29,7 @@
 	@each $name, $color in $tool-colors {
 		&.card-#{$name} {
 			border-color: rgba($color, 0.3);
-			
+			transition: all 0.2s;
 			// Shadow colorée au repos
 			box-shadow: 
 				0 0 10px rgba($color, 0.15),
@@ -77,9 +77,7 @@
 .card-footer {
 	border-top: 1px solid rgba($border-color, 0.4);
 	padding: $p-ms;
-	display: flex;
 	gap: $p-s;
-	align-items: center;
 }
 
 

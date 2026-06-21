@@ -1,4 +1,4 @@
-<?php 
+<?php
 $this->setLayout('layout.default');
 ?>
 
@@ -6,16 +6,16 @@ $this->setLayout('layout.default');
 	<div class="page-title">
 		<h2 class="rainbow-icon">
 			<i class="icon-zap"></i>
-			Modifier Firmware		</h2>
+			Widget		</h2>
 	</div>
 	<div class="page-action">
-		<a href="<?= $this->url(['action'=>'index']) ?>" class="btn btn-secondary">
-			<i class="icon-arrow-left"></i>
-			Retour
+		<a href="<?= $this->url(['action'=>'create']) ?>" class="btn btn-primary">
+			<i class="icon icon-add"></i>
+			Ajouter
 		</a>
 	</div>
 </header>
 
 <section class="page-content">
-	<?= $form->render() ?>
+	<?= $this->part('part.table', ['paginator' => $widgets]); ?>
 </section>

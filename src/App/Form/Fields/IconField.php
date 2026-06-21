@@ -18,6 +18,7 @@ use SkankyDev\Form\FormField;
 
 
 class IconField extends FormField {
+	
 	protected string $type = 'icon';
 	protected string $viewHtml = 'fields.icon';
 

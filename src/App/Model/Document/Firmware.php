@@ -16,7 +16,7 @@ namespace App\Model\Document;
 
 use SkankyDev\Model\Document\MasterDocument;
 use SkankyDev\Model\Document\Traits\TimedTrait;
-use DateTime;
+use MongoDB\BSON\ObjectId;
 
 class Firmware extends MasterDocument {
 
@@ -24,7 +24,7 @@ class Firmware extends MasterDocument {
 
 
 	public string $name = '';
-	public string $module_id;
+	public ObjectId $module_id;
 	public float $version = 0;
 	public array $file;
 

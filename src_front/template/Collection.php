@@ -23,5 +23,23 @@ class <?= $name ?>Collection extends MasterCollection {
 
 	protected string $collectionName = '<?= $collection ?>';
 	protected string $documentClass = <?= $name ?>::class;
-	
+
+	public function getDisplayField(): array {
+		return [
+<?php foreach($this->fields as $field): ?>
+<?php if($field['type'] === 'ObjectId'): ?>
+			'<?= $field['name'] ?>' => [
+				'label'  => '<?= $this->fkRelated($field['name']) ?>',
+				'sort'   => true,
+				'render' => fn($<?= $singularCamel ?>) => e($<?= $singularCamel ?>-><?= lcfirst($this->fkRelated($field['name'])) ?>?->name ?? '—'),
+			],
+<?php else: ?>
+			'<?= $field['name'] ?>' => ['label' => '<?= $this->toHuman($field['name']) ?>', 'sort' => true],
+<?php endif; ?>
+<?php endforeach; ?>
+			'created_at' => ['label' => 'Created', 'sort' => true],
+			'updated_at' => ['label' => 'Updated', 'sort' => true],
+		];
+	}
+
 }

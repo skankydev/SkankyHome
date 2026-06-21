@@ -259,6 +259,19 @@ abstract class MasterCollection {
 		$page = $paginateInfo['page'] ?? 1;
 		$limit = $paginateInfo['limit'] ?? 10;
 		$sort = $paginateInfo['sort'] ?? [];
+		$display = $this->getDisplayField();
+
+		// Le tri n'est accepté que sur un champ déclaré triable dans getDisplayField :
+		// la définition d'affichage fait office de whitelist (champ venant de l'URL).
+		// L'ordre est normalisé à 1/-1 pour éviter un sort MongoDB invalide.
+		if (!empty($sort)) {
+			$field = array_key_first($sort);
+			if (empty($display[$field]['sort'])) {
+				$sort = [];
+			} else {
+				$sort = [$field => ($sort[$field] < 0 ? -1 : 1)];
+			}
+		}
 
 		// Un tri stable est toujours nécessaire : sans lui, skip/limit peut renvoyer
 		// des résultats incohérents entre deux pages (doublons / oublis). `_id` est le
@@ -278,7 +291,53 @@ abstract class MasterCollection {
 
 		$items = $this->find($filter, $options);
 		$paginateInfo['total'] = $this->count($filter);
-		return new Paginator($items,$paginateInfo);
+
+		$paginator = new Paginator($items, $paginateInfo);
+		$paginator->setDisplayField($display);
+		$paginator->setDocumentClass($this->documentClass);
+		return $paginator;
+	}
+
+	/**
+	 * Describes the columns to render in a generic table (the `part.table` view).
+	 * Default: every public field of the document (except `_id`), all sortable.
+	 * Override in a concrete Collection to customise labels, sort, fake fields
+	 * (resolved via the Document `__get`), or per-cell `render`/`after` callbacks.
+	 *
+	 * Shape: `['field' => ['label' => string, 'sort' => bool, 'render'? => callable, 'after'? => callable]]`
+	 * @return array<string, array>
+	 */
+	public function getDisplayField(): array {
+		$fields = [];
+		$reflection = new \ReflectionClass($this->documentClass);
+		foreach ($reflection->getProperties(\ReflectionProperty::IS_PUBLIC) as $prop) {
+			$name = $prop->getName();
+			if ($name === '_id') {
+				continue;
+			}
+			$fields[$name] = [
+				'label' => ucfirst(str_replace('_', ' ', $name)),
+				'sort'  => true,
+			];
+		}
+		return $fields;
+	}
+
+	/**
+	 * Route link used when this document is shown as a home widget.
+	 * Default: the resource `show` page. Override in a concrete Collection to
+	 * point elsewhere (e.g. PersonaCollection → the chat action).
+	 * @param object $document the target document
+	 * @return array route array for UrlBuilder
+	 */
+	public function widgetLink(object $document): array {
+		$parts = explode('\\', $this->documentClass);
+		$controller = end($parts);
+		return [
+			'controller' => $controller,
+			'action'     => 'show',
+			'params'     => [lcfirst($controller) => $document->_id],
+		];
 	}
 	
 	/**

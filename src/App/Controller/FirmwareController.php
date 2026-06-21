@@ -20,6 +20,7 @@ use App\Model\Document\Module;
 use App\Model\FirmwareCollection;
 use App\Utilities\Upload;
 use SkankyDev\Controller\MasterController;
+use SkankyDev\Http\Middleware\Attribute\Middleware;
 use SkankyDev\Http\Request;
 use SkankyDev\Queue\Queue;
 
@@ -36,6 +37,7 @@ class FirmwareController extends MasterController {
 		]);
 	}
 
+	#[Middleware('PostOnly')]
 	public function store(Request $request,Module $module){
 		$input = $request->input();
 		$file = $request->file();
@@ -61,6 +63,7 @@ class FirmwareController extends MasterController {
 		return redirect(['controller'=>'module', 'action' => 'show', 'params' => ['module'=>$module->_id]])->withFlash('success', 'Firmware uploadé avec succès');
 	}
 
+	#[Middleware('PostOnly')]
 	public function delete(Firmware $firmware){
 		$filepath = PUBLIC_FOLDER.$firmware->file['path'];
 		unlink($filepath);

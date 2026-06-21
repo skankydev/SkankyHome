@@ -71,7 +71,7 @@ class CrudMaker extends MasterCommand
 		$this->warning('Configuration des champs de '.$this->documentName.' :');
 		$this->text('');
 		
-		$types = ['string', 'int', 'float', 'bool', 'date', 'datetime', 'array'];
+		$types = ['string', 'int', 'float', 'bool', 'date', 'datetime', 'array', 'ObjectId'];
 		
 		while (true) {
 			$fieldName = $this->ask(vert('Nom du champ').' ('.rouge('vide pour terminer').')');
@@ -104,6 +104,27 @@ class CrudMaker extends MasterCommand
 			$this->error('Aucun champ configuré !');
 			//exit;
 		}
+	}
+
+	/**
+	 * Derives the related document name (PascalCase, singular) from a FK field name.
+	 * e.g. `project_id` → `Project` (used for the `ObjectId` field type).
+	 */
+	private function fkRelated(string $fieldName): string {
+		return $this->toCap(preg_replace('/_id$/', '', $fieldName), '_');
+	}
+
+	/**
+	 * Name of the first non-FK field, used as the human label in the show view
+	 * header and the breadcrumb. Falls back to the first field, then `_id`.
+	 */
+	private function labelField(): string {
+		foreach ($this->fields as $field) {
+			if ($field['type'] !== 'ObjectId') {
+				return $field['name'];
+			}
+		}
+		return $this->fields[0]['name'] ?? '_id';
 	}
 
 	/**

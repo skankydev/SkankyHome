@@ -14,7 +14,8 @@ $this->setLayout('layout.default');
 			<i class="icon icon-edit"></i>
 			Edit
 		</a>
-		<a href="<?= $this->url(['action'=>'delete','params'=>[$scenario->_id]]) ?>" class="btn btn-error">
+		<a href="<?= $this->url(['action'=>'delete','params'=>[$scenario->_id]]) ?>" class="btn btn-error"
+			data-method="post" data-confirm="Supprimer ce scénario ?">
 			<i class="icon-delete"></i>
 			delete
 		</a>

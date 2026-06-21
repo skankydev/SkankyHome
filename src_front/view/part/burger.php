@@ -22,6 +22,9 @@
 			<div class="burger-link">
 				<a href="<?= $this->url(['controller'=>'persona','action'=>'index']) ?>"><i class="icon-message-circle"></i>Chat Bot</a>
 			</div>
+			<div class="burger-link">
+				<a href="<?= $this->url(['controller'=>'project','action'=>'index']) ?>"><i class="icon-sunrise"></i> Project</a>
+			</div>
 		</div>
 	</div>
 </div>

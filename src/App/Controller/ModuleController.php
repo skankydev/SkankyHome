@@ -19,6 +19,7 @@ use App\Model\Document\Module;
 use App\Model\FirmwareCollection;
 use App\Model\ModuleCollection;
 use SkankyDev\Controller\MasterController;
+use SkankyDev\Http\Middleware\Attribute\Middleware;
 use SkankyDev\Http\Request;
 use SkankyDev\Queue\Queue;
 
@@ -75,6 +76,7 @@ class ModuleController extends MasterController {
 		return redirect(['action' => 'show', 'params' => [$module->_id]])->withFlash('success', 'Modification réussie');
 	}
 
+	#[Middleware('PostOnly')]
 	public function delete(Module $module){
 		ModuleCollection::_deleteOne($module);
 		return redirect(['action' => 'index'])->withFlash('success', 'Suppression réussie');

@@ -32,6 +32,12 @@ class Paginator implements Iterator {
 	/** Base route link reused by all the links this paginator generates (sort + pages). */
 	protected array $baseLink = [];
 
+	/** Column definitions for the generic table part (from Collection::getDisplayField). */
+	protected array $displayField = [];
+
+	/** FQ document class name — used to derive the resource controller / id param. */
+	protected string $documentClass = '';
+
 	/**
 	 * @param iterable $data   the result set (MongoDB cursor or array)
 	 * @param array    $option pagination options: page, limit, total, range, sort
@@ -141,6 +147,64 @@ class Paginator implements Iterator {
 		}
 
 		return $this->link($content, $link, $attr);
+	}
+
+	/** Sets the column definitions (from Collection::getDisplayField). */
+	public function setDisplayField(array $fields): static {
+		$this->displayField = $fields;
+		return $this;
+	}
+
+	/** Returns the column definitions for the generic table part. */
+	public function getDisplayField(): array {
+		return $this->displayField;
+	}
+
+	/** Sets the document class, used to derive the resource controller / id param. */
+	public function setDocumentClass(string $class): static {
+		$this->documentClass = $class;
+		return $this;
+	}
+
+	/** Resource controller name derived from the document class, e.g. `Module`. */
+	public function controller(): string {
+		$parts = explode('\\', $this->documentClass);
+		return end($parts) ?: '';
+	}
+
+	/** Singular id param name for route links, e.g. `module`. */
+	public function singular(): string {
+		return lcfirst($this->controller());
+	}
+
+	/**
+	 * Renders the auto-formatted, escaped value of a field for one document.
+	 * Reads `$document->{$field}` (so fake fields resolve via the Document __get),
+	 * then formats by runtime type: DateTime → date, bool → icon, array → count.
+	 * Plain strings are escaped with e(). Custom rendering is handled by the
+	 * `render`/`after` callbacks in the column definition (in the view).
+	 */
+	public function cellValue(object $document, string $field): string {
+		$value = $document->{$field};
+
+		if ($value instanceof \DateTime) {
+			return $value->format('d/m/Y H:i');
+		}
+		if ($value instanceof \BackedEnum) {
+			return e(method_exists($value, 'label') ? $value->label() : $value->value);
+		}
+		if (is_bool($value)) {
+			return $value
+				? '<i class="icon-check text-success"></i>'
+				: '<i class="icon-x text-danger"></i>';
+		}
+		if (is_array($value)) {
+			return (string) count($value);
+		}
+		if ($value === null) {
+			return '';
+		}
+		return e((string) $value);
 	}
 
 }

@@ -38,3 +38,11 @@
 	}
 }
 
+@each $name, $color in $tool-colors {
+		
+	.status-#{$name} {
+		color: $color;
+		text-shadow: 0 0 8px rgba($color, 0.8),
+	}
+
+}
