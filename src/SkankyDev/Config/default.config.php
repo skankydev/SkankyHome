@@ -27,11 +27,13 @@ return [
 	],
 	'debug' => true,
 	'middlewares'=>[
-		'Session'=>'Session'
+		'Session'=>'Session',
+		'Csrf'=>'Csrf'
 	],
 	'class' => [
 		'middlewares' => [
 			'Session'  => \SkankyDev\Http\Middleware\SessionMiddleware::class,
+			'Csrf'     => \SkankyDev\Http\Middleware\CsrfMiddleware::class,
 		],
 		'fields' => [
 			'text'     => \SkankyDev\Form\Fields\TextField::class,

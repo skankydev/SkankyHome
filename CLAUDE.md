@@ -42,6 +42,18 @@ php vendor/bin/phpunit --filter testMagicGetExistingProperty    # un test
 
 ## Architecture SkankyDev
 
+### Cycle de vie d'une requête
+
+`public/index.php` → `Application::run()` :
+1. `Config::initConf()` + handler d'exceptions global.
+2. `Request::getInstance()` (superglobales → objet).
+3. `Router::_findCurrentRoute($uri)` : route explicite (`routes/routes.php`) sinon fallback par convention.
+4. `MiddlewareManager` exécute le pipeline (globaux + attributs `#[Middleware]`), terminé par :
+5. `MasterFactory` instancie le controller et appelle l'action (Collections injectées par type, Documents résolus depuis les params d'URL).
+6. L'action retourne une `Response` (`view()` / `redirect()` / `response()`) → `->send()`.
+
+CLI : `craft` → `CliApplication` (même `Config::initConf`, auto-découverte des commandes).
+
 ### Routing
 
 Routing par **convention** — pas besoin de déclarer les routes CRUD.
@@ -75,6 +87,31 @@ public function show(Request $request, Module $module) {
 }
 ```
 
+### MasterFactory (instanciation & injection)
+
+Conteneur DI maison, appelé en statique (Singleton) : `MasterFactory::_make()`, `MasterFactory::_call()`.
+- `_make(class, args)` : instancie en résolvant le constructeur. Gère les Singleton (`getInstance()`), les classes sans constructeur, et la DI récursive.
+- `_call(objet, méthode, params)` : appelle une méthode en résolvant ses paramètres.
+- **Résolution d'un paramètre** : sous-classe de `MasterDocument` → `find()` depuis l'ID de route (clé nommée ou positionnelle) ; clé nommée présente → telle quelle ; type natif/sans type → valeur fournie ou défaut ; autre classe → `_make()` récursif.
+
+### Middleware
+
+Pipeline exécuté par `MiddlewareManager` (dans `Application::run`) : middlewares globaux + ceux des attributs, dans l'ordre, se terminant par l'appel au controller.
+
+- **Contrat** : `MiddlewareInterface::handle(Request $request, callable $next): mixed`. On appelle `$next($request)` pour continuer, ou on **retourne une `Response`** pour court-circuiter (auth refusée, CSRF, etc.).
+- **Globaux** : déclarés dans la config `middlewares` (clé => alias), résolus via la map `class.middlewares`. Ordre = ordre d'exécution (ex. `Session` avant `Csrf`).
+- **Ciblés** : attribut `#[Middleware(Alias::class, ...args)]` sur le controller (toutes les actions) ou sur une action (celle-là seulement). Les args vont au constructeur du middleware (via `MasterFactory`).
+- **Sur une route explicite** : `Router::_add('/x', [...])->setMiddlewares(['Alias', ...])` (peu utilisé ici, le routing est surtout par convention).
+- Exemples livrés : `SessionMiddleware` (démarre la session), `CsrfMiddleware` (validation CSRF).
+
+```php
+#[Middleware(AuthMiddleware::class)]                 // tout le controller
+class AdminController extends MasterController {
+    #[Middleware(PermissionMiddleware::class, 'edit')] // cette action
+    public function edit(...) {}
+}
+```
+
 ### Vues
 
 - Templates PHP dans `src_front/view/`
@@ -96,6 +133,43 @@ Types de champs disponibles : `text`, `textarea`, `number`, `checkbox`, `radio`,
 
 Règles dans les Forms, vérifiées via `$form->validate($input)`.
 En cas d'échec : `redirect()->withErrors($form->getErrors())->withInput($input)`
+
+Règles dispo (config `class.rules`) : `required`, `email`, `numeric`, `min`, `max`, `min_length`, `max_length`, `regex`, `confirmed`, `same`, `hex_color`. Syntaxe : `'rules' => ['required', 'min_length:3', 'max:255']` (params après `:`). Fail-fast : 1ʳᵉ règle qui casse par champ.
+
+### CSRF
+
+`CsrfMiddleware` (global, après `Session`) valide les requêtes **POST/PUT/PATCH/DELETE** : token `_token` (forms) ou header `X-CSRF-Token` (AJAX), comparé au token de session (1 par session, via `csrf_token()`). Échec → 419 JSON (AJAX) ou redirect + flash.
+- **Forms** : `FormBuilder` injecte `_token` automatiquement (rien à faire).
+- **AJAX** : `app.js` wrappe `fetch` pour ajouter `X-CSRF-Token` (lu du `<meta name="csrf-token">`) → automatique pour tout `fetch` same-origin.
+- ⚠️ Les `delete` CRUD sont des **liens GET** → non protégés (limite connue, à passer en POST un jour).
+
+### Réponses
+
+Une action retourne une `Response` (jamais d'`echo`). Trois fabriques (`function.php`) :
+- `view('dossier.fichier', $data)` → vue HTML (ou JSON si `Accept: application/json`).
+- `redirect(['action' => ...])` → 302 + `Location`. Chaînable : `->withFlash()`, `->withErrors()`, `->withInput()`.
+- `response($data)` → **réponse de données** : toujours du JSON (pas de vue), pour l'AJAX. `->status(419)`, etc.
+
+`Response::build()` rend du JSON si le client le demande **ou** s'il n'y a pas de vue ; sinon la `HtmlView`. `send()` construit le body des 2xx et 4xx/5xx (pas des redirections 3xx).
+
+### Parts
+
+Bouts de vue réutilisables (façon View Cells) : `$this->part('part.markdown', ['content' => $x])`
+- rend `src_front/view/part/markdown.php` ;
+- si une classe `App\View\Part\PartMarkdownPart` existe (convention : segments du nom capitalisés + `Part`), son `data($options)` est fusionné aux variables avant rendu.
+Exemples : `part.table` (table data-driven, vue pure), `part.markdown` / `part.breadcrumb` (avec classe).
+
+### Config
+
+`Config::initConf()` fusionne, dans l'ordre : `src/SkankyDev/Config/default.config.php` ← config de chaque module (`src/{Module}/Config/config.php`) ← `config/master.config.php`. Accès : `Config::get('chemin.pointe')`. Y vivent `middlewares`, `class.middlewares`, `class.fields`, `class.rules`, `Module`, `paginator`, `icons`…
+
+### Gestion des erreurs
+
+`ExceptionHandler` est le handler global (+ shutdown pour les fatales). Debug (`Config::get('debug')`) → page détaillée (classe, fichier, trace) ; prod → page générique. Le code de l'exception sert de statut (ex. `throw new ...Exception('...', 404)`).
+
+### Helpers globaux (`function.php`)
+
+`view()`, `redirect()`, `response()`, `url()`, `asset()` ; `e()` (échappement HTML), `json()` ; `csrf_field()` / `csrf_token()` ; `flash()`, `old()`, `error()` ; `debug()`.
 
 ---
 
@@ -168,6 +242,16 @@ Dispatch dynamique : message `{'cmd': 'hello'}` → appelle `helloCmd()` sur le 
 
 ---
 
+## CLI (craft)
+
+Point d'entrée : `php craft <signature> [args]`. `CliApplication` auto-découvre les commandes dans le dossier `Command/` de chaque module (+ SkankyDev). `php craft help` les liste.
+
+Créer une commande : classe dans `src/App/Command/` étendant `MasterCommand`, avec les propriétés statiques `$signature` + `$help`, et la méthode `run(array $arg)`. Helpers CLI (trait `CliMessage`) : `info`/`success`/`warning`/`error`/`text`, `ask`, `choice`, `valide`.
+
+Commandes livrées : `crud-maker`, `queue:work`, `mqtt-loop`.
+
+---
+
 ## Génération CRUD
 
 ```bash
@@ -228,6 +312,7 @@ Point d'entrée : `main.scss` qui `@use` tous les partials. Organisation :
 
 ### Conventions utiles
 
+- **Réutiliser l'existant d'abord** : avant d'écrire du SCSS, composer les classes génériques (`elements/`, `tools/`, `scaffold/`). Ne créer un partial `component/` que si rien ne convient — ne pas re-styler ce qui a déjà une classe.
 - **Badges de statut** : classe `.status-{nom}` (générée depuis `$tool-colors` dans `tools/neon.scss`) → texte coloré + neon glow. Les enums exposent `class()` (`status-warning`…) et `pretty()` pour les rendre.
 - **Cards** : `.card` + variante colorée `.card-{tool-color}` (ex. `.card-success`).
 

@@ -13,7 +13,27 @@ window.remove = function(element) {
 	if (element && element.parentNode) {
 		element.parentNode.removeChild(element);
 	}
-}
+};
+
+// Injection automatique du token CSRF sur toutes les requêtes fetch same-origin
+// non-GET (forms AJAX, ScenarioMaker, tâches…). Le token vient du <meta> du layout.
+;(() => {
+	const meta = document.querySelector('meta[name="csrf-token"]');
+	if (!meta) return;
+	const token = meta.getAttribute('content');
+	const nativeFetch = window.fetch.bind(window);
+
+	window.fetch = function (resource, options = {}) {
+		const method = (options.method || 'GET').toUpperCase();
+		const target = resource instanceof Request ? resource.url : resource;
+		const sameOrigin = new URL(target, window.location.origin).origin === window.location.origin;
+
+		if (sameOrigin && method !== 'GET' && method !== 'HEAD') {
+			options.headers = { ...(options.headers || {}), 'X-CSRF-Token': token };
+		}
+		return nativeFetch(resource, options);
+	};
+})();
 
 
 document.addEventListener('DOMContentLoaded', () => {

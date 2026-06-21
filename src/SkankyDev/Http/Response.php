@@ -74,7 +74,9 @@ class Response {
 	 * Falls back to a JS redirect if headers are already sent and status is 3xx.
 	 */
 	public function send(): void {
-		if (!$this->built && $this->statusCode >= 200 && $this->statusCode < 300) {
+		// Build le body pour les réponses 2xx et les erreurs (4xx/5xx) ;
+		// pas pour les redirections 3xx qui n'ont pas de corps.
+		if (!$this->built && ($this->statusCode < 300 || $this->statusCode >= 400)) {
 			$this->build();
 		}
 		

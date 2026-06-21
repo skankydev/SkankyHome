@@ -28,7 +28,9 @@
 }
 
 .widget-icon{
-	font-size: 128px;
+	i::before{
+		font-size: 128px;
+	}
 }
 
 .widget-name{
