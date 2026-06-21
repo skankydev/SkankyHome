@@ -23,6 +23,6 @@ $this->addCrumb('Module',['action'=>'index'],'icon-zap');
 		'paginator' => $modules,
 		'actions'   => fn($module) => $this->link('<i class="icon-refresh-cw"></i>',
 			['action' => 'reboot', 'params' => ['module' => $module->_id]],
-			['class' => 'btn-mini btn-success']),
+			['class' => 'btn-mini btn-success','data-tooltip'=>'Reboot']),
 	]); ?>
 </section>

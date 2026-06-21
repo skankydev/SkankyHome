@@ -53,10 +53,10 @@ $hasActions = $btnShow || $btnEdit || $actions;
 			<?php if ($hasActions): ?>
 			<td class="action">
 				<?php if ($btnShow): ?>
-					<?= $this->link('<i class="icon-info"></i>', ['controller' => $controller, 'action' => 'show', 'params' => [$singular => $document->_id]], ['class' => 'btn-mini btn-info']) ?>
+					<?= $this->link('<i class="icon-info"></i>', ['controller' => $controller, 'action' => 'show', 'params' => [$singular => $document->_id]], ['class' => 'btn-mini btn-info','data-tooltip'=>'Show']) ?>
 				<?php endif; ?>
 				<?php if ($btnEdit): ?>
-					<?= $this->link('<i class="icon-edit"></i>', ['controller' => $controller, 'action' => 'edit', 'params' => [$singular => $document->_id]], ['class' => 'btn-mini btn-warning']) ?>
+					<?= $this->link('<i class="icon-edit"></i>', ['controller' => $controller, 'action' => 'edit', 'params' => [$singular => $document->_id]], ['class' => 'btn-mini btn-warning','data-tooltip'=>'Edit']) ?>
 				<?php endif; ?>
 				<?php if ($actions): ?>
 					<?= $actions($document) ?>

@@ -60,10 +60,10 @@ $this->addCrumb($project->name,['action'=>'show','params'=>['project'=>$project-
 			</summary>
 			<div class="task-content" data-task-id="<?= $task->_id ?>">
 
-				<div class="p-s">
+				<div class="p-m">
 					<?= $this->part('part.markdown', ['content' => $task->description]) ?>
 				</div>
-				<div class="card-header-action">
+				<div class="card-header-action p-m">
 					
 					<div class="form-group">
 						<label for="Status" class="form-label required">Statut</label>
@@ -74,12 +74,16 @@ $this->addCrumb($project->name,['action'=>'show','params'=>['project'=>$project-
 						</select>
 					</div>
 					<div>
-						<a href="<?= $this->url(['controller' => 'task', 'action' => 'edit', 'params' => [$task->_id]]) ?>" class="btn-mini btn-success">
+						<a href="<?= $this->url(['controller' => 'task', 'action' => 'edit', 'params' => [$task->_id]]) ?>" 
+							class="btn-mini btn-success"
+							data-tooltip="Edit"
+							>
 							<i class="icon-edit"></i>
 						</a>
 						<button type="button" 
+							data-tooltip="Delete"
 							class="btn-mini btn-error js-task-delete" 
-							data-url="<?= $this->url(['controller' => 'task', 'action' => 'remove', 'params' => [$task->_id]]) ?>">
+							data-url="<?= $this->url(['controller' => 'task', 'action' => 'delete', 'params' => [$task->_id]]) ?>">
 							<i class="icon-delete"></i>
 						</button>
 					</div>
@@ -92,7 +96,12 @@ $this->addCrumb($project->name,['action'=>'show','params'=>['project'=>$project-
 		<?php endif; ?>
 		<div class="card-footer">
 			<details class="task-add" <?= $taskForm->getErrors() ? 'open' : '' ?>>
-				<summary><i class="icon-add"></i> Ajouter une tâche</summary>
+				<summary class="card-header-action">
+					<h3 class="corner-accent-warning mb-m">
+						<i class="icon-add"></i> 
+						Ajouter une tâche
+					</h3>
+				</summary>
 				<?= $taskForm->render() ?>
 			</details>
 		</div>

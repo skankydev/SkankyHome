@@ -80,7 +80,7 @@ class TaskController extends MasterController {
 		]);
 	}
 
-	public function remove(Request $request, Task $task){
+	public function delete(Request $request, Task $task){
 		TaskCollection::_deleteOne($task);
 		return response(['ok' => true]);
 	}
