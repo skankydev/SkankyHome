@@ -15,28 +15,25 @@ namespace App\Model;
 
 use SkankyDev\Utilities\Traits\Singleton;
 use SkankyDev\Model\MasterCollection;
-use App\Model\Document\Persona;
+use App\Model\Document\Conversation;
 
-class PersonaCollection extends MasterCollection {
+class ConversationCollection extends MasterCollection {
 
 	use Singleton;
 
-	protected string $collectionName = 'personas';
-	protected string $documentClass = Persona::class;
+	protected string $collectionName = 'conversations';
+	protected string $documentClass = Conversation::class;
 
 	public function getDisplayField(): array {
 		return [
-			'name'       => ['label' => 'Name',    'sort' => true],
-			'created_at' => ['label' => 'created', 'sort' => true],
-			'updated_at' => ['label' => 'updated', 'sort' => true],
-		];
-	}
-
-	public function widgetLink(object $document): array {
-		return [
-			'controller' => 'persona',
-			'action'     => 'show',
-			'params'     => ['persona' => $document->_id],
+			'name' => ['label' => 'Name', 'sort' => true],
+			'persona_id' => [
+				'label'  => 'Persona',
+				'sort'   => true,
+				'render' => fn($conversation) => e($conversation->persona?->name ?? '—'),
+			],
+			'created_at' => ['label' => 'Created', 'sort' => true],
+			'updated_at' => ['label' => 'Updated', 'sort' => true],
 		];
 	}
 

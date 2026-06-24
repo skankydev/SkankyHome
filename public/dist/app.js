@@ -16176,7 +16176,7 @@ const _export_sfc = (sfc, props) => {
   }
   return target;
 };
-const _sfc_main$9 = {
+const _sfc_main$a = {
   __name: "LedEditor",
   props: {
     value: String
@@ -16191,9 +16191,9 @@ const _sfc_main$9 = {
     return __returned__;
   }
 };
-const _hoisted_1$9 = { class: "led-editor" };
-function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createElementBlock("div", _hoisted_1$9, [
+const _hoisted_1$a = { class: "led-editor" };
+function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", _hoisted_1$a, [
     createBaseVNode("h2", null, toDisplayString($props.value), 1),
     createBaseVNode("p", null, "Compteur: " + toDisplayString($setup.count), 1),
     createBaseVNode("button", {
@@ -16201,8 +16201,8 @@ function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
     }, "+1")
   ]);
 }
-const LedEditor = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$9], ["__file", "LedEditor.vue"]]);
-const _sfc_main$8 = {
+const LedEditor = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$a], ["__file", "LedEditor.vue"]]);
+const _sfc_main$9 = {
   __name: "ColorPicker",
   props: {
     modelValue: {
@@ -16352,16 +16352,16 @@ const _sfc_main$8 = {
     return __returned__;
   }
 };
-const _hoisted_1$8 = { class: "color-picker" };
-const _hoisted_2$8 = { class: "canva-wrapper" };
-const _hoisted_3$7 = { class: "color-brightness-slider" };
-const _hoisted_4$7 = { class: "color-value form-inline" };
-const _hoisted_5$7 = { class: "form-group" };
-const _hoisted_6$6 = { class: "form-group" };
-const _hoisted_7$6 = { class: "form-group" };
-function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createElementBlock("div", _hoisted_1$8, [
-    createBaseVNode("div", _hoisted_2$8, [
+const _hoisted_1$9 = { class: "color-picker" };
+const _hoisted_2$9 = { class: "canva-wrapper" };
+const _hoisted_3$8 = { class: "color-brightness-slider" };
+const _hoisted_4$8 = { class: "color-value form-inline" };
+const _hoisted_5$8 = { class: "form-group" };
+const _hoisted_6$7 = { class: "form-group" };
+const _hoisted_7$7 = { class: "form-group" };
+function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", _hoisted_1$9, [
+    createBaseVNode("div", _hoisted_2$9, [
       createBaseVNode("canvas", {
         ref: "canvas",
         class: "color-picker-canva",
@@ -16371,7 +16371,7 @@ function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
         onMousemove: $setup.handleMouseMove
       }, null, 544)
     ]),
-    createBaseVNode("div", _hoisted_3$7, [
+    createBaseVNode("div", _hoisted_3$8, [
       _cache[6] || (_cache[6] = createBaseVNode("label", null, "Luminosité", -1)),
       withDirectives(createBaseVNode("input", {
         type: "range",
@@ -16383,8 +16383,8 @@ function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
         [vModelText, $setup.brightness]
       ])
     ]),
-    createBaseVNode("div", _hoisted_4$7, [
-      createBaseVNode("div", _hoisted_5$7, [
+    createBaseVNode("div", _hoisted_4$8, [
+      createBaseVNode("div", _hoisted_5$8, [
         _cache[7] || (_cache[7] = createBaseVNode("label", {
           for: "",
           class: "form-label"
@@ -16400,7 +16400,7 @@ function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
           [vModelText, $setup.red]
         ])
       ]),
-      createBaseVNode("div", _hoisted_6$6, [
+      createBaseVNode("div", _hoisted_6$7, [
         _cache[8] || (_cache[8] = createBaseVNode("label", {
           for: "",
           class: "form-label"
@@ -16416,7 +16416,7 @@ function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
           [vModelText, $setup.green]
         ])
       ]),
-      createBaseVNode("div", _hoisted_7$6, [
+      createBaseVNode("div", _hoisted_7$7, [
         _cache[9] || (_cache[9] = createBaseVNode("label", {
           for: "",
           class: "form-label"
@@ -16441,8 +16441,8 @@ function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
     ])
   ]);
 }
-const ColorPicker = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$8], ["__file", "ColorPicker.vue"]]);
-const _sfc_main$7 = {
+const ColorPicker = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$9], ["__file", "ColorPicker.vue"]]);
+const _sfc_main$8 = {
   __name: "IconPicker",
   props: {
     modelValue: {
@@ -16523,20 +16523,20 @@ const _sfc_main$7 = {
     return __returned__;
   }
 };
-const _hoisted_1$7 = { class: "picker-icon" };
-const _hoisted_2$7 = { class: "picker-preview-icon" };
-const _hoisted_3$6 = {
+const _hoisted_1$8 = { class: "picker-icon" };
+const _hoisted_2$8 = { class: "picker-preview-icon" };
+const _hoisted_3$7 = {
   key: 0,
   class: "picker-icon-dropdown"
 };
-const _hoisted_4$6 = { class: "picker-icon-grid" };
-const _hoisted_5$6 = ["onClick"];
-const _hoisted_6$5 = { class: "picker-icon-input" };
-const _hoisted_7$5 = ["name", "value", "required"];
-function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createElementBlock("div", _hoisted_1$7, [
+const _hoisted_4$7 = { class: "picker-icon-grid" };
+const _hoisted_5$7 = ["onClick"];
+const _hoisted_6$6 = { class: "picker-icon-input" };
+const _hoisted_7$6 = ["name", "value", "required"];
+function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", _hoisted_1$8, [
     createBaseVNode("div", null, [
-      createBaseVNode("div", _hoisted_2$7, [
+      createBaseVNode("div", _hoisted_2$8, [
         createBaseVNode("div", {
           class: "picker-icon-item",
           onClick: $setup.openDropdown
@@ -16545,8 +16545,8 @@ function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
             class: normalizeClass($setup.selectedIcon)
           }, null, 2)
         ]),
-        $setup.isOpen ? (openBlock(), createElementBlock("div", _hoisted_3$6, [
-          createBaseVNode("div", _hoisted_4$6, [
+        $setup.isOpen ? (openBlock(), createElementBlock("div", _hoisted_3$7, [
+          createBaseVNode("div", _hoisted_4$7, [
             (openBlock(true), createElementBlock(Fragment, null, renderList($props.icons, (icon, key) => {
               return openBlock(), createElementBlock(Fragment, null, [
                 $setup.matchSearch(icon) ? (openBlock(), createElementBlock("div", {
@@ -16557,14 +16557,14 @@ function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
                   createBaseVNode("i", {
                     class: normalizeClass(icon)
                   }, null, 2)
-                ], 8, _hoisted_5$6)) : createCommentVNode("", true)
+                ], 8, _hoisted_5$7)) : createCommentVNode("", true)
               ], 64);
             }), 256))
           ])
         ])) : createCommentVNode("", true)
       ])
     ]),
-    createBaseVNode("div", _hoisted_6$5, [
+    createBaseVNode("div", _hoisted_6$6, [
       withDirectives(createBaseVNode("input", {
         type: "text",
         class: "form-input",
@@ -16580,10 +16580,10 @@ function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
       name: $props.name,
       value: $setup.selectedIcon,
       required: $props.required
-    }, null, 8, _hoisted_7$5)
+    }, null, 8, _hoisted_7$6)
   ]);
 }
-const IconPicker = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$7], ["__file", "IconPicker.vue"]]);
+const IconPicker = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$8], ["__file", "IconPicker.vue"]]);
 var as = Object.defineProperty;
 var Yb = Object.getOwnPropertyDescriptor;
 var Jb = Object.getOwnPropertyNames;
@@ -27809,7 +27809,7 @@ var XT = D((ot) => {
   YT(Ql(), ot);
 });
 const mqtt = XT();
-const _sfc_main$6 = {
+const _sfc_main$7 = {
   __name: "LiveMode",
   props: {
     effects: Array
@@ -27893,25 +27893,25 @@ const _sfc_main$6 = {
     return __returned__;
   }
 };
-const _hoisted_1$6 = { class: "grid-layout" };
-const _hoisted_2$6 = { class: "grid-half card" };
-const _hoisted_3$5 = { class: "card-body" };
-const _hoisted_4$5 = { class: "form-group" };
-const _hoisted_5$5 = { class: "grid-half card" };
-const _hoisted_6$4 = { class: "form-group ph-m" };
-const _hoisted_7$4 = { class: "effects-list pb-l" };
-const _hoisted_8$4 = { class: "scrollable" };
-const _hoisted_9$4 = ["onClick"];
-const _hoisted_10$4 = { class: "effect-key" };
-const _hoisted_11$3 = { class: "effect-name" };
-function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createElementBlock("div", _hoisted_1$6, [
-    createBaseVNode("div", _hoisted_2$6, [
+const _hoisted_1$7 = { class: "grid-layout" };
+const _hoisted_2$7 = { class: "grid-half card" };
+const _hoisted_3$6 = { class: "card-body" };
+const _hoisted_4$6 = { class: "form-group" };
+const _hoisted_5$6 = { class: "grid-half card" };
+const _hoisted_6$5 = { class: "form-group ph-m" };
+const _hoisted_7$5 = { class: "effects-list pb-l" };
+const _hoisted_8$5 = { class: "scrollable" };
+const _hoisted_9$5 = ["onClick"];
+const _hoisted_10$5 = { class: "effect-key" };
+const _hoisted_11$4 = { class: "effect-name" };
+function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", _hoisted_1$7, [
+    createBaseVNode("div", _hoisted_2$7, [
       _cache[3] || (_cache[3] = createBaseVNode("div", { class: "card-header" }, [
         createBaseVNode("h2", { class: "corner-accent-primary" }, "Color")
       ], -1)),
-      createBaseVNode("div", _hoisted_3$5, [
-        createBaseVNode("div", _hoisted_4$5, [
+      createBaseVNode("div", _hoisted_3$6, [
+        createBaseVNode("div", _hoisted_4$6, [
           _cache[2] || (_cache[2] = createBaseVNode("label", {
             for: "Color",
             class: "form-label"
@@ -27926,12 +27926,12 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
         ])
       ])
     ]),
-    createBaseVNode("div", _hoisted_5$5, [
+    createBaseVNode("div", _hoisted_5$6, [
       _cache[6] || (_cache[6] = createBaseVNode("div", { class: "card-header" }, [
         createBaseVNode("h2", { class: "corner-accent-primary" }, "Effect")
       ], -1)),
       createBaseVNode("div", null, [
-        createBaseVNode("div", _hoisted_6$4, [
+        createBaseVNode("div", _hoisted_6$5, [
           _cache[4] || (_cache[4] = createBaseVNode("label", {
             for: "",
             class: "form-label"
@@ -27944,8 +27944,8 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
             [vModelText, $setup.search]
           ])
         ]),
-        createBaseVNode("div", _hoisted_7$4, [
-          createBaseVNode("div", _hoisted_8$4, [
+        createBaseVNode("div", _hoisted_7$5, [
+          createBaseVNode("div", _hoisted_8$5, [
             (openBlock(true), createElementBlock(Fragment, null, renderList($setup.props.effects, (name2, key) => {
               return openBlock(), createElementBlock(Fragment, null, [
                 $setup.matchSearch(name2) ? (openBlock(), createElementBlock("div", {
@@ -27953,10 +27953,10 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
                   class: "effect",
                   onClick: ($event) => $setup.changeEffect(key)
                 }, [
-                  createBaseVNode("div", _hoisted_10$4, toDisplayString(key), 1),
+                  createBaseVNode("div", _hoisted_10$5, toDisplayString(key), 1),
                   _cache[5] || (_cache[5] = createBaseVNode("div", { class: "color-cyan" }, " => ", -1)),
-                  createBaseVNode("div", _hoisted_11$3, toDisplayString(name2), 1)
-                ], 8, _hoisted_9$4)) : createCommentVNode("", true)
+                  createBaseVNode("div", _hoisted_11$4, toDisplayString(name2), 1)
+                ], 8, _hoisted_9$5)) : createCommentVNode("", true)
               ], 64);
             }), 256))
           ])
@@ -27965,8 +27965,8 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
     ])
   ]);
 }
-const LiveMode = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$6], ["__file", "LiveMode.vue"]]);
-const _sfc_main$5 = {
+const LiveMode = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$7], ["__file", "LiveMode.vue"]]);
+const _sfc_main$6 = {
   __name: "QuickSelectColor",
   props: {
     modelValue: {
@@ -28018,17 +28018,17 @@ const _sfc_main$5 = {
     return __returned__;
   }
 };
-const _hoisted_1$5 = { class: "quick-select-color" };
-const _hoisted_2$5 = { class: "picker-preview-icon" };
-const _hoisted_3$4 = {
+const _hoisted_1$6 = { class: "quick-select-color" };
+const _hoisted_2$6 = { class: "picker-preview-icon" };
+const _hoisted_3$5 = {
   key: 0,
   class: "picker-icon-dropdown"
 };
-const _hoisted_4$4 = { class: "picker-icon-grid" };
-const _hoisted_5$4 = ["onClick"];
-function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createElementBlock("div", _hoisted_1$5, [
-    createBaseVNode("div", _hoisted_2$5, [
+const _hoisted_4$5 = { class: "picker-icon-grid" };
+const _hoisted_5$5 = ["onClick"];
+function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", _hoisted_1$6, [
+    createBaseVNode("div", _hoisted_2$6, [
       createBaseVNode("div", {
         class: "picker-icon-item",
         onClick: $setup.openDropdown
@@ -28038,21 +28038,21 @@ function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
           style: normalizeStyle({ "background-color": $setup.internalValue })
         }, null, 4)
       ]),
-      $setup.isOpen ? (openBlock(), createElementBlock("div", _hoisted_3$4, [
-        createBaseVNode("div", _hoisted_4$4, [
+      $setup.isOpen ? (openBlock(), createElementBlock("div", _hoisted_3$5, [
+        createBaseVNode("div", _hoisted_4$5, [
           (openBlock(true), createElementBlock(Fragment, null, renderList($props.list, (prefColor, key) => {
             return openBlock(), createElementBlock("div", {
               class: "pref-color",
               style: normalizeStyle({ "background-color": prefColor }),
               onClick: ($event) => $setup.selectItem(prefColor)
-            }, null, 12, _hoisted_5$4);
+            }, null, 12, _hoisted_5$5);
           }), 256))
         ])
       ])) : createCommentVNode("", true)
     ])
   ]);
 }
-const QuickSelectColor = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$5], ["__file", "QuickSelectColor.vue"]]);
+const QuickSelectColor = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$6], ["__file", "QuickSelectColor.vue"]]);
 function hexToRgb(hex) {
   if (!hex || hex === "") return { r: 0, g: 0, b: 0 };
   const h2 = hex.replace("#", "");
@@ -28869,7 +28869,7 @@ const NB_LEDS$1 = 20;
 const LED_R = 9;
 const LED_GAP = 4;
 const SPEED = 200;
-const _sfc_main$4 = {
+const _sfc_main$5 = {
   __name: "MiniEffectPreview",
   props: {
     effectId: { type: Number, default: null }
@@ -28967,17 +28967,17 @@ const _sfc_main$4 = {
     return __returned__;
   }
 };
-const _hoisted_1$4 = { class: "mini-effect-preview" };
-const _hoisted_2$4 = {
+const _hoisted_1$5 = { class: "mini-effect-preview" };
+const _hoisted_2$5 = {
   ref: "canvas",
   class: "mini-effect-canvas"
 };
-function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createElementBlock("div", _hoisted_1$4, [
-    createBaseVNode("canvas", _hoisted_2$4, null, 512)
+function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", _hoisted_1$5, [
+    createBaseVNode("canvas", _hoisted_2$5, null, 512)
   ]);
 }
-const MiniEffectPreview = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$4], ["__file", "MiniEffectPreview.vue"]]);
+const MiniEffectPreview = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$5], ["__file", "MiniEffectPreview.vue"]]);
 class ModuleBridge extends EventTarget {
   constructor(module) {
     super();
@@ -29083,7 +29083,7 @@ class ModuleBridge extends EventTarget {
     this.removeEventListener(event, callback);
   }
 }
-const _sfc_main$3 = {
+const _sfc_main$4 = {
   __name: "ScenarioMaker",
   props: {
     module: Object,
@@ -29339,18 +29339,18 @@ const _sfc_main$3 = {
     return __returned__;
   }
 };
-const _hoisted_1$3 = { class: "scenario-layout" };
-const _hoisted_2$3 = { class: "scenario-side-bar accordion ph-s" };
-const _hoisted_3$3 = { class: "accordion-item card card-primary mb-s" };
-const _hoisted_4$3 = { class: "accordion-content card-body" };
-const _hoisted_5$3 = { class: "text-right" };
-const _hoisted_6$3 = { class: "color-result" };
-const _hoisted_7$3 = { class: "color-text" };
-const _hoisted_8$3 = { class: "card mb-s" };
-const _hoisted_9$3 = { class: "pref-color-wrapper card-body" };
-const _hoisted_10$3 = ["onClick"];
-const _hoisted_11$2 = ["onClick"];
-const _hoisted_12$2 = { class: "accordion-item card card-primary mb-s" };
+const _hoisted_1$4 = { class: "scenario-layout" };
+const _hoisted_2$4 = { class: "scenario-side-bar accordion ph-s" };
+const _hoisted_3$4 = { class: "accordion-item card card-primary mb-s" };
+const _hoisted_4$4 = { class: "accordion-content card-body" };
+const _hoisted_5$4 = { class: "text-right" };
+const _hoisted_6$4 = { class: "color-result" };
+const _hoisted_7$4 = { class: "color-text" };
+const _hoisted_8$4 = { class: "card mb-s" };
+const _hoisted_9$4 = { class: "pref-color-wrapper card-body" };
+const _hoisted_10$4 = ["onClick"];
+const _hoisted_11$3 = ["onClick"];
+const _hoisted_12$3 = { class: "accordion-item card card-primary mb-s" };
 const _hoisted_13$2 = { class: "accordion-content" };
 const _hoisted_14$1 = { class: "form-group ph-m" };
 const _hoisted_15$1 = { class: "effects-list" };
@@ -29421,28 +29421,28 @@ const _hoisted_73 = {
 const _hoisted_74 = {
   class: /* @__PURE__ */ normalizeClass("scenario-is-conneced ")
 };
-function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createElementBlock("section", _hoisted_1$3, [
-    createBaseVNode("div", _hoisted_2$3, [
-      createBaseVNode("details", _hoisted_3$3, [
+function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("section", _hoisted_1$4, [
+    createBaseVNode("div", _hoisted_2$4, [
+      createBaseVNode("details", _hoisted_3$4, [
         _cache[6] || (_cache[6] = createBaseVNode("summary", { class: "accordion-header" }, [
           createBaseVNode("h3", {
             class: "glitch",
             "data-text": "Palette"
           }, "Palette")
         ], -1)),
-        createBaseVNode("div", _hoisted_4$3, [
+        createBaseVNode("div", _hoisted_4$4, [
           createVNode($setup["ColorPicker"], {
             modelValue: $setup.currentColor,
             "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $setup.currentColor = $event)
           }, null, 8, ["modelValue"]),
-          createBaseVNode("div", _hoisted_5$3, [
-            createBaseVNode("div", _hoisted_6$3, [
+          createBaseVNode("div", _hoisted_5$4, [
+            createBaseVNode("div", _hoisted_6$4, [
               createBaseVNode("span", {
                 class: "color-preview",
                 style: normalizeStyle({ "background-color": $setup.currentColor })
               }, null, 4),
-              createBaseVNode("span", _hoisted_7$3, toDisplayString($setup.currentColor), 1),
+              createBaseVNode("span", _hoisted_7$4, toDisplayString($setup.currentColor), 1),
               createBaseVNode("span", {
                 class: "btn-mini btn-favorie",
                 onClick: $setup.colorAddPref
@@ -29453,11 +29453,11 @@ function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
           ])
         ])
       ]),
-      createBaseVNode("div", _hoisted_8$3, [
+      createBaseVNode("div", _hoisted_8$4, [
         _cache[8] || (_cache[8] = createBaseVNode("div", { class: "card-header" }, [
           createBaseVNode("h6", null, "Couleur")
         ], -1)),
-        createBaseVNode("div", _hoisted_9$3, [
+        createBaseVNode("div", _hoisted_9$4, [
           (openBlock(true), createElementBlock(Fragment, null, renderList($setup.scenario.preference.colors, (prefColor, key) => {
             return openBlock(), createElementBlock("div", {
               class: "pref-color",
@@ -29469,12 +29469,12 @@ function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
                 onClick: ($event) => $setup.removePrefColor(key, $event)
               }, [..._cache[7] || (_cache[7] = [
                 createBaseVNode("i", { class: "icon-trash" }, null, -1)
-              ])], 8, _hoisted_11$2)
-            ], 12, _hoisted_10$3);
+              ])], 8, _hoisted_11$3)
+            ], 12, _hoisted_10$4);
           }), 256))
         ])
       ]),
-      createBaseVNode("details", _hoisted_12$2, [
+      createBaseVNode("details", _hoisted_12$3, [
         _cache[12] || (_cache[12] = createBaseVNode("summary", { class: "accordion-header" }, [
           createBaseVNode("h3", {
             class: "glitch",
@@ -29854,10 +29854,10 @@ function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
     ])
   ]);
 }
-const ScenarioMaker = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$3], ["__file", "ScenarioMaker.vue"]]);
+const ScenarioMaker = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$4], ["__file", "ScenarioMaker.vue"]]);
 const brokerUrl = "ws://skankyhome.local:8083/mqtt";
 const topic = "skankyhome/#";
-const _sfc_main$2 = {
+const _sfc_main$3 = {
   __name: "MqttMonitor",
   setup(__props, { expose: __expose }) {
     __expose();
@@ -29926,23 +29926,23 @@ const _sfc_main$2 = {
     return __returned__;
   }
 };
-const _hoisted_1$2 = { class: "mqtt-monitor" };
-const _hoisted_2$2 = { class: "mqtt-monitor-toolbar" };
-const _hoisted_3$2 = { class: "mqtt-monitor-status" };
-const _hoisted_4$2 = { class: "mqtt-monitor-actions" };
-const _hoisted_5$2 = ["data-tooltip"];
-const _hoisted_6$2 = { class: "mqtt-monitor-list" };
-const _hoisted_7$2 = {
+const _hoisted_1$3 = { class: "mqtt-monitor" };
+const _hoisted_2$3 = { class: "mqtt-monitor-toolbar" };
+const _hoisted_3$3 = { class: "mqtt-monitor-status" };
+const _hoisted_4$3 = { class: "mqtt-monitor-actions" };
+const _hoisted_5$3 = ["data-tooltip"];
+const _hoisted_6$3 = { class: "mqtt-monitor-list" };
+const _hoisted_7$3 = {
   key: 0,
   class: "mqtt-monitor-empty"
 };
-const _hoisted_8$2 = { class: "mqtt-monitor-time" };
-const _hoisted_9$2 = { class: "mqtt-monitor-topic" };
-const _hoisted_10$2 = { class: "mqtt-monitor-payload" };
-function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createElementBlock("div", _hoisted_1$2, [
-    createBaseVNode("div", _hoisted_2$2, [
-      createBaseVNode("div", _hoisted_3$2, [
+const _hoisted_8$3 = { class: "mqtt-monitor-time" };
+const _hoisted_9$3 = { class: "mqtt-monitor-topic" };
+const _hoisted_10$3 = { class: "mqtt-monitor-payload" };
+function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", _hoisted_1$3, [
+    createBaseVNode("div", _hoisted_2$3, [
+      createBaseVNode("div", _hoisted_3$3, [
         createBaseVNode("i", {
           class: normalizeClass("icon-" + ($setup.isConnected ? "success" : "error") + " neon-" + ($setup.isConnected ? "success" : "error") + "-light")
         }, null, 2),
@@ -29956,7 +29956,7 @@ function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
       }, null, 512), [
         [vModelText, $setup.filter]
       ]),
-      createBaseVNode("div", _hoisted_4$2, [
+      createBaseVNode("div", _hoisted_4$3, [
         createBaseVNode("button", {
           class: "btn-mini btn-warning",
           onClick: _cache[1] || (_cache[1] = ($event) => $setup.isPaused = !$setup.isPaused),
@@ -29965,7 +29965,7 @@ function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
           createBaseVNode("i", {
             class: normalizeClass("icon-" + ($setup.isPaused ? "play" : "pause"))
           }, null, 2)
-        ], 8, _hoisted_5$2),
+        ], 8, _hoisted_5$3),
         createBaseVNode("button", {
           class: "btn-mini btn-error",
           onClick: $setup.clear,
@@ -29975,25 +29975,25 @@ function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
         ])])
       ])
     ]),
-    createBaseVNode("div", _hoisted_6$2, [
-      $setup.filteredMessages().length === 0 ? (openBlock(), createElementBlock("div", _hoisted_7$2, " Aucun message… ")) : createCommentVNode("", true),
+    createBaseVNode("div", _hoisted_6$3, [
+      $setup.filteredMessages().length === 0 ? (openBlock(), createElementBlock("div", _hoisted_7$3, " Aucun message… ")) : createCommentVNode("", true),
       (openBlock(true), createElementBlock(Fragment, null, renderList($setup.filteredMessages(), (msg) => {
         return openBlock(), createElementBlock("div", {
           key: msg.id,
           class: "mqtt-monitor-item"
         }, [
-          createBaseVNode("span", _hoisted_8$2, toDisplayString(msg.time), 1),
-          createBaseVNode("span", _hoisted_9$2, toDisplayString(msg.topic), 1),
-          createBaseVNode("pre", _hoisted_10$2, toDisplayString(typeof msg.data === "string" ? msg.data : JSON.stringify(msg.data, null, 2)), 1)
+          createBaseVNode("span", _hoisted_8$3, toDisplayString(msg.time), 1),
+          createBaseVNode("span", _hoisted_9$3, toDisplayString(msg.topic), 1),
+          createBaseVNode("pre", _hoisted_10$3, toDisplayString(typeof msg.data === "string" ? msg.data : JSON.stringify(msg.data, null, 2)), 1)
         ]);
       }), 128))
     ])
   ]);
 }
-const MqttMonitor = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$2], ["__file", "MqttMonitor.vue"]]);
+const MqttMonitor = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$3], ["__file", "MqttMonitor.vue"]]);
 const NB_LEDS = 30;
 const GLOW = 8;
-const _sfc_main$1 = {
+const _sfc_main$2 = {
   __name: "EffectPreview",
   props: {
     effects: Object
@@ -30112,21 +30112,21 @@ const _sfc_main$1 = {
     return __returned__;
   }
 };
-const _hoisted_1$1 = { class: "effect-preview-layout" };
-const _hoisted_2$1 = { class: "effect-preview-sidebar card" };
-const _hoisted_3$1 = { class: "effect-preview-search" };
-const _hoisted_4$1 = { class: "effect-preview-list scrollable" };
-const _hoisted_5$1 = {
+const _hoisted_1$2 = { class: "effect-preview-layout" };
+const _hoisted_2$2 = { class: "effect-preview-sidebar card" };
+const _hoisted_3$2 = { class: "effect-preview-search" };
+const _hoisted_4$2 = { class: "effect-preview-list scrollable" };
+const _hoisted_5$2 = {
   key: 0,
   class: "effect-preview-cat"
 };
-const _hoisted_6$1 = { class: "effect-preview-cat-label" };
-const _hoisted_7$1 = ["onClick"];
-const _hoisted_8$1 = { class: "effect-id" };
-const _hoisted_9$1 = { class: "effect-name" };
-const _hoisted_10$1 = { class: "effect-preview-main" };
-const _hoisted_11$1 = { class: "card" };
-const _hoisted_12$1 = { class: "card-header" };
+const _hoisted_6$2 = { class: "effect-preview-cat-label" };
+const _hoisted_7$2 = ["onClick"];
+const _hoisted_8$2 = { class: "effect-id" };
+const _hoisted_9$2 = { class: "effect-name" };
+const _hoisted_10$2 = { class: "effect-preview-main" };
+const _hoisted_11$2 = { class: "card" };
+const _hoisted_12$2 = { class: "card-header" };
 const _hoisted_13$1 = ["data-text"];
 const _hoisted_14 = { class: "effect-id-badge" };
 const _hoisted_15 = { class: "card-body" };
@@ -30142,10 +30142,10 @@ const _hoisted_21 = { class: "form-group" };
 const _hoisted_22 = { class: "form-group" };
 const _hoisted_23 = { class: "form-group" };
 const _hoisted_24 = { class: "form-label" };
-function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createElementBlock("div", _hoisted_1$1, [
-    createBaseVNode("div", _hoisted_2$1, [
-      createBaseVNode("div", _hoisted_3$1, [
+function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", _hoisted_1$2, [
+    createBaseVNode("div", _hoisted_2$2, [
+      createBaseVNode("div", _hoisted_3$2, [
         withDirectives(createBaseVNode("input", {
           type: "text",
           class: "form-input",
@@ -30155,29 +30155,29 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
           [vModelText, $setup.search]
         ])
       ]),
-      createBaseVNode("div", _hoisted_4$1, [
+      createBaseVNode("div", _hoisted_4$2, [
         (openBlock(), createElementBlock(Fragment, null, renderList($setup.categories, (cat) => {
           return openBlock(), createElementBlock(Fragment, { key: cat }, [
-            $setup.filtered(cat).length ? (openBlock(), createElementBlock("div", _hoisted_5$1, [
-              createBaseVNode("div", _hoisted_6$1, toDisplayString(cat), 1),
+            $setup.filtered(cat).length ? (openBlock(), createElementBlock("div", _hoisted_5$2, [
+              createBaseVNode("div", _hoisted_6$2, toDisplayString(cat), 1),
               (openBlock(true), createElementBlock(Fragment, null, renderList($setup.filtered(cat), (e) => {
                 return openBlock(), createElementBlock("div", {
                   key: e.id,
                   class: normalizeClass(["effect-preview-item", { active: $setup.activeId === e.id }]),
                   onClick: ($event) => $setup.selectEffect(e.id)
                 }, [
-                  createBaseVNode("span", _hoisted_8$1, toDisplayString(e.id), 1),
-                  createBaseVNode("span", _hoisted_9$1, toDisplayString(e.name), 1)
-                ], 10, _hoisted_7$1);
+                  createBaseVNode("span", _hoisted_8$2, toDisplayString(e.id), 1),
+                  createBaseVNode("span", _hoisted_9$2, toDisplayString(e.name), 1)
+                ], 10, _hoisted_7$2);
               }), 128))
             ])) : createCommentVNode("", true)
           ], 64);
         }), 64))
       ])
     ]),
-    createBaseVNode("div", _hoisted_10$1, [
-      createBaseVNode("div", _hoisted_11$1, [
-        createBaseVNode("div", _hoisted_12$1, [
+    createBaseVNode("div", _hoisted_10$2, [
+      createBaseVNode("div", _hoisted_11$2, [
+        createBaseVNode("div", _hoisted_12$2, [
           createBaseVNode("h3", {
             class: "glitch",
             "data-text": $setup.effectById[$setup.activeId]
@@ -30245,8 +30245,8 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
     ])
   ]);
 }
-const EffectPreview = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["__file", "EffectPreview.vue"]]);
-const _sfc_main = {
+const EffectPreview = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$2], ["__file", "EffectPreview.vue"]]);
+const _sfc_main$1 = {
   __name: "PersonaChat",
   props: {
     persona: Object,
@@ -30368,6 +30368,183 @@ const _sfc_main = {
     return __returned__;
   }
 };
+const _hoisted_1$1 = { class: "persona-chat card" };
+const _hoisted_2$1 = { class: "card-header persona-chat-header" };
+const _hoisted_3$1 = ["data-text"];
+const _hoisted_4$1 = {
+  class: "persona-chat-thread",
+  ref: "threadRef"
+};
+const _hoisted_5$1 = {
+  key: 0,
+  class: "persona-chat-empty"
+};
+const _hoisted_6$1 = { class: "persona-chat-bubble" };
+const _hoisted_7$1 = {
+  key: 1,
+  class: "persona-chat-typing"
+};
+const _hoisted_8$1 = {
+  key: 2,
+  class: "persona-chat-truncated",
+  "data-tooltip": "Réponse coupée : plafond de tokens atteint"
+};
+const _hoisted_9$1 = {
+  key: 0,
+  class: "persona-chat-meta"
+};
+const _hoisted_10$1 = { key: 0 };
+const _hoisted_11$1 = {
+  key: 0,
+  class: "persona-chat-error flash-error"
+};
+const _hoisted_12$1 = ["disabled", "onKeydown"];
+const _hoisted_13 = ["disabled"];
+function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", _hoisted_1$1, [
+    createBaseVNode("header", _hoisted_2$1, [
+      createBaseVNode("h3", {
+        class: "rainbow-underline",
+        "data-text": $setup.props.persona.name
+      }, toDisplayString($setup.props.persona.name), 9, _hoisted_3$1),
+      createBaseVNode("button", {
+        type: "button",
+        class: "btn-mini btn-error",
+        onClick: $setup.reset,
+        "data-tooltip": "Réinitialiser la conversation"
+      }, [..._cache[1] || (_cache[1] = [
+        createBaseVNode("i", { class: "icon-trash" }, null, -1)
+      ])])
+    ]),
+    createBaseVNode("div", _hoisted_4$1, [
+      $setup.messages.length === 0 ? (openBlock(), createElementBlock("div", _hoisted_5$1, [
+        _cache[3] || (_cache[3] = createBaseVNode("i", { class: "icon-message-circle" }, null, -1)),
+        createBaseVNode("p", null, [
+          _cache[2] || (_cache[2] = createTextVNode("Démarre la conversation avec ", -1)),
+          createBaseVNode("strong", null, toDisplayString($setup.props.persona.name), 1)
+        ])
+      ])) : createCommentVNode("", true),
+      (openBlock(true), createElementBlock(Fragment, null, renderList($setup.messages, (message, key) => {
+        return openBlock(), createElementBlock("div", {
+          key,
+          class: normalizeClass(["persona-chat-message", "is-" + message.role])
+        }, [
+          createBaseVNode("div", _hoisted_6$1, [
+            message.content ? (openBlock(), createElementBlock(Fragment, { key: 0 }, [
+              createTextVNode(toDisplayString(message.content), 1)
+            ], 64)) : (openBlock(), createElementBlock("span", _hoisted_7$1, [..._cache[4] || (_cache[4] = [
+              createBaseVNode("span", { class: "dot" }, null, -1),
+              createBaseVNode("span", { class: "dot" }, null, -1),
+              createBaseVNode("span", { class: "dot" }, null, -1)
+            ])])),
+            message.truncated ? (openBlock(), createElementBlock("span", _hoisted_8$1, [..._cache[5] || (_cache[5] = [
+              createBaseVNode("i", { class: "icon-alert-triangle" }, null, -1),
+              createTextVNode(" tronqué ", -1)
+            ])])) : createCommentVNode("", true)
+          ]),
+          message.time ? (openBlock(), createElementBlock("div", _hoisted_9$1, [
+            _cache[6] || (_cache[6] = createBaseVNode("i", { class: "icon-clock" }, null, -1)),
+            createTextVNode(" " + toDisplayString(message.time) + " ", 1),
+            message.duration ? (openBlock(), createElementBlock("span", _hoisted_10$1, " · " + toDisplayString(message.duration) + "s", 1)) : createCommentVNode("", true)
+          ])) : createCommentVNode("", true)
+        ], 2);
+      }), 128))
+    ], 512),
+    $setup.error ? (openBlock(), createElementBlock("div", _hoisted_11$1, [
+      _cache[7] || (_cache[7] = createBaseVNode("i", { class: "icon-error" }, null, -1)),
+      createTextVNode(" " + toDisplayString($setup.error), 1)
+    ])) : createCommentVNode("", true),
+    createBaseVNode("form", {
+      class: "persona-chat-input",
+      onSubmit: withModifiers($setup.send, ["prevent"])
+    }, [
+      withDirectives(createBaseVNode("textarea", {
+        class: "form-input",
+        "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $setup.input = $event),
+        placeholder: "Écris un message…  (Entrée pour envoyer, Maj+Entrée pour un saut de ligne)",
+        rows: "2",
+        disabled: $setup.loading,
+        onKeydown: withKeys(withModifiers($setup.send, ["exact", "prevent"]), ["enter"])
+      }, null, 40, _hoisted_12$1), [
+        [vModelText, $setup.input]
+      ]),
+      createBaseVNode("button", {
+        type: "submit",
+        class: "btn-success",
+        disabled: $setup.loading || $setup.input.trim().length === 0
+      }, [..._cache[8] || (_cache[8] = [
+        createBaseVNode("i", { class: "icon-send" }, null, -1)
+      ])], 8, _hoisted_13)
+    ], 32)
+  ]);
+}
+const PersonaChat = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["__file", "PersonaChat.vue"]]);
+const _sfc_main = {
+  __name: "ConversationChat",
+  props: {
+    conversation: Object,
+    persona: Object,
+    endpoint: String
+    // POST PHP : un tour de chat (le system prompt est assemblé côté serveur)
+  },
+  setup(__props, { expose: __expose }) {
+    __expose();
+    const props = __props;
+    const messages = ref((props.conversation.messages || []).map((m) => ({ role: m.role, content: m.content })));
+    const input = ref("");
+    const loading = ref(false);
+    const error = ref("");
+    const threadRef = ref(null);
+    const formatTime = () => (/* @__PURE__ */ new Date()).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" });
+    const scrollDown = async () => {
+      await nextTick();
+      if (threadRef.value) {
+        threadRef.value.scrollTop = threadRef.value.scrollHeight;
+      }
+    };
+    const send = async () => {
+      const text = input.value.trim();
+      if (!text || loading.value) {
+        return;
+      }
+      error.value = "";
+      messages.value.push({ role: "user", content: text, time: formatTime() });
+      input.value = "";
+      loading.value = true;
+      const assistant = { role: "assistant", content: "", time: "", duration: "" };
+      messages.value.push(assistant);
+      await scrollDown();
+      const startedAt = Date.now();
+      try {
+        const response = await fetch(props.endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: text })
+        });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) {
+          throw new Error(data.error || "HTTP " + response.status);
+        }
+        assistant.content = data.message?.content || "(réponse vide)";
+        assistant.time = formatTime();
+        assistant.duration = ((Date.now() - startedAt) / 1e3).toFixed(1);
+      } catch (e) {
+        error.value = "Réponse impossible (" + e.message + ")";
+        const idx = messages.value.indexOf(assistant);
+        if (idx !== -1) {
+          messages.value.splice(idx, 1);
+        }
+      } finally {
+        loading.value = false;
+        await scrollDown();
+      }
+    };
+    onMounted(scrollDown);
+    const __returned__ = { props, messages, input, loading, error, threadRef, formatTime, scrollDown, send, ref, onMounted, nextTick };
+    Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
+    return __returned__;
+  }
+};
 const _hoisted_1 = { class: "persona-chat card" };
 const _hoisted_2 = { class: "card-header persona-chat-header" };
 const _hoisted_3 = ["data-text"];
@@ -30385,43 +30562,30 @@ const _hoisted_7 = {
   class: "persona-chat-typing"
 };
 const _hoisted_8 = {
-  key: 2,
-  class: "persona-chat-truncated",
-  "data-tooltip": "Réponse coupée : plafond de tokens atteint"
-};
-const _hoisted_9 = {
   key: 0,
   class: "persona-chat-meta"
 };
-const _hoisted_10 = { key: 0 };
-const _hoisted_11 = {
+const _hoisted_9 = { key: 0 };
+const _hoisted_10 = {
   key: 0,
   class: "persona-chat-error flash-error"
 };
-const _hoisted_12 = ["disabled", "onKeydown"];
-const _hoisted_13 = ["disabled"];
+const _hoisted_11 = ["disabled", "onKeydown"];
+const _hoisted_12 = ["disabled"];
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("div", _hoisted_1, [
     createBaseVNode("header", _hoisted_2, [
       createBaseVNode("h3", {
         class: "rainbow-underline",
-        "data-text": $setup.props.persona.name
-      }, toDisplayString($setup.props.persona.name), 9, _hoisted_3),
-      createBaseVNode("button", {
-        type: "button",
-        class: "btn-mini btn-error",
-        onClick: $setup.reset,
-        "data-tooltip": "Réinitialiser la conversation"
-      }, [..._cache[1] || (_cache[1] = [
-        createBaseVNode("i", { class: "icon-trash" }, null, -1)
-      ])])
+        "data-text": $setup.props.persona?.name
+      }, toDisplayString($setup.props.persona?.name), 9, _hoisted_3)
     ]),
     createBaseVNode("div", _hoisted_4, [
       $setup.messages.length === 0 ? (openBlock(), createElementBlock("div", _hoisted_5, [
-        _cache[3] || (_cache[3] = createBaseVNode("i", { class: "icon-message-circle" }, null, -1)),
+        _cache[2] || (_cache[2] = createBaseVNode("i", { class: "icon-message-circle" }, null, -1)),
         createBaseVNode("p", null, [
-          _cache[2] || (_cache[2] = createTextVNode("Démarre la conversation avec ", -1)),
-          createBaseVNode("strong", null, toDisplayString($setup.props.persona.name), 1)
+          _cache[1] || (_cache[1] = createTextVNode("Démarre la conversation avec ", -1)),
+          createBaseVNode("strong", null, toDisplayString($setup.props.persona?.name), 1)
         ])
       ])) : createCommentVNode("", true),
       (openBlock(true), createElementBlock(Fragment, null, renderList($setup.messages, (message, key) => {
@@ -30432,26 +30596,22 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
           createBaseVNode("div", _hoisted_6, [
             message.content ? (openBlock(), createElementBlock(Fragment, { key: 0 }, [
               createTextVNode(toDisplayString(message.content), 1)
-            ], 64)) : (openBlock(), createElementBlock("span", _hoisted_7, [..._cache[4] || (_cache[4] = [
+            ], 64)) : (openBlock(), createElementBlock("span", _hoisted_7, [..._cache[3] || (_cache[3] = [
               createBaseVNode("span", { class: "dot" }, null, -1),
               createBaseVNode("span", { class: "dot" }, null, -1),
               createBaseVNode("span", { class: "dot" }, null, -1)
-            ])])),
-            message.truncated ? (openBlock(), createElementBlock("span", _hoisted_8, [..._cache[5] || (_cache[5] = [
-              createBaseVNode("i", { class: "icon-alert-triangle" }, null, -1),
-              createTextVNode(" tronqué ", -1)
-            ])])) : createCommentVNode("", true)
+            ])]))
           ]),
-          message.time ? (openBlock(), createElementBlock("div", _hoisted_9, [
-            _cache[6] || (_cache[6] = createBaseVNode("i", { class: "icon-clock" }, null, -1)),
+          message.time ? (openBlock(), createElementBlock("div", _hoisted_8, [
+            _cache[4] || (_cache[4] = createBaseVNode("i", { class: "icon-clock" }, null, -1)),
             createTextVNode(" " + toDisplayString(message.time) + " ", 1),
-            message.duration ? (openBlock(), createElementBlock("span", _hoisted_10, " · " + toDisplayString(message.duration) + "s", 1)) : createCommentVNode("", true)
+            message.duration ? (openBlock(), createElementBlock("span", _hoisted_9, " · " + toDisplayString(message.duration) + "s", 1)) : createCommentVNode("", true)
           ])) : createCommentVNode("", true)
         ], 2);
       }), 128))
     ], 512),
-    $setup.error ? (openBlock(), createElementBlock("div", _hoisted_11, [
-      _cache[7] || (_cache[7] = createBaseVNode("i", { class: "icon-error" }, null, -1)),
+    $setup.error ? (openBlock(), createElementBlock("div", _hoisted_10, [
+      _cache[5] || (_cache[5] = createBaseVNode("i", { class: "icon-error" }, null, -1)),
       createTextVNode(" " + toDisplayString($setup.error), 1)
     ])) : createCommentVNode("", true),
     createBaseVNode("form", {
@@ -30465,20 +30625,20 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         rows: "2",
         disabled: $setup.loading,
         onKeydown: withKeys(withModifiers($setup.send, ["exact", "prevent"]), ["enter"])
-      }, null, 40, _hoisted_12), [
+      }, null, 40, _hoisted_11), [
         [vModelText, $setup.input]
       ]),
       createBaseVNode("button", {
         type: "submit",
         class: "btn-success",
         disabled: $setup.loading || $setup.input.trim().length === 0
-      }, [..._cache[8] || (_cache[8] = [
+      }, [..._cache[6] || (_cache[6] = [
         createBaseVNode("i", { class: "icon-send" }, null, -1)
-      ])], 8, _hoisted_13)
+      ])], 8, _hoisted_12)
     ], 32)
   ]);
 }
-const PersonaChat = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "PersonaChat.vue"]]);
+const ConversationChat = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "ConversationChat.vue"]]);
 window.remove = function(element) {
   if (element && element.parentNode) {
     element.parentNode.removeChild(element);
@@ -30569,6 +30729,12 @@ document.addEventListener("DOMContentLoaded", () => {
     var personaChat = createApp({});
     personaChat.component("persona-chat", PersonaChat);
     personaChat.mount("#PersonaChat");
+  }
+  target = document.getElementById("ConversationChat");
+  if (target) {
+    var conversationChat = createApp({});
+    conversationChat.component("conversation-chat", ConversationChat);
+    conversationChat.mount("#ConversationChat");
   }
   initBurger();
 });

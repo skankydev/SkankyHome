@@ -8,6 +8,7 @@ import ScenarioMaker from './Led/ScenarioMaker.vue'
 import MqttMonitor from './Led/MqttMonitor.vue'
 import EffectPreview from './Led/EffectPreview.vue'
 import PersonaChat from './Persona/PersonaChat.vue'
+import ConversationChat from './Persona/ConversationChat.vue'
 
 window.remove = function(element) {
 	if (element && element.parentNode) {
@@ -123,6 +124,13 @@ document.addEventListener('DOMContentLoaded', () => {
 		var personaChat = createApp({});
 		personaChat.component('persona-chat', PersonaChat);
 		personaChat.mount('#PersonaChat');
+	}
+
+	target = document.getElementById('ConversationChat');
+	if (target) {
+		var conversationChat = createApp({});
+		conversationChat.component('conversation-chat', ConversationChat);
+		conversationChat.mount('#ConversationChat');
 	}
 
 	initBurger();
