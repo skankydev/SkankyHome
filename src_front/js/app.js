@@ -7,7 +7,6 @@ import LiveMode from './Led/LiveMode.vue'
 import ScenarioMaker from './Led/ScenarioMaker.vue'
 import MqttMonitor from './Led/MqttMonitor.vue'
 import EffectPreview from './Led/EffectPreview.vue'
-import PersonaChat from './Persona/PersonaChat.vue'
 import ConversationChat from './Persona/ConversationChat.vue'
 
 window.remove = function(element) {
@@ -117,13 +116,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		var preview = createApp({});
 		preview.component('effect-preview', EffectPreview);
 		preview.mount('#EffectPreview');
-	}
-
-	target = document.getElementById('PersonaChat');
-	if (target) {
-		var personaChat = createApp({});
-		personaChat.component('persona-chat', PersonaChat);
-		personaChat.mount('#PersonaChat');
 	}
 
 	target = document.getElementById('ConversationChat');
