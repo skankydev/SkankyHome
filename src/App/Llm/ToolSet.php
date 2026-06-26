@@ -14,8 +14,12 @@
 
 namespace App\Llm;
 
+use App\Llm\Tools\AddProjectTool;
+use App\Llm\Tools\AddTaskTool;
 use App\Llm\Tools\ListProjectsTool;
+use App\Llm\Tools\ListTasksTool;
 use App\Llm\Tools\MasterTool;
+use App\Llm\Tools\UpdateTaskStatusTool;
 
 /**
  * Un jeu de tools mis à disposition du LLM pour un contexte donné.
@@ -60,12 +64,15 @@ class ToolSet {
 	}
 
 	/**
-	 * Profil « chat humain » : gestion de projet.
-	 * (On fera grandir ce tableau : list_tasks, add_task, update_task_status, add_project.)
+	 * Profil « chat humain » : gestion de projet (lecture + écriture).
 	 */
 	public static function forChat(): self {
 		return new self(
 			new ListProjectsTool(),
+			new ListTasksTool(),
+			new AddTaskTool(),
+			new UpdateTaskStatusTool(),
+			new AddProjectTool(),
 		);
 	}
 

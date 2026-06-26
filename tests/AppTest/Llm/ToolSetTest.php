@@ -49,6 +49,8 @@ class ToolSetTest extends TestCase
     public function testForChatBuildsNonEmptySet(): void {
         $set = ToolSet::forChat();
         $this->assertFalse($set->isEmpty());
-        $this->assertTrue($set->has('list_projects'));
+        foreach (['list_projects', 'list_tasks', 'add_task', 'update_task_status', 'add_project'] as $name) {
+            $this->assertTrue($set->has($name), "Tool manquant dans forChat() : {$name}");
+        }
     }
 }
