@@ -15,6 +15,7 @@ namespace App\Controller;
 
 use App\Form\ConversationForm;
 use App\Llm\ChatEngine;
+use App\Llm\ToolSet;
 use App\Model\ConversationCollection;
 use App\Model\Document\Conversation;
 use App\Model\Document\Message;
@@ -97,7 +98,7 @@ class ConversationController extends MasterController {
 		$conversation->addMessage(Message::user($text));
 
 		try {
-			$reply = (new ChatEngine())->reply($conversation);
+			$reply = (new ChatEngine())->reply($conversation, ToolSet::forChat());
 		} catch (\Throwable $e) {
 			return response(['error' => $e->getMessage()])->status(502);
 		}

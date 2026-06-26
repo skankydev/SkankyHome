@@ -33,7 +33,7 @@ class ProjectCollection extends MasterCollection {
 					return '<i class="'.$doc->icon.'"></i> ';
 				}
 			],
-			'description' => ['label' => 'Description', 'sort' => true],
+			//'description' => ['label' => 'Description', 'sort' => true],
 			'status' => ['label' => 'Status', 'sort' => true],
 			'created_at' => ['label' => 'Created', 'sort' => true],
 			'updated_at' => ['label' => 'Updated', 'sort' => true],

@@ -221,6 +221,14 @@ Pour bénéficier de `created_at` / `updated_at` automatiques, le document fait 
 - Form : `$this->add('status','select',['options' => TaskStatus::options(), ...])`.
 - Vue : `$x->status->pretty()` (badge) ou `e($x->status->label())`.
 
+### EmbeddedDocument (sous-documents)
+
+`SkankyDev\Model\Document\EmbeddedDocument` : base **Persistable** pour les objets typés qui vivent *dans* un autre document (array ou propriété), sans `_id` ni Collection à eux. Même (dé)sérialisation pilotée par type que `MasterDocument` (DateTime ⇄ UTCDateTime, BackedEnum ⇄ `->value`, ObjectId stocké tel quel), mais sans la logique de collection.
+
+- MongoDB stocke `__pclass` et **reconstruit le graphe d'objets imbriqués automatiquement** (un array d'EmbeddedDocument revient typé après lecture).
+- `MasterJob` en hérite (les jobs sont des embedded du `JobDoc.payload`). Exemple applicatif : `App\Model\Document\Message` dans `Conversation.messages`.
+- Usage : `class Message extends EmbeddedDocument { public string $role = ''; ... }` ; remplissage via `new Message([...])` ou fabriques statiques.
+
 ### Behaviors
 
 Un behavior se compose de **deux éléments liés par convention** :
