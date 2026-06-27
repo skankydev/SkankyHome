@@ -14,6 +14,8 @@
 
 @use 'scaffold/page';
 @use 'scaffold/burger';
+@use 'scaffold/home';
+
 
 @use 'elements/diviser';
 @use 'elements/title';
@@ -25,7 +27,7 @@
 @use 'elements/flash';
 @use 'elements/link';
 @use 'elements/breadcrumb';
-
+@use 'elements/image';
 
 @use 'component/live';
 @use 'component/color-picker';
@@ -33,3 +35,4 @@
 @use 'component/scenario-maker';
 @use 'component/mqtt-monitor';
 @use 'component/effect-preview';
+@use 'component/persona-chat';

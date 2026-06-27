@@ -13,7 +13,7 @@
 
 namespace SkankyDev\Exception;
 
-use SkankyDev\Exception\Exception;
+use Exception;
 
 class BehaviorNotFoundException extends Exception{
 	

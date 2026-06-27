@@ -28,6 +28,11 @@ function view(string $name,array $data = []){
 	return $response;
 }
 
+function response(array $data = []){
+    $response = new Response('',$data);
+    return $response;
+}
+
 
 /**
  * Échapper du HTML
@@ -103,10 +108,21 @@ function flash($type = 'success',$message = null) {
 	Session::insert('flash', ['type' => $type,'message' => $message,]);
 }
 
+/**
+ * Token CSRF de la session, généré une seule fois et conservé tant que la session vit
+ * (pattern synchronizer token). Le même token sert à tous les forms et à l'AJAX.
+ */
+function csrf_token(): string {
+	$token = Session::get('csrf_token');
+	if (!is_string($token) || $token === '') {
+		$token = (new Token())->getToken();
+		Session::set('csrf_token', $token);
+	}
+	return $token;
+}
+
 function csrf_field() {
-	$token = new Token();
-	Session::set('csrf_token', $token);
-	return '<input type="hidden" name="_token" value="' . $token->getToken() . '">';
+	return '<input type="hidden" name="_token" value="' . csrf_token() . '">';
 }
 
 function old($key, $default = '') {

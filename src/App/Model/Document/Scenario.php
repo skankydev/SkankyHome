@@ -15,13 +15,17 @@
 namespace App\Model\Document;
 
 use SkankyDev\Model\Document\MasterDocument;
-use DateTime;
+use SkankyDev\Model\Document\Traits\TimedTrait;
+use MongoDB\BSON\ObjectId;
 
 class Scenario extends MasterDocument {
-	
+
+	use TimedTrait;
+
+
 	public string $name = '';
 	public string $icon = '';
-	public string $module_id = '';
+	public ObjectId $module_id;
 	public array $preference = ['colors'=>['#FF0000','#00FF00','#0000FF','#FFFF00','#00FFFF','#FF00FF'],'effects'=>[]];
 	public array $lines = [];
 

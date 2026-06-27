@@ -23,5 +23,14 @@ class FirmwareCollection extends MasterCollection {
 
 	protected string $collectionName = 'firmwares';
 	protected string $documentClass = Firmware::class;
-	
+
+	public function getDisplayField(): array {
+		return [
+			'name'       => ['label' => 'Name',    'sort' => true],
+			'version'    => ['label' => 'Version', 'sort' => true],
+			'created_at' => ['label' => 'created', 'sort' => true],
+			'updated_at' => ['label' => 'updated', 'sort' => true],
+		];
+	}
+
 }

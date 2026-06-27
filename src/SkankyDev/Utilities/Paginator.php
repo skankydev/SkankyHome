@@ -14,6 +14,7 @@
 namespace SkankyDev\Utilities;
 
 use SkankyDev\Utilities\Traits\IterableData;
+use SkankyDev\Utilities\Traits\HtmlHelper;
 use SkankyDev\Config\Config;
 use Iterator;
 
@@ -23,10 +24,19 @@ use Iterator;
  */
 class Paginator implements Iterator {
 
-	use IterableData;
+	use IterableData, HtmlHelper;
 
 	public array $data   = [];
 	public array $option = ['sort' => ['_id' => -1]];
+
+	/** Base route link reused by all the links this paginator generates (sort + pages). */
+	protected array $baseLink = [];
+
+	/** Column definitions for the generic table part (from Collection::getDisplayField). */
+	protected array $displayField = [];
+
+	/** FQ document class name — used to derive the resource controller / id param. */
+	protected string $documentClass = '';
 
 	/**
 	 * @param iterable $data   the result set (MongoDB cursor or array)
@@ -45,9 +55,21 @@ class Paginator implements Iterator {
 	 */
 	public function getOption(array $link = [], array $get = []): array {
 		$this->initInfo();
-		$this->option['link'] = $link;
-		$this->option['get']  = $get;
+		$this->option['link']    = !empty($link) ? $link : $this->baseLink;
+		$this->option['get']     = $get;
+		$this->option['sortGet'] = $this->sortGet();
 		return $this->option;
+	}
+
+	/**
+	 * Sets the base route link reused by every link this paginator builds
+	 * (sort headers and page links). Defaults to the current route when left unset.
+	 * Call it early in the view for nested lists (e.g. a part inside a `show`).
+	 * @param array $link route array (action, params…) passed to UrlBuilder
+	 */
+	public function setLink(array $link): static {
+		$this->baseLink = $link;
+		return $this;
 	}
 
 	/**
@@ -86,6 +108,103 @@ class Paginator implements Iterator {
 			$params['order'] = 1;
 		}
 		return $params;
+	}
+
+	/**
+	 * Returns the active sort as GET params (`field`/`order`) so page links can
+	 * carry it. Returns [] when the sort is the default stable `_id` — no need to
+	 * expose it in the URL.
+	 * @return array{field?: string, order?: int}
+	 */
+	public function sortGet(): array {
+		$sort = $this->option['sort'] ?? [];
+		if (empty($sort)) {
+			return [];
+		}
+		$field = array_key_first($sort);
+		if ($field === '_id') {
+			return [];
+		}
+		return ['field' => $field, 'order' => $sort[$field]];
+	}
+
+	/**
+	 * Builds a ready-to-print sort link for a column header: toggles the order,
+	 * carries the current sort, resets to page 1, and shows a ▲/▼ arrow plus a
+	 * `sorted` class on the active column.
+	 * @param string $field the document field to sort on
+	 * @param string $label the column label shown to the user
+	 * @param array  $attr  extra HTML attributes for the <a> tag
+	 */
+	public function sortLink(string $field, string $label, array $attr = []): string {
+		$link = [...$this->baseLink, 'get' => $this->sortParams($field)];
+
+		$content = e($label);
+		$sort = $this->option['sort'] ?? [];
+		if (array_key_exists($field, $sort)) {
+			$attr['class'] = trim(($attr['class'] ?? '') . ' sorted');
+			$content .= $sort[$field] == 1 ? ' &#9650;' : ' &#9660;';
+		}
+
+		return $this->link($content, $link, $attr);
+	}
+
+	/** Sets the column definitions (from Collection::getDisplayField). */
+	public function setDisplayField(array $fields): static {
+		$this->displayField = $fields;
+		return $this;
+	}
+
+	/** Returns the column definitions for the generic table part. */
+	public function getDisplayField(): array {
+		return $this->displayField;
+	}
+
+	/** Sets the document class, used to derive the resource controller / id param. */
+	public function setDocumentClass(string $class): static {
+		$this->documentClass = $class;
+		return $this;
+	}
+
+	/** Resource controller name derived from the document class, e.g. `Module`. */
+	public function controller(): string {
+		$parts = explode('\\', $this->documentClass);
+		return end($parts) ?: '';
+	}
+
+	/** Singular id param name for route links, e.g. `module`. */
+	public function singular(): string {
+		return lcfirst($this->controller());
+	}
+
+	/**
+	 * Renders the auto-formatted, escaped value of a field for one document.
+	 * Reads `$document->{$field}` (so fake fields resolve via the Document __get),
+	 * then formats by runtime type: DateTime → date, bool → icon, array → count.
+	 * Plain strings are escaped with e(). Custom rendering is handled by the
+	 * `render`/`after` callbacks in the column definition (in the view).
+	 */
+	public function cellValue(object $document, string $field): string {
+		$value = $document->{$field};
+
+		if ($value instanceof \DateTime) {
+			return $value->format('d/m/Y H:i');
+		}
+		if ($value instanceof \BackedEnum) {
+			return e(method_exists($value, 'label') ? $value->label() : $value->value);
+		}
+		if (is_bool($value)) {
+			return $value
+				? '<i class="icon-check text-success"></i>'
+				: '<i class="icon-x text-danger"></i>';
+		}
+		if (is_array($value)) {
+			return (string) count($value);
+		}
+		if ($value === null) {
+			return '';
+		}
+		return e((string) $value);
 	}
 
 }

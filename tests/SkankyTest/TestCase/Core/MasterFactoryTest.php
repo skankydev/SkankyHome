@@ -11,6 +11,11 @@ use SkankyDev\Http\Routing\Router;
 use SkankyDev\Http\UrlBuilder;
 use TestApp\Controller\TestController;
 
+// Fixture : classe avec un paramètre de constructeur ayant une valeur par défaut.
+class DefaultParamFixture {
+    public function __construct(public string $label = 'default') {}
+}
+
 class MasterFactoryTest extends TestCase
 {
     protected function setUp(): void
@@ -98,6 +103,28 @@ class MasterFactoryTest extends TestCase
         $ctrl   = new TestController();
         $result = MasterFactory::_call($ctrl, 'greet');
         $this->assertEquals('hello world', $result);
+    }
+
+    public function testCallPositionalArgumentOverridesDefault(): void
+    {
+        // Un argument positionnel explicite doit gagner sur la valeur par défaut
+        $ctrl   = new TestController();
+        $result = MasterFactory::_call($ctrl, 'greet', ['Bob']);
+        $this->assertEquals('hello Bob', $result);
+    }
+
+    // ── arguments explicites vs valeur par défaut (constructeur) ────────────────
+
+    public function testMakePositionalArgumentOverridesConstructorDefault(): void
+    {
+        $obj = MasterFactory::_make(DefaultParamFixture::class, ['explicit']);
+        $this->assertEquals('explicit', $obj->label);
+    }
+
+    public function testMakeUsesConstructorDefaultWhenNoArgument(): void
+    {
+        $obj = MasterFactory::_make(DefaultParamFixture::class, []);
+        $this->assertEquals('default', $obj->label);
     }
 
     public function testCallThrowsForUnknownMethod(): void

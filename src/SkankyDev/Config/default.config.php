@@ -23,18 +23,18 @@ return [
 		'range' => 5,
 	],
 	'skankydev'  => [
-		'version'=>'0.0.7'
+		'version'=>'0.0.8'
 	],
 	'debug' => true,
 	'middlewares'=>[
-		'Session'=>'Session'
+		'Session'=>'Session',
+		'Csrf'=>'Csrf'
 	],
 	'class' => [
-		'behavior' => [
-			'Timed' => \SkankyDev\Model\Behavior\TimedBehavior::class,
-		],
 		'middlewares' => [
 			'Session'  => \SkankyDev\Http\Middleware\SessionMiddleware::class,
+			'Csrf'     => \SkankyDev\Http\Middleware\CsrfMiddleware::class,
+			'PostOnly' => \SkankyDev\Http\Middleware\PostOnlyMiddleware::class,
 		],
 		'fields' => [
 			'text'     => \SkankyDev\Form\Fields\TextField::class,

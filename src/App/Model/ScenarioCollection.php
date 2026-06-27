@@ -23,5 +23,22 @@ class ScenarioCollection extends MasterCollection {
 
 	protected string $collectionName = 'scenarios';
 	protected string $documentClass = Scenario::class;
-	
+	/*
+	name
+	updated_at
+	created_at
+	*/
+	public function getDisplayField(): array {
+		return [
+			'name'          => [
+				'label' => 'Name',
+				'sort' => true,
+				'before' => function($doc){
+					return '<i class="'.$doc->icon.'"></i> ';
+				}
+			],
+			'created_at'    => ['label' => 'created',       'sort' => true],
+			'updated_at'    => ['label' => 'updated',       'sort' => true],
+		];
+	}
 }

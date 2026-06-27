@@ -19,13 +19,15 @@ use App\Model\Document\Module;
 use App\Model\FirmwareCollection;
 use App\Model\ModuleCollection;
 use SkankyDev\Controller\MasterController;
+use SkankyDev\Http\Middleware\Attribute\Middleware;
 use SkankyDev\Http\Request;
 use SkankyDev\Queue\Queue;
+
 
 class ModuleController extends MasterController {
 
 	public function index(ModuleCollection $collection){
-		$modules = $collection->paginate([], Request::_paginateInfo());
+		$modules = $collection->paginate([],Request::_paginateInfo());
 		return view('module.index', ['modules' => $modules]);
 	}
 
@@ -46,7 +48,10 @@ class ModuleController extends MasterController {
 	}
 
 	public function show(Module $module){
-		$firmwares = FirmwareCollection::_find(['module_id'=>$module->_id],['limit' =>10]);
+		$firmwares = FirmwareCollection::_find(['module_id'=>$module->_id],[
+			'limit' =>10,
+			'sort' => ['created_at' => 1]
+		]);
 
 		return view('module.show', [
 			'module'    => $module,
@@ -71,6 +76,7 @@ class ModuleController extends MasterController {
 		return redirect(['action' => 'show', 'params' => [$module->_id]])->withFlash('success', 'Modification réussie');
 	}
 
+	#[Middleware('PostOnly')]
 	public function delete(Module $module){
 		ModuleCollection::_deleteOne($module);
 		return redirect(['action' => 'index'])->withFlash('success', 'Suppression réussie');

@@ -15,6 +15,7 @@ namespace SkankyDev\Utilities;
 
 use Exception;
 use Throwable;
+use SkankyDev\Config\Config;
 
 class Log {
 
@@ -121,11 +122,12 @@ class Log {
 	}
 
 	/**
-	 * Writes a DEBUG entry to the daily debug log. No-op if the DEBUG constant is not set or false.
+	 * Writes a DEBUG entry to the daily debug log. No-op unless debug mode is on
+	 * (Config `debug`, same switch as Application).
 	 */
 	public static function debug(string $message, array $context = []): void {
-		// Ne log que si en mode debug
-		if (!defined('DEBUG') || !DEBUG) {
+		// Ne log que si le mode debug est actif
+		if (!Config::get('debug')) {
 			return;
 		}
 		

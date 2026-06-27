@@ -52,10 +52,11 @@ class Response {
 
 	/**
 	 * Renders the response body.
-	 * Outputs JSON if the client accepts it, otherwise renders the HTML view.
+	 * Outputs JSON when the client asks for it (Accept) OR when there is no view
+	 * to render (a data response built via response()) ; otherwise renders the HTML view.
 	 */
 	public function build(): self {
-		if(Request::_wantsJson()){
+		if(Request::_wantsJson() || $this->viewName === ''){
 			$this->header('content-type', 'application/json');
 			$this->body = json_encode($this->data);
 		}else{
@@ -73,7 +74,9 @@ class Response {
 	 * Falls back to a JS redirect if headers are already sent and status is 3xx.
 	 */
 	public function send(): void {
-		if (!$this->built && $this->statusCode >= 200 && $this->statusCode < 300) {
+		// Build le body pour les réponses 2xx et les erreurs (4xx/5xx) ;
+		// pas pour les redirections 3xx qui n'ont pas de corps.
+		if (!$this->built && ($this->statusCode < 300 || $this->statusCode >= 400)) {
 			$this->build();
 		}
 		

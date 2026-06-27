@@ -4,6 +4,9 @@ namespace SkankyTest\TestCase\Utilities;
 
 use PHPUnit\Framework\TestCase;
 use SkankyDev\Utilities\Paginator;
+use SkankyDev\Http\Request;
+use SkankyDev\Http\Routing\Router;
+use SkankyDev\Http\UrlBuilder;
 
 class PaginatorTest extends TestCase
 {
@@ -55,6 +58,111 @@ class PaginatorTest extends TestCase
 
         // 'title' is not sorted → clicking it sets order to 1
         $this->assertEquals(['page' => 1, 'field' => 'title', 'order' => 1], $paginator->sortParams('title'));
+    }
+
+    // ── sortGet : tri courant exposé pour les liens de page ─────────────────────
+
+    public function testSortGetReturnsCurrentSort(): void {
+        $paginator = new Paginator($this->data, $this->option); // sort = ['slug' => 1]
+        $this->assertEquals(['field' => 'slug', 'order' => 1], $paginator->sortGet());
+    }
+
+    public function testSortGetIsEmptyForDefaultIdSort(): void {
+        // Le tri stable par défaut (_id) ne doit pas être exposé dans l'URL
+        $paginator = new Paginator($this->data, ['limit' => 10, 'page' => 1, 'total' => 1, 'range' => 5, 'sort' => ['_id' => -1]]);
+        $this->assertEquals([], $paginator->sortGet());
+    }
+
+    // ── sortLink : lien d'en-tête prêt à afficher ───────────────────────────────
+
+    public function testSortLinkTogglesAndMarksActiveColumn(): void {
+        $this->setUpRoute();
+        $paginator = new Paginator($this->data, $this->option); // sort = ['slug' => 1]
+
+        $html = $paginator->sortLink('slug', 'Slug');
+
+        // toggle : slug est trié asc → le lien doit demander desc
+        $this->assertStringContainsString('field=slug', $html);
+        $this->assertStringContainsString('order=-1', $html);
+        $this->assertStringContainsString('page=1', $html);
+        // colonne active → classe + flèche montante (tri courant asc)
+        $this->assertStringContainsString('sorted', $html);
+        $this->assertStringContainsString('&#9650;', $html);
+    }
+
+    public function testSortLinkOnInactiveColumnHasNoMarker(): void {
+        $this->setUpRoute();
+        $paginator = new Paginator($this->data, $this->option);
+
+        $html = $paginator->sortLink('title', 'Title');
+
+        $this->assertStringContainsString('field=title', $html);
+        $this->assertStringContainsString('order=1', $html);
+        $this->assertStringNotContainsString('sorted', $html);
+    }
+
+    // ── Table data-driven : valeurs de cellule auto-formatées ───────────────────
+
+    public function testCellValueFormatsByRuntimeType(): void {
+        $paginator = new Paginator($this->data, $this->option);
+
+        $doc = (object) [
+            'name'    => 'Salon',
+            'count'   => ['a', 'b', 'c'],
+            'when'    => new \DateTime('2026-06-15 14:30'),
+            'flagOn'  => true,
+            'flagOff' => false,
+            'empty'   => null,
+        ];
+
+        $this->assertSame('Salon', $paginator->cellValue($doc, 'name'));
+        $this->assertSame('3', $paginator->cellValue($doc, 'count'));
+        $this->assertSame('15/06/2026 14:30', $paginator->cellValue($doc, 'when'));
+        $this->assertStringContainsString('icon-check', $paginator->cellValue($doc, 'flagOn'));
+        $this->assertStringContainsString('icon-x', $paginator->cellValue($doc, 'flagOff'));
+        $this->assertSame('', $paginator->cellValue($doc, 'empty'));
+    }
+
+    public function testCellValueEscapesStrings(): void {
+        $paginator = new Paginator($this->data, $this->option);
+        $doc = (object) ['name' => '<script>alert(1)</script>'];
+
+        $value = $paginator->cellValue($doc, 'name');
+        $this->assertStringNotContainsString('<script>', $value);
+        $this->assertStringContainsString('&lt;script&gt;', $value);
+    }
+
+    public function testResourceControllerAndSingularFromDocumentClass(): void {
+        $paginator = new Paginator($this->data, $this->option);
+        $paginator->setDocumentClass('App\\Model\\Document\\Module');
+
+        $this->assertSame('Module', $paginator->controller());
+        $this->assertSame('module', $paginator->singular());
+    }
+
+    public function testDisplayFieldRoundTrip(): void {
+        $paginator = new Paginator($this->data, $this->option);
+        $fields = ['name' => ['label' => 'Name', 'sort' => true]];
+        $paginator->setDisplayField($fields);
+
+        $this->assertSame($fields, $paginator->getDisplayField());
+    }
+
+    /** Met en place une route courante pour que UrlBuilder puisse construire les liens. */
+    private function setUpRoute(): void {
+        (new \ReflectionProperty(Router::class,     '_instance'))->setValue(null, null);
+        (new \ReflectionProperty(Request::class,    '_instance'))->setValue(null, null);
+        (new \ReflectionProperty(UrlBuilder::class, '_instance'))->setValue(null, null);
+
+        $_GET = $_POST = $_COOKIE = $_FILES = [];
+        $_SERVER = [
+            'REQUEST_METHOD' => 'GET',
+            'REQUEST_SCHEME' => 'http',
+            'HTTP_HOST'      => 'skankyhome.local',
+            'REQUEST_URI'    => '/module/index',
+            'REMOTE_ADDR'    => '127.0.0.1',
+        ];
+        Router::_findCurrentRoute('/module/index');
     }
 
     public function testLastPageBoundary(): void {

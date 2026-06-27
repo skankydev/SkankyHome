@@ -58,7 +58,7 @@ class ExceptionHandler {
 	<section id="MainContainer">
 		<header id="Header">
 			<div class="layout-header">
-				<a href="/" class="main-title">SkankyHome</a>
+				<a href="/" class="title-skankyhome">SkankyHome</a>
 			</div>
 			<hr class="rainbow-diviser">
 		</header>

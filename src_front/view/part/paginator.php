@@ -1,4 +1,5 @@
 <?php $aClass = 'btn-mini'; ?>
+<?php $get = array_merge($sortGet ?? [], $get); // les liens de page conservent le tri courant ?>
 <nav id="Paginator" class="text-center p-m">
 	
 	<?php $class = $aClass; if($first==$prev) $class .= ' btn-disabled'; ?>

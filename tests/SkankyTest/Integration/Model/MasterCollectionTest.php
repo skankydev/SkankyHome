@@ -7,6 +7,7 @@ use MongoDB\BSON\ObjectId;
 use SkankyDev\Database\MongoClient;
 use SkankyDev\Model\MasterCollection;
 use SkankyDev\Model\Document\MasterDocument;
+use SkankyDev\Model\Document\Traits\TimedTrait;
 use SkankyDev\Utilities\Paginator;
 use SkankyTest\IntegrationTestCase;
 
@@ -22,24 +23,23 @@ class TestItemCollection extends MasterCollection
 {
     protected string $collectionName = 'test_items';
     protected string $documentClass  = TestItem::class;
-    protected array  $behaviorsName  = []; // pas de behaviors pour l'isolation
+    // TestItem n'utilise aucun trait de behavior → aucun behavior, isolation garantie
 }
 
 // ── Fixtures avec Behaviors ───────────────────────────────────────────────────
 
-#[\AllowDynamicProperties]
 class TimedItem extends MasterDocument
 {
-    public string    $name       = '';
-    public ?DateTime $created_at = null;
-    public ?DateTime $updated_at = null;
+    use TimedTrait; // déclare created_at / updated_at et active TimedBehavior par convention
+
+    public string $name = '';
 }
 
 class TimedItemCollection extends MasterCollection
 {
     protected string $collectionName = 'timed_items';
     protected string $documentClass  = TimedItem::class;
-    // behaviorsName defaults to ['Timed'] from MasterCollection
+    // TimedBehavior est résolu depuis le TimedTrait de TimedItem
 }
 
 // ── Tests ─────────────────────────────────────────────────────────────────────
@@ -289,6 +289,55 @@ class MasterCollectionTest extends IntegrationTestCase
     }
 
     // ── callBehaviors via TimedBehavior ───────────────────────────────────────
+
+    // ── getDisplayField (défaut par réflexion) ─────────────────────────────────
+
+    public function testGetDisplayFieldListsPublicFieldsExceptId(): void
+    {
+        $fields = $this->col->getDisplayField();
+
+        // TestItem a deux champs publics : name, value (mais pas _id)
+        $this->assertArrayHasKey('name', $fields);
+        $this->assertArrayHasKey('value', $fields);
+        $this->assertArrayNotHasKey('_id', $fields);
+
+        $this->assertSame(['label' => 'Name', 'sort' => true], $fields['name']);
+        $this->assertSame(['label' => 'Value', 'sort' => true], $fields['value']);
+    }
+
+    // ── Tri whitelisté via getDisplayField ──────────────────────────────────────
+
+    public function testPaginateKeepsSortOnDeclaredSortableField(): void
+    {
+        $p = $this->col->paginate([], ['page' => 1, 'sort' => ['name' => 1]]);
+        $this->assertSame(['name' => 1], $p->getOption()['sort']);
+    }
+
+    public function testPaginateRejectsSortOnUnknownField(): void
+    {
+        // 'hacky' n'est pas dans getDisplayField → ignoré → tri stable par défaut
+        $p = $this->col->paginate([], ['page' => 1, 'sort' => ['hacky' => 1]]);
+        $this->assertSame(['_id' => -1], $p->getOption()['sort']);
+    }
+
+    public function testPaginateNormalizesSortOrder(): void
+    {
+        // un order farfelu venant de l'URL est ramené à 1 / -1
+        $p = $this->col->paginate([], ['page' => 1, 'sort' => ['name' => 5]]);
+        $this->assertSame(['name' => 1], $p->getOption()['sort']);
+    }
+
+    // ── widgetLink (lien par défaut d'un widget = show de la ressource) ─────────
+
+    public function testWidgetLinkDefaultsToResourceShow(): void
+    {
+        $doc = (object) ['_id' => 'abc123'];
+        $link = $this->col->widgetLink($doc);
+
+        $this->assertSame('TestItem', $link['controller']);
+        $this->assertSame('show', $link['action']);
+        $this->assertSame(['testItem' => 'abc123'], $link['params']);
+    }
 
     public function testBehaviorSetsTimestampsOnInsert(): void
     {

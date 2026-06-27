@@ -19,5 +19,8 @@
         <testsuite name="Integration">
             <directory>tests/SkankyTest/Integration</directory>
         </testsuite>
+        <testsuite name="App">
+            <directory>tests/AppTest</directory>
+        </testsuite>
     </testsuites>
 </phpunit>

@@ -26,7 +26,6 @@ use SkankyDev\Utilities\Traits\StringFacility;
 
 
 
-#[\AllowDynamicProperties]
 class MasterDocument implements JsonSerializable, Persistable {
 
 	use StringFacility;
@@ -72,7 +71,7 @@ class MasterDocument implements JsonSerializable, Persistable {
 		if(in_array($name,$methods) !== false){
 			return $this->$name();
 		}
-		return false;
+		return null;
 	}
 
 	/**
@@ -87,21 +86,58 @@ class MasterDocument implements JsonSerializable, Persistable {
 
 
 	/**
+	 * Returns the declared type name of a property (single named type), or null
+	 * if the property is untyped, has a union/intersection type, or doesn't exist.
+	 * Drives type-aware (de)serialization without relying on naming conventions.
+	 */
+	private function propertyType(string $key): ?string {
+		if (!property_exists($this, $key)) {
+			return null;
+		}
+		$type = (new \ReflectionProperty($this, $key))->getType();
+		return $type instanceof \ReflectionNamedType ? $type->getName() : null;
+	}
+
+	/**
 	 * Fills document properties from an array, only for declared class properties.
-	 * Fields matching `*_id` are automatically cast to ObjectId.
+	 * Conversion is driven by the property's declared type (Reflection):
+	 * `ObjectId` properties cast strings to ObjectId, `BackedEnum` properties cast
+	 * strings via tryFrom(). Scalars rely on PHP's coercive typing. `_id` is never
+	 * mass-assignable.
 	 */
 	public function fill(array $data): static {
-		$properties = get_class_vars(get_class($this));
-		foreach ($properties as $key=>$value){
-			if(isset($data[$key])){
-				$this->{$key} = $data[$key];
-				if(preg_match('/[a-zA-Z0-9_-]*_id/', $key)){
-					if(empty($data[$key])){
-						$this->{$key} = new ObjectId();
-					}else{
-						$this->{$key} = new ObjectId($data[$key]);
+		foreach ($data as $key => $value) {
+			if ($key === '_id' || !property_exists($this, $key)) {
+				continue;
+			}
+			$type = $this->propertyType($key);
+
+			if ($type === ObjectId::class) {
+				if ($value instanceof ObjectId) {
+					$this->{$key} = $value;
+				} elseif (!empty($value)) {
+					$this->{$key} = new ObjectId($value);
+				}
+				// valeur vide → on laisse le défaut, pas de FK bidon générée
+			} elseif ($type !== null && is_subclass_of($type, \BackedEnum::class)) {
+				$enum = $value instanceof \BackedEnum ? $value : $type::tryFrom($value);
+				if ($enum !== null) {
+					$this->{$key} = $enum;
+				}
+			} elseif ($type === DateTime::class) {
+				if ($value instanceof DateTime) {
+					$this->{$key} = $value;
+				} elseif (!empty($value)) {
+					try {
+						// new DateTime parse l'ISO du navigateur (date "2026-06-20"
+						// comme datetime-local "2026-06-20T14:30") et la plupart des formats.
+						$this->{$key} = new DateTime($value);
+					} catch (\Exception $e) {
+						// chaîne de date non parsable → on laisse le défaut
 					}
 				}
+			} else {
+				$this->{$key} = $value;
 			}
 		}
 		return $this;
@@ -109,21 +145,22 @@ class MasterDocument implements JsonSerializable, Persistable {
 
 	/**
 	 * Serializes the document for MongoDB storage.
-	 * Converts DateTime to UTCDateTime and *_id fields to ObjectId.
+	 * Converts DateTime to UTCDateTime and BackedEnum to its scalar value.
+	 * ObjectId-typed properties already hold an ObjectId and are stored as-is.
+	 * An empty `_id` (new document) is dropped so MongoDB generates one natively;
+	 * MasterCollection::insert() then back-fills it from getInsertedId().
 	 * Called automatically by the MongoDB driver on insert/update.
 	 */
 	public function bsonSerialize(): stdClass|Document|array {
 		$prop = get_object_vars($this);
+		if (empty($prop['_id'])) {
+			unset($prop['_id']);
+		}
 		foreach ($prop as $key=>$value) {
-			$prop[$key] = $this->{$key};
-			if($prop[$key] instanceof DateTime){
-				$prop[$key] = new UTCDateTime($this->{$key});
-			}else if(preg_match('/[a-zA-Z0-9_-]*_id/', $key)){
-				if(empty($value)){
-					$prop[$key] = new ObjectId();
-				}else{
-					$prop[$key] = new ObjectId($value);
-				}
+			if($value instanceof DateTime){
+				$prop[$key] = new UTCDateTime($value);
+			}else if($value instanceof \BackedEnum){
+				$prop[$key] = $value->value;
 			}
 		}
 		return $prop;
@@ -135,9 +172,17 @@ class MasterDocument implements JsonSerializable, Persistable {
 	 * Converts BSON types (UTCDateTime, BSONArray, BSONDocument) to native PHP types.
 	 */
 	public function bsonUnserialize(array $data): void {
-		unset($data['__pclass']); 
+		unset($data['__pclass']);
 		foreach ($data as $key => $value) {
-			$this->{$key} = $this->convertBsonValue($value);
+			$value = $this->convertBsonValue($value);
+			$type = $this->propertyType($key);
+			if ($type !== null && is_subclass_of($type, \BackedEnum::class) && !($value instanceof \BackedEnum)) {
+				$value = $type::tryFrom($value);
+				if ($value === null) {
+					continue; // valeur stockée invalide → on garde le défaut du document
+				}
+			}
+			$this->{$key} = $value;
 		}
 	}
 
@@ -160,18 +205,19 @@ class MasterDocument implements JsonSerializable, Persistable {
 
 	/**
 	 * Serializes the document for JSON output.
-	 * ObjectId fields are converted to strings for API responses.
+	 * ObjectId fields are converted to strings and BackedEnum to their scalar value.
 	 */
 	public function jsonSerialize(): mixed {
 		$data = get_object_vars($this);
-		
 
 		foreach ($data as $key => $value) {
-			if(preg_match('/[a-zA-Z0-9_-]*_id/', $key) && $value instanceof ObjectId){
+			if($value instanceof ObjectId){
 				$data[$key] = (string) $value;
+			}else if($value instanceof \BackedEnum){
+				$data[$key] = $value->value;
 			}
 		}
-				
+
 		return $data;
 	}
 

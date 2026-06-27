@@ -3,7 +3,6 @@
  * congratulation you have found the master configuration file
  */
 
-$smtp = require_once 'smtp.config.php';
 $leds = require_once 'leds.config.php';
 $icons = require_once 'icons.config.php';
 
@@ -23,6 +22,10 @@ $conf =  [
 		'username'=>getenv('MQTT_USERNAME') ?: '',
 		'password'=>getenv('MQTT_PASSWORD') ?: '',
 	],
+	'llama' => [
+		'host' => getenv('LLAMA_HOST') ?: 'localhost',
+		'port' => getenv('LLAMA_PORT') ?: 8080,
+	],
 	'location'=>[
 		'fr'=>[
 			'domaine'=>'App',
@@ -32,25 +35,11 @@ $conf =  [
 	'Module'=>[
 		'App'
 	],
-	'smtp' => $smtp,
 	'debug'     => (int)(getenv('APP_DEBUG') !== false ? getenv('APP_DEBUG') : 2),
 	'adminMail' => getenv('APP_ADMIN_MAIL') ?: 'skankydev@gmail.com',
 	'leds' => $leds,
 	'icons' => $icons,
 ];
+
 return $conf;
 
-/*
-smtp.config.php exemple
-return [
-	'default' => [
-		'host' => '***',
-		'username' => '***',
-		'password' => '***',
-		'secure' => 'ssl',
-		'port' => '465',
-		'sender' => 'no-reply@mail.com'
-	]
-];
-
- */

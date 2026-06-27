@@ -141,12 +141,12 @@ class MasterFactory {
 
 			// Si pas de type ou type primitif
 			if ($type === null || $type->isBuiltin()) {
-				// Utiliser la valeur par défaut si disponible
-				if ($parameter->isDefaultValueAvailable()) {
-					$dependencies[] = $parameter->getDefaultValue();
-				} else if(isset($value[$paramKey])){
+				// Un argument explicitement fourni gagne sur la valeur par défaut.
+				if (array_key_exists($paramKey, $value)) {
 					$dependencies[] = $value[$paramKey];
 					$paramKey++;
+				} else if ($parameter->isDefaultValueAvailable()) {
+					$dependencies[] = $parameter->getDefaultValue();
 				} else {
 					throw new ClassNotFoundException("Impossible de résoudre le paramètre {$name}",500);
 				}

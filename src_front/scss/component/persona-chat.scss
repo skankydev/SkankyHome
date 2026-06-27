@@ -1,0 +1,122 @@
+@use '../settings/functions' as *;
+@use '../settings/mixins' as *;
+@use '../settings/variables' as *;
+@use '../settings/animations' as *;
+
+.persona-chat{
+	display: flex;
+	flex-direction: column;
+	height: calc(100vh - #{$header} - #{$p-xxl});
+	overflow: hidden; // carte auto-contenue : absorbe le bleed du glitch (scroll vertical géré par le thread)
+
+	.persona-chat-header{
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.persona-chat-thread{
+		flex: 1;
+		min-width: 0; // autorise les enfants flex à rétrécir au lieu de déborder
+		overflow-y: auto;
+		padding: $p-m;
+		display: flex;
+		flex-direction: column;
+		gap: $p-s;
+	}
+
+	.persona-chat-empty{
+		margin: auto;
+		text-align: center;
+		color: $text-muted;
+	}
+
+	.persona-chat-message{
+		display: flex;
+		flex-direction: column;
+		min-width: 0;
+
+		&.is-user{
+			align-items: flex-end;
+
+			.persona-chat-bubble{
+				background: $neon-purple;
+				color: $text-primary;
+				border-bottom-right-radius: $p-xs;
+			}
+		}
+
+		&.is-assistant{
+			align-items: flex-start;
+
+			.persona-chat-bubble{
+				background: $bg-tertiary;
+				border-bottom-left-radius: $p-xs;
+			}
+		}
+	}
+
+	.persona-chat-meta{
+		margin-top: $p-xxs;
+		padding: 0 $p-xs;
+		font-size: $fs-xs;
+		color: $text-muted;
+
+		i{
+			font-size: 0.9em;
+		}
+	}
+
+	.persona-chat-bubble{
+		max-width: 75%;
+		padding: $p-s $p-m;
+		border-radius: $p-m;
+		white-space: pre-wrap;
+		overflow-wrap: anywhere;
+		line-height: $line-height-normal;
+		color: $text-primary;
+	}
+
+	.persona-chat-typing{
+		display: inline-flex;
+		align-items: center;
+		gap: $p-xs;
+		padding: $p-xxs 0;
+
+		.dot{
+			width: 7px;
+			height: 7px;
+			border-radius: 50%;
+			background: $neon-cyan;
+			animation: typing-bounce 1.2s infinite ease-in-out;
+
+			&:nth-child(2){ animation-delay: 0.15s; }
+			&:nth-child(3){ animation-delay: 0.3s; }
+		}
+	}
+
+	.persona-chat-truncated{
+		display: inline-block;
+		margin-top: $p-xs;
+		font-size: $fs-xs;
+		color: $warning;
+		opacity: 0.85;
+	}
+
+	.persona-chat-error{
+		margin: 0 $p-m;
+	}
+
+	.persona-chat-input{
+		display: flex;
+		gap: $p-s;
+		padding: $p-s;
+		border-top: 1px solid $border-color;
+
+		textarea{
+			flex: 1;
+			min-width: 0; // sinon la largeur intrinsèque de la textarea déborde du flex
+			resize: none;
+		}
+	}
+}

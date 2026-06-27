@@ -11,13 +11,10 @@
  *
  */
 
-use App\Middlewares\BiduleMiddleware;
-use App\Middlewares\TrucMiddleware;
-
 return [
 	'class' => [
 		'fields' => [
 			'icon' => \App\Form\Fields\IconField::class,
-		]
+		],
 	],
 ];

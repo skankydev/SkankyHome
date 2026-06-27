@@ -17,6 +17,6 @@ use SkankyDev\Form\FormField;
 
 
 class DateTimeField extends FormField {
-	protected string $type = 'datetime';
+	protected string $type = 'datetime-local';
 	protected string $viewHtml = 'fields.default';
 }
