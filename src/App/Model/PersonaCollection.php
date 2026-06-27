@@ -35,7 +35,7 @@ class PersonaCollection extends MasterCollection {
 	public function widgetLink(object $document): array {
 		return [
 			'controller' => 'persona',
-			'action'     => 'chat',
+			'action'     => 'show',
 			'params'     => ['persona' => $document->_id],
 		];
 	}

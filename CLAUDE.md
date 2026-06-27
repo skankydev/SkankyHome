@@ -173,6 +173,25 @@ Exemples : `part.table` (table data-driven, vue pure), `part.markdown` / `part.b
 
 `view()`, `redirect()`, `response()`, `url()`, `asset()` ; `e()` (échappement HTML), `json()` ; `csrf_field()` / `csrf_token()` ; `flash()`, `old()`, `error()` ; `debug()`.
 
+### Client HTTP sortant
+
+`SkankyDev\Utilities\HttpClient` : petit wrapper cURL pour les requêtes **sortantes** (API externes, llama-server…). Sans état : chaque requête renvoie un `HttpResult` autoporteur.
+
+```php
+$client = new HttpClient();
+$res = $client->timeout(60)->post($url, ['messages' => [...]]); // $data POSTé en JSON (Content-Type auto)
+
+if ($res->ok()) {            // 2xx
+    $data = $res->json();    // body décodé (ou ->body() pour le brut)
+}
+```
+
+- Méthodes : `get($url, $query)` / `post($url, $data)` / `request($method, $url, $data)` → `HttpResult`.
+- Setters fluent cumulables : `withHeader()` / `withHeaders()` / `timeout($s)` (utile pour l'inférence LLM, lente).
+- `HttpResult` : `status()`, `ok()`, `failed()` (erreur transport **ou** ≥ 400), `body()`, `json()`, `header()` (insensible à la casse), `error()`.
+- Échec réseau → `HttpResult` avec `status() === 0` et `error()` rempli (pas d'exception).
+- ⚠️ Ne pas confondre `HttpResult` (réponse *reçue* d'un distant) avec `SkankyDev\Http\Response` (réponse *sortante* vers le navigateur).
+
 ---
 
 ## Modèles MongoDB
@@ -201,6 +220,14 @@ Pour bénéficier de `created_at` / `updated_at` automatiques, le document fait 
 **Convention status (enum)** : un backed enum string dans `App\Model\Enum\` avec `label()` (libellé FR) et `options()` (`value => label`, pour un `select`). Les enums de statut exposent en plus `class()` (→ `status-xxx`, cf. SCSS) et `pretty()` (badge HTML).
 - Form : `$this->add('status','select',['options' => TaskStatus::options(), ...])`.
 - Vue : `$x->status->pretty()` (badge) ou `e($x->status->label())`.
+
+### EmbeddedDocument (sous-documents)
+
+`SkankyDev\Model\Document\EmbeddedDocument` : base **Persistable** pour les objets typés qui vivent *dans* un autre document (array ou propriété), sans `_id` ni Collection à eux. Même (dé)sérialisation pilotée par type que `MasterDocument` (DateTime ⇄ UTCDateTime, BackedEnum ⇄ `->value`, ObjectId stocké tel quel), mais sans la logique de collection.
+
+- MongoDB stocke `__pclass` et **reconstruit le graphe d'objets imbriqués automatiquement** (un array d'EmbeddedDocument revient typé après lecture).
+- `MasterJob` en hérite (les jobs sont des embedded du `JobDoc.payload`). Exemple applicatif : `App\Model\Document\Message` dans `Conversation.messages`.
+- Usage : `class Message extends EmbeddedDocument { public string $role = ''; ... }` ; remplissage via `new Message([...])` ou fabriques statiques.
 
 ### Behaviors
 

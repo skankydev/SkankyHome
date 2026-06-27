@@ -15,26 +15,23 @@ namespace App\Model;
 
 use SkankyDev\Utilities\Traits\Singleton;
 use SkankyDev\Model\MasterCollection;
-use App\Model\Document\Project;
+use App\Model\Document\Conversation;
 
-class ProjectCollection extends MasterCollection {
+class ConversationCollection extends MasterCollection {
 
 	use Singleton;
 
-	protected string $collectionName = 'projects';
-	protected string $documentClass = Project::class;
+	protected string $collectionName = 'conversations';
+	protected string $documentClass = Conversation::class;
 
 	public function getDisplayField(): array {
 		return [
-			'name'          => [
-				'label' => 'Name',
-				'sort' => true,
-				'before' => function($doc){
-					return '<i class="'.$doc->icon.'"></i> ';
-				}
+			'name' => ['label' => 'Name', 'sort' => true],
+			'persona_id' => [
+				'label'  => 'Persona',
+				'sort'   => true,
+				'render' => fn($conversation) => e($conversation->persona?->name ?? '—'),
 			],
-			//'description' => ['label' => 'Description', 'sort' => true],
-			'status' => ['label' => 'Status', 'sort' => true],
 			'created_at' => ['label' => 'Created', 'sort' => true],
 			'updated_at' => ['label' => 'Updated', 'sort' => true],
 		];

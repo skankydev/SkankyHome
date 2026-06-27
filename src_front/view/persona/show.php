@@ -12,7 +12,7 @@ $this->addCrumb($persona->name,['action'=>'show','params'=>['persona'=>$persona-
 		</h2>
 	</div>
 	<div class="page-action">
-		<a href="<?= $this->url(['action'=>'chat','params'=>[$persona->_id]]) ?>" class="btn btn-success">
+		<a href="<?= $this->url(['controller'=>'conversation','action'=>'start','params'=>['persona'=>$persona->_id]]) ?>" class="btn btn-success" data-method="post">
 			<i class="icon-message-circle"></i>
 			Chat
 		</a>

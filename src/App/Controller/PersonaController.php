@@ -58,15 +58,8 @@ class PersonaController extends MasterController {
 		return view('persona.show', ['persona' => $persona]);
 	}
 
-	public function chat(Persona $persona){
-		$conf = Config::get('llama');
-		$llamaUrl = 'http://'.$conf['host'].':'.$conf['port'];
-		return view('persona.chat', ['persona' => $persona, 'llamaUrl' => $llamaUrl]);
-	}
-
 	public function edit(Persona $persona){
 		$form = new PersonaForm(['action' => 'update', 'params' => [$persona->_id]],'POST',['enctype'=>'multipart/form-data']);
-
 
 		$form->setData($persona);
 		return view('persona.edit', ['form' => $form, 'persona' => $persona]);
