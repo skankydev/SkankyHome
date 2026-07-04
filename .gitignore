@@ -18,6 +18,9 @@ config/smtp.config.php
 .phpunit.cache/
 public/coverage
 
+# Sourcemaps buildées
+public/dist/*.map
+
 # IDE & OS
 .claude
 *.sublime-workspace
