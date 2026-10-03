@@ -32,6 +32,6 @@ class ScenarioForm extends FormBuilder {
 			'rules' => ['required']
 		]);
 
-		$this->submit('<i class="icon-save"></i> SAVE');
+		$this->submit('SAVE');
 	}
 }

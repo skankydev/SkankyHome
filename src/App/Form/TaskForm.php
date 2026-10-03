@@ -39,7 +39,7 @@ class TaskForm extends FormBuilder {
 			'options' => TaskStatus::options(),
 		]);
 
-		$this->submit('<i class="icon-save"></i> SAVE');
+		$this->submit('SAVE');
 	}
 
 }

@@ -30,7 +30,7 @@ class ConversationForm extends FormBuilder {
 			'options' => $this->personaIdOptions(),
 		]);
 
-		$this->submit('<i class="icon-save"></i> SAVE');
+		$this->submit('SAVE');
 	}
 
 	/**
