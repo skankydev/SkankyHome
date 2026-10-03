@@ -6,6 +6,9 @@
 	<link rel="icon" type="image/png" href="/favicon.png" />
 	<title>
 		<?php
+			if (\SkankyDev\Config\Config::get('debug')) {
+				echo '[🐞] Dev - ';
+			}
 			$titre = $this->getTitle();
 			if (!empty($titre)) {
 				echo ucwords($titre.' - ');

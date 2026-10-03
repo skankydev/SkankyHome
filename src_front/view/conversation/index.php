@@ -18,5 +18,8 @@ $this->addCrumb('Conversation', ['action' => 'index'], '');
 </header>
 
 <section class="page-content">
-	<?= $this->part('part.table', ['paginator' => $conversations]); ?>
+	<?= $this->part('part.table', [
+		'btnDelete' => true,
+		'paginator' => $conversations
+	]); ?>
 </section>
