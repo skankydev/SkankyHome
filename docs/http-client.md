@@ -2,7 +2,7 @@
 
 Référence détaillée. Vue d'ensemble dans [CLAUDE.md](../CLAUDE.md).
 
-`SkankyDev\Utilities\HttpClient` : petit wrapper cURL pour les requêtes **sortantes** (API externes, llama-server…). Sans état : chaque requête renvoie un `HttpResult` autoporteur.
+`SkankyDev\Utilities\Http\HttpClient` : petit wrapper cURL pour les requêtes **sortantes** (API externes, llama-server…). Sans état : chaque requête renvoie un `HttpResult` autoporteur.
 
 ```php
 $client = new HttpClient();

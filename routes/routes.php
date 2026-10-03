@@ -4,8 +4,7 @@ use App\Controller\HomeController;
 use SkankyDev\Http\Routing\Router;
 
 Router::_add('/',[
-	'controller' => 'Home',
+	'controller' => HomeController::class,
 	'action'     => 'index',
-	'namespace'  => 'App'
-]);
+])->setName('home');
 

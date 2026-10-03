@@ -15,11 +15,11 @@ Basée sur le framework PHP MVC maison **SkankyDev**.
 
 ---
 
-## Tests
+## Le framework et les tests
 
-Suite **PHPUnit** dans `tests/`. Elle couvre **surtout le framework `SkankyDev`** (le cœur réutilisable) — la partie applicative `App` est très peu testée.
-- `tests/SkankyTest/TestCase/` — tests unitaires (pas de dépendance externe)
-- `tests/SkankyTest/Integration/` — tests d'intégration (nécessitent MongoDB)
+SkankyDev n'est plus dans ce projet : c'est une dépendance Composer (`skankydev/framework`), installée dans `vendor/skankydev/framework/`. Son code, ses tests et sa doc (`docs/`) vivent dans son propre dépôt (`E:\Dev\SkankyDev`).
+
+Ce projet a sa propre suite **PHPUnit** pour la partie applicative, dans `tests/AppTest/` (surtout `Llm`, sans dépendance externe).
 
 Scripts Composer (à privilégier) :
 
@@ -32,11 +32,11 @@ composer coverage-pretty   # phpunit --coverage-html build/coverage
 Ciblage fin si besoin :
 
 ```bash
-php vendor/bin/phpunit tests/SkankyTest/TestCase/Model/...      # un fichier
-php vendor/bin/phpunit --filter testMagicGetExistingProperty    # un test
+php vendor/bin/phpunit tests/AppTest/Llm/ChatEngineTest.php   # un fichier
+php vendor/bin/phpunit --filter testNomDuTest                 # un test
 ```
 
-> Validation : pour un changement dans `SkankyDev`, lancer `composer test` (PHPUnit attrape syntaxe **et** régressions). **Ne pas faire de `php -l`** — inutile : les tests couvrent la syntaxe du code testé, et pour le reste (templates, vues, `App`) les erreurs de syntaxe se voient tout de suite à l'exécution.
+> Validation : pour un changement dans `App`, lancer `composer test`. **Ne pas faire de `php -l`**. Un changement dans le framework se fait dans son dépôt, avec `composer test` là-bas.
 
 > Vérification minimale : si un outil ou une vérification (build, browser, etc.) échoue, ne pas relancer en boucle — dire directement à Simon ce qui n'a pas pu être vérifié.
 
@@ -153,7 +153,7 @@ Exemples : `part.table` (table data-driven, vue pure), `part.markdown` / `part.b
 
 ### Config
 
-`Config::initConf()` fusionne, dans l'ordre : `src/SkankyDev/Config/default.config.php` ← config de chaque module (`src/{Module}/Config/config.php`) ← `config/master.config.php`. Accès : `Config::get('chemin.pointe')`. Y vivent `middlewares`, `class.middlewares`, `class.fields`, `class.rules`, `Module`, `paginator`, `icons`…
+`Config::initConf()` fusionne, dans l'ordre : `default.config.php` du framework (`vendor/skankydev/framework/src/Config/`) ← config de chaque module (`src/{Module}/Config/config.php`) ← `config/master.config.php`. Accès : `Config::get('chemin.pointe')`. Y vivent `middlewares`, `class.middlewares`, `class.fields`, `class.rules`, `Module`, `paginator`, `icons`…
 
 ### Gestion des erreurs
 
@@ -165,7 +165,7 @@ Exemples : `part.table` (table data-driven, vue pure), `part.markdown` / `part.b
 
 ### Client HTTP sortant
 
-`SkankyDev\Utilities\HttpClient` : wrapper cURL pour les requêtes **sortantes** (API externes, llama-server…), sans état, renvoie un `HttpResult`. API complète et gotchas : **→ [docs/http-client.md](docs/http-client.md)**.
+`SkankyDev\Utilities\Http\HttpClient` : wrapper cURL pour les requêtes **sortantes** (API externes, llama-server…), sans état, renvoie un `HttpResult`. API complète et gotchas : **→ [docs/http-client.md](docs/http-client.md)**.
 
 ---
 

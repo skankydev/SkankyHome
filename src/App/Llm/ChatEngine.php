@@ -17,7 +17,7 @@ namespace App\Llm;
 use App\Model\Document\Conversation;
 use App\Model\Document\Message;
 use SkankyDev\Config\Config;
-use SkankyDev\Utilities\HttpClient;
+use SkankyDev\Utilities\Http\HttpClient;
 use SkankyDev\Utilities\Log;
 
 /**
