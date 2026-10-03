@@ -43,6 +43,7 @@ class MqttLoop extends MasterCommand {
 		} catch (MqttClientException $e) {
 
 			$this->error('Ya un truc qui marche plus dans le mqtt.');
+			$this->error($e->getCode().' : '.$e->getMessage());
 		}
 	}
 

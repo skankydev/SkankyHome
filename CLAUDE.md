@@ -15,11 +15,11 @@ Basée sur le framework PHP MVC maison **SkankyDev**.
 
 ---
 
-## Tests
+## Le framework et les tests
 
-Suite **PHPUnit** dans `tests/`. Elle couvre **surtout le framework `SkankyDev`** (le cœur réutilisable) — la partie applicative `App` est très peu testée.
-- `tests/SkankyTest/TestCase/` — tests unitaires (pas de dépendance externe)
-- `tests/SkankyTest/Integration/` — tests d'intégration (nécessitent MongoDB)
+SkankyDev n'est plus dans ce projet : c'est une dépendance Composer (`skankydev/framework`), installée dans `vendor/skankydev/framework/`. Son code, ses tests et sa doc (`docs/`) vivent dans son propre dépôt (`E:\Dev\SkankyDev`).
+
+Ce projet a sa propre suite **PHPUnit** pour la partie applicative, dans `tests/AppTest/` (surtout `Llm`, sans dépendance externe).
 
 Scripts Composer (à privilégier) :
 
@@ -32,11 +32,13 @@ composer coverage-pretty   # phpunit --coverage-html build/coverage
 Ciblage fin si besoin :
 
 ```bash
-php vendor/bin/phpunit tests/SkankyTest/TestCase/Model/...      # un fichier
-php vendor/bin/phpunit --filter testMagicGetExistingProperty    # un test
+php vendor/bin/phpunit tests/AppTest/Llm/ChatEngineTest.php   # un fichier
+php vendor/bin/phpunit --filter testNomDuTest                 # un test
 ```
 
-> Validation : pour un changement dans `SkankyDev`, lancer `composer test` (PHPUnit attrape syntaxe **et** régressions). **Ne pas faire de `php -l`** — inutile : les tests couvrent la syntaxe du code testé, et pour le reste (templates, vues, `App`) les erreurs de syntaxe se voient tout de suite à l'exécution.
+> Validation : pour un changement dans `App`, lancer `composer test`. **Ne pas faire de `php -l`**. Un changement dans le framework se fait dans son dépôt, avec `composer test` là-bas.
+
+> Vérification minimale : si un outil ou une vérification (build, browser, etc.) échoue, ne pas relancer en boucle — dire directement à Simon ce qui n'a pas pu être vérifié.
 
 ---
 
@@ -122,21 +124,9 @@ class AdminController extends MasterController {
 - URL helper : `$this->url(['action' => 'show', 'params' => [$id]])`
 - Échappement XSS : `e($valeur)` — à utiliser systématiquement sur les données utilisateur
 
-### FormBuilder
+### FormBuilder & Validation
 
-```php
-$this->add('name', 'text', ['label' => 'Nom', 'rules' => ['required']]);
-$this->submit('<i class="icon-save"></i> SAVE');
-```
-
-Types de champs disponibles : `text`, `textarea`, `number`, `checkbox`, `radio`, `select`, `file`, `icon`, `hidden`
-
-### Validation
-
-Règles dans les Forms, vérifiées via `$form->validate($input)`.
-En cas d'échec : `redirect()->withErrors($form->getErrors())->withInput($input)`
-
-Règles dispo (config `class.rules`) : `required`, `email`, `numeric`, `min`, `max`, `min_length`, `max_length`, `regex`, `confirmed`, `same`, `hex_color`. Syntaxe : `'rules' => ['required', 'min_length:3', 'max:255']` (params après `:`). Fail-fast : 1ʳᵉ règle qui casse par champ.
+`FormBuilder` (`$this->add(...)` / `$this->submit(...)`) + validation via `$form->validate($input)`, échec → `redirect()->withErrors(...)->withInput(...)`. Types de champs et règles dispo : **→ [docs/forms-validation.md](docs/forms-validation.md)**.
 
 ### CSRF
 
@@ -163,7 +153,7 @@ Exemples : `part.table` (table data-driven, vue pure), `part.markdown` / `part.b
 
 ### Config
 
-`Config::initConf()` fusionne, dans l'ordre : `src/SkankyDev/Config/default.config.php` ← config de chaque module (`src/{Module}/Config/config.php`) ← `config/master.config.php`. Accès : `Config::get('chemin.pointe')`. Y vivent `middlewares`, `class.middlewares`, `class.fields`, `class.rules`, `Module`, `paginator`, `icons`…
+`Config::initConf()` fusionne, dans l'ordre : `default.config.php` du framework (`vendor/skankydev/framework/src/Config/`) ← config de chaque module (`src/{Module}/Config/config.php`) ← `config/master.config.php`. Accès : `Config::get('chemin.pointe')`. Y vivent `middlewares`, `class.middlewares`, `class.fields`, `class.rules`, `Module`, `paginator`, `icons`…
 
 ### Gestion des erreurs
 
@@ -175,22 +165,7 @@ Exemples : `part.table` (table data-driven, vue pure), `part.markdown` / `part.b
 
 ### Client HTTP sortant
 
-`SkankyDev\Utilities\HttpClient` : petit wrapper cURL pour les requêtes **sortantes** (API externes, llama-server…). Sans état : chaque requête renvoie un `HttpResult` autoporteur.
-
-```php
-$client = new HttpClient();
-$res = $client->timeout(60)->post($url, ['messages' => [...]]); // $data POSTé en JSON (Content-Type auto)
-
-if ($res->ok()) {            // 2xx
-    $data = $res->json();    // body décodé (ou ->body() pour le brut)
-}
-```
-
-- Méthodes : `get($url, $query)` / `post($url, $data)` / `request($method, $url, $data)` → `HttpResult`.
-- Setters fluent cumulables : `withHeader()` / `withHeaders()` / `timeout($s)` (utile pour l'inférence LLM, lente).
-- `HttpResult` : `status()`, `ok()`, `failed()` (erreur transport **ou** ≥ 400), `body()`, `json()`, `header()` (insensible à la casse), `error()`.
-- Échec réseau → `HttpResult` avec `status() === 0` et `error()` rempli (pas d'exception).
-- ⚠️ Ne pas confondre `HttpResult` (réponse *reçue* d'un distant) avec `SkankyDev\Http\Response` (réponse *sortante* vers le navigateur).
+`SkankyDev\Utilities\Http\HttpClient` : wrapper cURL pour les requêtes **sortantes** (API externes, llama-server…), sans état, renvoie un `HttpResult`. API complète et gotchas : **→ [docs/http-client.md](docs/http-client.md)**.
 
 ---
 
@@ -326,61 +301,17 @@ createApp(IconPicker).mount('#AppForm')
 
 ## Styles (SCSS)
 
-Source dans `src_front/scss/`, compilé par **Vite** vers `public/dist/styles.css` (avec `app.js`).
-Toute modif SCSS nécessite un build pour être visible :
+Source dans `src_front/scss/`, compilé par **Vite** vers `public/dist/styles.css`. Toute modif SCSS nécessite un build (`npm run dev` en watch, `npm run build` en prod).
 
-```bash
-npm run dev      # ou: npm run watch — build watch (dev)
-npm run build    # ou: npm run prod  — build production
-```
+**Principe** : réutiliser les classes génériques existantes (`elements/`, `tools/`, `scaffold/`) avant de créer un partial `component/`. Badges de statut via `.status-{nom}` (les enums exposent `class()`/`pretty()`).
 
-Point d'entrée : `main.scss` qui `@use` tous les partials. Organisation :
-- `settings/` — `variables` (tokens), `mixins`, `functions`, `animations`
-- `tools/` — utilitaires : `space` (classes `.p-s`, `.p-m`…), `layout` (`.grid-layout`, `.grid-half`), `neon`, `scrollable`, `accordion`, `tooltips`
-- `scaffold/` — `page`, `burger`, `home`
-- `elements/` — briques UI : `card`, `button`, `form`, `table`, `liste`, `title`, `breadcrumb`, `flash`, `link`, `diviser`, `image`
-- `component/` — un fichier par feature/composant (`scenario-maker`, `color-picker`, `persona-chat`…)
-
-**Ajouter un style de feature** : créer un partial dans `component/` (ou `elements/`), l'ajouter dans `main.scss` (`@use 'component/...'`), puis rebuild.
-
-### Design tokens (`settings/variables.scss`)
-
-- **Fonds** : `$bg-primary`, `$bg-secondary`, `$bg-tertiary`
-- **Néon** : `$neon-red/orange/yellow/lime/green/cyan/blue/purple/magenta/pink` + map `$neon-colors` + `$neon-gradient` / `$neo-gradient`
-- **Statuts** : `$success`, `$error`, `$warning`, `$favorie`, `$info`, `$disabled` + map `$tool-colors` (`primary/success/error/warning/favorie/info/disabled`)
-- **Texte** : `$text-primary`, `$text-secondary`, `$text-muted` — **Bordure** : `$border-color`
-- **Espacements** : `$p-xs` (4) `$p-s` (8) `$p-ms` (10) `$p-m` (16) … `$p-massive` (128) + map `$spaces`
-
-### Conventions utiles
-
-- **Réutiliser l'existant d'abord** : avant d'écrire du SCSS, composer les classes génériques (`elements/`, `tools/`, `scaffold/`). Ne créer un partial `component/` que si rien ne convient — ne pas re-styler ce qui a déjà une classe.
-- **Badges de statut** : classe `.status-{nom}` (générée depuis `$tool-colors` dans `tools/neon.scss`) → texte coloré + neon glow. Les enums exposent `class()` (`status-warning`…) et `pretty()` pour les rendre.
-- **Cards** : `.card` + variante colorée `.card-{tool-color}` (ex. `.card-success`).
+Organisation des partials, liste des design tokens, conventions détaillées : **→ [docs/styles-scss.md](docs/styles-scss.md)**.
 
 ---
 
 ## Conventions LED / ESP32
 
-Les effets LED ont toujours **3 couleurs** dans le payload, même si l'effet n'en utilise qu'une ou deux. Les couleurs inutilisées sont des strings vides `""`. C'est volontaire — l'ESP32 attend toujours un tableau de 3.
-
-Structure d'un scénario en base / MQTT :
-```json
-{
-  "line_0": {
-    "steps": [{
-      "duration": 5,
-      "cursors": [0, 15, 30, 59],
-      "segments": [{
-        "first": 0, "last": 14,
-        "effect": 44,
-        "colors": ["#ff0000", "", ""],
-        "speed": 1000,
-        "reverse": false
-      }]
-    }]
-  }
-}
-```
+Un effet LED a toujours **3 couleurs** dans le payload (les inutilisées = strings vides `""`) — l'ESP32 attend toujours un tableau de 3. Structure complète d'un scénario (JSON) : **→ [docs/led-esp32.md](docs/led-esp32.md)**.
 
 ---
 

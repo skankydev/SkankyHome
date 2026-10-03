@@ -8,8 +8,8 @@ use App\Llm\ToolSet;
 use App\Llm\Tools\MasterTool;
 use App\Model\Document\Conversation;
 use App\Model\Document\Message;
-use SkankyDev\Utilities\HttpClient;
-use SkankyDev\Utilities\HttpResult;
+use SkankyDev\Utilities\Http\HttpClient;
+use SkankyDev\Utilities\Http\HttpResult;
 
 class ChatEngineTest extends TestCase
 {

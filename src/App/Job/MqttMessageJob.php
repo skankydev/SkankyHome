@@ -4,10 +4,10 @@ namespace App\Job;
 
 use App\Model\Document\Module;
 use App\Model\ModuleCollection;
+use App\Utilities\MqttLog;
 use App\Utilities\MqttSender;
 use SkankyDev\Queue\Job\MasterJob;
 use SkankyDev\Queue\Queue;
-use SkankyDev\Utilities\Log;
 use SkankyDev\Utilities\Traits\CliMessage;
 use SkankyDev\Utilities\Traits\StringFacility;
 use \Exception;
@@ -28,13 +28,13 @@ class MqttMessageJob extends MasterJob {
 		$moduleSlug = end($moduleSlug);
 		
 		if(!isset($message['cmd'])){
-			Log::mqtt('pas de commande');
+			MqttLog::write('pas de commande');
 			$this->error('pas de commande');
 			return;
 		}
 		$cmd = $message['cmd'].'Cmd';
 		if(!method_exists($this,$cmd)){
-			Log::mqtt('pas de methode');
+			MqttLog::write('pas de methode');
 			$this->error('pas de methode');
 
 			return;
@@ -42,7 +42,7 @@ class MqttMessageJob extends MasterJob {
 		$module = ModuleCollection::_findOne(['slug'=>$moduleSlug]);
 
 		if(!$module){
-			Log::mqtt('pas de Module '.$moduleSlug);
+			MqttLog::write('pas de Module '.$moduleSlug);
 			$this->error('pas de Module '.$moduleSlug);
 			return;
 		}
@@ -50,7 +50,7 @@ class MqttMessageJob extends MasterJob {
 		try{
 			$this->$cmd($module,$message['data']??[]);
 		} catch (Exception $e) {
-			Log::mqtt('error : '.$e->getMessage());
+			MqttLog::write('error : '.$e->getMessage());
 			$this->error('error : '.$e->getMessage());
 		}
 	}

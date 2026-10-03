@@ -1,5 +1,10 @@
 <?php
 
+// Avant l'autoload : le framework déduit sinon APP_FOLDER du dossier du projet.
+if (!defined('APP_FOLDER')) {
+    define('APP_FOLDER', sys_get_temp_dir() . '/skankydev_test');
+}
+
 require_once __DIR__ . '/../vendor/autoload.php';
 
 if (!defined('DS')) {
@@ -7,9 +12,6 @@ if (!defined('DS')) {
 }
 if (!defined('TIME_HOUR')) {
     define('TIME_HOUR', 3600);
-}
-if (!defined('APP_FOLDER')) {
-    define('APP_FOLDER', sys_get_temp_dir() . '/skankydev_test');
 }
 
 // Minimal config required by the framework components under test.

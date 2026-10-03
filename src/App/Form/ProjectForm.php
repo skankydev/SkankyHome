@@ -41,6 +41,6 @@ class ProjectForm extends FormBuilder {
 			'options' => ProjectStatus::options(),
 		]);
 
-		$this->submit('<i class="icon-save"></i> SAVE');
+		$this->submit('SAVE');
 	}
 }

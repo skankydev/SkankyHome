@@ -35,6 +35,6 @@ class FirmwareForm extends FormBuilder {
 
 		$this->add('module_id','hidden',[]);
 
-		$this->submit('<i class="icon-save"></i> SAVE');
+		$this->submit('SAVE');
 	}
 }

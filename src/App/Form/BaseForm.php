@@ -55,7 +55,7 @@ class BaseForm extends FormBuilder {
 		]);
 
 
-		$this->submit('<i class="icon-save"></i> SAVE');
+		$this->submit('SAVE');
 	}
 }
 

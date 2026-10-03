@@ -15,6 +15,7 @@
  */
 $btnShow  = $btnShow ?? true;
 $btnEdit  = $btnEdit ?? true;
+$btnDelete  = $btnDelete ?? false;
 $actions  = $actions ?? null;
 $paginBtn = $paginBtn ?? true;
 $trAction = $trAction ?? 'show';
@@ -56,7 +57,10 @@ $hasActions = $btnShow || $btnEdit || $actions;
 					<?= $this->link('<i class="icon-info"></i>', ['controller' => $controller, 'action' => 'show', 'params' => [$singular => $document->_id]], ['class' => 'btn-mini btn-info','data-tooltip'=>'Show']) ?>
 				<?php endif; ?>
 				<?php if ($btnEdit): ?>
-					<?= $this->link('<i class="icon-edit"></i>', ['controller' => $controller, 'action' => 'edit', 'params' => [$singular => $document->_id]], ['class' => 'btn-mini btn-warning','data-tooltip'=>'Edit']) ?>
+					<?= $this->link('<i class="icon-edit-2"></i>', ['controller' => $controller, 'action' => 'edit', 'params' => [$singular => $document->_id]], ['class' => 'btn-mini btn-warning','data-tooltip'=>'Edit']) ?>
+				<?php endif; ?>
+				<?php if ($btnDelete): ?>
+					<?= $this->link('<i class="icon-trash"></i>', ['controller' => $controller, 'action' => 'edit', 'params' => [$singular => $document->_id]], ['class' => 'btn-mini btn-error','data-tooltip'=>'Delete','data-method'=>'post']) ?>
 				<?php endif; ?>
 				<?php if ($actions): ?>
 					<?= $actions($document) ?>

@@ -4,7 +4,6 @@ namespace App\Utilities;
 
 use PhpMqtt\Client\MqttClient;
 use SkankyDev\Config\Config;
-use SkankyDev\Utilities\Log;
 
 class MqttSender {
 	
@@ -35,7 +34,7 @@ class MqttSender {
 		}
 		
 		$client->publish($topic, $message, $qos);
-		Log::mqtt('Published', $topic, $message);
+		MqttLog::write('Published', $topic, $message);
 		self::disconnect($client);
 	}
 	
@@ -43,7 +42,7 @@ class MqttSender {
 		if ($client !== null) {
 			$client->disconnect();
 			$client = null;
-			//Log::mqtt('Disconnected from broker');
+			//MqttLog::write('Disconnected from broker');
 		}
 	}
 }

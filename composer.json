@@ -3,20 +3,12 @@
     "description": "la gestion de ma maison",
     "license": "MIT",
     "autoload": {
-         "psr-4": { 
-            "App\\": "src/App",
-            "SkankyDev\\": "src/SkankyDev"
-        },
-        "files": [
-            "src/SkankyDev/constant.php",
-            "src/SkankyDev/debug.php",
-            "src/SkankyDev/function.php"
-        ]
+         "psr-4": {
+            "App\\": "src/App"
+        }
     },
     "autoload-dev": {
         "psr-4": {
-            "SkankyTest\\": "tests/SkankyTest",
-            "TestApp\\":    "tests/App",
             "AppTest\\":    "tests/AppTest"
         }
     },
@@ -27,6 +19,8 @@
         }
     ],
     "require": {
+        "php": ">=8.4",
+        "skankydev/framework": "^0.1",
         "mongodb/mongodb": "^2.1",
         "php-mqtt/client": "^2.3",
         "league/commonmark": "^2.8"

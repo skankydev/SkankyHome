@@ -7,6 +7,7 @@ $leds = require_once 'leds.config.php';
 $icons = require_once 'icons.config.php';
 
 $conf =  [
+	'SkankyHome'=> '0.1.0',
 	'db' => [
 		'MongoDB' =>[
 			'host'     => getenv('DB_MONGO_HOST')     ?: 'localhost',
@@ -39,6 +40,14 @@ $conf =  [
 	'adminMail' => getenv('APP_ADMIN_MAIL') ?: 'skankydev@gmail.com',
 	'leds' => $leds,
 	'icons' => $icons,
+	'view' => [
+		'error' => VIEW_FOLDER.DS.'error',
+		'error_layout' => VIEW_FOLDER.DS.'layout'.DS.'error.php',
+		'fields' => VIEW_FOLDER.DS.'fields',
+	],
+	'template' => [
+		'folder' => TEMPLATE_FOLDER,
+	],
 ];
 
 return $conf;
