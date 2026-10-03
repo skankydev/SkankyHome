@@ -27,4 +27,5 @@ public/dist/*.map
 .DS_Store
 Thumbs.db
 Desktop.ini
+
 public/upload/*

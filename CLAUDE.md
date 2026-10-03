@@ -38,6 +38,8 @@ php vendor/bin/phpunit --filter testMagicGetExistingProperty    # un test
 
 > Validation : pour un changement dans `SkankyDev`, lancer `composer test` (PHPUnit attrape syntaxe **et** régressions). **Ne pas faire de `php -l`** — inutile : les tests couvrent la syntaxe du code testé, et pour le reste (templates, vues, `App`) les erreurs de syntaxe se voient tout de suite à l'exécution.
 
+> Vérification minimale : si un outil ou une vérification (build, browser, etc.) échoue, ne pas relancer en boucle — dire directement à Simon ce qui n'a pas pu être vérifié.
+
 ---
 
 ## Architecture SkankyDev

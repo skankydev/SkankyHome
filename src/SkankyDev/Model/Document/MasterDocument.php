@@ -215,6 +215,8 @@ class MasterDocument implements JsonSerializable, Persistable {
 				$data[$key] = (string) $value;
 			}else if($value instanceof \BackedEnum){
 				$data[$key] = $value->value;
+			}else if($value instanceof DateTime){
+				$data[$key] = $value->format(DATE_ATOM);
 			}
 		}
 
